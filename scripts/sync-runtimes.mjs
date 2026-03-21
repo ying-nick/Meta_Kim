@@ -14,6 +14,13 @@ const claudeSkillPath = path.join(
   "meta-theory",
   "SKILL.md"
 );
+const claudeSkillReferencesDir = path.join(
+  repoRoot,
+  ".claude",
+  "skills",
+  "meta-theory",
+  "references"
+);
 const codexLegacySkillsDir = path.join(repoRoot, ".codex", "skills");
 const codexAgentsDir = path.join(repoRoot, ".codex", "agents");
 const codexProjectSkillsDir = path.join(repoRoot, ".agents", "skills");
@@ -456,6 +463,23 @@ async function ensureDir(dirPath) {
   await fs.mkdir(dirPath, { recursive: true });
 }
 
+async function loadSkillReferences() {
+  const entries = await fs.readdir(claudeSkillReferencesDir, {
+    withFileTypes: true,
+  });
+  const files = entries.filter((entry) => entry.isFile());
+
+  return Promise.all(
+    files.map(async (file) => ({
+      name: file.name,
+      content: await fs.readFile(
+        path.join(claudeSkillReferencesDir, file.name),
+        "utf8"
+      ),
+    }))
+  );
+}
+
 function escapeTomlBasicMultiline(value) {
   return value.replace(/\\/g, "\\\\").replace(/"""/g, '\\"\\"\\"');
 }
@@ -527,6 +551,7 @@ async function main() {
   const agents = await loadAgents();
   const teamDirectory = buildWorkspaceDirectory(agents);
   const portableSkill = await fs.readFile(claudeSkillPath, "utf8");
+  const skillReferences = await loadSkillReferences();
   const localOpenClawModel = await detectLocalOpenClawModel();
   const changedFiles = [];
 
@@ -562,6 +587,18 @@ async function main() {
         path.join(workspaceDir, "skills", "meta-theory", "SKILL.md"),
         portableSkill
       ),
+      ...skillReferences.map((reference) =>
+        writeGeneratedFile(
+          path.join(
+            workspaceDir,
+            "skills",
+            "meta-theory",
+            "references",
+            reference.name
+          ),
+          reference.content
+        )
+      ),
     ]);
 
     if (writes.some((result) => result.changed)) {
@@ -593,6 +630,18 @@ async function main() {
   ) {
     changedFiles.push("shared-skills/meta-theory.md");
   }
+  for (const reference of skillReferences) {
+    if (
+      (
+        await writeGeneratedFile(
+          path.join(sharedSkillsDir, "references", reference.name),
+          reference.content
+        )
+      ).changed
+    ) {
+      changedFiles.push(`shared-skills/references/${reference.name}`);
+    }
+  }
   if (
     (await writeGeneratedFile(
       path.join(openclawSkillsDir, "meta-theory.md"),
@@ -600,6 +649,18 @@ async function main() {
     )).changed
   ) {
     changedFiles.push("openclaw/skills/meta-theory.md");
+  }
+  for (const reference of skillReferences) {
+    if (
+      (
+        await writeGeneratedFile(
+          path.join(openclawSkillsDir, "references", reference.name),
+          reference.content
+        )
+      ).changed
+    ) {
+      changedFiles.push(`openclaw/skills/references/${reference.name}`);
+    }
   }
   if (
     (await writeGeneratedFile(
@@ -609,6 +670,18 @@ async function main() {
   ) {
     changedFiles.push(".codex/skills/meta-theory.md");
   }
+  for (const reference of skillReferences) {
+    if (
+      (
+        await writeGeneratedFile(
+          path.join(codexLegacySkillsDir, "references", reference.name),
+          reference.content
+        )
+      ).changed
+    ) {
+      changedFiles.push(`.codex/skills/references/${reference.name}`);
+    }
+  }
   if (
     (await writeGeneratedFile(
       path.join(codexProjectSkillsDir, "meta-theory", "SKILL.md"),
@@ -616,6 +689,23 @@ async function main() {
     )).changed
   ) {
     changedFiles.push(".agents/skills/meta-theory/SKILL.md");
+  }
+  for (const reference of skillReferences) {
+    if (
+      (
+        await writeGeneratedFile(
+          path.join(
+            codexProjectSkillsDir,
+            "meta-theory",
+            "references",
+            reference.name
+          ),
+          reference.content
+        )
+      ).changed
+    ) {
+      changedFiles.push(`.agents/skills/meta-theory/references/${reference.name}`);
+    }
   }
   if (
     (await writeGeneratedFile(

@@ -8,8 +8,24 @@ import { fileURLToPath } from "node:url";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const repoRoot = path.resolve(__dirname, "..");
 const claudeAgentsDir = path.join(repoRoot, ".claude", "agents");
+const claudeSkillReferencesDir = path.join(
+  repoRoot,
+  ".claude",
+  "skills",
+  "meta-theory",
+  "references"
+);
 const openclawWorkspacesDir = path.join(repoRoot, "openclaw", "workspaces");
 const execFileAsync = promisify(execFile);
+const forbiddenRuntimeMarkers = [
+  "AskUserQuestion",
+  'Agent(subagent_type="',
+  "Skill(skill=",
+  "meta-factory.mjs",
+  "evolution-analyzer.mjs",
+  "keyword-optimizer.mjs",
+  "run_loop.py"
+];
 
 function assert(condition, message) {
   if (!condition) {
@@ -23,6 +39,22 @@ async function exists(filePath) {
     return true;
   } catch {
     return false;
+  }
+}
+
+async function listCanonicalSkillReferences() {
+  const entries = await fs.readdir(claudeSkillReferencesDir, {
+    withFileTypes: true,
+  });
+  return entries
+    .filter((entry) => entry.isFile())
+    .map((entry) => entry.name)
+    .sort();
+}
+
+function assertNoForbiddenMarkers(raw, filePath, markers = forbiddenRuntimeMarkers) {
+  for (const marker of markers) {
+    assert(!raw.includes(marker), `${filePath} still contains forbidden marker: ${marker}`);
   }
 }
 
@@ -98,6 +130,7 @@ async function validateClaudeAgents() {
       frontmatter.name === file.replace(/\.md$/, ""),
       `${file} frontmatter name must match filename.`
     );
+    assertNoForbiddenMarkers(raw, filePath);
     ids.push(frontmatter.name);
   }
 
@@ -105,6 +138,8 @@ async function validateClaudeAgents() {
 }
 
 async function validateOpenClawArtifacts(agentIds) {
+  const referenceFiles = await listCanonicalSkillReferences();
+
   const templateConfigPath = path.join(repoRoot, "openclaw", "openclaw.template.json");
   const templateConfig = JSON.parse(await fs.readFile(templateConfigPath, "utf8"));
   const configIds = templateConfig.agents?.list?.map((agent) => agent.id) ?? [];
@@ -155,6 +190,10 @@ async function validateOpenClawArtifacts(agentIds) {
     ]) {
       const workspaceFile = path.join(openclawWorkspacesDir, agentId, fileName);
       assert(await exists(workspaceFile), `Missing OpenClaw workspace file: ${path.relative(repoRoot, workspaceFile)}`);
+      if (fileName === "SOUL.md") {
+        const workspaceSoul = await fs.readFile(workspaceFile, "utf8");
+        assertNoForbiddenMarkers(workspaceSoul, workspaceFile);
+      }
     }
     const workspaceSkill = path.join(
       openclawWorkspacesDir,
@@ -167,6 +206,22 @@ async function validateOpenClawArtifacts(agentIds) {
       await exists(workspaceSkill),
       `Missing OpenClaw workspace skill: ${path.relative(repoRoot, workspaceSkill)}`
     );
+    const workspaceSkillRaw = await fs.readFile(workspaceSkill, "utf8");
+    assertNoForbiddenMarkers(workspaceSkillRaw, workspaceSkill);
+    for (const referenceFile of referenceFiles) {
+      const workspaceReference = path.join(
+        openclawWorkspacesDir,
+        agentId,
+        "skills",
+        "meta-theory",
+        "references",
+        referenceFile
+      );
+      assert(
+        await exists(workspaceReference),
+        `Missing OpenClaw workspace skill reference: ${path.relative(repoRoot, workspaceReference)}`
+      );
+    }
     const memoryReadme = path.join(
       openclawWorkspacesDir,
       agentId,
@@ -181,6 +236,7 @@ async function validateOpenClawArtifacts(agentIds) {
 }
 
 async function validatePortableSkill() {
+  const referenceFiles = await listCanonicalSkillReferences();
   const skillSourcePath = path.join(
     repoRoot,
     ".claude",
@@ -199,6 +255,7 @@ async function validatePortableSkill() {
   ]) {
     assert(skillSource.includes(expected), `Portable skill is missing ${expected}`);
   }
+  assertNoForbiddenMarkers(skillSource, skillSourcePath, ["AskUserQuestion"]);
 
   const sharedSkill = await fs.readFile(
     path.join(repoRoot, "shared-skills", "meta-theory.md"),
@@ -233,6 +290,28 @@ async function validatePortableSkill() {
     codexSkill === skillSource,
     ".codex/skills/meta-theory.md is out of sync with the canonical Claude skill."
   );
+
+  for (const referenceFile of referenceFiles) {
+    const canonicalReferencePath = path.join(claudeSkillReferencesDir, referenceFile);
+    const canonicalReference = await fs.readFile(canonicalReferencePath, "utf8");
+    assertNoForbiddenMarkers(canonicalReference, canonicalReferencePath, ["AskUserQuestion"]);
+
+    const mirrorTargets = [
+      path.join(repoRoot, "shared-skills", "references", referenceFile),
+      path.join(repoRoot, ".agents", "skills", "meta-theory", "references", referenceFile),
+      path.join(repoRoot, ".codex", "skills", "references", referenceFile),
+      path.join(repoRoot, "openclaw", "skills", "references", referenceFile)
+    ];
+
+    for (const mirrorPath of mirrorTargets) {
+      assert(await exists(mirrorPath), `Missing portable skill reference mirror: ${path.relative(repoRoot, mirrorPath)}`);
+      const mirrorContent = await fs.readFile(mirrorPath, "utf8");
+      assert(
+        mirrorContent === canonicalReference,
+        `${path.relative(repoRoot, mirrorPath)} is out of sync with the canonical Claude references.`
+      );
+    }
+  }
 }
 
 async function validateCodexArtifacts(agentIds) {
@@ -248,6 +327,7 @@ async function validateCodexArtifacts(agentIds) {
       raw.includes("developer_instructions = "),
       `${agentId}.toml is missing developer_instructions.`
     );
+    assertNoForbiddenMarkers(raw, agentPath);
   }
 
   const configExample = await fs.readFile(

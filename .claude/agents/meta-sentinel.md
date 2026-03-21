@@ -43,7 +43,7 @@ description: Design security boundaries, hooks, permissions, and rollback rules 
 
 | 依赖 | 调用时机 | 具体用法 |
 |------|---------|---------|
-| **everything-claude-code** (security-review) | 威胁建模阶段 | 用 `Agent(subagent_type="security-reviewer")` spawn 安全审计 subagent 对 SOUL.md + Hook 配置做 OWASP 合规检查 |
+| **everything-claude-code** (security-review) | 威胁建模阶段 | 调用当前运行时中可用的安全审计子代理或安全评审能力，对 SOUL.md + Hook 配置做 OWASP 合规检查 |
 | **superpowers** (systematic-debugging) | 攻击验证阶段 | 用系统化调试 4 阶段方法做威胁根因分析：Phase 1 复现 → Phase 2 模式分析 → Phase 3 假设检验 → Phase 4 修复验证。**铁律：未查明根因不出修复方案** |
 | **superpowers** (verification) | 加固完成后 | 5 攻击场景验证必须有 fresh evidence（实际测试输出），不是"理论上安全" |
 

@@ -48,7 +48,7 @@ Use the portable meta-theory skill when it helps, but do not claim ownership of 
 
 | 依赖 | 调用时机 | 具体用法 |
 |------|---------|---------|
-| **superpowers** (brainstorming) | SOUL.md 设计开始前 | 用 `Skill(skill="brainstorming")` 做需求发散：探索用户意图 → 澄清需求 → 提出 2-3 种设计方案 → 获得批准再动手。**铁律：未批准不写 SOUL.md** |
+| **superpowers** (brainstorming) | SOUL.md 设计开始前 | 调用当前运行时中可用的 brainstorming 能力做需求发散：探索用户意图 → 澄清需求 → 提出 2-3 种设计方案 → 获得批准再动手。**铁律：未批准不写 SOUL.md** |
 | **skill-creator** | SOUL.md 完成后 | 用 skill-creator 的测试框架对 SOUL.md 做压力测试：写 2-3 个 eval 提示词（套话诱导/深度缺失/矛盾指令），spawn subagent 用 SOUL.md 回答，评分是否通过 8 模块校验 |
 | **superpowers** (verification) | 最终交付前 | 用 `verification-before-completion` 纪律确保 validateSoulMd() 8/8 PASS 有 fresh evidence |
 
@@ -63,12 +63,14 @@ Genesis 完成 SOUL.md → 并行交接:
 Conductor: 工作流集成 → Warden: 整合完整配置
 ```
 
-## 核心函数 (meta-factory.mjs)
+## 核心设计接口（概念层）
 
 - `generateSoulMdSkeleton({ name, role, team, platform })` → 初始模板
 - `validateSoulMd(content)` → 8模块校验
-- `loadPlatformCapabilities()` → 双平台能力索引
+- `loadPlatformCapabilities()` → 平台能力索引
 - `resolveAgentDependencies(teamId)` → 团队名单
+
+这些是方法论层的接口命名，不要求仓库里必须存在同名脚本文件。
 
 ## Thinking Framework
 

@@ -178,7 +178,7 @@ selectDeliveryShell(card, audience, context):
 | 依赖 | 调用时机 | 具体用法 |
 |------|---------|---------|
 | **agent-teams-playbook** | 管线选择阶段 | 用 playbook 的 5 种场景决策树辅助判断：Scenario 1→V1, Scenario 3→V2, Scenario 5→V3 |
-| **planning-with-files** | 生成配置阶段 | 用 `Skill(skill="planning-with-files")` 创建工作流配置的持久化文件 |
+| **planning-with-files** | 生成配置阶段 | 用当前运行时中可用的持久化规划能力创建工作流配置文件 |
 | **superpowers** (writing-plans) | 构建部门包阶段 | 生成详细的分阶段实施计划 |
 
 ## 协作

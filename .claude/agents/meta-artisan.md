@@ -43,8 +43,8 @@ ROI = (任务覆盖度 × 使用频率) / (上下文成本 + 学习曲线)
 
 | 依赖 | 调用时机 | 具体用法 |
 |------|---------|---------|
-| **findskill** | 粗筛阶段 | 用 `Skill(skill="find-skills", args="<关键词>")` 搜索 Skills.sh 生态，发现外部 Skill 候选。**必须遵循 3 步 fallback 链**（来自 agent-teams-playbook）：Step 1 扫描本地已安装 → Step 2 `find-skills` 搜索外部 → Step 3 无匹配则 fallback generic subagent。3 步全走，不许跳过 |
-| **skill-creator** | 精选完成后（可选） | 用 skill-creator 的描述优化功能（`run_loop.py`）优化新创建 Skill 的触发描述，提高自动触发准确率 |
+| **findskill** | 粗筛阶段 | 调用当前运行时中可用的 `find-skills` / 同类技能搜索能力搜索 Skills.sh 生态，发现外部 Skill 候选。**必须遵循 3 步 fallback 链**（来自 agent-teams-playbook）：Step 1 扫描本地已安装 → Step 2 搜索外部 → Step 3 无匹配则 fallback generic subagent。3 步全走，不许跳过 |
+| **skill-creator** | 精选完成后（可选） | 用 skill-creator 的描述优化流程优化新创建 Skill 的触发描述，提高自动触发准确率 |
 | **everything-claude-code** | 精选阶段 | 作为 CC 平台的候选池：从 29 个 skill（前端/后端/安全/TDD/DB/Go/Python/Django/Spring）和 13 个 subagent 类型中匹配。ROI 评分时直接引用具体 skill 名称 |
 | **superpowers** | 验证阶段 | 用 `verification-before-completion` 确保 3 场景测试（正常/边界/异常）都有 fresh evidence，不是"应该能覆盖" |
 
@@ -89,7 +89,7 @@ Artisan: 分析角色 → 粗筛 → 精选(ROI) → 3场景验证
 ```
 | Skill | ROI | 覆盖度 | 频率 | 成本 | 理由 |
 | superpowers:verification | ★★★★★ | 90% | 每次 | 低 | 覆盖所有验证环节 |
-| code-security | ★★★☆☆ | 40% | 安全审计时 | 中 | 仅安全相关任务需要 |
+| security-review capability | ★★★☆☆ | 40% | 安全审计时 | 中 | 仅安全相关任务需要 |
 缺口: 无覆盖"数据可视化"能力 → 通知 Scout
 ```
 
