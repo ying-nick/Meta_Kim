@@ -10,6 +10,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const repoRoot = path.resolve(__dirname, "..");
 const claudeAgentsDir = path.join(repoRoot, ".claude", "agents");
 const openclawLocalConfigPath = path.join(repoRoot, "openclaw", "openclaw.local.json");
+const prepareOpenClawScriptPath = path.join(repoRoot, "scripts", "prepare-openclaw-local.mjs");
 
 const claudeSchema = JSON.stringify({
   type: "object",
@@ -40,8 +41,8 @@ const claudeCases = {
     artifactGroups: [["skill", "MCP", "能力清单", "映射", "report"]],
   },
   "meta-sentinel": {
-    ownGroups: [["安全", "风险", "权限"], ["Hook", "hook", "守卫"], ["回滚", "边界", "策略"]],
-    refuseGroups: [["SOUL", "prompt", "提示词"], ["工具发现", "skill", "技能"]],
+    ownGroups: [["安全", "风险", "权限"], ["Hook", "hook", "守卫"], ["回滚", "边界", "策略", "三级", "CAN", "CANNOT", "NEVER"]],
+    refuseGroups: [["SOUL", "prompt", "提示词"], ["工具发现", "skill", "技能", "工作流", "编排"]],
     artifactGroups: [["Hook", "回滚", "安全规则", "守卫"]],
   },
   "meta-librarian": {
@@ -182,7 +183,10 @@ function extractOpenClawReply(raw) {
   const payloadText = parsed.payloads?.[0]?.text;
   if (typeof payloadText === "string" && payloadText.trim()) {
     try {
-      return JSON.parse(payloadText);
+      return {
+        ...JSON.parse(payloadText),
+        wrapper: parsed,
+      };
     } catch {
       return {
         raw: payloadText.trim(),
@@ -372,6 +376,16 @@ async function runCodexSmoke() {
 }
 
 async function runOpenClawSmoke() {
+  await execFileAsync(
+    "node",
+    [prepareOpenClawScriptPath],
+    {
+      cwd: repoRoot,
+      timeout: 120_000,
+      env: { ...process.env, NO_COLOR: "1" },
+    }
+  );
+
   const command = await resolveOpenClawCommand();
   const env = {
     ...process.env,
@@ -389,7 +403,7 @@ async function runOpenClawSmoke() {
     }
   );
 
-  const smokeAgents = ["meta-warden"];
+  const smokeAgents = await loadClaudeAgentIds();
   const agentResults = [];
 
   for (const agentId of smokeAgents) {

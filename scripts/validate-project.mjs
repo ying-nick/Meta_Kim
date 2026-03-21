@@ -61,6 +61,7 @@ async function validateRequiredFiles() {
     ".claude/settings.json",
     "meta/meta.md",
     "meta/runtime-capability-matrix.md",
+    "meta/repo-map.md",
     ".claude/skills/meta-theory/SKILL.md",
     ".codex/skills/meta-theory.md",
     "shared-skills/meta-theory.md",
