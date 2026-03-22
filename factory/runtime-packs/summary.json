@@ -1,0 +1,21 @@
+{
+  "summary": {
+    "industries": 20,
+    "departments": 5,
+    "departmentSeeds": 100,
+    "specialistAgents": 1000,
+    "totalAgents": 1100
+  },
+  "runtimes": {
+    "claude": {
+      "agents": 1100
+    },
+    "codex": {
+      "agents": 1100
+    },
+    "openclaw": {
+      "agents": 1100,
+      "workspaceFilesPerAgent": 5
+    }
+  }
+}

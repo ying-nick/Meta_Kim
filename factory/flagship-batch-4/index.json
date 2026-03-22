@@ -1,0 +1,67 @@
+[
+  {
+    "runtimeId": "flagship-energy-strategy-office",
+    "sourceAgentId": "energy-strategy-office",
+    "industry": "energy",
+    "department": "strategy-office",
+    "prioritySpecialists": [
+      "market-cartographer",
+      "scenario-planner",
+      "portfolio-prioritizer",
+      "ecosystem-mapper",
+      "executive-briefing-lead"
+    ]
+  },
+  {
+    "runtimeId": "flagship-automotive-product-delivery",
+    "sourceAgentId": "automotive-product-delivery",
+    "industry": "automotive",
+    "department": "product-delivery",
+    "prioritySpecialists": [
+      "product-architect",
+      "spec-writer",
+      "launch-planner",
+      "delivery-reviewer",
+      "implementation-coordinator"
+    ]
+  },
+  {
+    "runtimeId": "flagship-travel-growth-operations",
+    "sourceAgentId": "travel-growth-operations",
+    "industry": "travel",
+    "department": "growth-operations",
+    "prioritySpecialists": [
+      "funnel-operator",
+      "retention-strategist",
+      "lifecycle-designer",
+      "community-operator",
+      "revenue-operator"
+    ]
+  },
+  {
+    "runtimeId": "flagship-biotech-research-intelligence",
+    "sourceAgentId": "biotech-research-intelligence",
+    "industry": "biotech",
+    "department": "research-intelligence",
+    "prioritySpecialists": [
+      "source-hunter",
+      "policy-watcher",
+      "data-scout",
+      "evidence-auditor",
+      "diligence-coordinator"
+    ]
+  },
+  {
+    "runtimeId": "flagship-public-sector-strategy-office",
+    "sourceAgentId": "public-sector-strategy-office",
+    "industry": "public-sector",
+    "department": "strategy-office",
+    "prioritySpecialists": [
+      "market-cartographer",
+      "scenario-planner",
+      "segment-strategist",
+      "partnership-strategist",
+      "executive-briefing-lead"
+    ]
+  }
+]

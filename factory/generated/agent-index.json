@@ -1,0 +1,5802 @@
+[
+  {
+    "id": "game-strategy-office",
+    "industry": "game",
+    "department": "strategy-office",
+    "title": "Game Strategy Office",
+    "specialists": [
+      {
+        "id": "game-strategy-office-market-cartographer",
+        "specialist": "market-cartographer",
+        "title": "Market Cartographer"
+      },
+      {
+        "id": "game-strategy-office-thesis-architect",
+        "specialist": "thesis-architect",
+        "title": "Thesis Architect"
+      },
+      {
+        "id": "game-strategy-office-scenario-planner",
+        "specialist": "scenario-planner",
+        "title": "Scenario Planner"
+      },
+      {
+        "id": "game-strategy-office-pricing-strategist",
+        "specialist": "pricing-strategist",
+        "title": "Pricing Strategist"
+      },
+      {
+        "id": "game-strategy-office-portfolio-prioritizer",
+        "specialist": "portfolio-prioritizer",
+        "title": "Portfolio Prioritizer"
+      },
+      {
+        "id": "game-strategy-office-ecosystem-mapper",
+        "specialist": "ecosystem-mapper",
+        "title": "Ecosystem Mapper"
+      },
+      {
+        "id": "game-strategy-office-segment-strategist",
+        "specialist": "segment-strategist",
+        "title": "Segment Strategist"
+      },
+      {
+        "id": "game-strategy-office-monetization-strategist",
+        "specialist": "monetization-strategist",
+        "title": "Monetization Strategist"
+      },
+      {
+        "id": "game-strategy-office-partnership-strategist",
+        "specialist": "partnership-strategist",
+        "title": "Partnership Strategist"
+      },
+      {
+        "id": "game-strategy-office-executive-briefing-lead",
+        "specialist": "executive-briefing-lead",
+        "title": "Executive Briefing Lead"
+      }
+    ]
+  },
+  {
+    "id": "game-research-intelligence",
+    "industry": "game",
+    "department": "research-intelligence",
+    "title": "Game Research & Intelligence",
+    "specialists": [
+      {
+        "id": "game-research-intelligence-source-hunter",
+        "specialist": "source-hunter",
+        "title": "Source Hunter"
+      },
+      {
+        "id": "game-research-intelligence-benchmark-analyst",
+        "specialist": "benchmark-analyst",
+        "title": "Benchmark Analyst"
+      },
+      {
+        "id": "game-research-intelligence-competitor-watcher",
+        "specialist": "competitor-watcher",
+        "title": "Competitor Watcher"
+      },
+      {
+        "id": "game-research-intelligence-policy-watcher",
+        "specialist": "policy-watcher",
+        "title": "Policy Watcher"
+      },
+      {
+        "id": "game-research-intelligence-customer-insight-miner",
+        "specialist": "customer-insight-miner",
+        "title": "Customer Insight Miner"
+      },
+      {
+        "id": "game-research-intelligence-data-scout",
+        "specialist": "data-scout",
+        "title": "Data Scout"
+      },
+      {
+        "id": "game-research-intelligence-trend-synthesizer",
+        "specialist": "trend-synthesizer",
+        "title": "Trend Synthesizer"
+      },
+      {
+        "id": "game-research-intelligence-evidence-auditor",
+        "specialist": "evidence-auditor",
+        "title": "Evidence Auditor"
+      },
+      {
+        "id": "game-research-intelligence-expert-interview-designer",
+        "specialist": "expert-interview-designer",
+        "title": "Expert Interview Designer"
+      },
+      {
+        "id": "game-research-intelligence-diligence-coordinator",
+        "specialist": "diligence-coordinator",
+        "title": "Diligence Coordinator"
+      }
+    ]
+  },
+  {
+    "id": "game-product-delivery",
+    "industry": "game",
+    "department": "product-delivery",
+    "title": "Game Product & Delivery",
+    "specialists": [
+      {
+        "id": "game-product-delivery-product-architect",
+        "specialist": "product-architect",
+        "title": "Product Architect"
+      },
+      {
+        "id": "game-product-delivery-workflow-designer",
+        "specialist": "workflow-designer",
+        "title": "Workflow Designer"
+      },
+      {
+        "id": "game-product-delivery-spec-writer",
+        "specialist": "spec-writer",
+        "title": "Spec Writer"
+      },
+      {
+        "id": "game-product-delivery-prototype-lead",
+        "specialist": "prototype-lead",
+        "title": "Prototype Lead"
+      },
+      {
+        "id": "game-product-delivery-ux-optimizer",
+        "specialist": "ux-optimizer",
+        "title": "UX Optimizer"
+      },
+      {
+        "id": "game-product-delivery-launch-planner",
+        "specialist": "launch-planner",
+        "title": "Launch Planner"
+      },
+      {
+        "id": "game-product-delivery-delivery-reviewer",
+        "specialist": "delivery-reviewer",
+        "title": "Delivery Reviewer"
+      },
+      {
+        "id": "game-product-delivery-qa-strategist",
+        "specialist": "qa-strategist",
+        "title": "QA Strategist"
+      },
+      {
+        "id": "game-product-delivery-roadmap-steward",
+        "specialist": "roadmap-steward",
+        "title": "Roadmap Steward"
+      },
+      {
+        "id": "game-product-delivery-implementation-coordinator",
+        "specialist": "implementation-coordinator",
+        "title": "Implementation Coordinator"
+      }
+    ]
+  },
+  {
+    "id": "game-growth-operations",
+    "industry": "game",
+    "department": "growth-operations",
+    "title": "Game Growth & Operations",
+    "specialists": [
+      {
+        "id": "game-growth-operations-funnel-operator",
+        "specialist": "funnel-operator",
+        "title": "Funnel Operator"
+      },
+      {
+        "id": "game-growth-operations-acquisition-planner",
+        "specialist": "acquisition-planner",
+        "title": "Acquisition Planner"
+      },
+      {
+        "id": "game-growth-operations-retention-strategist",
+        "specialist": "retention-strategist",
+        "title": "Retention Strategist"
+      },
+      {
+        "id": "game-growth-operations-lifecycle-designer",
+        "specialist": "lifecycle-designer",
+        "title": "Lifecycle Designer"
+      },
+      {
+        "id": "game-growth-operations-community-operator",
+        "specialist": "community-operator",
+        "title": "Community Operator"
+      },
+      {
+        "id": "game-growth-operations-channel-optimizer",
+        "specialist": "channel-optimizer",
+        "title": "Channel Optimizer"
+      },
+      {
+        "id": "game-growth-operations-ops-automation-lead",
+        "specialist": "ops-automation-lead",
+        "title": "Ops Automation Lead"
+      },
+      {
+        "id": "game-growth-operations-campaign-analyst",
+        "specialist": "campaign-analyst",
+        "title": "Campaign Analyst"
+      },
+      {
+        "id": "game-growth-operations-revenue-operator",
+        "specialist": "revenue-operator",
+        "title": "Revenue Operator"
+      },
+      {
+        "id": "game-growth-operations-performance-marketer",
+        "specialist": "performance-marketer",
+        "title": "Performance Marketer"
+      }
+    ]
+  },
+  {
+    "id": "game-risk-compliance",
+    "industry": "game",
+    "department": "risk-compliance",
+    "title": "Game Risk & Compliance",
+    "specialists": [
+      {
+        "id": "game-risk-compliance-risk-mapper",
+        "specialist": "risk-mapper",
+        "title": "Risk Mapper"
+      },
+      {
+        "id": "game-risk-compliance-compliance-interpreter",
+        "specialist": "compliance-interpreter",
+        "title": "Compliance Interpreter"
+      },
+      {
+        "id": "game-risk-compliance-control-designer",
+        "specialist": "control-designer",
+        "title": "Control Designer"
+      },
+      {
+        "id": "game-risk-compliance-incident-reviewer",
+        "specialist": "incident-reviewer",
+        "title": "Incident Reviewer"
+      },
+      {
+        "id": "game-risk-compliance-decision-red-teamer",
+        "specialist": "decision-red-teamer",
+        "title": "Decision Red-Teamer"
+      },
+      {
+        "id": "game-risk-compliance-downside-analyst",
+        "specialist": "downside-analyst",
+        "title": "Downside Analyst"
+      },
+      {
+        "id": "game-risk-compliance-security-liaison",
+        "specialist": "security-liaison",
+        "title": "Security Liaison"
+      },
+      {
+        "id": "game-risk-compliance-policy-drafter",
+        "specialist": "policy-drafter",
+        "title": "Policy Drafter"
+      },
+      {
+        "id": "game-risk-compliance-audit-planner",
+        "specialist": "audit-planner",
+        "title": "Audit Planner"
+      },
+      {
+        "id": "game-risk-compliance-escalation-chief",
+        "specialist": "escalation-chief",
+        "title": "Escalation Chief"
+      }
+    ]
+  },
+  {
+    "id": "internet-strategy-office",
+    "industry": "internet",
+    "department": "strategy-office",
+    "title": "Internet Product Strategy Office",
+    "specialists": [
+      {
+        "id": "internet-strategy-office-market-cartographer",
+        "specialist": "market-cartographer",
+        "title": "Market Cartographer"
+      },
+      {
+        "id": "internet-strategy-office-thesis-architect",
+        "specialist": "thesis-architect",
+        "title": "Thesis Architect"
+      },
+      {
+        "id": "internet-strategy-office-scenario-planner",
+        "specialist": "scenario-planner",
+        "title": "Scenario Planner"
+      },
+      {
+        "id": "internet-strategy-office-pricing-strategist",
+        "specialist": "pricing-strategist",
+        "title": "Pricing Strategist"
+      },
+      {
+        "id": "internet-strategy-office-portfolio-prioritizer",
+        "specialist": "portfolio-prioritizer",
+        "title": "Portfolio Prioritizer"
+      },
+      {
+        "id": "internet-strategy-office-ecosystem-mapper",
+        "specialist": "ecosystem-mapper",
+        "title": "Ecosystem Mapper"
+      },
+      {
+        "id": "internet-strategy-office-segment-strategist",
+        "specialist": "segment-strategist",
+        "title": "Segment Strategist"
+      },
+      {
+        "id": "internet-strategy-office-monetization-strategist",
+        "specialist": "monetization-strategist",
+        "title": "Monetization Strategist"
+      },
+      {
+        "id": "internet-strategy-office-partnership-strategist",
+        "specialist": "partnership-strategist",
+        "title": "Partnership Strategist"
+      },
+      {
+        "id": "internet-strategy-office-executive-briefing-lead",
+        "specialist": "executive-briefing-lead",
+        "title": "Executive Briefing Lead"
+      }
+    ]
+  },
+  {
+    "id": "internet-research-intelligence",
+    "industry": "internet",
+    "department": "research-intelligence",
+    "title": "Internet Product Research & Intelligence",
+    "specialists": [
+      {
+        "id": "internet-research-intelligence-source-hunter",
+        "specialist": "source-hunter",
+        "title": "Source Hunter"
+      },
+      {
+        "id": "internet-research-intelligence-benchmark-analyst",
+        "specialist": "benchmark-analyst",
+        "title": "Benchmark Analyst"
+      },
+      {
+        "id": "internet-research-intelligence-competitor-watcher",
+        "specialist": "competitor-watcher",
+        "title": "Competitor Watcher"
+      },
+      {
+        "id": "internet-research-intelligence-policy-watcher",
+        "specialist": "policy-watcher",
+        "title": "Policy Watcher"
+      },
+      {
+        "id": "internet-research-intelligence-customer-insight-miner",
+        "specialist": "customer-insight-miner",
+        "title": "Customer Insight Miner"
+      },
+      {
+        "id": "internet-research-intelligence-data-scout",
+        "specialist": "data-scout",
+        "title": "Data Scout"
+      },
+      {
+        "id": "internet-research-intelligence-trend-synthesizer",
+        "specialist": "trend-synthesizer",
+        "title": "Trend Synthesizer"
+      },
+      {
+        "id": "internet-research-intelligence-evidence-auditor",
+        "specialist": "evidence-auditor",
+        "title": "Evidence Auditor"
+      },
+      {
+        "id": "internet-research-intelligence-expert-interview-designer",
+        "specialist": "expert-interview-designer",
+        "title": "Expert Interview Designer"
+      },
+      {
+        "id": "internet-research-intelligence-diligence-coordinator",
+        "specialist": "diligence-coordinator",
+        "title": "Diligence Coordinator"
+      }
+    ]
+  },
+  {
+    "id": "internet-product-delivery",
+    "industry": "internet",
+    "department": "product-delivery",
+    "title": "Internet Product Product & Delivery",
+    "specialists": [
+      {
+        "id": "internet-product-delivery-product-architect",
+        "specialist": "product-architect",
+        "title": "Product Architect"
+      },
+      {
+        "id": "internet-product-delivery-workflow-designer",
+        "specialist": "workflow-designer",
+        "title": "Workflow Designer"
+      },
+      {
+        "id": "internet-product-delivery-spec-writer",
+        "specialist": "spec-writer",
+        "title": "Spec Writer"
+      },
+      {
+        "id": "internet-product-delivery-prototype-lead",
+        "specialist": "prototype-lead",
+        "title": "Prototype Lead"
+      },
+      {
+        "id": "internet-product-delivery-ux-optimizer",
+        "specialist": "ux-optimizer",
+        "title": "UX Optimizer"
+      },
+      {
+        "id": "internet-product-delivery-launch-planner",
+        "specialist": "launch-planner",
+        "title": "Launch Planner"
+      },
+      {
+        "id": "internet-product-delivery-delivery-reviewer",
+        "specialist": "delivery-reviewer",
+        "title": "Delivery Reviewer"
+      },
+      {
+        "id": "internet-product-delivery-qa-strategist",
+        "specialist": "qa-strategist",
+        "title": "QA Strategist"
+      },
+      {
+        "id": "internet-product-delivery-roadmap-steward",
+        "specialist": "roadmap-steward",
+        "title": "Roadmap Steward"
+      },
+      {
+        "id": "internet-product-delivery-implementation-coordinator",
+        "specialist": "implementation-coordinator",
+        "title": "Implementation Coordinator"
+      }
+    ]
+  },
+  {
+    "id": "internet-growth-operations",
+    "industry": "internet",
+    "department": "growth-operations",
+    "title": "Internet Product Growth & Operations",
+    "specialists": [
+      {
+        "id": "internet-growth-operations-funnel-operator",
+        "specialist": "funnel-operator",
+        "title": "Funnel Operator"
+      },
+      {
+        "id": "internet-growth-operations-acquisition-planner",
+        "specialist": "acquisition-planner",
+        "title": "Acquisition Planner"
+      },
+      {
+        "id": "internet-growth-operations-retention-strategist",
+        "specialist": "retention-strategist",
+        "title": "Retention Strategist"
+      },
+      {
+        "id": "internet-growth-operations-lifecycle-designer",
+        "specialist": "lifecycle-designer",
+        "title": "Lifecycle Designer"
+      },
+      {
+        "id": "internet-growth-operations-community-operator",
+        "specialist": "community-operator",
+        "title": "Community Operator"
+      },
+      {
+        "id": "internet-growth-operations-channel-optimizer",
+        "specialist": "channel-optimizer",
+        "title": "Channel Optimizer"
+      },
+      {
+        "id": "internet-growth-operations-ops-automation-lead",
+        "specialist": "ops-automation-lead",
+        "title": "Ops Automation Lead"
+      },
+      {
+        "id": "internet-growth-operations-campaign-analyst",
+        "specialist": "campaign-analyst",
+        "title": "Campaign Analyst"
+      },
+      {
+        "id": "internet-growth-operations-revenue-operator",
+        "specialist": "revenue-operator",
+        "title": "Revenue Operator"
+      },
+      {
+        "id": "internet-growth-operations-performance-marketer",
+        "specialist": "performance-marketer",
+        "title": "Performance Marketer"
+      }
+    ]
+  },
+  {
+    "id": "internet-risk-compliance",
+    "industry": "internet",
+    "department": "risk-compliance",
+    "title": "Internet Product Risk & Compliance",
+    "specialists": [
+      {
+        "id": "internet-risk-compliance-risk-mapper",
+        "specialist": "risk-mapper",
+        "title": "Risk Mapper"
+      },
+      {
+        "id": "internet-risk-compliance-compliance-interpreter",
+        "specialist": "compliance-interpreter",
+        "title": "Compliance Interpreter"
+      },
+      {
+        "id": "internet-risk-compliance-control-designer",
+        "specialist": "control-designer",
+        "title": "Control Designer"
+      },
+      {
+        "id": "internet-risk-compliance-incident-reviewer",
+        "specialist": "incident-reviewer",
+        "title": "Incident Reviewer"
+      },
+      {
+        "id": "internet-risk-compliance-decision-red-teamer",
+        "specialist": "decision-red-teamer",
+        "title": "Decision Red-Teamer"
+      },
+      {
+        "id": "internet-risk-compliance-downside-analyst",
+        "specialist": "downside-analyst",
+        "title": "Downside Analyst"
+      },
+      {
+        "id": "internet-risk-compliance-security-liaison",
+        "specialist": "security-liaison",
+        "title": "Security Liaison"
+      },
+      {
+        "id": "internet-risk-compliance-policy-drafter",
+        "specialist": "policy-drafter",
+        "title": "Policy Drafter"
+      },
+      {
+        "id": "internet-risk-compliance-audit-planner",
+        "specialist": "audit-planner",
+        "title": "Audit Planner"
+      },
+      {
+        "id": "internet-risk-compliance-escalation-chief",
+        "specialist": "escalation-chief",
+        "title": "Escalation Chief"
+      }
+    ]
+  },
+  {
+    "id": "finance-strategy-office",
+    "industry": "finance",
+    "department": "strategy-office",
+    "title": "Finance Strategy Office",
+    "specialists": [
+      {
+        "id": "finance-strategy-office-market-cartographer",
+        "specialist": "market-cartographer",
+        "title": "Market Cartographer"
+      },
+      {
+        "id": "finance-strategy-office-thesis-architect",
+        "specialist": "thesis-architect",
+        "title": "Thesis Architect"
+      },
+      {
+        "id": "finance-strategy-office-scenario-planner",
+        "specialist": "scenario-planner",
+        "title": "Scenario Planner"
+      },
+      {
+        "id": "finance-strategy-office-pricing-strategist",
+        "specialist": "pricing-strategist",
+        "title": "Pricing Strategist"
+      },
+      {
+        "id": "finance-strategy-office-portfolio-prioritizer",
+        "specialist": "portfolio-prioritizer",
+        "title": "Portfolio Prioritizer"
+      },
+      {
+        "id": "finance-strategy-office-ecosystem-mapper",
+        "specialist": "ecosystem-mapper",
+        "title": "Ecosystem Mapper"
+      },
+      {
+        "id": "finance-strategy-office-segment-strategist",
+        "specialist": "segment-strategist",
+        "title": "Segment Strategist"
+      },
+      {
+        "id": "finance-strategy-office-monetization-strategist",
+        "specialist": "monetization-strategist",
+        "title": "Monetization Strategist"
+      },
+      {
+        "id": "finance-strategy-office-partnership-strategist",
+        "specialist": "partnership-strategist",
+        "title": "Partnership Strategist"
+      },
+      {
+        "id": "finance-strategy-office-executive-briefing-lead",
+        "specialist": "executive-briefing-lead",
+        "title": "Executive Briefing Lead"
+      }
+    ]
+  },
+  {
+    "id": "finance-research-intelligence",
+    "industry": "finance",
+    "department": "research-intelligence",
+    "title": "Finance Research & Intelligence",
+    "specialists": [
+      {
+        "id": "finance-research-intelligence-source-hunter",
+        "specialist": "source-hunter",
+        "title": "Source Hunter"
+      },
+      {
+        "id": "finance-research-intelligence-benchmark-analyst",
+        "specialist": "benchmark-analyst",
+        "title": "Benchmark Analyst"
+      },
+      {
+        "id": "finance-research-intelligence-competitor-watcher",
+        "specialist": "competitor-watcher",
+        "title": "Competitor Watcher"
+      },
+      {
+        "id": "finance-research-intelligence-policy-watcher",
+        "specialist": "policy-watcher",
+        "title": "Policy Watcher"
+      },
+      {
+        "id": "finance-research-intelligence-customer-insight-miner",
+        "specialist": "customer-insight-miner",
+        "title": "Customer Insight Miner"
+      },
+      {
+        "id": "finance-research-intelligence-data-scout",
+        "specialist": "data-scout",
+        "title": "Data Scout"
+      },
+      {
+        "id": "finance-research-intelligence-trend-synthesizer",
+        "specialist": "trend-synthesizer",
+        "title": "Trend Synthesizer"
+      },
+      {
+        "id": "finance-research-intelligence-evidence-auditor",
+        "specialist": "evidence-auditor",
+        "title": "Evidence Auditor"
+      },
+      {
+        "id": "finance-research-intelligence-expert-interview-designer",
+        "specialist": "expert-interview-designer",
+        "title": "Expert Interview Designer"
+      },
+      {
+        "id": "finance-research-intelligence-diligence-coordinator",
+        "specialist": "diligence-coordinator",
+        "title": "Diligence Coordinator"
+      }
+    ]
+  },
+  {
+    "id": "finance-product-delivery",
+    "industry": "finance",
+    "department": "product-delivery",
+    "title": "Finance Product & Delivery",
+    "specialists": [
+      {
+        "id": "finance-product-delivery-product-architect",
+        "specialist": "product-architect",
+        "title": "Product Architect"
+      },
+      {
+        "id": "finance-product-delivery-workflow-designer",
+        "specialist": "workflow-designer",
+        "title": "Workflow Designer"
+      },
+      {
+        "id": "finance-product-delivery-spec-writer",
+        "specialist": "spec-writer",
+        "title": "Spec Writer"
+      },
+      {
+        "id": "finance-product-delivery-prototype-lead",
+        "specialist": "prototype-lead",
+        "title": "Prototype Lead"
+      },
+      {
+        "id": "finance-product-delivery-ux-optimizer",
+        "specialist": "ux-optimizer",
+        "title": "UX Optimizer"
+      },
+      {
+        "id": "finance-product-delivery-launch-planner",
+        "specialist": "launch-planner",
+        "title": "Launch Planner"
+      },
+      {
+        "id": "finance-product-delivery-delivery-reviewer",
+        "specialist": "delivery-reviewer",
+        "title": "Delivery Reviewer"
+      },
+      {
+        "id": "finance-product-delivery-qa-strategist",
+        "specialist": "qa-strategist",
+        "title": "QA Strategist"
+      },
+      {
+        "id": "finance-product-delivery-roadmap-steward",
+        "specialist": "roadmap-steward",
+        "title": "Roadmap Steward"
+      },
+      {
+        "id": "finance-product-delivery-implementation-coordinator",
+        "specialist": "implementation-coordinator",
+        "title": "Implementation Coordinator"
+      }
+    ]
+  },
+  {
+    "id": "finance-growth-operations",
+    "industry": "finance",
+    "department": "growth-operations",
+    "title": "Finance Growth & Operations",
+    "specialists": [
+      {
+        "id": "finance-growth-operations-funnel-operator",
+        "specialist": "funnel-operator",
+        "title": "Funnel Operator"
+      },
+      {
+        "id": "finance-growth-operations-acquisition-planner",
+        "specialist": "acquisition-planner",
+        "title": "Acquisition Planner"
+      },
+      {
+        "id": "finance-growth-operations-retention-strategist",
+        "specialist": "retention-strategist",
+        "title": "Retention Strategist"
+      },
+      {
+        "id": "finance-growth-operations-lifecycle-designer",
+        "specialist": "lifecycle-designer",
+        "title": "Lifecycle Designer"
+      },
+      {
+        "id": "finance-growth-operations-community-operator",
+        "specialist": "community-operator",
+        "title": "Community Operator"
+      },
+      {
+        "id": "finance-growth-operations-channel-optimizer",
+        "specialist": "channel-optimizer",
+        "title": "Channel Optimizer"
+      },
+      {
+        "id": "finance-growth-operations-ops-automation-lead",
+        "specialist": "ops-automation-lead",
+        "title": "Ops Automation Lead"
+      },
+      {
+        "id": "finance-growth-operations-campaign-analyst",
+        "specialist": "campaign-analyst",
+        "title": "Campaign Analyst"
+      },
+      {
+        "id": "finance-growth-operations-revenue-operator",
+        "specialist": "revenue-operator",
+        "title": "Revenue Operator"
+      },
+      {
+        "id": "finance-growth-operations-performance-marketer",
+        "specialist": "performance-marketer",
+        "title": "Performance Marketer"
+      }
+    ]
+  },
+  {
+    "id": "finance-risk-compliance",
+    "industry": "finance",
+    "department": "risk-compliance",
+    "title": "Finance Risk & Compliance",
+    "specialists": [
+      {
+        "id": "finance-risk-compliance-risk-mapper",
+        "specialist": "risk-mapper",
+        "title": "Risk Mapper"
+      },
+      {
+        "id": "finance-risk-compliance-compliance-interpreter",
+        "specialist": "compliance-interpreter",
+        "title": "Compliance Interpreter"
+      },
+      {
+        "id": "finance-risk-compliance-control-designer",
+        "specialist": "control-designer",
+        "title": "Control Designer"
+      },
+      {
+        "id": "finance-risk-compliance-incident-reviewer",
+        "specialist": "incident-reviewer",
+        "title": "Incident Reviewer"
+      },
+      {
+        "id": "finance-risk-compliance-decision-red-teamer",
+        "specialist": "decision-red-teamer",
+        "title": "Decision Red-Teamer"
+      },
+      {
+        "id": "finance-risk-compliance-downside-analyst",
+        "specialist": "downside-analyst",
+        "title": "Downside Analyst"
+      },
+      {
+        "id": "finance-risk-compliance-security-liaison",
+        "specialist": "security-liaison",
+        "title": "Security Liaison"
+      },
+      {
+        "id": "finance-risk-compliance-policy-drafter",
+        "specialist": "policy-drafter",
+        "title": "Policy Drafter"
+      },
+      {
+        "id": "finance-risk-compliance-audit-planner",
+        "specialist": "audit-planner",
+        "title": "Audit Planner"
+      },
+      {
+        "id": "finance-risk-compliance-escalation-chief",
+        "specialist": "escalation-chief",
+        "title": "Escalation Chief"
+      }
+    ]
+  },
+  {
+    "id": "ai-strategy-office",
+    "industry": "ai",
+    "department": "strategy-office",
+    "title": "AI Strategy Office",
+    "specialists": [
+      {
+        "id": "ai-strategy-office-market-cartographer",
+        "specialist": "market-cartographer",
+        "title": "Market Cartographer"
+      },
+      {
+        "id": "ai-strategy-office-thesis-architect",
+        "specialist": "thesis-architect",
+        "title": "Thesis Architect"
+      },
+      {
+        "id": "ai-strategy-office-scenario-planner",
+        "specialist": "scenario-planner",
+        "title": "Scenario Planner"
+      },
+      {
+        "id": "ai-strategy-office-pricing-strategist",
+        "specialist": "pricing-strategist",
+        "title": "Pricing Strategist"
+      },
+      {
+        "id": "ai-strategy-office-portfolio-prioritizer",
+        "specialist": "portfolio-prioritizer",
+        "title": "Portfolio Prioritizer"
+      },
+      {
+        "id": "ai-strategy-office-ecosystem-mapper",
+        "specialist": "ecosystem-mapper",
+        "title": "Ecosystem Mapper"
+      },
+      {
+        "id": "ai-strategy-office-segment-strategist",
+        "specialist": "segment-strategist",
+        "title": "Segment Strategist"
+      },
+      {
+        "id": "ai-strategy-office-monetization-strategist",
+        "specialist": "monetization-strategist",
+        "title": "Monetization Strategist"
+      },
+      {
+        "id": "ai-strategy-office-partnership-strategist",
+        "specialist": "partnership-strategist",
+        "title": "Partnership Strategist"
+      },
+      {
+        "id": "ai-strategy-office-executive-briefing-lead",
+        "specialist": "executive-briefing-lead",
+        "title": "Executive Briefing Lead"
+      }
+    ]
+  },
+  {
+    "id": "ai-research-intelligence",
+    "industry": "ai",
+    "department": "research-intelligence",
+    "title": "AI Research & Intelligence",
+    "specialists": [
+      {
+        "id": "ai-research-intelligence-source-hunter",
+        "specialist": "source-hunter",
+        "title": "Source Hunter"
+      },
+      {
+        "id": "ai-research-intelligence-benchmark-analyst",
+        "specialist": "benchmark-analyst",
+        "title": "Benchmark Analyst"
+      },
+      {
+        "id": "ai-research-intelligence-competitor-watcher",
+        "specialist": "competitor-watcher",
+        "title": "Competitor Watcher"
+      },
+      {
+        "id": "ai-research-intelligence-policy-watcher",
+        "specialist": "policy-watcher",
+        "title": "Policy Watcher"
+      },
+      {
+        "id": "ai-research-intelligence-customer-insight-miner",
+        "specialist": "customer-insight-miner",
+        "title": "Customer Insight Miner"
+      },
+      {
+        "id": "ai-research-intelligence-data-scout",
+        "specialist": "data-scout",
+        "title": "Data Scout"
+      },
+      {
+        "id": "ai-research-intelligence-trend-synthesizer",
+        "specialist": "trend-synthesizer",
+        "title": "Trend Synthesizer"
+      },
+      {
+        "id": "ai-research-intelligence-evidence-auditor",
+        "specialist": "evidence-auditor",
+        "title": "Evidence Auditor"
+      },
+      {
+        "id": "ai-research-intelligence-expert-interview-designer",
+        "specialist": "expert-interview-designer",
+        "title": "Expert Interview Designer"
+      },
+      {
+        "id": "ai-research-intelligence-diligence-coordinator",
+        "specialist": "diligence-coordinator",
+        "title": "Diligence Coordinator"
+      }
+    ]
+  },
+  {
+    "id": "ai-product-delivery",
+    "industry": "ai",
+    "department": "product-delivery",
+    "title": "AI Product & Delivery",
+    "specialists": [
+      {
+        "id": "ai-product-delivery-product-architect",
+        "specialist": "product-architect",
+        "title": "Product Architect"
+      },
+      {
+        "id": "ai-product-delivery-workflow-designer",
+        "specialist": "workflow-designer",
+        "title": "Workflow Designer"
+      },
+      {
+        "id": "ai-product-delivery-spec-writer",
+        "specialist": "spec-writer",
+        "title": "Spec Writer"
+      },
+      {
+        "id": "ai-product-delivery-prototype-lead",
+        "specialist": "prototype-lead",
+        "title": "Prototype Lead"
+      },
+      {
+        "id": "ai-product-delivery-ux-optimizer",
+        "specialist": "ux-optimizer",
+        "title": "UX Optimizer"
+      },
+      {
+        "id": "ai-product-delivery-launch-planner",
+        "specialist": "launch-planner",
+        "title": "Launch Planner"
+      },
+      {
+        "id": "ai-product-delivery-delivery-reviewer",
+        "specialist": "delivery-reviewer",
+        "title": "Delivery Reviewer"
+      },
+      {
+        "id": "ai-product-delivery-qa-strategist",
+        "specialist": "qa-strategist",
+        "title": "QA Strategist"
+      },
+      {
+        "id": "ai-product-delivery-roadmap-steward",
+        "specialist": "roadmap-steward",
+        "title": "Roadmap Steward"
+      },
+      {
+        "id": "ai-product-delivery-implementation-coordinator",
+        "specialist": "implementation-coordinator",
+        "title": "Implementation Coordinator"
+      }
+    ]
+  },
+  {
+    "id": "ai-growth-operations",
+    "industry": "ai",
+    "department": "growth-operations",
+    "title": "AI Growth & Operations",
+    "specialists": [
+      {
+        "id": "ai-growth-operations-funnel-operator",
+        "specialist": "funnel-operator",
+        "title": "Funnel Operator"
+      },
+      {
+        "id": "ai-growth-operations-acquisition-planner",
+        "specialist": "acquisition-planner",
+        "title": "Acquisition Planner"
+      },
+      {
+        "id": "ai-growth-operations-retention-strategist",
+        "specialist": "retention-strategist",
+        "title": "Retention Strategist"
+      },
+      {
+        "id": "ai-growth-operations-lifecycle-designer",
+        "specialist": "lifecycle-designer",
+        "title": "Lifecycle Designer"
+      },
+      {
+        "id": "ai-growth-operations-community-operator",
+        "specialist": "community-operator",
+        "title": "Community Operator"
+      },
+      {
+        "id": "ai-growth-operations-channel-optimizer",
+        "specialist": "channel-optimizer",
+        "title": "Channel Optimizer"
+      },
+      {
+        "id": "ai-growth-operations-ops-automation-lead",
+        "specialist": "ops-automation-lead",
+        "title": "Ops Automation Lead"
+      },
+      {
+        "id": "ai-growth-operations-campaign-analyst",
+        "specialist": "campaign-analyst",
+        "title": "Campaign Analyst"
+      },
+      {
+        "id": "ai-growth-operations-revenue-operator",
+        "specialist": "revenue-operator",
+        "title": "Revenue Operator"
+      },
+      {
+        "id": "ai-growth-operations-performance-marketer",
+        "specialist": "performance-marketer",
+        "title": "Performance Marketer"
+      }
+    ]
+  },
+  {
+    "id": "ai-risk-compliance",
+    "industry": "ai",
+    "department": "risk-compliance",
+    "title": "AI Risk & Compliance",
+    "specialists": [
+      {
+        "id": "ai-risk-compliance-risk-mapper",
+        "specialist": "risk-mapper",
+        "title": "Risk Mapper"
+      },
+      {
+        "id": "ai-risk-compliance-compliance-interpreter",
+        "specialist": "compliance-interpreter",
+        "title": "Compliance Interpreter"
+      },
+      {
+        "id": "ai-risk-compliance-control-designer",
+        "specialist": "control-designer",
+        "title": "Control Designer"
+      },
+      {
+        "id": "ai-risk-compliance-incident-reviewer",
+        "specialist": "incident-reviewer",
+        "title": "Incident Reviewer"
+      },
+      {
+        "id": "ai-risk-compliance-decision-red-teamer",
+        "specialist": "decision-red-teamer",
+        "title": "Decision Red-Teamer"
+      },
+      {
+        "id": "ai-risk-compliance-downside-analyst",
+        "specialist": "downside-analyst",
+        "title": "Downside Analyst"
+      },
+      {
+        "id": "ai-risk-compliance-security-liaison",
+        "specialist": "security-liaison",
+        "title": "Security Liaison"
+      },
+      {
+        "id": "ai-risk-compliance-policy-drafter",
+        "specialist": "policy-drafter",
+        "title": "Policy Drafter"
+      },
+      {
+        "id": "ai-risk-compliance-audit-planner",
+        "specialist": "audit-planner",
+        "title": "Audit Planner"
+      },
+      {
+        "id": "ai-risk-compliance-escalation-chief",
+        "specialist": "escalation-chief",
+        "title": "Escalation Chief"
+      }
+    ]
+  },
+  {
+    "id": "healthcare-strategy-office",
+    "industry": "healthcare",
+    "department": "strategy-office",
+    "title": "Healthcare Strategy Office",
+    "specialists": [
+      {
+        "id": "healthcare-strategy-office-market-cartographer",
+        "specialist": "market-cartographer",
+        "title": "Market Cartographer"
+      },
+      {
+        "id": "healthcare-strategy-office-thesis-architect",
+        "specialist": "thesis-architect",
+        "title": "Thesis Architect"
+      },
+      {
+        "id": "healthcare-strategy-office-scenario-planner",
+        "specialist": "scenario-planner",
+        "title": "Scenario Planner"
+      },
+      {
+        "id": "healthcare-strategy-office-pricing-strategist",
+        "specialist": "pricing-strategist",
+        "title": "Pricing Strategist"
+      },
+      {
+        "id": "healthcare-strategy-office-portfolio-prioritizer",
+        "specialist": "portfolio-prioritizer",
+        "title": "Portfolio Prioritizer"
+      },
+      {
+        "id": "healthcare-strategy-office-ecosystem-mapper",
+        "specialist": "ecosystem-mapper",
+        "title": "Ecosystem Mapper"
+      },
+      {
+        "id": "healthcare-strategy-office-segment-strategist",
+        "specialist": "segment-strategist",
+        "title": "Segment Strategist"
+      },
+      {
+        "id": "healthcare-strategy-office-monetization-strategist",
+        "specialist": "monetization-strategist",
+        "title": "Monetization Strategist"
+      },
+      {
+        "id": "healthcare-strategy-office-partnership-strategist",
+        "specialist": "partnership-strategist",
+        "title": "Partnership Strategist"
+      },
+      {
+        "id": "healthcare-strategy-office-executive-briefing-lead",
+        "specialist": "executive-briefing-lead",
+        "title": "Executive Briefing Lead"
+      }
+    ]
+  },
+  {
+    "id": "healthcare-research-intelligence",
+    "industry": "healthcare",
+    "department": "research-intelligence",
+    "title": "Healthcare Research & Intelligence",
+    "specialists": [
+      {
+        "id": "healthcare-research-intelligence-source-hunter",
+        "specialist": "source-hunter",
+        "title": "Source Hunter"
+      },
+      {
+        "id": "healthcare-research-intelligence-benchmark-analyst",
+        "specialist": "benchmark-analyst",
+        "title": "Benchmark Analyst"
+      },
+      {
+        "id": "healthcare-research-intelligence-competitor-watcher",
+        "specialist": "competitor-watcher",
+        "title": "Competitor Watcher"
+      },
+      {
+        "id": "healthcare-research-intelligence-policy-watcher",
+        "specialist": "policy-watcher",
+        "title": "Policy Watcher"
+      },
+      {
+        "id": "healthcare-research-intelligence-customer-insight-miner",
+        "specialist": "customer-insight-miner",
+        "title": "Customer Insight Miner"
+      },
+      {
+        "id": "healthcare-research-intelligence-data-scout",
+        "specialist": "data-scout",
+        "title": "Data Scout"
+      },
+      {
+        "id": "healthcare-research-intelligence-trend-synthesizer",
+        "specialist": "trend-synthesizer",
+        "title": "Trend Synthesizer"
+      },
+      {
+        "id": "healthcare-research-intelligence-evidence-auditor",
+        "specialist": "evidence-auditor",
+        "title": "Evidence Auditor"
+      },
+      {
+        "id": "healthcare-research-intelligence-expert-interview-designer",
+        "specialist": "expert-interview-designer",
+        "title": "Expert Interview Designer"
+      },
+      {
+        "id": "healthcare-research-intelligence-diligence-coordinator",
+        "specialist": "diligence-coordinator",
+        "title": "Diligence Coordinator"
+      }
+    ]
+  },
+  {
+    "id": "healthcare-product-delivery",
+    "industry": "healthcare",
+    "department": "product-delivery",
+    "title": "Healthcare Product & Delivery",
+    "specialists": [
+      {
+        "id": "healthcare-product-delivery-product-architect",
+        "specialist": "product-architect",
+        "title": "Product Architect"
+      },
+      {
+        "id": "healthcare-product-delivery-workflow-designer",
+        "specialist": "workflow-designer",
+        "title": "Workflow Designer"
+      },
+      {
+        "id": "healthcare-product-delivery-spec-writer",
+        "specialist": "spec-writer",
+        "title": "Spec Writer"
+      },
+      {
+        "id": "healthcare-product-delivery-prototype-lead",
+        "specialist": "prototype-lead",
+        "title": "Prototype Lead"
+      },
+      {
+        "id": "healthcare-product-delivery-ux-optimizer",
+        "specialist": "ux-optimizer",
+        "title": "UX Optimizer"
+      },
+      {
+        "id": "healthcare-product-delivery-launch-planner",
+        "specialist": "launch-planner",
+        "title": "Launch Planner"
+      },
+      {
+        "id": "healthcare-product-delivery-delivery-reviewer",
+        "specialist": "delivery-reviewer",
+        "title": "Delivery Reviewer"
+      },
+      {
+        "id": "healthcare-product-delivery-qa-strategist",
+        "specialist": "qa-strategist",
+        "title": "QA Strategist"
+      },
+      {
+        "id": "healthcare-product-delivery-roadmap-steward",
+        "specialist": "roadmap-steward",
+        "title": "Roadmap Steward"
+      },
+      {
+        "id": "healthcare-product-delivery-implementation-coordinator",
+        "specialist": "implementation-coordinator",
+        "title": "Implementation Coordinator"
+      }
+    ]
+  },
+  {
+    "id": "healthcare-growth-operations",
+    "industry": "healthcare",
+    "department": "growth-operations",
+    "title": "Healthcare Growth & Operations",
+    "specialists": [
+      {
+        "id": "healthcare-growth-operations-funnel-operator",
+        "specialist": "funnel-operator",
+        "title": "Funnel Operator"
+      },
+      {
+        "id": "healthcare-growth-operations-acquisition-planner",
+        "specialist": "acquisition-planner",
+        "title": "Acquisition Planner"
+      },
+      {
+        "id": "healthcare-growth-operations-retention-strategist",
+        "specialist": "retention-strategist",
+        "title": "Retention Strategist"
+      },
+      {
+        "id": "healthcare-growth-operations-lifecycle-designer",
+        "specialist": "lifecycle-designer",
+        "title": "Lifecycle Designer"
+      },
+      {
+        "id": "healthcare-growth-operations-community-operator",
+        "specialist": "community-operator",
+        "title": "Community Operator"
+      },
+      {
+        "id": "healthcare-growth-operations-channel-optimizer",
+        "specialist": "channel-optimizer",
+        "title": "Channel Optimizer"
+      },
+      {
+        "id": "healthcare-growth-operations-ops-automation-lead",
+        "specialist": "ops-automation-lead",
+        "title": "Ops Automation Lead"
+      },
+      {
+        "id": "healthcare-growth-operations-campaign-analyst",
+        "specialist": "campaign-analyst",
+        "title": "Campaign Analyst"
+      },
+      {
+        "id": "healthcare-growth-operations-revenue-operator",
+        "specialist": "revenue-operator",
+        "title": "Revenue Operator"
+      },
+      {
+        "id": "healthcare-growth-operations-performance-marketer",
+        "specialist": "performance-marketer",
+        "title": "Performance Marketer"
+      }
+    ]
+  },
+  {
+    "id": "healthcare-risk-compliance",
+    "industry": "healthcare",
+    "department": "risk-compliance",
+    "title": "Healthcare Risk & Compliance",
+    "specialists": [
+      {
+        "id": "healthcare-risk-compliance-risk-mapper",
+        "specialist": "risk-mapper",
+        "title": "Risk Mapper"
+      },
+      {
+        "id": "healthcare-risk-compliance-compliance-interpreter",
+        "specialist": "compliance-interpreter",
+        "title": "Compliance Interpreter"
+      },
+      {
+        "id": "healthcare-risk-compliance-control-designer",
+        "specialist": "control-designer",
+        "title": "Control Designer"
+      },
+      {
+        "id": "healthcare-risk-compliance-incident-reviewer",
+        "specialist": "incident-reviewer",
+        "title": "Incident Reviewer"
+      },
+      {
+        "id": "healthcare-risk-compliance-decision-red-teamer",
+        "specialist": "decision-red-teamer",
+        "title": "Decision Red-Teamer"
+      },
+      {
+        "id": "healthcare-risk-compliance-downside-analyst",
+        "specialist": "downside-analyst",
+        "title": "Downside Analyst"
+      },
+      {
+        "id": "healthcare-risk-compliance-security-liaison",
+        "specialist": "security-liaison",
+        "title": "Security Liaison"
+      },
+      {
+        "id": "healthcare-risk-compliance-policy-drafter",
+        "specialist": "policy-drafter",
+        "title": "Policy Drafter"
+      },
+      {
+        "id": "healthcare-risk-compliance-audit-planner",
+        "specialist": "audit-planner",
+        "title": "Audit Planner"
+      },
+      {
+        "id": "healthcare-risk-compliance-escalation-chief",
+        "specialist": "escalation-chief",
+        "title": "Escalation Chief"
+      }
+    ]
+  },
+  {
+    "id": "stocks-strategy-office",
+    "industry": "stocks",
+    "department": "strategy-office",
+    "title": "Stocks Strategy Office",
+    "specialists": [
+      {
+        "id": "stocks-strategy-office-market-cartographer",
+        "specialist": "market-cartographer",
+        "title": "Market Cartographer"
+      },
+      {
+        "id": "stocks-strategy-office-thesis-architect",
+        "specialist": "thesis-architect",
+        "title": "Thesis Architect"
+      },
+      {
+        "id": "stocks-strategy-office-scenario-planner",
+        "specialist": "scenario-planner",
+        "title": "Scenario Planner"
+      },
+      {
+        "id": "stocks-strategy-office-pricing-strategist",
+        "specialist": "pricing-strategist",
+        "title": "Pricing Strategist"
+      },
+      {
+        "id": "stocks-strategy-office-portfolio-prioritizer",
+        "specialist": "portfolio-prioritizer",
+        "title": "Portfolio Prioritizer"
+      },
+      {
+        "id": "stocks-strategy-office-ecosystem-mapper",
+        "specialist": "ecosystem-mapper",
+        "title": "Ecosystem Mapper"
+      },
+      {
+        "id": "stocks-strategy-office-segment-strategist",
+        "specialist": "segment-strategist",
+        "title": "Segment Strategist"
+      },
+      {
+        "id": "stocks-strategy-office-monetization-strategist",
+        "specialist": "monetization-strategist",
+        "title": "Monetization Strategist"
+      },
+      {
+        "id": "stocks-strategy-office-partnership-strategist",
+        "specialist": "partnership-strategist",
+        "title": "Partnership Strategist"
+      },
+      {
+        "id": "stocks-strategy-office-executive-briefing-lead",
+        "specialist": "executive-briefing-lead",
+        "title": "Executive Briefing Lead"
+      }
+    ]
+  },
+  {
+    "id": "stocks-research-intelligence",
+    "industry": "stocks",
+    "department": "research-intelligence",
+    "title": "Stocks Research & Intelligence",
+    "specialists": [
+      {
+        "id": "stocks-research-intelligence-source-hunter",
+        "specialist": "source-hunter",
+        "title": "Source Hunter"
+      },
+      {
+        "id": "stocks-research-intelligence-benchmark-analyst",
+        "specialist": "benchmark-analyst",
+        "title": "Benchmark Analyst"
+      },
+      {
+        "id": "stocks-research-intelligence-competitor-watcher",
+        "specialist": "competitor-watcher",
+        "title": "Competitor Watcher"
+      },
+      {
+        "id": "stocks-research-intelligence-policy-watcher",
+        "specialist": "policy-watcher",
+        "title": "Policy Watcher"
+      },
+      {
+        "id": "stocks-research-intelligence-customer-insight-miner",
+        "specialist": "customer-insight-miner",
+        "title": "Customer Insight Miner"
+      },
+      {
+        "id": "stocks-research-intelligence-data-scout",
+        "specialist": "data-scout",
+        "title": "Data Scout"
+      },
+      {
+        "id": "stocks-research-intelligence-trend-synthesizer",
+        "specialist": "trend-synthesizer",
+        "title": "Trend Synthesizer"
+      },
+      {
+        "id": "stocks-research-intelligence-evidence-auditor",
+        "specialist": "evidence-auditor",
+        "title": "Evidence Auditor"
+      },
+      {
+        "id": "stocks-research-intelligence-expert-interview-designer",
+        "specialist": "expert-interview-designer",
+        "title": "Expert Interview Designer"
+      },
+      {
+        "id": "stocks-research-intelligence-diligence-coordinator",
+        "specialist": "diligence-coordinator",
+        "title": "Diligence Coordinator"
+      }
+    ]
+  },
+  {
+    "id": "stocks-product-delivery",
+    "industry": "stocks",
+    "department": "product-delivery",
+    "title": "Stocks Product & Delivery",
+    "specialists": [
+      {
+        "id": "stocks-product-delivery-product-architect",
+        "specialist": "product-architect",
+        "title": "Product Architect"
+      },
+      {
+        "id": "stocks-product-delivery-workflow-designer",
+        "specialist": "workflow-designer",
+        "title": "Workflow Designer"
+      },
+      {
+        "id": "stocks-product-delivery-spec-writer",
+        "specialist": "spec-writer",
+        "title": "Spec Writer"
+      },
+      {
+        "id": "stocks-product-delivery-prototype-lead",
+        "specialist": "prototype-lead",
+        "title": "Prototype Lead"
+      },
+      {
+        "id": "stocks-product-delivery-ux-optimizer",
+        "specialist": "ux-optimizer",
+        "title": "UX Optimizer"
+      },
+      {
+        "id": "stocks-product-delivery-launch-planner",
+        "specialist": "launch-planner",
+        "title": "Launch Planner"
+      },
+      {
+        "id": "stocks-product-delivery-delivery-reviewer",
+        "specialist": "delivery-reviewer",
+        "title": "Delivery Reviewer"
+      },
+      {
+        "id": "stocks-product-delivery-qa-strategist",
+        "specialist": "qa-strategist",
+        "title": "QA Strategist"
+      },
+      {
+        "id": "stocks-product-delivery-roadmap-steward",
+        "specialist": "roadmap-steward",
+        "title": "Roadmap Steward"
+      },
+      {
+        "id": "stocks-product-delivery-implementation-coordinator",
+        "specialist": "implementation-coordinator",
+        "title": "Implementation Coordinator"
+      }
+    ]
+  },
+  {
+    "id": "stocks-growth-operations",
+    "industry": "stocks",
+    "department": "growth-operations",
+    "title": "Stocks Growth & Operations",
+    "specialists": [
+      {
+        "id": "stocks-growth-operations-funnel-operator",
+        "specialist": "funnel-operator",
+        "title": "Funnel Operator"
+      },
+      {
+        "id": "stocks-growth-operations-acquisition-planner",
+        "specialist": "acquisition-planner",
+        "title": "Acquisition Planner"
+      },
+      {
+        "id": "stocks-growth-operations-retention-strategist",
+        "specialist": "retention-strategist",
+        "title": "Retention Strategist"
+      },
+      {
+        "id": "stocks-growth-operations-lifecycle-designer",
+        "specialist": "lifecycle-designer",
+        "title": "Lifecycle Designer"
+      },
+      {
+        "id": "stocks-growth-operations-community-operator",
+        "specialist": "community-operator",
+        "title": "Community Operator"
+      },
+      {
+        "id": "stocks-growth-operations-channel-optimizer",
+        "specialist": "channel-optimizer",
+        "title": "Channel Optimizer"
+      },
+      {
+        "id": "stocks-growth-operations-ops-automation-lead",
+        "specialist": "ops-automation-lead",
+        "title": "Ops Automation Lead"
+      },
+      {
+        "id": "stocks-growth-operations-campaign-analyst",
+        "specialist": "campaign-analyst",
+        "title": "Campaign Analyst"
+      },
+      {
+        "id": "stocks-growth-operations-revenue-operator",
+        "specialist": "revenue-operator",
+        "title": "Revenue Operator"
+      },
+      {
+        "id": "stocks-growth-operations-performance-marketer",
+        "specialist": "performance-marketer",
+        "title": "Performance Marketer"
+      }
+    ]
+  },
+  {
+    "id": "stocks-risk-compliance",
+    "industry": "stocks",
+    "department": "risk-compliance",
+    "title": "Stocks Risk & Compliance",
+    "specialists": [
+      {
+        "id": "stocks-risk-compliance-risk-mapper",
+        "specialist": "risk-mapper",
+        "title": "Risk Mapper"
+      },
+      {
+        "id": "stocks-risk-compliance-compliance-interpreter",
+        "specialist": "compliance-interpreter",
+        "title": "Compliance Interpreter"
+      },
+      {
+        "id": "stocks-risk-compliance-control-designer",
+        "specialist": "control-designer",
+        "title": "Control Designer"
+      },
+      {
+        "id": "stocks-risk-compliance-incident-reviewer",
+        "specialist": "incident-reviewer",
+        "title": "Incident Reviewer"
+      },
+      {
+        "id": "stocks-risk-compliance-decision-red-teamer",
+        "specialist": "decision-red-teamer",
+        "title": "Decision Red-Teamer"
+      },
+      {
+        "id": "stocks-risk-compliance-downside-analyst",
+        "specialist": "downside-analyst",
+        "title": "Downside Analyst"
+      },
+      {
+        "id": "stocks-risk-compliance-security-liaison",
+        "specialist": "security-liaison",
+        "title": "Security Liaison"
+      },
+      {
+        "id": "stocks-risk-compliance-policy-drafter",
+        "specialist": "policy-drafter",
+        "title": "Policy Drafter"
+      },
+      {
+        "id": "stocks-risk-compliance-audit-planner",
+        "specialist": "audit-planner",
+        "title": "Audit Planner"
+      },
+      {
+        "id": "stocks-risk-compliance-escalation-chief",
+        "specialist": "escalation-chief",
+        "title": "Escalation Chief"
+      }
+    ]
+  },
+  {
+    "id": "investment-strategy-office",
+    "industry": "investment",
+    "department": "strategy-office",
+    "title": "Investment Strategy Office",
+    "specialists": [
+      {
+        "id": "investment-strategy-office-market-cartographer",
+        "specialist": "market-cartographer",
+        "title": "Market Cartographer"
+      },
+      {
+        "id": "investment-strategy-office-thesis-architect",
+        "specialist": "thesis-architect",
+        "title": "Thesis Architect"
+      },
+      {
+        "id": "investment-strategy-office-scenario-planner",
+        "specialist": "scenario-planner",
+        "title": "Scenario Planner"
+      },
+      {
+        "id": "investment-strategy-office-pricing-strategist",
+        "specialist": "pricing-strategist",
+        "title": "Pricing Strategist"
+      },
+      {
+        "id": "investment-strategy-office-portfolio-prioritizer",
+        "specialist": "portfolio-prioritizer",
+        "title": "Portfolio Prioritizer"
+      },
+      {
+        "id": "investment-strategy-office-ecosystem-mapper",
+        "specialist": "ecosystem-mapper",
+        "title": "Ecosystem Mapper"
+      },
+      {
+        "id": "investment-strategy-office-segment-strategist",
+        "specialist": "segment-strategist",
+        "title": "Segment Strategist"
+      },
+      {
+        "id": "investment-strategy-office-monetization-strategist",
+        "specialist": "monetization-strategist",
+        "title": "Monetization Strategist"
+      },
+      {
+        "id": "investment-strategy-office-partnership-strategist",
+        "specialist": "partnership-strategist",
+        "title": "Partnership Strategist"
+      },
+      {
+        "id": "investment-strategy-office-executive-briefing-lead",
+        "specialist": "executive-briefing-lead",
+        "title": "Executive Briefing Lead"
+      }
+    ]
+  },
+  {
+    "id": "investment-research-intelligence",
+    "industry": "investment",
+    "department": "research-intelligence",
+    "title": "Investment Research & Intelligence",
+    "specialists": [
+      {
+        "id": "investment-research-intelligence-source-hunter",
+        "specialist": "source-hunter",
+        "title": "Source Hunter"
+      },
+      {
+        "id": "investment-research-intelligence-benchmark-analyst",
+        "specialist": "benchmark-analyst",
+        "title": "Benchmark Analyst"
+      },
+      {
+        "id": "investment-research-intelligence-competitor-watcher",
+        "specialist": "competitor-watcher",
+        "title": "Competitor Watcher"
+      },
+      {
+        "id": "investment-research-intelligence-policy-watcher",
+        "specialist": "policy-watcher",
+        "title": "Policy Watcher"
+      },
+      {
+        "id": "investment-research-intelligence-customer-insight-miner",
+        "specialist": "customer-insight-miner",
+        "title": "Customer Insight Miner"
+      },
+      {
+        "id": "investment-research-intelligence-data-scout",
+        "specialist": "data-scout",
+        "title": "Data Scout"
+      },
+      {
+        "id": "investment-research-intelligence-trend-synthesizer",
+        "specialist": "trend-synthesizer",
+        "title": "Trend Synthesizer"
+      },
+      {
+        "id": "investment-research-intelligence-evidence-auditor",
+        "specialist": "evidence-auditor",
+        "title": "Evidence Auditor"
+      },
+      {
+        "id": "investment-research-intelligence-expert-interview-designer",
+        "specialist": "expert-interview-designer",
+        "title": "Expert Interview Designer"
+      },
+      {
+        "id": "investment-research-intelligence-diligence-coordinator",
+        "specialist": "diligence-coordinator",
+        "title": "Diligence Coordinator"
+      }
+    ]
+  },
+  {
+    "id": "investment-product-delivery",
+    "industry": "investment",
+    "department": "product-delivery",
+    "title": "Investment Product & Delivery",
+    "specialists": [
+      {
+        "id": "investment-product-delivery-product-architect",
+        "specialist": "product-architect",
+        "title": "Product Architect"
+      },
+      {
+        "id": "investment-product-delivery-workflow-designer",
+        "specialist": "workflow-designer",
+        "title": "Workflow Designer"
+      },
+      {
+        "id": "investment-product-delivery-spec-writer",
+        "specialist": "spec-writer",
+        "title": "Spec Writer"
+      },
+      {
+        "id": "investment-product-delivery-prototype-lead",
+        "specialist": "prototype-lead",
+        "title": "Prototype Lead"
+      },
+      {
+        "id": "investment-product-delivery-ux-optimizer",
+        "specialist": "ux-optimizer",
+        "title": "UX Optimizer"
+      },
+      {
+        "id": "investment-product-delivery-launch-planner",
+        "specialist": "launch-planner",
+        "title": "Launch Planner"
+      },
+      {
+        "id": "investment-product-delivery-delivery-reviewer",
+        "specialist": "delivery-reviewer",
+        "title": "Delivery Reviewer"
+      },
+      {
+        "id": "investment-product-delivery-qa-strategist",
+        "specialist": "qa-strategist",
+        "title": "QA Strategist"
+      },
+      {
+        "id": "investment-product-delivery-roadmap-steward",
+        "specialist": "roadmap-steward",
+        "title": "Roadmap Steward"
+      },
+      {
+        "id": "investment-product-delivery-implementation-coordinator",
+        "specialist": "implementation-coordinator",
+        "title": "Implementation Coordinator"
+      }
+    ]
+  },
+  {
+    "id": "investment-growth-operations",
+    "industry": "investment",
+    "department": "growth-operations",
+    "title": "Investment Growth & Operations",
+    "specialists": [
+      {
+        "id": "investment-growth-operations-funnel-operator",
+        "specialist": "funnel-operator",
+        "title": "Funnel Operator"
+      },
+      {
+        "id": "investment-growth-operations-acquisition-planner",
+        "specialist": "acquisition-planner",
+        "title": "Acquisition Planner"
+      },
+      {
+        "id": "investment-growth-operations-retention-strategist",
+        "specialist": "retention-strategist",
+        "title": "Retention Strategist"
+      },
+      {
+        "id": "investment-growth-operations-lifecycle-designer",
+        "specialist": "lifecycle-designer",
+        "title": "Lifecycle Designer"
+      },
+      {
+        "id": "investment-growth-operations-community-operator",
+        "specialist": "community-operator",
+        "title": "Community Operator"
+      },
+      {
+        "id": "investment-growth-operations-channel-optimizer",
+        "specialist": "channel-optimizer",
+        "title": "Channel Optimizer"
+      },
+      {
+        "id": "investment-growth-operations-ops-automation-lead",
+        "specialist": "ops-automation-lead",
+        "title": "Ops Automation Lead"
+      },
+      {
+        "id": "investment-growth-operations-campaign-analyst",
+        "specialist": "campaign-analyst",
+        "title": "Campaign Analyst"
+      },
+      {
+        "id": "investment-growth-operations-revenue-operator",
+        "specialist": "revenue-operator",
+        "title": "Revenue Operator"
+      },
+      {
+        "id": "investment-growth-operations-performance-marketer",
+        "specialist": "performance-marketer",
+        "title": "Performance Marketer"
+      }
+    ]
+  },
+  {
+    "id": "investment-risk-compliance",
+    "industry": "investment",
+    "department": "risk-compliance",
+    "title": "Investment Risk & Compliance",
+    "specialists": [
+      {
+        "id": "investment-risk-compliance-risk-mapper",
+        "specialist": "risk-mapper",
+        "title": "Risk Mapper"
+      },
+      {
+        "id": "investment-risk-compliance-compliance-interpreter",
+        "specialist": "compliance-interpreter",
+        "title": "Compliance Interpreter"
+      },
+      {
+        "id": "investment-risk-compliance-control-designer",
+        "specialist": "control-designer",
+        "title": "Control Designer"
+      },
+      {
+        "id": "investment-risk-compliance-incident-reviewer",
+        "specialist": "incident-reviewer",
+        "title": "Incident Reviewer"
+      },
+      {
+        "id": "investment-risk-compliance-decision-red-teamer",
+        "specialist": "decision-red-teamer",
+        "title": "Decision Red-Teamer"
+      },
+      {
+        "id": "investment-risk-compliance-downside-analyst",
+        "specialist": "downside-analyst",
+        "title": "Downside Analyst"
+      },
+      {
+        "id": "investment-risk-compliance-security-liaison",
+        "specialist": "security-liaison",
+        "title": "Security Liaison"
+      },
+      {
+        "id": "investment-risk-compliance-policy-drafter",
+        "specialist": "policy-drafter",
+        "title": "Policy Drafter"
+      },
+      {
+        "id": "investment-risk-compliance-audit-planner",
+        "specialist": "audit-planner",
+        "title": "Audit Planner"
+      },
+      {
+        "id": "investment-risk-compliance-escalation-chief",
+        "specialist": "escalation-chief",
+        "title": "Escalation Chief"
+      }
+    ]
+  },
+  {
+    "id": "web3-strategy-office",
+    "industry": "web3",
+    "department": "strategy-office",
+    "title": "Web3 Strategy Office",
+    "specialists": [
+      {
+        "id": "web3-strategy-office-market-cartographer",
+        "specialist": "market-cartographer",
+        "title": "Market Cartographer"
+      },
+      {
+        "id": "web3-strategy-office-thesis-architect",
+        "specialist": "thesis-architect",
+        "title": "Thesis Architect"
+      },
+      {
+        "id": "web3-strategy-office-scenario-planner",
+        "specialist": "scenario-planner",
+        "title": "Scenario Planner"
+      },
+      {
+        "id": "web3-strategy-office-pricing-strategist",
+        "specialist": "pricing-strategist",
+        "title": "Pricing Strategist"
+      },
+      {
+        "id": "web3-strategy-office-portfolio-prioritizer",
+        "specialist": "portfolio-prioritizer",
+        "title": "Portfolio Prioritizer"
+      },
+      {
+        "id": "web3-strategy-office-ecosystem-mapper",
+        "specialist": "ecosystem-mapper",
+        "title": "Ecosystem Mapper"
+      },
+      {
+        "id": "web3-strategy-office-segment-strategist",
+        "specialist": "segment-strategist",
+        "title": "Segment Strategist"
+      },
+      {
+        "id": "web3-strategy-office-monetization-strategist",
+        "specialist": "monetization-strategist",
+        "title": "Monetization Strategist"
+      },
+      {
+        "id": "web3-strategy-office-partnership-strategist",
+        "specialist": "partnership-strategist",
+        "title": "Partnership Strategist"
+      },
+      {
+        "id": "web3-strategy-office-executive-briefing-lead",
+        "specialist": "executive-briefing-lead",
+        "title": "Executive Briefing Lead"
+      }
+    ]
+  },
+  {
+    "id": "web3-research-intelligence",
+    "industry": "web3",
+    "department": "research-intelligence",
+    "title": "Web3 Research & Intelligence",
+    "specialists": [
+      {
+        "id": "web3-research-intelligence-source-hunter",
+        "specialist": "source-hunter",
+        "title": "Source Hunter"
+      },
+      {
+        "id": "web3-research-intelligence-benchmark-analyst",
+        "specialist": "benchmark-analyst",
+        "title": "Benchmark Analyst"
+      },
+      {
+        "id": "web3-research-intelligence-competitor-watcher",
+        "specialist": "competitor-watcher",
+        "title": "Competitor Watcher"
+      },
+      {
+        "id": "web3-research-intelligence-policy-watcher",
+        "specialist": "policy-watcher",
+        "title": "Policy Watcher"
+      },
+      {
+        "id": "web3-research-intelligence-customer-insight-miner",
+        "specialist": "customer-insight-miner",
+        "title": "Customer Insight Miner"
+      },
+      {
+        "id": "web3-research-intelligence-data-scout",
+        "specialist": "data-scout",
+        "title": "Data Scout"
+      },
+      {
+        "id": "web3-research-intelligence-trend-synthesizer",
+        "specialist": "trend-synthesizer",
+        "title": "Trend Synthesizer"
+      },
+      {
+        "id": "web3-research-intelligence-evidence-auditor",
+        "specialist": "evidence-auditor",
+        "title": "Evidence Auditor"
+      },
+      {
+        "id": "web3-research-intelligence-expert-interview-designer",
+        "specialist": "expert-interview-designer",
+        "title": "Expert Interview Designer"
+      },
+      {
+        "id": "web3-research-intelligence-diligence-coordinator",
+        "specialist": "diligence-coordinator",
+        "title": "Diligence Coordinator"
+      }
+    ]
+  },
+  {
+    "id": "web3-product-delivery",
+    "industry": "web3",
+    "department": "product-delivery",
+    "title": "Web3 Product & Delivery",
+    "specialists": [
+      {
+        "id": "web3-product-delivery-product-architect",
+        "specialist": "product-architect",
+        "title": "Product Architect"
+      },
+      {
+        "id": "web3-product-delivery-workflow-designer",
+        "specialist": "workflow-designer",
+        "title": "Workflow Designer"
+      },
+      {
+        "id": "web3-product-delivery-spec-writer",
+        "specialist": "spec-writer",
+        "title": "Spec Writer"
+      },
+      {
+        "id": "web3-product-delivery-prototype-lead",
+        "specialist": "prototype-lead",
+        "title": "Prototype Lead"
+      },
+      {
+        "id": "web3-product-delivery-ux-optimizer",
+        "specialist": "ux-optimizer",
+        "title": "UX Optimizer"
+      },
+      {
+        "id": "web3-product-delivery-launch-planner",
+        "specialist": "launch-planner",
+        "title": "Launch Planner"
+      },
+      {
+        "id": "web3-product-delivery-delivery-reviewer",
+        "specialist": "delivery-reviewer",
+        "title": "Delivery Reviewer"
+      },
+      {
+        "id": "web3-product-delivery-qa-strategist",
+        "specialist": "qa-strategist",
+        "title": "QA Strategist"
+      },
+      {
+        "id": "web3-product-delivery-roadmap-steward",
+        "specialist": "roadmap-steward",
+        "title": "Roadmap Steward"
+      },
+      {
+        "id": "web3-product-delivery-implementation-coordinator",
+        "specialist": "implementation-coordinator",
+        "title": "Implementation Coordinator"
+      }
+    ]
+  },
+  {
+    "id": "web3-growth-operations",
+    "industry": "web3",
+    "department": "growth-operations",
+    "title": "Web3 Growth & Operations",
+    "specialists": [
+      {
+        "id": "web3-growth-operations-funnel-operator",
+        "specialist": "funnel-operator",
+        "title": "Funnel Operator"
+      },
+      {
+        "id": "web3-growth-operations-acquisition-planner",
+        "specialist": "acquisition-planner",
+        "title": "Acquisition Planner"
+      },
+      {
+        "id": "web3-growth-operations-retention-strategist",
+        "specialist": "retention-strategist",
+        "title": "Retention Strategist"
+      },
+      {
+        "id": "web3-growth-operations-lifecycle-designer",
+        "specialist": "lifecycle-designer",
+        "title": "Lifecycle Designer"
+      },
+      {
+        "id": "web3-growth-operations-community-operator",
+        "specialist": "community-operator",
+        "title": "Community Operator"
+      },
+      {
+        "id": "web3-growth-operations-channel-optimizer",
+        "specialist": "channel-optimizer",
+        "title": "Channel Optimizer"
+      },
+      {
+        "id": "web3-growth-operations-ops-automation-lead",
+        "specialist": "ops-automation-lead",
+        "title": "Ops Automation Lead"
+      },
+      {
+        "id": "web3-growth-operations-campaign-analyst",
+        "specialist": "campaign-analyst",
+        "title": "Campaign Analyst"
+      },
+      {
+        "id": "web3-growth-operations-revenue-operator",
+        "specialist": "revenue-operator",
+        "title": "Revenue Operator"
+      },
+      {
+        "id": "web3-growth-operations-performance-marketer",
+        "specialist": "performance-marketer",
+        "title": "Performance Marketer"
+      }
+    ]
+  },
+  {
+    "id": "web3-risk-compliance",
+    "industry": "web3",
+    "department": "risk-compliance",
+    "title": "Web3 Risk & Compliance",
+    "specialists": [
+      {
+        "id": "web3-risk-compliance-risk-mapper",
+        "specialist": "risk-mapper",
+        "title": "Risk Mapper"
+      },
+      {
+        "id": "web3-risk-compliance-compliance-interpreter",
+        "specialist": "compliance-interpreter",
+        "title": "Compliance Interpreter"
+      },
+      {
+        "id": "web3-risk-compliance-control-designer",
+        "specialist": "control-designer",
+        "title": "Control Designer"
+      },
+      {
+        "id": "web3-risk-compliance-incident-reviewer",
+        "specialist": "incident-reviewer",
+        "title": "Incident Reviewer"
+      },
+      {
+        "id": "web3-risk-compliance-decision-red-teamer",
+        "specialist": "decision-red-teamer",
+        "title": "Decision Red-Teamer"
+      },
+      {
+        "id": "web3-risk-compliance-downside-analyst",
+        "specialist": "downside-analyst",
+        "title": "Downside Analyst"
+      },
+      {
+        "id": "web3-risk-compliance-security-liaison",
+        "specialist": "security-liaison",
+        "title": "Security Liaison"
+      },
+      {
+        "id": "web3-risk-compliance-policy-drafter",
+        "specialist": "policy-drafter",
+        "title": "Policy Drafter"
+      },
+      {
+        "id": "web3-risk-compliance-audit-planner",
+        "specialist": "audit-planner",
+        "title": "Audit Planner"
+      },
+      {
+        "id": "web3-risk-compliance-escalation-chief",
+        "specialist": "escalation-chief",
+        "title": "Escalation Chief"
+      }
+    ]
+  },
+  {
+    "id": "media-strategy-office",
+    "industry": "media",
+    "department": "strategy-office",
+    "title": "Creator Media Strategy Office",
+    "specialists": [
+      {
+        "id": "media-strategy-office-market-cartographer",
+        "specialist": "market-cartographer",
+        "title": "Market Cartographer"
+      },
+      {
+        "id": "media-strategy-office-thesis-architect",
+        "specialist": "thesis-architect",
+        "title": "Thesis Architect"
+      },
+      {
+        "id": "media-strategy-office-scenario-planner",
+        "specialist": "scenario-planner",
+        "title": "Scenario Planner"
+      },
+      {
+        "id": "media-strategy-office-pricing-strategist",
+        "specialist": "pricing-strategist",
+        "title": "Pricing Strategist"
+      },
+      {
+        "id": "media-strategy-office-portfolio-prioritizer",
+        "specialist": "portfolio-prioritizer",
+        "title": "Portfolio Prioritizer"
+      },
+      {
+        "id": "media-strategy-office-ecosystem-mapper",
+        "specialist": "ecosystem-mapper",
+        "title": "Ecosystem Mapper"
+      },
+      {
+        "id": "media-strategy-office-segment-strategist",
+        "specialist": "segment-strategist",
+        "title": "Segment Strategist"
+      },
+      {
+        "id": "media-strategy-office-monetization-strategist",
+        "specialist": "monetization-strategist",
+        "title": "Monetization Strategist"
+      },
+      {
+        "id": "media-strategy-office-partnership-strategist",
+        "specialist": "partnership-strategist",
+        "title": "Partnership Strategist"
+      },
+      {
+        "id": "media-strategy-office-executive-briefing-lead",
+        "specialist": "executive-briefing-lead",
+        "title": "Executive Briefing Lead"
+      }
+    ]
+  },
+  {
+    "id": "media-research-intelligence",
+    "industry": "media",
+    "department": "research-intelligence",
+    "title": "Creator Media Research & Intelligence",
+    "specialists": [
+      {
+        "id": "media-research-intelligence-source-hunter",
+        "specialist": "source-hunter",
+        "title": "Source Hunter"
+      },
+      {
+        "id": "media-research-intelligence-benchmark-analyst",
+        "specialist": "benchmark-analyst",
+        "title": "Benchmark Analyst"
+      },
+      {
+        "id": "media-research-intelligence-competitor-watcher",
+        "specialist": "competitor-watcher",
+        "title": "Competitor Watcher"
+      },
+      {
+        "id": "media-research-intelligence-policy-watcher",
+        "specialist": "policy-watcher",
+        "title": "Policy Watcher"
+      },
+      {
+        "id": "media-research-intelligence-customer-insight-miner",
+        "specialist": "customer-insight-miner",
+        "title": "Customer Insight Miner"
+      },
+      {
+        "id": "media-research-intelligence-data-scout",
+        "specialist": "data-scout",
+        "title": "Data Scout"
+      },
+      {
+        "id": "media-research-intelligence-trend-synthesizer",
+        "specialist": "trend-synthesizer",
+        "title": "Trend Synthesizer"
+      },
+      {
+        "id": "media-research-intelligence-evidence-auditor",
+        "specialist": "evidence-auditor",
+        "title": "Evidence Auditor"
+      },
+      {
+        "id": "media-research-intelligence-expert-interview-designer",
+        "specialist": "expert-interview-designer",
+        "title": "Expert Interview Designer"
+      },
+      {
+        "id": "media-research-intelligence-diligence-coordinator",
+        "specialist": "diligence-coordinator",
+        "title": "Diligence Coordinator"
+      }
+    ]
+  },
+  {
+    "id": "media-product-delivery",
+    "industry": "media",
+    "department": "product-delivery",
+    "title": "Creator Media Product & Delivery",
+    "specialists": [
+      {
+        "id": "media-product-delivery-product-architect",
+        "specialist": "product-architect",
+        "title": "Product Architect"
+      },
+      {
+        "id": "media-product-delivery-workflow-designer",
+        "specialist": "workflow-designer",
+        "title": "Workflow Designer"
+      },
+      {
+        "id": "media-product-delivery-spec-writer",
+        "specialist": "spec-writer",
+        "title": "Spec Writer"
+      },
+      {
+        "id": "media-product-delivery-prototype-lead",
+        "specialist": "prototype-lead",
+        "title": "Prototype Lead"
+      },
+      {
+        "id": "media-product-delivery-ux-optimizer",
+        "specialist": "ux-optimizer",
+        "title": "UX Optimizer"
+      },
+      {
+        "id": "media-product-delivery-launch-planner",
+        "specialist": "launch-planner",
+        "title": "Launch Planner"
+      },
+      {
+        "id": "media-product-delivery-delivery-reviewer",
+        "specialist": "delivery-reviewer",
+        "title": "Delivery Reviewer"
+      },
+      {
+        "id": "media-product-delivery-qa-strategist",
+        "specialist": "qa-strategist",
+        "title": "QA Strategist"
+      },
+      {
+        "id": "media-product-delivery-roadmap-steward",
+        "specialist": "roadmap-steward",
+        "title": "Roadmap Steward"
+      },
+      {
+        "id": "media-product-delivery-implementation-coordinator",
+        "specialist": "implementation-coordinator",
+        "title": "Implementation Coordinator"
+      }
+    ]
+  },
+  {
+    "id": "media-growth-operations",
+    "industry": "media",
+    "department": "growth-operations",
+    "title": "Creator Media Growth & Operations",
+    "specialists": [
+      {
+        "id": "media-growth-operations-funnel-operator",
+        "specialist": "funnel-operator",
+        "title": "Funnel Operator"
+      },
+      {
+        "id": "media-growth-operations-acquisition-planner",
+        "specialist": "acquisition-planner",
+        "title": "Acquisition Planner"
+      },
+      {
+        "id": "media-growth-operations-retention-strategist",
+        "specialist": "retention-strategist",
+        "title": "Retention Strategist"
+      },
+      {
+        "id": "media-growth-operations-lifecycle-designer",
+        "specialist": "lifecycle-designer",
+        "title": "Lifecycle Designer"
+      },
+      {
+        "id": "media-growth-operations-community-operator",
+        "specialist": "community-operator",
+        "title": "Community Operator"
+      },
+      {
+        "id": "media-growth-operations-channel-optimizer",
+        "specialist": "channel-optimizer",
+        "title": "Channel Optimizer"
+      },
+      {
+        "id": "media-growth-operations-ops-automation-lead",
+        "specialist": "ops-automation-lead",
+        "title": "Ops Automation Lead"
+      },
+      {
+        "id": "media-growth-operations-campaign-analyst",
+        "specialist": "campaign-analyst",
+        "title": "Campaign Analyst"
+      },
+      {
+        "id": "media-growth-operations-revenue-operator",
+        "specialist": "revenue-operator",
+        "title": "Revenue Operator"
+      },
+      {
+        "id": "media-growth-operations-performance-marketer",
+        "specialist": "performance-marketer",
+        "title": "Performance Marketer"
+      }
+    ]
+  },
+  {
+    "id": "media-risk-compliance",
+    "industry": "media",
+    "department": "risk-compliance",
+    "title": "Creator Media Risk & Compliance",
+    "specialists": [
+      {
+        "id": "media-risk-compliance-risk-mapper",
+        "specialist": "risk-mapper",
+        "title": "Risk Mapper"
+      },
+      {
+        "id": "media-risk-compliance-compliance-interpreter",
+        "specialist": "compliance-interpreter",
+        "title": "Compliance Interpreter"
+      },
+      {
+        "id": "media-risk-compliance-control-designer",
+        "specialist": "control-designer",
+        "title": "Control Designer"
+      },
+      {
+        "id": "media-risk-compliance-incident-reviewer",
+        "specialist": "incident-reviewer",
+        "title": "Incident Reviewer"
+      },
+      {
+        "id": "media-risk-compliance-decision-red-teamer",
+        "specialist": "decision-red-teamer",
+        "title": "Decision Red-Teamer"
+      },
+      {
+        "id": "media-risk-compliance-downside-analyst",
+        "specialist": "downside-analyst",
+        "title": "Downside Analyst"
+      },
+      {
+        "id": "media-risk-compliance-security-liaison",
+        "specialist": "security-liaison",
+        "title": "Security Liaison"
+      },
+      {
+        "id": "media-risk-compliance-policy-drafter",
+        "specialist": "policy-drafter",
+        "title": "Policy Drafter"
+      },
+      {
+        "id": "media-risk-compliance-audit-planner",
+        "specialist": "audit-planner",
+        "title": "Audit Planner"
+      },
+      {
+        "id": "media-risk-compliance-escalation-chief",
+        "specialist": "escalation-chief",
+        "title": "Escalation Chief"
+      }
+    ]
+  },
+  {
+    "id": "ecommerce-strategy-office",
+    "industry": "ecommerce",
+    "department": "strategy-office",
+    "title": "E-Commerce Strategy Office",
+    "specialists": [
+      {
+        "id": "ecommerce-strategy-office-market-cartographer",
+        "specialist": "market-cartographer",
+        "title": "Market Cartographer"
+      },
+      {
+        "id": "ecommerce-strategy-office-thesis-architect",
+        "specialist": "thesis-architect",
+        "title": "Thesis Architect"
+      },
+      {
+        "id": "ecommerce-strategy-office-scenario-planner",
+        "specialist": "scenario-planner",
+        "title": "Scenario Planner"
+      },
+      {
+        "id": "ecommerce-strategy-office-pricing-strategist",
+        "specialist": "pricing-strategist",
+        "title": "Pricing Strategist"
+      },
+      {
+        "id": "ecommerce-strategy-office-portfolio-prioritizer",
+        "specialist": "portfolio-prioritizer",
+        "title": "Portfolio Prioritizer"
+      },
+      {
+        "id": "ecommerce-strategy-office-ecosystem-mapper",
+        "specialist": "ecosystem-mapper",
+        "title": "Ecosystem Mapper"
+      },
+      {
+        "id": "ecommerce-strategy-office-segment-strategist",
+        "specialist": "segment-strategist",
+        "title": "Segment Strategist"
+      },
+      {
+        "id": "ecommerce-strategy-office-monetization-strategist",
+        "specialist": "monetization-strategist",
+        "title": "Monetization Strategist"
+      },
+      {
+        "id": "ecommerce-strategy-office-partnership-strategist",
+        "specialist": "partnership-strategist",
+        "title": "Partnership Strategist"
+      },
+      {
+        "id": "ecommerce-strategy-office-executive-briefing-lead",
+        "specialist": "executive-briefing-lead",
+        "title": "Executive Briefing Lead"
+      }
+    ]
+  },
+  {
+    "id": "ecommerce-research-intelligence",
+    "industry": "ecommerce",
+    "department": "research-intelligence",
+    "title": "E-Commerce Research & Intelligence",
+    "specialists": [
+      {
+        "id": "ecommerce-research-intelligence-source-hunter",
+        "specialist": "source-hunter",
+        "title": "Source Hunter"
+      },
+      {
+        "id": "ecommerce-research-intelligence-benchmark-analyst",
+        "specialist": "benchmark-analyst",
+        "title": "Benchmark Analyst"
+      },
+      {
+        "id": "ecommerce-research-intelligence-competitor-watcher",
+        "specialist": "competitor-watcher",
+        "title": "Competitor Watcher"
+      },
+      {
+        "id": "ecommerce-research-intelligence-policy-watcher",
+        "specialist": "policy-watcher",
+        "title": "Policy Watcher"
+      },
+      {
+        "id": "ecommerce-research-intelligence-customer-insight-miner",
+        "specialist": "customer-insight-miner",
+        "title": "Customer Insight Miner"
+      },
+      {
+        "id": "ecommerce-research-intelligence-data-scout",
+        "specialist": "data-scout",
+        "title": "Data Scout"
+      },
+      {
+        "id": "ecommerce-research-intelligence-trend-synthesizer",
+        "specialist": "trend-synthesizer",
+        "title": "Trend Synthesizer"
+      },
+      {
+        "id": "ecommerce-research-intelligence-evidence-auditor",
+        "specialist": "evidence-auditor",
+        "title": "Evidence Auditor"
+      },
+      {
+        "id": "ecommerce-research-intelligence-expert-interview-designer",
+        "specialist": "expert-interview-designer",
+        "title": "Expert Interview Designer"
+      },
+      {
+        "id": "ecommerce-research-intelligence-diligence-coordinator",
+        "specialist": "diligence-coordinator",
+        "title": "Diligence Coordinator"
+      }
+    ]
+  },
+  {
+    "id": "ecommerce-product-delivery",
+    "industry": "ecommerce",
+    "department": "product-delivery",
+    "title": "E-Commerce Product & Delivery",
+    "specialists": [
+      {
+        "id": "ecommerce-product-delivery-product-architect",
+        "specialist": "product-architect",
+        "title": "Product Architect"
+      },
+      {
+        "id": "ecommerce-product-delivery-workflow-designer",
+        "specialist": "workflow-designer",
+        "title": "Workflow Designer"
+      },
+      {
+        "id": "ecommerce-product-delivery-spec-writer",
+        "specialist": "spec-writer",
+        "title": "Spec Writer"
+      },
+      {
+        "id": "ecommerce-product-delivery-prototype-lead",
+        "specialist": "prototype-lead",
+        "title": "Prototype Lead"
+      },
+      {
+        "id": "ecommerce-product-delivery-ux-optimizer",
+        "specialist": "ux-optimizer",
+        "title": "UX Optimizer"
+      },
+      {
+        "id": "ecommerce-product-delivery-launch-planner",
+        "specialist": "launch-planner",
+        "title": "Launch Planner"
+      },
+      {
+        "id": "ecommerce-product-delivery-delivery-reviewer",
+        "specialist": "delivery-reviewer",
+        "title": "Delivery Reviewer"
+      },
+      {
+        "id": "ecommerce-product-delivery-qa-strategist",
+        "specialist": "qa-strategist",
+        "title": "QA Strategist"
+      },
+      {
+        "id": "ecommerce-product-delivery-roadmap-steward",
+        "specialist": "roadmap-steward",
+        "title": "Roadmap Steward"
+      },
+      {
+        "id": "ecommerce-product-delivery-implementation-coordinator",
+        "specialist": "implementation-coordinator",
+        "title": "Implementation Coordinator"
+      }
+    ]
+  },
+  {
+    "id": "ecommerce-growth-operations",
+    "industry": "ecommerce",
+    "department": "growth-operations",
+    "title": "E-Commerce Growth & Operations",
+    "specialists": [
+      {
+        "id": "ecommerce-growth-operations-funnel-operator",
+        "specialist": "funnel-operator",
+        "title": "Funnel Operator"
+      },
+      {
+        "id": "ecommerce-growth-operations-acquisition-planner",
+        "specialist": "acquisition-planner",
+        "title": "Acquisition Planner"
+      },
+      {
+        "id": "ecommerce-growth-operations-retention-strategist",
+        "specialist": "retention-strategist",
+        "title": "Retention Strategist"
+      },
+      {
+        "id": "ecommerce-growth-operations-lifecycle-designer",
+        "specialist": "lifecycle-designer",
+        "title": "Lifecycle Designer"
+      },
+      {
+        "id": "ecommerce-growth-operations-community-operator",
+        "specialist": "community-operator",
+        "title": "Community Operator"
+      },
+      {
+        "id": "ecommerce-growth-operations-channel-optimizer",
+        "specialist": "channel-optimizer",
+        "title": "Channel Optimizer"
+      },
+      {
+        "id": "ecommerce-growth-operations-ops-automation-lead",
+        "specialist": "ops-automation-lead",
+        "title": "Ops Automation Lead"
+      },
+      {
+        "id": "ecommerce-growth-operations-campaign-analyst",
+        "specialist": "campaign-analyst",
+        "title": "Campaign Analyst"
+      },
+      {
+        "id": "ecommerce-growth-operations-revenue-operator",
+        "specialist": "revenue-operator",
+        "title": "Revenue Operator"
+      },
+      {
+        "id": "ecommerce-growth-operations-performance-marketer",
+        "specialist": "performance-marketer",
+        "title": "Performance Marketer"
+      }
+    ]
+  },
+  {
+    "id": "ecommerce-risk-compliance",
+    "industry": "ecommerce",
+    "department": "risk-compliance",
+    "title": "E-Commerce Risk & Compliance",
+    "specialists": [
+      {
+        "id": "ecommerce-risk-compliance-risk-mapper",
+        "specialist": "risk-mapper",
+        "title": "Risk Mapper"
+      },
+      {
+        "id": "ecommerce-risk-compliance-compliance-interpreter",
+        "specialist": "compliance-interpreter",
+        "title": "Compliance Interpreter"
+      },
+      {
+        "id": "ecommerce-risk-compliance-control-designer",
+        "specialist": "control-designer",
+        "title": "Control Designer"
+      },
+      {
+        "id": "ecommerce-risk-compliance-incident-reviewer",
+        "specialist": "incident-reviewer",
+        "title": "Incident Reviewer"
+      },
+      {
+        "id": "ecommerce-risk-compliance-decision-red-teamer",
+        "specialist": "decision-red-teamer",
+        "title": "Decision Red-Teamer"
+      },
+      {
+        "id": "ecommerce-risk-compliance-downside-analyst",
+        "specialist": "downside-analyst",
+        "title": "Downside Analyst"
+      },
+      {
+        "id": "ecommerce-risk-compliance-security-liaison",
+        "specialist": "security-liaison",
+        "title": "Security Liaison"
+      },
+      {
+        "id": "ecommerce-risk-compliance-policy-drafter",
+        "specialist": "policy-drafter",
+        "title": "Policy Drafter"
+      },
+      {
+        "id": "ecommerce-risk-compliance-audit-planner",
+        "specialist": "audit-planner",
+        "title": "Audit Planner"
+      },
+      {
+        "id": "ecommerce-risk-compliance-escalation-chief",
+        "specialist": "escalation-chief",
+        "title": "Escalation Chief"
+      }
+    ]
+  },
+  {
+    "id": "education-strategy-office",
+    "industry": "education",
+    "department": "strategy-office",
+    "title": "Education Strategy Office",
+    "specialists": [
+      {
+        "id": "education-strategy-office-market-cartographer",
+        "specialist": "market-cartographer",
+        "title": "Market Cartographer"
+      },
+      {
+        "id": "education-strategy-office-thesis-architect",
+        "specialist": "thesis-architect",
+        "title": "Thesis Architect"
+      },
+      {
+        "id": "education-strategy-office-scenario-planner",
+        "specialist": "scenario-planner",
+        "title": "Scenario Planner"
+      },
+      {
+        "id": "education-strategy-office-pricing-strategist",
+        "specialist": "pricing-strategist",
+        "title": "Pricing Strategist"
+      },
+      {
+        "id": "education-strategy-office-portfolio-prioritizer",
+        "specialist": "portfolio-prioritizer",
+        "title": "Portfolio Prioritizer"
+      },
+      {
+        "id": "education-strategy-office-ecosystem-mapper",
+        "specialist": "ecosystem-mapper",
+        "title": "Ecosystem Mapper"
+      },
+      {
+        "id": "education-strategy-office-segment-strategist",
+        "specialist": "segment-strategist",
+        "title": "Segment Strategist"
+      },
+      {
+        "id": "education-strategy-office-monetization-strategist",
+        "specialist": "monetization-strategist",
+        "title": "Monetization Strategist"
+      },
+      {
+        "id": "education-strategy-office-partnership-strategist",
+        "specialist": "partnership-strategist",
+        "title": "Partnership Strategist"
+      },
+      {
+        "id": "education-strategy-office-executive-briefing-lead",
+        "specialist": "executive-briefing-lead",
+        "title": "Executive Briefing Lead"
+      }
+    ]
+  },
+  {
+    "id": "education-research-intelligence",
+    "industry": "education",
+    "department": "research-intelligence",
+    "title": "Education Research & Intelligence",
+    "specialists": [
+      {
+        "id": "education-research-intelligence-source-hunter",
+        "specialist": "source-hunter",
+        "title": "Source Hunter"
+      },
+      {
+        "id": "education-research-intelligence-benchmark-analyst",
+        "specialist": "benchmark-analyst",
+        "title": "Benchmark Analyst"
+      },
+      {
+        "id": "education-research-intelligence-competitor-watcher",
+        "specialist": "competitor-watcher",
+        "title": "Competitor Watcher"
+      },
+      {
+        "id": "education-research-intelligence-policy-watcher",
+        "specialist": "policy-watcher",
+        "title": "Policy Watcher"
+      },
+      {
+        "id": "education-research-intelligence-customer-insight-miner",
+        "specialist": "customer-insight-miner",
+        "title": "Customer Insight Miner"
+      },
+      {
+        "id": "education-research-intelligence-data-scout",
+        "specialist": "data-scout",
+        "title": "Data Scout"
+      },
+      {
+        "id": "education-research-intelligence-trend-synthesizer",
+        "specialist": "trend-synthesizer",
+        "title": "Trend Synthesizer"
+      },
+      {
+        "id": "education-research-intelligence-evidence-auditor",
+        "specialist": "evidence-auditor",
+        "title": "Evidence Auditor"
+      },
+      {
+        "id": "education-research-intelligence-expert-interview-designer",
+        "specialist": "expert-interview-designer",
+        "title": "Expert Interview Designer"
+      },
+      {
+        "id": "education-research-intelligence-diligence-coordinator",
+        "specialist": "diligence-coordinator",
+        "title": "Diligence Coordinator"
+      }
+    ]
+  },
+  {
+    "id": "education-product-delivery",
+    "industry": "education",
+    "department": "product-delivery",
+    "title": "Education Product & Delivery",
+    "specialists": [
+      {
+        "id": "education-product-delivery-product-architect",
+        "specialist": "product-architect",
+        "title": "Product Architect"
+      },
+      {
+        "id": "education-product-delivery-workflow-designer",
+        "specialist": "workflow-designer",
+        "title": "Workflow Designer"
+      },
+      {
+        "id": "education-product-delivery-spec-writer",
+        "specialist": "spec-writer",
+        "title": "Spec Writer"
+      },
+      {
+        "id": "education-product-delivery-prototype-lead",
+        "specialist": "prototype-lead",
+        "title": "Prototype Lead"
+      },
+      {
+        "id": "education-product-delivery-ux-optimizer",
+        "specialist": "ux-optimizer",
+        "title": "UX Optimizer"
+      },
+      {
+        "id": "education-product-delivery-launch-planner",
+        "specialist": "launch-planner",
+        "title": "Launch Planner"
+      },
+      {
+        "id": "education-product-delivery-delivery-reviewer",
+        "specialist": "delivery-reviewer",
+        "title": "Delivery Reviewer"
+      },
+      {
+        "id": "education-product-delivery-qa-strategist",
+        "specialist": "qa-strategist",
+        "title": "QA Strategist"
+      },
+      {
+        "id": "education-product-delivery-roadmap-steward",
+        "specialist": "roadmap-steward",
+        "title": "Roadmap Steward"
+      },
+      {
+        "id": "education-product-delivery-implementation-coordinator",
+        "specialist": "implementation-coordinator",
+        "title": "Implementation Coordinator"
+      }
+    ]
+  },
+  {
+    "id": "education-growth-operations",
+    "industry": "education",
+    "department": "growth-operations",
+    "title": "Education Growth & Operations",
+    "specialists": [
+      {
+        "id": "education-growth-operations-funnel-operator",
+        "specialist": "funnel-operator",
+        "title": "Funnel Operator"
+      },
+      {
+        "id": "education-growth-operations-acquisition-planner",
+        "specialist": "acquisition-planner",
+        "title": "Acquisition Planner"
+      },
+      {
+        "id": "education-growth-operations-retention-strategist",
+        "specialist": "retention-strategist",
+        "title": "Retention Strategist"
+      },
+      {
+        "id": "education-growth-operations-lifecycle-designer",
+        "specialist": "lifecycle-designer",
+        "title": "Lifecycle Designer"
+      },
+      {
+        "id": "education-growth-operations-community-operator",
+        "specialist": "community-operator",
+        "title": "Community Operator"
+      },
+      {
+        "id": "education-growth-operations-channel-optimizer",
+        "specialist": "channel-optimizer",
+        "title": "Channel Optimizer"
+      },
+      {
+        "id": "education-growth-operations-ops-automation-lead",
+        "specialist": "ops-automation-lead",
+        "title": "Ops Automation Lead"
+      },
+      {
+        "id": "education-growth-operations-campaign-analyst",
+        "specialist": "campaign-analyst",
+        "title": "Campaign Analyst"
+      },
+      {
+        "id": "education-growth-operations-revenue-operator",
+        "specialist": "revenue-operator",
+        "title": "Revenue Operator"
+      },
+      {
+        "id": "education-growth-operations-performance-marketer",
+        "specialist": "performance-marketer",
+        "title": "Performance Marketer"
+      }
+    ]
+  },
+  {
+    "id": "education-risk-compliance",
+    "industry": "education",
+    "department": "risk-compliance",
+    "title": "Education Risk & Compliance",
+    "specialists": [
+      {
+        "id": "education-risk-compliance-risk-mapper",
+        "specialist": "risk-mapper",
+        "title": "Risk Mapper"
+      },
+      {
+        "id": "education-risk-compliance-compliance-interpreter",
+        "specialist": "compliance-interpreter",
+        "title": "Compliance Interpreter"
+      },
+      {
+        "id": "education-risk-compliance-control-designer",
+        "specialist": "control-designer",
+        "title": "Control Designer"
+      },
+      {
+        "id": "education-risk-compliance-incident-reviewer",
+        "specialist": "incident-reviewer",
+        "title": "Incident Reviewer"
+      },
+      {
+        "id": "education-risk-compliance-decision-red-teamer",
+        "specialist": "decision-red-teamer",
+        "title": "Decision Red-Teamer"
+      },
+      {
+        "id": "education-risk-compliance-downside-analyst",
+        "specialist": "downside-analyst",
+        "title": "Downside Analyst"
+      },
+      {
+        "id": "education-risk-compliance-security-liaison",
+        "specialist": "security-liaison",
+        "title": "Security Liaison"
+      },
+      {
+        "id": "education-risk-compliance-policy-drafter",
+        "specialist": "policy-drafter",
+        "title": "Policy Drafter"
+      },
+      {
+        "id": "education-risk-compliance-audit-planner",
+        "specialist": "audit-planner",
+        "title": "Audit Planner"
+      },
+      {
+        "id": "education-risk-compliance-escalation-chief",
+        "specialist": "escalation-chief",
+        "title": "Escalation Chief"
+      }
+    ]
+  },
+  {
+    "id": "legal-strategy-office",
+    "industry": "legal",
+    "department": "strategy-office",
+    "title": "Legal Strategy Office",
+    "specialists": [
+      {
+        "id": "legal-strategy-office-market-cartographer",
+        "specialist": "market-cartographer",
+        "title": "Market Cartographer"
+      },
+      {
+        "id": "legal-strategy-office-thesis-architect",
+        "specialist": "thesis-architect",
+        "title": "Thesis Architect"
+      },
+      {
+        "id": "legal-strategy-office-scenario-planner",
+        "specialist": "scenario-planner",
+        "title": "Scenario Planner"
+      },
+      {
+        "id": "legal-strategy-office-pricing-strategist",
+        "specialist": "pricing-strategist",
+        "title": "Pricing Strategist"
+      },
+      {
+        "id": "legal-strategy-office-portfolio-prioritizer",
+        "specialist": "portfolio-prioritizer",
+        "title": "Portfolio Prioritizer"
+      },
+      {
+        "id": "legal-strategy-office-ecosystem-mapper",
+        "specialist": "ecosystem-mapper",
+        "title": "Ecosystem Mapper"
+      },
+      {
+        "id": "legal-strategy-office-segment-strategist",
+        "specialist": "segment-strategist",
+        "title": "Segment Strategist"
+      },
+      {
+        "id": "legal-strategy-office-monetization-strategist",
+        "specialist": "monetization-strategist",
+        "title": "Monetization Strategist"
+      },
+      {
+        "id": "legal-strategy-office-partnership-strategist",
+        "specialist": "partnership-strategist",
+        "title": "Partnership Strategist"
+      },
+      {
+        "id": "legal-strategy-office-executive-briefing-lead",
+        "specialist": "executive-briefing-lead",
+        "title": "Executive Briefing Lead"
+      }
+    ]
+  },
+  {
+    "id": "legal-research-intelligence",
+    "industry": "legal",
+    "department": "research-intelligence",
+    "title": "Legal Research & Intelligence",
+    "specialists": [
+      {
+        "id": "legal-research-intelligence-source-hunter",
+        "specialist": "source-hunter",
+        "title": "Source Hunter"
+      },
+      {
+        "id": "legal-research-intelligence-benchmark-analyst",
+        "specialist": "benchmark-analyst",
+        "title": "Benchmark Analyst"
+      },
+      {
+        "id": "legal-research-intelligence-competitor-watcher",
+        "specialist": "competitor-watcher",
+        "title": "Competitor Watcher"
+      },
+      {
+        "id": "legal-research-intelligence-policy-watcher",
+        "specialist": "policy-watcher",
+        "title": "Policy Watcher"
+      },
+      {
+        "id": "legal-research-intelligence-customer-insight-miner",
+        "specialist": "customer-insight-miner",
+        "title": "Customer Insight Miner"
+      },
+      {
+        "id": "legal-research-intelligence-data-scout",
+        "specialist": "data-scout",
+        "title": "Data Scout"
+      },
+      {
+        "id": "legal-research-intelligence-trend-synthesizer",
+        "specialist": "trend-synthesizer",
+        "title": "Trend Synthesizer"
+      },
+      {
+        "id": "legal-research-intelligence-evidence-auditor",
+        "specialist": "evidence-auditor",
+        "title": "Evidence Auditor"
+      },
+      {
+        "id": "legal-research-intelligence-expert-interview-designer",
+        "specialist": "expert-interview-designer",
+        "title": "Expert Interview Designer"
+      },
+      {
+        "id": "legal-research-intelligence-diligence-coordinator",
+        "specialist": "diligence-coordinator",
+        "title": "Diligence Coordinator"
+      }
+    ]
+  },
+  {
+    "id": "legal-product-delivery",
+    "industry": "legal",
+    "department": "product-delivery",
+    "title": "Legal Product & Delivery",
+    "specialists": [
+      {
+        "id": "legal-product-delivery-product-architect",
+        "specialist": "product-architect",
+        "title": "Product Architect"
+      },
+      {
+        "id": "legal-product-delivery-workflow-designer",
+        "specialist": "workflow-designer",
+        "title": "Workflow Designer"
+      },
+      {
+        "id": "legal-product-delivery-spec-writer",
+        "specialist": "spec-writer",
+        "title": "Spec Writer"
+      },
+      {
+        "id": "legal-product-delivery-prototype-lead",
+        "specialist": "prototype-lead",
+        "title": "Prototype Lead"
+      },
+      {
+        "id": "legal-product-delivery-ux-optimizer",
+        "specialist": "ux-optimizer",
+        "title": "UX Optimizer"
+      },
+      {
+        "id": "legal-product-delivery-launch-planner",
+        "specialist": "launch-planner",
+        "title": "Launch Planner"
+      },
+      {
+        "id": "legal-product-delivery-delivery-reviewer",
+        "specialist": "delivery-reviewer",
+        "title": "Delivery Reviewer"
+      },
+      {
+        "id": "legal-product-delivery-qa-strategist",
+        "specialist": "qa-strategist",
+        "title": "QA Strategist"
+      },
+      {
+        "id": "legal-product-delivery-roadmap-steward",
+        "specialist": "roadmap-steward",
+        "title": "Roadmap Steward"
+      },
+      {
+        "id": "legal-product-delivery-implementation-coordinator",
+        "specialist": "implementation-coordinator",
+        "title": "Implementation Coordinator"
+      }
+    ]
+  },
+  {
+    "id": "legal-growth-operations",
+    "industry": "legal",
+    "department": "growth-operations",
+    "title": "Legal Growth & Operations",
+    "specialists": [
+      {
+        "id": "legal-growth-operations-funnel-operator",
+        "specialist": "funnel-operator",
+        "title": "Funnel Operator"
+      },
+      {
+        "id": "legal-growth-operations-acquisition-planner",
+        "specialist": "acquisition-planner",
+        "title": "Acquisition Planner"
+      },
+      {
+        "id": "legal-growth-operations-retention-strategist",
+        "specialist": "retention-strategist",
+        "title": "Retention Strategist"
+      },
+      {
+        "id": "legal-growth-operations-lifecycle-designer",
+        "specialist": "lifecycle-designer",
+        "title": "Lifecycle Designer"
+      },
+      {
+        "id": "legal-growth-operations-community-operator",
+        "specialist": "community-operator",
+        "title": "Community Operator"
+      },
+      {
+        "id": "legal-growth-operations-channel-optimizer",
+        "specialist": "channel-optimizer",
+        "title": "Channel Optimizer"
+      },
+      {
+        "id": "legal-growth-operations-ops-automation-lead",
+        "specialist": "ops-automation-lead",
+        "title": "Ops Automation Lead"
+      },
+      {
+        "id": "legal-growth-operations-campaign-analyst",
+        "specialist": "campaign-analyst",
+        "title": "Campaign Analyst"
+      },
+      {
+        "id": "legal-growth-operations-revenue-operator",
+        "specialist": "revenue-operator",
+        "title": "Revenue Operator"
+      },
+      {
+        "id": "legal-growth-operations-performance-marketer",
+        "specialist": "performance-marketer",
+        "title": "Performance Marketer"
+      }
+    ]
+  },
+  {
+    "id": "legal-risk-compliance",
+    "industry": "legal",
+    "department": "risk-compliance",
+    "title": "Legal Risk & Compliance",
+    "specialists": [
+      {
+        "id": "legal-risk-compliance-risk-mapper",
+        "specialist": "risk-mapper",
+        "title": "Risk Mapper"
+      },
+      {
+        "id": "legal-risk-compliance-compliance-interpreter",
+        "specialist": "compliance-interpreter",
+        "title": "Compliance Interpreter"
+      },
+      {
+        "id": "legal-risk-compliance-control-designer",
+        "specialist": "control-designer",
+        "title": "Control Designer"
+      },
+      {
+        "id": "legal-risk-compliance-incident-reviewer",
+        "specialist": "incident-reviewer",
+        "title": "Incident Reviewer"
+      },
+      {
+        "id": "legal-risk-compliance-decision-red-teamer",
+        "specialist": "decision-red-teamer",
+        "title": "Decision Red-Teamer"
+      },
+      {
+        "id": "legal-risk-compliance-downside-analyst",
+        "specialist": "downside-analyst",
+        "title": "Downside Analyst"
+      },
+      {
+        "id": "legal-risk-compliance-security-liaison",
+        "specialist": "security-liaison",
+        "title": "Security Liaison"
+      },
+      {
+        "id": "legal-risk-compliance-policy-drafter",
+        "specialist": "policy-drafter",
+        "title": "Policy Drafter"
+      },
+      {
+        "id": "legal-risk-compliance-audit-planner",
+        "specialist": "audit-planner",
+        "title": "Audit Planner"
+      },
+      {
+        "id": "legal-risk-compliance-escalation-chief",
+        "specialist": "escalation-chief",
+        "title": "Escalation Chief"
+      }
+    ]
+  },
+  {
+    "id": "manufacturing-strategy-office",
+    "industry": "manufacturing",
+    "department": "strategy-office",
+    "title": "Manufacturing Strategy Office",
+    "specialists": [
+      {
+        "id": "manufacturing-strategy-office-market-cartographer",
+        "specialist": "market-cartographer",
+        "title": "Market Cartographer"
+      },
+      {
+        "id": "manufacturing-strategy-office-thesis-architect",
+        "specialist": "thesis-architect",
+        "title": "Thesis Architect"
+      },
+      {
+        "id": "manufacturing-strategy-office-scenario-planner",
+        "specialist": "scenario-planner",
+        "title": "Scenario Planner"
+      },
+      {
+        "id": "manufacturing-strategy-office-pricing-strategist",
+        "specialist": "pricing-strategist",
+        "title": "Pricing Strategist"
+      },
+      {
+        "id": "manufacturing-strategy-office-portfolio-prioritizer",
+        "specialist": "portfolio-prioritizer",
+        "title": "Portfolio Prioritizer"
+      },
+      {
+        "id": "manufacturing-strategy-office-ecosystem-mapper",
+        "specialist": "ecosystem-mapper",
+        "title": "Ecosystem Mapper"
+      },
+      {
+        "id": "manufacturing-strategy-office-segment-strategist",
+        "specialist": "segment-strategist",
+        "title": "Segment Strategist"
+      },
+      {
+        "id": "manufacturing-strategy-office-monetization-strategist",
+        "specialist": "monetization-strategist",
+        "title": "Monetization Strategist"
+      },
+      {
+        "id": "manufacturing-strategy-office-partnership-strategist",
+        "specialist": "partnership-strategist",
+        "title": "Partnership Strategist"
+      },
+      {
+        "id": "manufacturing-strategy-office-executive-briefing-lead",
+        "specialist": "executive-briefing-lead",
+        "title": "Executive Briefing Lead"
+      }
+    ]
+  },
+  {
+    "id": "manufacturing-research-intelligence",
+    "industry": "manufacturing",
+    "department": "research-intelligence",
+    "title": "Manufacturing Research & Intelligence",
+    "specialists": [
+      {
+        "id": "manufacturing-research-intelligence-source-hunter",
+        "specialist": "source-hunter",
+        "title": "Source Hunter"
+      },
+      {
+        "id": "manufacturing-research-intelligence-benchmark-analyst",
+        "specialist": "benchmark-analyst",
+        "title": "Benchmark Analyst"
+      },
+      {
+        "id": "manufacturing-research-intelligence-competitor-watcher",
+        "specialist": "competitor-watcher",
+        "title": "Competitor Watcher"
+      },
+      {
+        "id": "manufacturing-research-intelligence-policy-watcher",
+        "specialist": "policy-watcher",
+        "title": "Policy Watcher"
+      },
+      {
+        "id": "manufacturing-research-intelligence-customer-insight-miner",
+        "specialist": "customer-insight-miner",
+        "title": "Customer Insight Miner"
+      },
+      {
+        "id": "manufacturing-research-intelligence-data-scout",
+        "specialist": "data-scout",
+        "title": "Data Scout"
+      },
+      {
+        "id": "manufacturing-research-intelligence-trend-synthesizer",
+        "specialist": "trend-synthesizer",
+        "title": "Trend Synthesizer"
+      },
+      {
+        "id": "manufacturing-research-intelligence-evidence-auditor",
+        "specialist": "evidence-auditor",
+        "title": "Evidence Auditor"
+      },
+      {
+        "id": "manufacturing-research-intelligence-expert-interview-designer",
+        "specialist": "expert-interview-designer",
+        "title": "Expert Interview Designer"
+      },
+      {
+        "id": "manufacturing-research-intelligence-diligence-coordinator",
+        "specialist": "diligence-coordinator",
+        "title": "Diligence Coordinator"
+      }
+    ]
+  },
+  {
+    "id": "manufacturing-product-delivery",
+    "industry": "manufacturing",
+    "department": "product-delivery",
+    "title": "Manufacturing Product & Delivery",
+    "specialists": [
+      {
+        "id": "manufacturing-product-delivery-product-architect",
+        "specialist": "product-architect",
+        "title": "Product Architect"
+      },
+      {
+        "id": "manufacturing-product-delivery-workflow-designer",
+        "specialist": "workflow-designer",
+        "title": "Workflow Designer"
+      },
+      {
+        "id": "manufacturing-product-delivery-spec-writer",
+        "specialist": "spec-writer",
+        "title": "Spec Writer"
+      },
+      {
+        "id": "manufacturing-product-delivery-prototype-lead",
+        "specialist": "prototype-lead",
+        "title": "Prototype Lead"
+      },
+      {
+        "id": "manufacturing-product-delivery-ux-optimizer",
+        "specialist": "ux-optimizer",
+        "title": "UX Optimizer"
+      },
+      {
+        "id": "manufacturing-product-delivery-launch-planner",
+        "specialist": "launch-planner",
+        "title": "Launch Planner"
+      },
+      {
+        "id": "manufacturing-product-delivery-delivery-reviewer",
+        "specialist": "delivery-reviewer",
+        "title": "Delivery Reviewer"
+      },
+      {
+        "id": "manufacturing-product-delivery-qa-strategist",
+        "specialist": "qa-strategist",
+        "title": "QA Strategist"
+      },
+      {
+        "id": "manufacturing-product-delivery-roadmap-steward",
+        "specialist": "roadmap-steward",
+        "title": "Roadmap Steward"
+      },
+      {
+        "id": "manufacturing-product-delivery-implementation-coordinator",
+        "specialist": "implementation-coordinator",
+        "title": "Implementation Coordinator"
+      }
+    ]
+  },
+  {
+    "id": "manufacturing-growth-operations",
+    "industry": "manufacturing",
+    "department": "growth-operations",
+    "title": "Manufacturing Growth & Operations",
+    "specialists": [
+      {
+        "id": "manufacturing-growth-operations-funnel-operator",
+        "specialist": "funnel-operator",
+        "title": "Funnel Operator"
+      },
+      {
+        "id": "manufacturing-growth-operations-acquisition-planner",
+        "specialist": "acquisition-planner",
+        "title": "Acquisition Planner"
+      },
+      {
+        "id": "manufacturing-growth-operations-retention-strategist",
+        "specialist": "retention-strategist",
+        "title": "Retention Strategist"
+      },
+      {
+        "id": "manufacturing-growth-operations-lifecycle-designer",
+        "specialist": "lifecycle-designer",
+        "title": "Lifecycle Designer"
+      },
+      {
+        "id": "manufacturing-growth-operations-community-operator",
+        "specialist": "community-operator",
+        "title": "Community Operator"
+      },
+      {
+        "id": "manufacturing-growth-operations-channel-optimizer",
+        "specialist": "channel-optimizer",
+        "title": "Channel Optimizer"
+      },
+      {
+        "id": "manufacturing-growth-operations-ops-automation-lead",
+        "specialist": "ops-automation-lead",
+        "title": "Ops Automation Lead"
+      },
+      {
+        "id": "manufacturing-growth-operations-campaign-analyst",
+        "specialist": "campaign-analyst",
+        "title": "Campaign Analyst"
+      },
+      {
+        "id": "manufacturing-growth-operations-revenue-operator",
+        "specialist": "revenue-operator",
+        "title": "Revenue Operator"
+      },
+      {
+        "id": "manufacturing-growth-operations-performance-marketer",
+        "specialist": "performance-marketer",
+        "title": "Performance Marketer"
+      }
+    ]
+  },
+  {
+    "id": "manufacturing-risk-compliance",
+    "industry": "manufacturing",
+    "department": "risk-compliance",
+    "title": "Manufacturing Risk & Compliance",
+    "specialists": [
+      {
+        "id": "manufacturing-risk-compliance-risk-mapper",
+        "specialist": "risk-mapper",
+        "title": "Risk Mapper"
+      },
+      {
+        "id": "manufacturing-risk-compliance-compliance-interpreter",
+        "specialist": "compliance-interpreter",
+        "title": "Compliance Interpreter"
+      },
+      {
+        "id": "manufacturing-risk-compliance-control-designer",
+        "specialist": "control-designer",
+        "title": "Control Designer"
+      },
+      {
+        "id": "manufacturing-risk-compliance-incident-reviewer",
+        "specialist": "incident-reviewer",
+        "title": "Incident Reviewer"
+      },
+      {
+        "id": "manufacturing-risk-compliance-decision-red-teamer",
+        "specialist": "decision-red-teamer",
+        "title": "Decision Red-Teamer"
+      },
+      {
+        "id": "manufacturing-risk-compliance-downside-analyst",
+        "specialist": "downside-analyst",
+        "title": "Downside Analyst"
+      },
+      {
+        "id": "manufacturing-risk-compliance-security-liaison",
+        "specialist": "security-liaison",
+        "title": "Security Liaison"
+      },
+      {
+        "id": "manufacturing-risk-compliance-policy-drafter",
+        "specialist": "policy-drafter",
+        "title": "Policy Drafter"
+      },
+      {
+        "id": "manufacturing-risk-compliance-audit-planner",
+        "specialist": "audit-planner",
+        "title": "Audit Planner"
+      },
+      {
+        "id": "manufacturing-risk-compliance-escalation-chief",
+        "specialist": "escalation-chief",
+        "title": "Escalation Chief"
+      }
+    ]
+  },
+  {
+    "id": "logistics-strategy-office",
+    "industry": "logistics",
+    "department": "strategy-office",
+    "title": "Logistics Strategy Office",
+    "specialists": [
+      {
+        "id": "logistics-strategy-office-market-cartographer",
+        "specialist": "market-cartographer",
+        "title": "Market Cartographer"
+      },
+      {
+        "id": "logistics-strategy-office-thesis-architect",
+        "specialist": "thesis-architect",
+        "title": "Thesis Architect"
+      },
+      {
+        "id": "logistics-strategy-office-scenario-planner",
+        "specialist": "scenario-planner",
+        "title": "Scenario Planner"
+      },
+      {
+        "id": "logistics-strategy-office-pricing-strategist",
+        "specialist": "pricing-strategist",
+        "title": "Pricing Strategist"
+      },
+      {
+        "id": "logistics-strategy-office-portfolio-prioritizer",
+        "specialist": "portfolio-prioritizer",
+        "title": "Portfolio Prioritizer"
+      },
+      {
+        "id": "logistics-strategy-office-ecosystem-mapper",
+        "specialist": "ecosystem-mapper",
+        "title": "Ecosystem Mapper"
+      },
+      {
+        "id": "logistics-strategy-office-segment-strategist",
+        "specialist": "segment-strategist",
+        "title": "Segment Strategist"
+      },
+      {
+        "id": "logistics-strategy-office-monetization-strategist",
+        "specialist": "monetization-strategist",
+        "title": "Monetization Strategist"
+      },
+      {
+        "id": "logistics-strategy-office-partnership-strategist",
+        "specialist": "partnership-strategist",
+        "title": "Partnership Strategist"
+      },
+      {
+        "id": "logistics-strategy-office-executive-briefing-lead",
+        "specialist": "executive-briefing-lead",
+        "title": "Executive Briefing Lead"
+      }
+    ]
+  },
+  {
+    "id": "logistics-research-intelligence",
+    "industry": "logistics",
+    "department": "research-intelligence",
+    "title": "Logistics Research & Intelligence",
+    "specialists": [
+      {
+        "id": "logistics-research-intelligence-source-hunter",
+        "specialist": "source-hunter",
+        "title": "Source Hunter"
+      },
+      {
+        "id": "logistics-research-intelligence-benchmark-analyst",
+        "specialist": "benchmark-analyst",
+        "title": "Benchmark Analyst"
+      },
+      {
+        "id": "logistics-research-intelligence-competitor-watcher",
+        "specialist": "competitor-watcher",
+        "title": "Competitor Watcher"
+      },
+      {
+        "id": "logistics-research-intelligence-policy-watcher",
+        "specialist": "policy-watcher",
+        "title": "Policy Watcher"
+      },
+      {
+        "id": "logistics-research-intelligence-customer-insight-miner",
+        "specialist": "customer-insight-miner",
+        "title": "Customer Insight Miner"
+      },
+      {
+        "id": "logistics-research-intelligence-data-scout",
+        "specialist": "data-scout",
+        "title": "Data Scout"
+      },
+      {
+        "id": "logistics-research-intelligence-trend-synthesizer",
+        "specialist": "trend-synthesizer",
+        "title": "Trend Synthesizer"
+      },
+      {
+        "id": "logistics-research-intelligence-evidence-auditor",
+        "specialist": "evidence-auditor",
+        "title": "Evidence Auditor"
+      },
+      {
+        "id": "logistics-research-intelligence-expert-interview-designer",
+        "specialist": "expert-interview-designer",
+        "title": "Expert Interview Designer"
+      },
+      {
+        "id": "logistics-research-intelligence-diligence-coordinator",
+        "specialist": "diligence-coordinator",
+        "title": "Diligence Coordinator"
+      }
+    ]
+  },
+  {
+    "id": "logistics-product-delivery",
+    "industry": "logistics",
+    "department": "product-delivery",
+    "title": "Logistics Product & Delivery",
+    "specialists": [
+      {
+        "id": "logistics-product-delivery-product-architect",
+        "specialist": "product-architect",
+        "title": "Product Architect"
+      },
+      {
+        "id": "logistics-product-delivery-workflow-designer",
+        "specialist": "workflow-designer",
+        "title": "Workflow Designer"
+      },
+      {
+        "id": "logistics-product-delivery-spec-writer",
+        "specialist": "spec-writer",
+        "title": "Spec Writer"
+      },
+      {
+        "id": "logistics-product-delivery-prototype-lead",
+        "specialist": "prototype-lead",
+        "title": "Prototype Lead"
+      },
+      {
+        "id": "logistics-product-delivery-ux-optimizer",
+        "specialist": "ux-optimizer",
+        "title": "UX Optimizer"
+      },
+      {
+        "id": "logistics-product-delivery-launch-planner",
+        "specialist": "launch-planner",
+        "title": "Launch Planner"
+      },
+      {
+        "id": "logistics-product-delivery-delivery-reviewer",
+        "specialist": "delivery-reviewer",
+        "title": "Delivery Reviewer"
+      },
+      {
+        "id": "logistics-product-delivery-qa-strategist",
+        "specialist": "qa-strategist",
+        "title": "QA Strategist"
+      },
+      {
+        "id": "logistics-product-delivery-roadmap-steward",
+        "specialist": "roadmap-steward",
+        "title": "Roadmap Steward"
+      },
+      {
+        "id": "logistics-product-delivery-implementation-coordinator",
+        "specialist": "implementation-coordinator",
+        "title": "Implementation Coordinator"
+      }
+    ]
+  },
+  {
+    "id": "logistics-growth-operations",
+    "industry": "logistics",
+    "department": "growth-operations",
+    "title": "Logistics Growth & Operations",
+    "specialists": [
+      {
+        "id": "logistics-growth-operations-funnel-operator",
+        "specialist": "funnel-operator",
+        "title": "Funnel Operator"
+      },
+      {
+        "id": "logistics-growth-operations-acquisition-planner",
+        "specialist": "acquisition-planner",
+        "title": "Acquisition Planner"
+      },
+      {
+        "id": "logistics-growth-operations-retention-strategist",
+        "specialist": "retention-strategist",
+        "title": "Retention Strategist"
+      },
+      {
+        "id": "logistics-growth-operations-lifecycle-designer",
+        "specialist": "lifecycle-designer",
+        "title": "Lifecycle Designer"
+      },
+      {
+        "id": "logistics-growth-operations-community-operator",
+        "specialist": "community-operator",
+        "title": "Community Operator"
+      },
+      {
+        "id": "logistics-growth-operations-channel-optimizer",
+        "specialist": "channel-optimizer",
+        "title": "Channel Optimizer"
+      },
+      {
+        "id": "logistics-growth-operations-ops-automation-lead",
+        "specialist": "ops-automation-lead",
+        "title": "Ops Automation Lead"
+      },
+      {
+        "id": "logistics-growth-operations-campaign-analyst",
+        "specialist": "campaign-analyst",
+        "title": "Campaign Analyst"
+      },
+      {
+        "id": "logistics-growth-operations-revenue-operator",
+        "specialist": "revenue-operator",
+        "title": "Revenue Operator"
+      },
+      {
+        "id": "logistics-growth-operations-performance-marketer",
+        "specialist": "performance-marketer",
+        "title": "Performance Marketer"
+      }
+    ]
+  },
+  {
+    "id": "logistics-risk-compliance",
+    "industry": "logistics",
+    "department": "risk-compliance",
+    "title": "Logistics Risk & Compliance",
+    "specialists": [
+      {
+        "id": "logistics-risk-compliance-risk-mapper",
+        "specialist": "risk-mapper",
+        "title": "Risk Mapper"
+      },
+      {
+        "id": "logistics-risk-compliance-compliance-interpreter",
+        "specialist": "compliance-interpreter",
+        "title": "Compliance Interpreter"
+      },
+      {
+        "id": "logistics-risk-compliance-control-designer",
+        "specialist": "control-designer",
+        "title": "Control Designer"
+      },
+      {
+        "id": "logistics-risk-compliance-incident-reviewer",
+        "specialist": "incident-reviewer",
+        "title": "Incident Reviewer"
+      },
+      {
+        "id": "logistics-risk-compliance-decision-red-teamer",
+        "specialist": "decision-red-teamer",
+        "title": "Decision Red-Teamer"
+      },
+      {
+        "id": "logistics-risk-compliance-downside-analyst",
+        "specialist": "downside-analyst",
+        "title": "Downside Analyst"
+      },
+      {
+        "id": "logistics-risk-compliance-security-liaison",
+        "specialist": "security-liaison",
+        "title": "Security Liaison"
+      },
+      {
+        "id": "logistics-risk-compliance-policy-drafter",
+        "specialist": "policy-drafter",
+        "title": "Policy Drafter"
+      },
+      {
+        "id": "logistics-risk-compliance-audit-planner",
+        "specialist": "audit-planner",
+        "title": "Audit Planner"
+      },
+      {
+        "id": "logistics-risk-compliance-escalation-chief",
+        "specialist": "escalation-chief",
+        "title": "Escalation Chief"
+      }
+    ]
+  },
+  {
+    "id": "real-estate-strategy-office",
+    "industry": "real-estate",
+    "department": "strategy-office",
+    "title": "Real Estate Strategy Office",
+    "specialists": [
+      {
+        "id": "real-estate-strategy-office-market-cartographer",
+        "specialist": "market-cartographer",
+        "title": "Market Cartographer"
+      },
+      {
+        "id": "real-estate-strategy-office-thesis-architect",
+        "specialist": "thesis-architect",
+        "title": "Thesis Architect"
+      },
+      {
+        "id": "real-estate-strategy-office-scenario-planner",
+        "specialist": "scenario-planner",
+        "title": "Scenario Planner"
+      },
+      {
+        "id": "real-estate-strategy-office-pricing-strategist",
+        "specialist": "pricing-strategist",
+        "title": "Pricing Strategist"
+      },
+      {
+        "id": "real-estate-strategy-office-portfolio-prioritizer",
+        "specialist": "portfolio-prioritizer",
+        "title": "Portfolio Prioritizer"
+      },
+      {
+        "id": "real-estate-strategy-office-ecosystem-mapper",
+        "specialist": "ecosystem-mapper",
+        "title": "Ecosystem Mapper"
+      },
+      {
+        "id": "real-estate-strategy-office-segment-strategist",
+        "specialist": "segment-strategist",
+        "title": "Segment Strategist"
+      },
+      {
+        "id": "real-estate-strategy-office-monetization-strategist",
+        "specialist": "monetization-strategist",
+        "title": "Monetization Strategist"
+      },
+      {
+        "id": "real-estate-strategy-office-partnership-strategist",
+        "specialist": "partnership-strategist",
+        "title": "Partnership Strategist"
+      },
+      {
+        "id": "real-estate-strategy-office-executive-briefing-lead",
+        "specialist": "executive-briefing-lead",
+        "title": "Executive Briefing Lead"
+      }
+    ]
+  },
+  {
+    "id": "real-estate-research-intelligence",
+    "industry": "real-estate",
+    "department": "research-intelligence",
+    "title": "Real Estate Research & Intelligence",
+    "specialists": [
+      {
+        "id": "real-estate-research-intelligence-source-hunter",
+        "specialist": "source-hunter",
+        "title": "Source Hunter"
+      },
+      {
+        "id": "real-estate-research-intelligence-benchmark-analyst",
+        "specialist": "benchmark-analyst",
+        "title": "Benchmark Analyst"
+      },
+      {
+        "id": "real-estate-research-intelligence-competitor-watcher",
+        "specialist": "competitor-watcher",
+        "title": "Competitor Watcher"
+      },
+      {
+        "id": "real-estate-research-intelligence-policy-watcher",
+        "specialist": "policy-watcher",
+        "title": "Policy Watcher"
+      },
+      {
+        "id": "real-estate-research-intelligence-customer-insight-miner",
+        "specialist": "customer-insight-miner",
+        "title": "Customer Insight Miner"
+      },
+      {
+        "id": "real-estate-research-intelligence-data-scout",
+        "specialist": "data-scout",
+        "title": "Data Scout"
+      },
+      {
+        "id": "real-estate-research-intelligence-trend-synthesizer",
+        "specialist": "trend-synthesizer",
+        "title": "Trend Synthesizer"
+      },
+      {
+        "id": "real-estate-research-intelligence-evidence-auditor",
+        "specialist": "evidence-auditor",
+        "title": "Evidence Auditor"
+      },
+      {
+        "id": "real-estate-research-intelligence-expert-interview-designer",
+        "specialist": "expert-interview-designer",
+        "title": "Expert Interview Designer"
+      },
+      {
+        "id": "real-estate-research-intelligence-diligence-coordinator",
+        "specialist": "diligence-coordinator",
+        "title": "Diligence Coordinator"
+      }
+    ]
+  },
+  {
+    "id": "real-estate-product-delivery",
+    "industry": "real-estate",
+    "department": "product-delivery",
+    "title": "Real Estate Product & Delivery",
+    "specialists": [
+      {
+        "id": "real-estate-product-delivery-product-architect",
+        "specialist": "product-architect",
+        "title": "Product Architect"
+      },
+      {
+        "id": "real-estate-product-delivery-workflow-designer",
+        "specialist": "workflow-designer",
+        "title": "Workflow Designer"
+      },
+      {
+        "id": "real-estate-product-delivery-spec-writer",
+        "specialist": "spec-writer",
+        "title": "Spec Writer"
+      },
+      {
+        "id": "real-estate-product-delivery-prototype-lead",
+        "specialist": "prototype-lead",
+        "title": "Prototype Lead"
+      },
+      {
+        "id": "real-estate-product-delivery-ux-optimizer",
+        "specialist": "ux-optimizer",
+        "title": "UX Optimizer"
+      },
+      {
+        "id": "real-estate-product-delivery-launch-planner",
+        "specialist": "launch-planner",
+        "title": "Launch Planner"
+      },
+      {
+        "id": "real-estate-product-delivery-delivery-reviewer",
+        "specialist": "delivery-reviewer",
+        "title": "Delivery Reviewer"
+      },
+      {
+        "id": "real-estate-product-delivery-qa-strategist",
+        "specialist": "qa-strategist",
+        "title": "QA Strategist"
+      },
+      {
+        "id": "real-estate-product-delivery-roadmap-steward",
+        "specialist": "roadmap-steward",
+        "title": "Roadmap Steward"
+      },
+      {
+        "id": "real-estate-product-delivery-implementation-coordinator",
+        "specialist": "implementation-coordinator",
+        "title": "Implementation Coordinator"
+      }
+    ]
+  },
+  {
+    "id": "real-estate-growth-operations",
+    "industry": "real-estate",
+    "department": "growth-operations",
+    "title": "Real Estate Growth & Operations",
+    "specialists": [
+      {
+        "id": "real-estate-growth-operations-funnel-operator",
+        "specialist": "funnel-operator",
+        "title": "Funnel Operator"
+      },
+      {
+        "id": "real-estate-growth-operations-acquisition-planner",
+        "specialist": "acquisition-planner",
+        "title": "Acquisition Planner"
+      },
+      {
+        "id": "real-estate-growth-operations-retention-strategist",
+        "specialist": "retention-strategist",
+        "title": "Retention Strategist"
+      },
+      {
+        "id": "real-estate-growth-operations-lifecycle-designer",
+        "specialist": "lifecycle-designer",
+        "title": "Lifecycle Designer"
+      },
+      {
+        "id": "real-estate-growth-operations-community-operator",
+        "specialist": "community-operator",
+        "title": "Community Operator"
+      },
+      {
+        "id": "real-estate-growth-operations-channel-optimizer",
+        "specialist": "channel-optimizer",
+        "title": "Channel Optimizer"
+      },
+      {
+        "id": "real-estate-growth-operations-ops-automation-lead",
+        "specialist": "ops-automation-lead",
+        "title": "Ops Automation Lead"
+      },
+      {
+        "id": "real-estate-growth-operations-campaign-analyst",
+        "specialist": "campaign-analyst",
+        "title": "Campaign Analyst"
+      },
+      {
+        "id": "real-estate-growth-operations-revenue-operator",
+        "specialist": "revenue-operator",
+        "title": "Revenue Operator"
+      },
+      {
+        "id": "real-estate-growth-operations-performance-marketer",
+        "specialist": "performance-marketer",
+        "title": "Performance Marketer"
+      }
+    ]
+  },
+  {
+    "id": "real-estate-risk-compliance",
+    "industry": "real-estate",
+    "department": "risk-compliance",
+    "title": "Real Estate Risk & Compliance",
+    "specialists": [
+      {
+        "id": "real-estate-risk-compliance-risk-mapper",
+        "specialist": "risk-mapper",
+        "title": "Risk Mapper"
+      },
+      {
+        "id": "real-estate-risk-compliance-compliance-interpreter",
+        "specialist": "compliance-interpreter",
+        "title": "Compliance Interpreter"
+      },
+      {
+        "id": "real-estate-risk-compliance-control-designer",
+        "specialist": "control-designer",
+        "title": "Control Designer"
+      },
+      {
+        "id": "real-estate-risk-compliance-incident-reviewer",
+        "specialist": "incident-reviewer",
+        "title": "Incident Reviewer"
+      },
+      {
+        "id": "real-estate-risk-compliance-decision-red-teamer",
+        "specialist": "decision-red-teamer",
+        "title": "Decision Red-Teamer"
+      },
+      {
+        "id": "real-estate-risk-compliance-downside-analyst",
+        "specialist": "downside-analyst",
+        "title": "Downside Analyst"
+      },
+      {
+        "id": "real-estate-risk-compliance-security-liaison",
+        "specialist": "security-liaison",
+        "title": "Security Liaison"
+      },
+      {
+        "id": "real-estate-risk-compliance-policy-drafter",
+        "specialist": "policy-drafter",
+        "title": "Policy Drafter"
+      },
+      {
+        "id": "real-estate-risk-compliance-audit-planner",
+        "specialist": "audit-planner",
+        "title": "Audit Planner"
+      },
+      {
+        "id": "real-estate-risk-compliance-escalation-chief",
+        "specialist": "escalation-chief",
+        "title": "Escalation Chief"
+      }
+    ]
+  },
+  {
+    "id": "energy-strategy-office",
+    "industry": "energy",
+    "department": "strategy-office",
+    "title": "Energy Strategy Office",
+    "specialists": [
+      {
+        "id": "energy-strategy-office-market-cartographer",
+        "specialist": "market-cartographer",
+        "title": "Market Cartographer"
+      },
+      {
+        "id": "energy-strategy-office-thesis-architect",
+        "specialist": "thesis-architect",
+        "title": "Thesis Architect"
+      },
+      {
+        "id": "energy-strategy-office-scenario-planner",
+        "specialist": "scenario-planner",
+        "title": "Scenario Planner"
+      },
+      {
+        "id": "energy-strategy-office-pricing-strategist",
+        "specialist": "pricing-strategist",
+        "title": "Pricing Strategist"
+      },
+      {
+        "id": "energy-strategy-office-portfolio-prioritizer",
+        "specialist": "portfolio-prioritizer",
+        "title": "Portfolio Prioritizer"
+      },
+      {
+        "id": "energy-strategy-office-ecosystem-mapper",
+        "specialist": "ecosystem-mapper",
+        "title": "Ecosystem Mapper"
+      },
+      {
+        "id": "energy-strategy-office-segment-strategist",
+        "specialist": "segment-strategist",
+        "title": "Segment Strategist"
+      },
+      {
+        "id": "energy-strategy-office-monetization-strategist",
+        "specialist": "monetization-strategist",
+        "title": "Monetization Strategist"
+      },
+      {
+        "id": "energy-strategy-office-partnership-strategist",
+        "specialist": "partnership-strategist",
+        "title": "Partnership Strategist"
+      },
+      {
+        "id": "energy-strategy-office-executive-briefing-lead",
+        "specialist": "executive-briefing-lead",
+        "title": "Executive Briefing Lead"
+      }
+    ]
+  },
+  {
+    "id": "energy-research-intelligence",
+    "industry": "energy",
+    "department": "research-intelligence",
+    "title": "Energy Research & Intelligence",
+    "specialists": [
+      {
+        "id": "energy-research-intelligence-source-hunter",
+        "specialist": "source-hunter",
+        "title": "Source Hunter"
+      },
+      {
+        "id": "energy-research-intelligence-benchmark-analyst",
+        "specialist": "benchmark-analyst",
+        "title": "Benchmark Analyst"
+      },
+      {
+        "id": "energy-research-intelligence-competitor-watcher",
+        "specialist": "competitor-watcher",
+        "title": "Competitor Watcher"
+      },
+      {
+        "id": "energy-research-intelligence-policy-watcher",
+        "specialist": "policy-watcher",
+        "title": "Policy Watcher"
+      },
+      {
+        "id": "energy-research-intelligence-customer-insight-miner",
+        "specialist": "customer-insight-miner",
+        "title": "Customer Insight Miner"
+      },
+      {
+        "id": "energy-research-intelligence-data-scout",
+        "specialist": "data-scout",
+        "title": "Data Scout"
+      },
+      {
+        "id": "energy-research-intelligence-trend-synthesizer",
+        "specialist": "trend-synthesizer",
+        "title": "Trend Synthesizer"
+      },
+      {
+        "id": "energy-research-intelligence-evidence-auditor",
+        "specialist": "evidence-auditor",
+        "title": "Evidence Auditor"
+      },
+      {
+        "id": "energy-research-intelligence-expert-interview-designer",
+        "specialist": "expert-interview-designer",
+        "title": "Expert Interview Designer"
+      },
+      {
+        "id": "energy-research-intelligence-diligence-coordinator",
+        "specialist": "diligence-coordinator",
+        "title": "Diligence Coordinator"
+      }
+    ]
+  },
+  {
+    "id": "energy-product-delivery",
+    "industry": "energy",
+    "department": "product-delivery",
+    "title": "Energy Product & Delivery",
+    "specialists": [
+      {
+        "id": "energy-product-delivery-product-architect",
+        "specialist": "product-architect",
+        "title": "Product Architect"
+      },
+      {
+        "id": "energy-product-delivery-workflow-designer",
+        "specialist": "workflow-designer",
+        "title": "Workflow Designer"
+      },
+      {
+        "id": "energy-product-delivery-spec-writer",
+        "specialist": "spec-writer",
+        "title": "Spec Writer"
+      },
+      {
+        "id": "energy-product-delivery-prototype-lead",
+        "specialist": "prototype-lead",
+        "title": "Prototype Lead"
+      },
+      {
+        "id": "energy-product-delivery-ux-optimizer",
+        "specialist": "ux-optimizer",
+        "title": "UX Optimizer"
+      },
+      {
+        "id": "energy-product-delivery-launch-planner",
+        "specialist": "launch-planner",
+        "title": "Launch Planner"
+      },
+      {
+        "id": "energy-product-delivery-delivery-reviewer",
+        "specialist": "delivery-reviewer",
+        "title": "Delivery Reviewer"
+      },
+      {
+        "id": "energy-product-delivery-qa-strategist",
+        "specialist": "qa-strategist",
+        "title": "QA Strategist"
+      },
+      {
+        "id": "energy-product-delivery-roadmap-steward",
+        "specialist": "roadmap-steward",
+        "title": "Roadmap Steward"
+      },
+      {
+        "id": "energy-product-delivery-implementation-coordinator",
+        "specialist": "implementation-coordinator",
+        "title": "Implementation Coordinator"
+      }
+    ]
+  },
+  {
+    "id": "energy-growth-operations",
+    "industry": "energy",
+    "department": "growth-operations",
+    "title": "Energy Growth & Operations",
+    "specialists": [
+      {
+        "id": "energy-growth-operations-funnel-operator",
+        "specialist": "funnel-operator",
+        "title": "Funnel Operator"
+      },
+      {
+        "id": "energy-growth-operations-acquisition-planner",
+        "specialist": "acquisition-planner",
+        "title": "Acquisition Planner"
+      },
+      {
+        "id": "energy-growth-operations-retention-strategist",
+        "specialist": "retention-strategist",
+        "title": "Retention Strategist"
+      },
+      {
+        "id": "energy-growth-operations-lifecycle-designer",
+        "specialist": "lifecycle-designer",
+        "title": "Lifecycle Designer"
+      },
+      {
+        "id": "energy-growth-operations-community-operator",
+        "specialist": "community-operator",
+        "title": "Community Operator"
+      },
+      {
+        "id": "energy-growth-operations-channel-optimizer",
+        "specialist": "channel-optimizer",
+        "title": "Channel Optimizer"
+      },
+      {
+        "id": "energy-growth-operations-ops-automation-lead",
+        "specialist": "ops-automation-lead",
+        "title": "Ops Automation Lead"
+      },
+      {
+        "id": "energy-growth-operations-campaign-analyst",
+        "specialist": "campaign-analyst",
+        "title": "Campaign Analyst"
+      },
+      {
+        "id": "energy-growth-operations-revenue-operator",
+        "specialist": "revenue-operator",
+        "title": "Revenue Operator"
+      },
+      {
+        "id": "energy-growth-operations-performance-marketer",
+        "specialist": "performance-marketer",
+        "title": "Performance Marketer"
+      }
+    ]
+  },
+  {
+    "id": "energy-risk-compliance",
+    "industry": "energy",
+    "department": "risk-compliance",
+    "title": "Energy Risk & Compliance",
+    "specialists": [
+      {
+        "id": "energy-risk-compliance-risk-mapper",
+        "specialist": "risk-mapper",
+        "title": "Risk Mapper"
+      },
+      {
+        "id": "energy-risk-compliance-compliance-interpreter",
+        "specialist": "compliance-interpreter",
+        "title": "Compliance Interpreter"
+      },
+      {
+        "id": "energy-risk-compliance-control-designer",
+        "specialist": "control-designer",
+        "title": "Control Designer"
+      },
+      {
+        "id": "energy-risk-compliance-incident-reviewer",
+        "specialist": "incident-reviewer",
+        "title": "Incident Reviewer"
+      },
+      {
+        "id": "energy-risk-compliance-decision-red-teamer",
+        "specialist": "decision-red-teamer",
+        "title": "Decision Red-Teamer"
+      },
+      {
+        "id": "energy-risk-compliance-downside-analyst",
+        "specialist": "downside-analyst",
+        "title": "Downside Analyst"
+      },
+      {
+        "id": "energy-risk-compliance-security-liaison",
+        "specialist": "security-liaison",
+        "title": "Security Liaison"
+      },
+      {
+        "id": "energy-risk-compliance-policy-drafter",
+        "specialist": "policy-drafter",
+        "title": "Policy Drafter"
+      },
+      {
+        "id": "energy-risk-compliance-audit-planner",
+        "specialist": "audit-planner",
+        "title": "Audit Planner"
+      },
+      {
+        "id": "energy-risk-compliance-escalation-chief",
+        "specialist": "escalation-chief",
+        "title": "Escalation Chief"
+      }
+    ]
+  },
+  {
+    "id": "automotive-strategy-office",
+    "industry": "automotive",
+    "department": "strategy-office",
+    "title": "Automotive Strategy Office",
+    "specialists": [
+      {
+        "id": "automotive-strategy-office-market-cartographer",
+        "specialist": "market-cartographer",
+        "title": "Market Cartographer"
+      },
+      {
+        "id": "automotive-strategy-office-thesis-architect",
+        "specialist": "thesis-architect",
+        "title": "Thesis Architect"
+      },
+      {
+        "id": "automotive-strategy-office-scenario-planner",
+        "specialist": "scenario-planner",
+        "title": "Scenario Planner"
+      },
+      {
+        "id": "automotive-strategy-office-pricing-strategist",
+        "specialist": "pricing-strategist",
+        "title": "Pricing Strategist"
+      },
+      {
+        "id": "automotive-strategy-office-portfolio-prioritizer",
+        "specialist": "portfolio-prioritizer",
+        "title": "Portfolio Prioritizer"
+      },
+      {
+        "id": "automotive-strategy-office-ecosystem-mapper",
+        "specialist": "ecosystem-mapper",
+        "title": "Ecosystem Mapper"
+      },
+      {
+        "id": "automotive-strategy-office-segment-strategist",
+        "specialist": "segment-strategist",
+        "title": "Segment Strategist"
+      },
+      {
+        "id": "automotive-strategy-office-monetization-strategist",
+        "specialist": "monetization-strategist",
+        "title": "Monetization Strategist"
+      },
+      {
+        "id": "automotive-strategy-office-partnership-strategist",
+        "specialist": "partnership-strategist",
+        "title": "Partnership Strategist"
+      },
+      {
+        "id": "automotive-strategy-office-executive-briefing-lead",
+        "specialist": "executive-briefing-lead",
+        "title": "Executive Briefing Lead"
+      }
+    ]
+  },
+  {
+    "id": "automotive-research-intelligence",
+    "industry": "automotive",
+    "department": "research-intelligence",
+    "title": "Automotive Research & Intelligence",
+    "specialists": [
+      {
+        "id": "automotive-research-intelligence-source-hunter",
+        "specialist": "source-hunter",
+        "title": "Source Hunter"
+      },
+      {
+        "id": "automotive-research-intelligence-benchmark-analyst",
+        "specialist": "benchmark-analyst",
+        "title": "Benchmark Analyst"
+      },
+      {
+        "id": "automotive-research-intelligence-competitor-watcher",
+        "specialist": "competitor-watcher",
+        "title": "Competitor Watcher"
+      },
+      {
+        "id": "automotive-research-intelligence-policy-watcher",
+        "specialist": "policy-watcher",
+        "title": "Policy Watcher"
+      },
+      {
+        "id": "automotive-research-intelligence-customer-insight-miner",
+        "specialist": "customer-insight-miner",
+        "title": "Customer Insight Miner"
+      },
+      {
+        "id": "automotive-research-intelligence-data-scout",
+        "specialist": "data-scout",
+        "title": "Data Scout"
+      },
+      {
+        "id": "automotive-research-intelligence-trend-synthesizer",
+        "specialist": "trend-synthesizer",
+        "title": "Trend Synthesizer"
+      },
+      {
+        "id": "automotive-research-intelligence-evidence-auditor",
+        "specialist": "evidence-auditor",
+        "title": "Evidence Auditor"
+      },
+      {
+        "id": "automotive-research-intelligence-expert-interview-designer",
+        "specialist": "expert-interview-designer",
+        "title": "Expert Interview Designer"
+      },
+      {
+        "id": "automotive-research-intelligence-diligence-coordinator",
+        "specialist": "diligence-coordinator",
+        "title": "Diligence Coordinator"
+      }
+    ]
+  },
+  {
+    "id": "automotive-product-delivery",
+    "industry": "automotive",
+    "department": "product-delivery",
+    "title": "Automotive Product & Delivery",
+    "specialists": [
+      {
+        "id": "automotive-product-delivery-product-architect",
+        "specialist": "product-architect",
+        "title": "Product Architect"
+      },
+      {
+        "id": "automotive-product-delivery-workflow-designer",
+        "specialist": "workflow-designer",
+        "title": "Workflow Designer"
+      },
+      {
+        "id": "automotive-product-delivery-spec-writer",
+        "specialist": "spec-writer",
+        "title": "Spec Writer"
+      },
+      {
+        "id": "automotive-product-delivery-prototype-lead",
+        "specialist": "prototype-lead",
+        "title": "Prototype Lead"
+      },
+      {
+        "id": "automotive-product-delivery-ux-optimizer",
+        "specialist": "ux-optimizer",
+        "title": "UX Optimizer"
+      },
+      {
+        "id": "automotive-product-delivery-launch-planner",
+        "specialist": "launch-planner",
+        "title": "Launch Planner"
+      },
+      {
+        "id": "automotive-product-delivery-delivery-reviewer",
+        "specialist": "delivery-reviewer",
+        "title": "Delivery Reviewer"
+      },
+      {
+        "id": "automotive-product-delivery-qa-strategist",
+        "specialist": "qa-strategist",
+        "title": "QA Strategist"
+      },
+      {
+        "id": "automotive-product-delivery-roadmap-steward",
+        "specialist": "roadmap-steward",
+        "title": "Roadmap Steward"
+      },
+      {
+        "id": "automotive-product-delivery-implementation-coordinator",
+        "specialist": "implementation-coordinator",
+        "title": "Implementation Coordinator"
+      }
+    ]
+  },
+  {
+    "id": "automotive-growth-operations",
+    "industry": "automotive",
+    "department": "growth-operations",
+    "title": "Automotive Growth & Operations",
+    "specialists": [
+      {
+        "id": "automotive-growth-operations-funnel-operator",
+        "specialist": "funnel-operator",
+        "title": "Funnel Operator"
+      },
+      {
+        "id": "automotive-growth-operations-acquisition-planner",
+        "specialist": "acquisition-planner",
+        "title": "Acquisition Planner"
+      },
+      {
+        "id": "automotive-growth-operations-retention-strategist",
+        "specialist": "retention-strategist",
+        "title": "Retention Strategist"
+      },
+      {
+        "id": "automotive-growth-operations-lifecycle-designer",
+        "specialist": "lifecycle-designer",
+        "title": "Lifecycle Designer"
+      },
+      {
+        "id": "automotive-growth-operations-community-operator",
+        "specialist": "community-operator",
+        "title": "Community Operator"
+      },
+      {
+        "id": "automotive-growth-operations-channel-optimizer",
+        "specialist": "channel-optimizer",
+        "title": "Channel Optimizer"
+      },
+      {
+        "id": "automotive-growth-operations-ops-automation-lead",
+        "specialist": "ops-automation-lead",
+        "title": "Ops Automation Lead"
+      },
+      {
+        "id": "automotive-growth-operations-campaign-analyst",
+        "specialist": "campaign-analyst",
+        "title": "Campaign Analyst"
+      },
+      {
+        "id": "automotive-growth-operations-revenue-operator",
+        "specialist": "revenue-operator",
+        "title": "Revenue Operator"
+      },
+      {
+        "id": "automotive-growth-operations-performance-marketer",
+        "specialist": "performance-marketer",
+        "title": "Performance Marketer"
+      }
+    ]
+  },
+  {
+    "id": "automotive-risk-compliance",
+    "industry": "automotive",
+    "department": "risk-compliance",
+    "title": "Automotive Risk & Compliance",
+    "specialists": [
+      {
+        "id": "automotive-risk-compliance-risk-mapper",
+        "specialist": "risk-mapper",
+        "title": "Risk Mapper"
+      },
+      {
+        "id": "automotive-risk-compliance-compliance-interpreter",
+        "specialist": "compliance-interpreter",
+        "title": "Compliance Interpreter"
+      },
+      {
+        "id": "automotive-risk-compliance-control-designer",
+        "specialist": "control-designer",
+        "title": "Control Designer"
+      },
+      {
+        "id": "automotive-risk-compliance-incident-reviewer",
+        "specialist": "incident-reviewer",
+        "title": "Incident Reviewer"
+      },
+      {
+        "id": "automotive-risk-compliance-decision-red-teamer",
+        "specialist": "decision-red-teamer",
+        "title": "Decision Red-Teamer"
+      },
+      {
+        "id": "automotive-risk-compliance-downside-analyst",
+        "specialist": "downside-analyst",
+        "title": "Downside Analyst"
+      },
+      {
+        "id": "automotive-risk-compliance-security-liaison",
+        "specialist": "security-liaison",
+        "title": "Security Liaison"
+      },
+      {
+        "id": "automotive-risk-compliance-policy-drafter",
+        "specialist": "policy-drafter",
+        "title": "Policy Drafter"
+      },
+      {
+        "id": "automotive-risk-compliance-audit-planner",
+        "specialist": "audit-planner",
+        "title": "Audit Planner"
+      },
+      {
+        "id": "automotive-risk-compliance-escalation-chief",
+        "specialist": "escalation-chief",
+        "title": "Escalation Chief"
+      }
+    ]
+  },
+  {
+    "id": "travel-strategy-office",
+    "industry": "travel",
+    "department": "strategy-office",
+    "title": "Travel & Hospitality Strategy Office",
+    "specialists": [
+      {
+        "id": "travel-strategy-office-market-cartographer",
+        "specialist": "market-cartographer",
+        "title": "Market Cartographer"
+      },
+      {
+        "id": "travel-strategy-office-thesis-architect",
+        "specialist": "thesis-architect",
+        "title": "Thesis Architect"
+      },
+      {
+        "id": "travel-strategy-office-scenario-planner",
+        "specialist": "scenario-planner",
+        "title": "Scenario Planner"
+      },
+      {
+        "id": "travel-strategy-office-pricing-strategist",
+        "specialist": "pricing-strategist",
+        "title": "Pricing Strategist"
+      },
+      {
+        "id": "travel-strategy-office-portfolio-prioritizer",
+        "specialist": "portfolio-prioritizer",
+        "title": "Portfolio Prioritizer"
+      },
+      {
+        "id": "travel-strategy-office-ecosystem-mapper",
+        "specialist": "ecosystem-mapper",
+        "title": "Ecosystem Mapper"
+      },
+      {
+        "id": "travel-strategy-office-segment-strategist",
+        "specialist": "segment-strategist",
+        "title": "Segment Strategist"
+      },
+      {
+        "id": "travel-strategy-office-monetization-strategist",
+        "specialist": "monetization-strategist",
+        "title": "Monetization Strategist"
+      },
+      {
+        "id": "travel-strategy-office-partnership-strategist",
+        "specialist": "partnership-strategist",
+        "title": "Partnership Strategist"
+      },
+      {
+        "id": "travel-strategy-office-executive-briefing-lead",
+        "specialist": "executive-briefing-lead",
+        "title": "Executive Briefing Lead"
+      }
+    ]
+  },
+  {
+    "id": "travel-research-intelligence",
+    "industry": "travel",
+    "department": "research-intelligence",
+    "title": "Travel & Hospitality Research & Intelligence",
+    "specialists": [
+      {
+        "id": "travel-research-intelligence-source-hunter",
+        "specialist": "source-hunter",
+        "title": "Source Hunter"
+      },
+      {
+        "id": "travel-research-intelligence-benchmark-analyst",
+        "specialist": "benchmark-analyst",
+        "title": "Benchmark Analyst"
+      },
+      {
+        "id": "travel-research-intelligence-competitor-watcher",
+        "specialist": "competitor-watcher",
+        "title": "Competitor Watcher"
+      },
+      {
+        "id": "travel-research-intelligence-policy-watcher",
+        "specialist": "policy-watcher",
+        "title": "Policy Watcher"
+      },
+      {
+        "id": "travel-research-intelligence-customer-insight-miner",
+        "specialist": "customer-insight-miner",
+        "title": "Customer Insight Miner"
+      },
+      {
+        "id": "travel-research-intelligence-data-scout",
+        "specialist": "data-scout",
+        "title": "Data Scout"
+      },
+      {
+        "id": "travel-research-intelligence-trend-synthesizer",
+        "specialist": "trend-synthesizer",
+        "title": "Trend Synthesizer"
+      },
+      {
+        "id": "travel-research-intelligence-evidence-auditor",
+        "specialist": "evidence-auditor",
+        "title": "Evidence Auditor"
+      },
+      {
+        "id": "travel-research-intelligence-expert-interview-designer",
+        "specialist": "expert-interview-designer",
+        "title": "Expert Interview Designer"
+      },
+      {
+        "id": "travel-research-intelligence-diligence-coordinator",
+        "specialist": "diligence-coordinator",
+        "title": "Diligence Coordinator"
+      }
+    ]
+  },
+  {
+    "id": "travel-product-delivery",
+    "industry": "travel",
+    "department": "product-delivery",
+    "title": "Travel & Hospitality Product & Delivery",
+    "specialists": [
+      {
+        "id": "travel-product-delivery-product-architect",
+        "specialist": "product-architect",
+        "title": "Product Architect"
+      },
+      {
+        "id": "travel-product-delivery-workflow-designer",
+        "specialist": "workflow-designer",
+        "title": "Workflow Designer"
+      },
+      {
+        "id": "travel-product-delivery-spec-writer",
+        "specialist": "spec-writer",
+        "title": "Spec Writer"
+      },
+      {
+        "id": "travel-product-delivery-prototype-lead",
+        "specialist": "prototype-lead",
+        "title": "Prototype Lead"
+      },
+      {
+        "id": "travel-product-delivery-ux-optimizer",
+        "specialist": "ux-optimizer",
+        "title": "UX Optimizer"
+      },
+      {
+        "id": "travel-product-delivery-launch-planner",
+        "specialist": "launch-planner",
+        "title": "Launch Planner"
+      },
+      {
+        "id": "travel-product-delivery-delivery-reviewer",
+        "specialist": "delivery-reviewer",
+        "title": "Delivery Reviewer"
+      },
+      {
+        "id": "travel-product-delivery-qa-strategist",
+        "specialist": "qa-strategist",
+        "title": "QA Strategist"
+      },
+      {
+        "id": "travel-product-delivery-roadmap-steward",
+        "specialist": "roadmap-steward",
+        "title": "Roadmap Steward"
+      },
+      {
+        "id": "travel-product-delivery-implementation-coordinator",
+        "specialist": "implementation-coordinator",
+        "title": "Implementation Coordinator"
+      }
+    ]
+  },
+  {
+    "id": "travel-growth-operations",
+    "industry": "travel",
+    "department": "growth-operations",
+    "title": "Travel & Hospitality Growth & Operations",
+    "specialists": [
+      {
+        "id": "travel-growth-operations-funnel-operator",
+        "specialist": "funnel-operator",
+        "title": "Funnel Operator"
+      },
+      {
+        "id": "travel-growth-operations-acquisition-planner",
+        "specialist": "acquisition-planner",
+        "title": "Acquisition Planner"
+      },
+      {
+        "id": "travel-growth-operations-retention-strategist",
+        "specialist": "retention-strategist",
+        "title": "Retention Strategist"
+      },
+      {
+        "id": "travel-growth-operations-lifecycle-designer",
+        "specialist": "lifecycle-designer",
+        "title": "Lifecycle Designer"
+      },
+      {
+        "id": "travel-growth-operations-community-operator",
+        "specialist": "community-operator",
+        "title": "Community Operator"
+      },
+      {
+        "id": "travel-growth-operations-channel-optimizer",
+        "specialist": "channel-optimizer",
+        "title": "Channel Optimizer"
+      },
+      {
+        "id": "travel-growth-operations-ops-automation-lead",
+        "specialist": "ops-automation-lead",
+        "title": "Ops Automation Lead"
+      },
+      {
+        "id": "travel-growth-operations-campaign-analyst",
+        "specialist": "campaign-analyst",
+        "title": "Campaign Analyst"
+      },
+      {
+        "id": "travel-growth-operations-revenue-operator",
+        "specialist": "revenue-operator",
+        "title": "Revenue Operator"
+      },
+      {
+        "id": "travel-growth-operations-performance-marketer",
+        "specialist": "performance-marketer",
+        "title": "Performance Marketer"
+      }
+    ]
+  },
+  {
+    "id": "travel-risk-compliance",
+    "industry": "travel",
+    "department": "risk-compliance",
+    "title": "Travel & Hospitality Risk & Compliance",
+    "specialists": [
+      {
+        "id": "travel-risk-compliance-risk-mapper",
+        "specialist": "risk-mapper",
+        "title": "Risk Mapper"
+      },
+      {
+        "id": "travel-risk-compliance-compliance-interpreter",
+        "specialist": "compliance-interpreter",
+        "title": "Compliance Interpreter"
+      },
+      {
+        "id": "travel-risk-compliance-control-designer",
+        "specialist": "control-designer",
+        "title": "Control Designer"
+      },
+      {
+        "id": "travel-risk-compliance-incident-reviewer",
+        "specialist": "incident-reviewer",
+        "title": "Incident Reviewer"
+      },
+      {
+        "id": "travel-risk-compliance-decision-red-teamer",
+        "specialist": "decision-red-teamer",
+        "title": "Decision Red-Teamer"
+      },
+      {
+        "id": "travel-risk-compliance-downside-analyst",
+        "specialist": "downside-analyst",
+        "title": "Downside Analyst"
+      },
+      {
+        "id": "travel-risk-compliance-security-liaison",
+        "specialist": "security-liaison",
+        "title": "Security Liaison"
+      },
+      {
+        "id": "travel-risk-compliance-policy-drafter",
+        "specialist": "policy-drafter",
+        "title": "Policy Drafter"
+      },
+      {
+        "id": "travel-risk-compliance-audit-planner",
+        "specialist": "audit-planner",
+        "title": "Audit Planner"
+      },
+      {
+        "id": "travel-risk-compliance-escalation-chief",
+        "specialist": "escalation-chief",
+        "title": "Escalation Chief"
+      }
+    ]
+  },
+  {
+    "id": "biotech-strategy-office",
+    "industry": "biotech",
+    "department": "strategy-office",
+    "title": "Biotech Strategy Office",
+    "specialists": [
+      {
+        "id": "biotech-strategy-office-market-cartographer",
+        "specialist": "market-cartographer",
+        "title": "Market Cartographer"
+      },
+      {
+        "id": "biotech-strategy-office-thesis-architect",
+        "specialist": "thesis-architect",
+        "title": "Thesis Architect"
+      },
+      {
+        "id": "biotech-strategy-office-scenario-planner",
+        "specialist": "scenario-planner",
+        "title": "Scenario Planner"
+      },
+      {
+        "id": "biotech-strategy-office-pricing-strategist",
+        "specialist": "pricing-strategist",
+        "title": "Pricing Strategist"
+      },
+      {
+        "id": "biotech-strategy-office-portfolio-prioritizer",
+        "specialist": "portfolio-prioritizer",
+        "title": "Portfolio Prioritizer"
+      },
+      {
+        "id": "biotech-strategy-office-ecosystem-mapper",
+        "specialist": "ecosystem-mapper",
+        "title": "Ecosystem Mapper"
+      },
+      {
+        "id": "biotech-strategy-office-segment-strategist",
+        "specialist": "segment-strategist",
+        "title": "Segment Strategist"
+      },
+      {
+        "id": "biotech-strategy-office-monetization-strategist",
+        "specialist": "monetization-strategist",
+        "title": "Monetization Strategist"
+      },
+      {
+        "id": "biotech-strategy-office-partnership-strategist",
+        "specialist": "partnership-strategist",
+        "title": "Partnership Strategist"
+      },
+      {
+        "id": "biotech-strategy-office-executive-briefing-lead",
+        "specialist": "executive-briefing-lead",
+        "title": "Executive Briefing Lead"
+      }
+    ]
+  },
+  {
+    "id": "biotech-research-intelligence",
+    "industry": "biotech",
+    "department": "research-intelligence",
+    "title": "Biotech Research & Intelligence",
+    "specialists": [
+      {
+        "id": "biotech-research-intelligence-source-hunter",
+        "specialist": "source-hunter",
+        "title": "Source Hunter"
+      },
+      {
+        "id": "biotech-research-intelligence-benchmark-analyst",
+        "specialist": "benchmark-analyst",
+        "title": "Benchmark Analyst"
+      },
+      {
+        "id": "biotech-research-intelligence-competitor-watcher",
+        "specialist": "competitor-watcher",
+        "title": "Competitor Watcher"
+      },
+      {
+        "id": "biotech-research-intelligence-policy-watcher",
+        "specialist": "policy-watcher",
+        "title": "Policy Watcher"
+      },
+      {
+        "id": "biotech-research-intelligence-customer-insight-miner",
+        "specialist": "customer-insight-miner",
+        "title": "Customer Insight Miner"
+      },
+      {
+        "id": "biotech-research-intelligence-data-scout",
+        "specialist": "data-scout",
+        "title": "Data Scout"
+      },
+      {
+        "id": "biotech-research-intelligence-trend-synthesizer",
+        "specialist": "trend-synthesizer",
+        "title": "Trend Synthesizer"
+      },
+      {
+        "id": "biotech-research-intelligence-evidence-auditor",
+        "specialist": "evidence-auditor",
+        "title": "Evidence Auditor"
+      },
+      {
+        "id": "biotech-research-intelligence-expert-interview-designer",
+        "specialist": "expert-interview-designer",
+        "title": "Expert Interview Designer"
+      },
+      {
+        "id": "biotech-research-intelligence-diligence-coordinator",
+        "specialist": "diligence-coordinator",
+        "title": "Diligence Coordinator"
+      }
+    ]
+  },
+  {
+    "id": "biotech-product-delivery",
+    "industry": "biotech",
+    "department": "product-delivery",
+    "title": "Biotech Product & Delivery",
+    "specialists": [
+      {
+        "id": "biotech-product-delivery-product-architect",
+        "specialist": "product-architect",
+        "title": "Product Architect"
+      },
+      {
+        "id": "biotech-product-delivery-workflow-designer",
+        "specialist": "workflow-designer",
+        "title": "Workflow Designer"
+      },
+      {
+        "id": "biotech-product-delivery-spec-writer",
+        "specialist": "spec-writer",
+        "title": "Spec Writer"
+      },
+      {
+        "id": "biotech-product-delivery-prototype-lead",
+        "specialist": "prototype-lead",
+        "title": "Prototype Lead"
+      },
+      {
+        "id": "biotech-product-delivery-ux-optimizer",
+        "specialist": "ux-optimizer",
+        "title": "UX Optimizer"
+      },
+      {
+        "id": "biotech-product-delivery-launch-planner",
+        "specialist": "launch-planner",
+        "title": "Launch Planner"
+      },
+      {
+        "id": "biotech-product-delivery-delivery-reviewer",
+        "specialist": "delivery-reviewer",
+        "title": "Delivery Reviewer"
+      },
+      {
+        "id": "biotech-product-delivery-qa-strategist",
+        "specialist": "qa-strategist",
+        "title": "QA Strategist"
+      },
+      {
+        "id": "biotech-product-delivery-roadmap-steward",
+        "specialist": "roadmap-steward",
+        "title": "Roadmap Steward"
+      },
+      {
+        "id": "biotech-product-delivery-implementation-coordinator",
+        "specialist": "implementation-coordinator",
+        "title": "Implementation Coordinator"
+      }
+    ]
+  },
+  {
+    "id": "biotech-growth-operations",
+    "industry": "biotech",
+    "department": "growth-operations",
+    "title": "Biotech Growth & Operations",
+    "specialists": [
+      {
+        "id": "biotech-growth-operations-funnel-operator",
+        "specialist": "funnel-operator",
+        "title": "Funnel Operator"
+      },
+      {
+        "id": "biotech-growth-operations-acquisition-planner",
+        "specialist": "acquisition-planner",
+        "title": "Acquisition Planner"
+      },
+      {
+        "id": "biotech-growth-operations-retention-strategist",
+        "specialist": "retention-strategist",
+        "title": "Retention Strategist"
+      },
+      {
+        "id": "biotech-growth-operations-lifecycle-designer",
+        "specialist": "lifecycle-designer",
+        "title": "Lifecycle Designer"
+      },
+      {
+        "id": "biotech-growth-operations-community-operator",
+        "specialist": "community-operator",
+        "title": "Community Operator"
+      },
+      {
+        "id": "biotech-growth-operations-channel-optimizer",
+        "specialist": "channel-optimizer",
+        "title": "Channel Optimizer"
+      },
+      {
+        "id": "biotech-growth-operations-ops-automation-lead",
+        "specialist": "ops-automation-lead",
+        "title": "Ops Automation Lead"
+      },
+      {
+        "id": "biotech-growth-operations-campaign-analyst",
+        "specialist": "campaign-analyst",
+        "title": "Campaign Analyst"
+      },
+      {
+        "id": "biotech-growth-operations-revenue-operator",
+        "specialist": "revenue-operator",
+        "title": "Revenue Operator"
+      },
+      {
+        "id": "biotech-growth-operations-performance-marketer",
+        "specialist": "performance-marketer",
+        "title": "Performance Marketer"
+      }
+    ]
+  },
+  {
+    "id": "biotech-risk-compliance",
+    "industry": "biotech",
+    "department": "risk-compliance",
+    "title": "Biotech Risk & Compliance",
+    "specialists": [
+      {
+        "id": "biotech-risk-compliance-risk-mapper",
+        "specialist": "risk-mapper",
+        "title": "Risk Mapper"
+      },
+      {
+        "id": "biotech-risk-compliance-compliance-interpreter",
+        "specialist": "compliance-interpreter",
+        "title": "Compliance Interpreter"
+      },
+      {
+        "id": "biotech-risk-compliance-control-designer",
+        "specialist": "control-designer",
+        "title": "Control Designer"
+      },
+      {
+        "id": "biotech-risk-compliance-incident-reviewer",
+        "specialist": "incident-reviewer",
+        "title": "Incident Reviewer"
+      },
+      {
+        "id": "biotech-risk-compliance-decision-red-teamer",
+        "specialist": "decision-red-teamer",
+        "title": "Decision Red-Teamer"
+      },
+      {
+        "id": "biotech-risk-compliance-downside-analyst",
+        "specialist": "downside-analyst",
+        "title": "Downside Analyst"
+      },
+      {
+        "id": "biotech-risk-compliance-security-liaison",
+        "specialist": "security-liaison",
+        "title": "Security Liaison"
+      },
+      {
+        "id": "biotech-risk-compliance-policy-drafter",
+        "specialist": "policy-drafter",
+        "title": "Policy Drafter"
+      },
+      {
+        "id": "biotech-risk-compliance-audit-planner",
+        "specialist": "audit-planner",
+        "title": "Audit Planner"
+      },
+      {
+        "id": "biotech-risk-compliance-escalation-chief",
+        "specialist": "escalation-chief",
+        "title": "Escalation Chief"
+      }
+    ]
+  },
+  {
+    "id": "public-sector-strategy-office",
+    "industry": "public-sector",
+    "department": "strategy-office",
+    "title": "Public Sector Strategy Office",
+    "specialists": [
+      {
+        "id": "public-sector-strategy-office-market-cartographer",
+        "specialist": "market-cartographer",
+        "title": "Market Cartographer"
+      },
+      {
+        "id": "public-sector-strategy-office-thesis-architect",
+        "specialist": "thesis-architect",
+        "title": "Thesis Architect"
+      },
+      {
+        "id": "public-sector-strategy-office-scenario-planner",
+        "specialist": "scenario-planner",
+        "title": "Scenario Planner"
+      },
+      {
+        "id": "public-sector-strategy-office-pricing-strategist",
+        "specialist": "pricing-strategist",
+        "title": "Pricing Strategist"
+      },
+      {
+        "id": "public-sector-strategy-office-portfolio-prioritizer",
+        "specialist": "portfolio-prioritizer",
+        "title": "Portfolio Prioritizer"
+      },
+      {
+        "id": "public-sector-strategy-office-ecosystem-mapper",
+        "specialist": "ecosystem-mapper",
+        "title": "Ecosystem Mapper"
+      },
+      {
+        "id": "public-sector-strategy-office-segment-strategist",
+        "specialist": "segment-strategist",
+        "title": "Segment Strategist"
+      },
+      {
+        "id": "public-sector-strategy-office-monetization-strategist",
+        "specialist": "monetization-strategist",
+        "title": "Monetization Strategist"
+      },
+      {
+        "id": "public-sector-strategy-office-partnership-strategist",
+        "specialist": "partnership-strategist",
+        "title": "Partnership Strategist"
+      },
+      {
+        "id": "public-sector-strategy-office-executive-briefing-lead",
+        "specialist": "executive-briefing-lead",
+        "title": "Executive Briefing Lead"
+      }
+    ]
+  },
+  {
+    "id": "public-sector-research-intelligence",
+    "industry": "public-sector",
+    "department": "research-intelligence",
+    "title": "Public Sector Research & Intelligence",
+    "specialists": [
+      {
+        "id": "public-sector-research-intelligence-source-hunter",
+        "specialist": "source-hunter",
+        "title": "Source Hunter"
+      },
+      {
+        "id": "public-sector-research-intelligence-benchmark-analyst",
+        "specialist": "benchmark-analyst",
+        "title": "Benchmark Analyst"
+      },
+      {
+        "id": "public-sector-research-intelligence-competitor-watcher",
+        "specialist": "competitor-watcher",
+        "title": "Competitor Watcher"
+      },
+      {
+        "id": "public-sector-research-intelligence-policy-watcher",
+        "specialist": "policy-watcher",
+        "title": "Policy Watcher"
+      },
+      {
+        "id": "public-sector-research-intelligence-customer-insight-miner",
+        "specialist": "customer-insight-miner",
+        "title": "Customer Insight Miner"
+      },
+      {
+        "id": "public-sector-research-intelligence-data-scout",
+        "specialist": "data-scout",
+        "title": "Data Scout"
+      },
+      {
+        "id": "public-sector-research-intelligence-trend-synthesizer",
+        "specialist": "trend-synthesizer",
+        "title": "Trend Synthesizer"
+      },
+      {
+        "id": "public-sector-research-intelligence-evidence-auditor",
+        "specialist": "evidence-auditor",
+        "title": "Evidence Auditor"
+      },
+      {
+        "id": "public-sector-research-intelligence-expert-interview-designer",
+        "specialist": "expert-interview-designer",
+        "title": "Expert Interview Designer"
+      },
+      {
+        "id": "public-sector-research-intelligence-diligence-coordinator",
+        "specialist": "diligence-coordinator",
+        "title": "Diligence Coordinator"
+      }
+    ]
+  },
+  {
+    "id": "public-sector-product-delivery",
+    "industry": "public-sector",
+    "department": "product-delivery",
+    "title": "Public Sector Product & Delivery",
+    "specialists": [
+      {
+        "id": "public-sector-product-delivery-product-architect",
+        "specialist": "product-architect",
+        "title": "Product Architect"
+      },
+      {
+        "id": "public-sector-product-delivery-workflow-designer",
+        "specialist": "workflow-designer",
+        "title": "Workflow Designer"
+      },
+      {
+        "id": "public-sector-product-delivery-spec-writer",
+        "specialist": "spec-writer",
+        "title": "Spec Writer"
+      },
+      {
+        "id": "public-sector-product-delivery-prototype-lead",
+        "specialist": "prototype-lead",
+        "title": "Prototype Lead"
+      },
+      {
+        "id": "public-sector-product-delivery-ux-optimizer",
+        "specialist": "ux-optimizer",
+        "title": "UX Optimizer"
+      },
+      {
+        "id": "public-sector-product-delivery-launch-planner",
+        "specialist": "launch-planner",
+        "title": "Launch Planner"
+      },
+      {
+        "id": "public-sector-product-delivery-delivery-reviewer",
+        "specialist": "delivery-reviewer",
+        "title": "Delivery Reviewer"
+      },
+      {
+        "id": "public-sector-product-delivery-qa-strategist",
+        "specialist": "qa-strategist",
+        "title": "QA Strategist"
+      },
+      {
+        "id": "public-sector-product-delivery-roadmap-steward",
+        "specialist": "roadmap-steward",
+        "title": "Roadmap Steward"
+      },
+      {
+        "id": "public-sector-product-delivery-implementation-coordinator",
+        "specialist": "implementation-coordinator",
+        "title": "Implementation Coordinator"
+      }
+    ]
+  },
+  {
+    "id": "public-sector-growth-operations",
+    "industry": "public-sector",
+    "department": "growth-operations",
+    "title": "Public Sector Growth & Operations",
+    "specialists": [
+      {
+        "id": "public-sector-growth-operations-funnel-operator",
+        "specialist": "funnel-operator",
+        "title": "Funnel Operator"
+      },
+      {
+        "id": "public-sector-growth-operations-acquisition-planner",
+        "specialist": "acquisition-planner",
+        "title": "Acquisition Planner"
+      },
+      {
+        "id": "public-sector-growth-operations-retention-strategist",
+        "specialist": "retention-strategist",
+        "title": "Retention Strategist"
+      },
+      {
+        "id": "public-sector-growth-operations-lifecycle-designer",
+        "specialist": "lifecycle-designer",
+        "title": "Lifecycle Designer"
+      },
+      {
+        "id": "public-sector-growth-operations-community-operator",
+        "specialist": "community-operator",
+        "title": "Community Operator"
+      },
+      {
+        "id": "public-sector-growth-operations-channel-optimizer",
+        "specialist": "channel-optimizer",
+        "title": "Channel Optimizer"
+      },
+      {
+        "id": "public-sector-growth-operations-ops-automation-lead",
+        "specialist": "ops-automation-lead",
+        "title": "Ops Automation Lead"
+      },
+      {
+        "id": "public-sector-growth-operations-campaign-analyst",
+        "specialist": "campaign-analyst",
+        "title": "Campaign Analyst"
+      },
+      {
+        "id": "public-sector-growth-operations-revenue-operator",
+        "specialist": "revenue-operator",
+        "title": "Revenue Operator"
+      },
+      {
+        "id": "public-sector-growth-operations-performance-marketer",
+        "specialist": "performance-marketer",
+        "title": "Performance Marketer"
+      }
+    ]
+  },
+  {
+    "id": "public-sector-risk-compliance",
+    "industry": "public-sector",
+    "department": "risk-compliance",
+    "title": "Public Sector Risk & Compliance",
+    "specialists": [
+      {
+        "id": "public-sector-risk-compliance-risk-mapper",
+        "specialist": "risk-mapper",
+        "title": "Risk Mapper"
+      },
+      {
+        "id": "public-sector-risk-compliance-compliance-interpreter",
+        "specialist": "compliance-interpreter",
+        "title": "Compliance Interpreter"
+      },
+      {
+        "id": "public-sector-risk-compliance-control-designer",
+        "specialist": "control-designer",
+        "title": "Control Designer"
+      },
+      {
+        "id": "public-sector-risk-compliance-incident-reviewer",
+        "specialist": "incident-reviewer",
+        "title": "Incident Reviewer"
+      },
+      {
+        "id": "public-sector-risk-compliance-decision-red-teamer",
+        "specialist": "decision-red-teamer",
+        "title": "Decision Red-Teamer"
+      },
+      {
+        "id": "public-sector-risk-compliance-downside-analyst",
+        "specialist": "downside-analyst",
+        "title": "Downside Analyst"
+      },
+      {
+        "id": "public-sector-risk-compliance-security-liaison",
+        "specialist": "security-liaison",
+        "title": "Security Liaison"
+      },
+      {
+        "id": "public-sector-risk-compliance-policy-drafter",
+        "specialist": "policy-drafter",
+        "title": "Policy Drafter"
+      },
+      {
+        "id": "public-sector-risk-compliance-audit-planner",
+        "specialist": "audit-planner",
+        "title": "Audit Planner"
+      },
+      {
+        "id": "public-sector-risk-compliance-escalation-chief",
+        "specialist": "escalation-chief",
+        "title": "Escalation Chief"
+      }
+    ]
+  }
+]

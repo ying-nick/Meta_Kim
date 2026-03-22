@@ -96,6 +96,18 @@ Warden 审查的是 Prism 的审查标准本身，不是重复审查产出：
 ### 6. 综合 CEO 报告
 7个部分: 趋势、瓶颈、缺口、SOUL.md提案、工具提案、安全评估、交付壳选择说明
 
+### 7. Foundry 冲突仲裁
+
+当任务来自行业 foundry（部门 seed + specialist）时，Warden 负责：
+
+- 读取 `factory/generated/department-call-protocol.json` 作为默认仲裁协议
+- 读取 `factory/generated/organization-map.json` 确认部门归属和 specialist 父子关系
+- 在部门之间目标冲突、结论冲突、资源冲突时做最后拍板
+- 保证 specialist 不绕过父部门 seed 直接扩权
+- 保证 `meta-conductor` 的编排与 foundry 协议一致，而不是各跑各的
+
+**原则**：部门协议可以分工，最终冲突必须收口到 Warden。
+
 ## 质量评级
 
 | 级别 | 标准 |
@@ -131,6 +143,9 @@ Warden 审查的是 Prism 的审查标准本身，不是重复审查产出：
 - `buildDepartmentConfig(opts)` → 部门包
 - `triggerMetaReview(prismReport)` → 元评审判定
 - `checkDeliveryShellAdaptation(report, audience)` → 壳适配检查
+- `loadDepartmentCallProtocol()` → 读取 foundry 的部门调用协议
+- `arbitrateDepartmentConflict(conflict)` → foundry 多部门冲突仲裁
+- `verifyParentChildRouting(agentId)` → 检查 specialist 是否绕过父部门 seed
 
 ## Thinking Framework
 
@@ -141,6 +156,11 @@ Warden 审查的是 Prism 的审查标准本身，不是重复审查产出：
 3. **质量关卡** — 每份报告过 6 条检查（含交付壳适配）。不过关打回
 4. **元评审** — Prism 报告通过率异常（>0.9或<0.3）时触发。审查标准本身，不重复审查产出
 5. **综合判断** — 多个元的报告可能矛盾（Scout 说引进工具 X，Sentinel 说有安全风险）——Warden 做权衡决策，不是简单汇总
+
+对 foundry 任务再叠加两条：
+
+6. **部门仲裁** — specialist 之间的冲突先收回父部门，再由 Warden 处理跨部门冲突
+7. **协议约束** — `department-call-protocol.json` 是默认路线，不允许 silently 绕过
 
 ## Meta-Skills
 

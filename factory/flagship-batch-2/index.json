@@ -1,0 +1,67 @@
+[
+  {
+    "runtimeId": "flagship-stocks-research-intelligence",
+    "sourceAgentId": "stocks-research-intelligence",
+    "industry": "stocks",
+    "department": "research-intelligence",
+    "prioritySpecialists": [
+      "source-hunter",
+      "benchmark-analyst",
+      "competitor-watcher",
+      "evidence-auditor",
+      "diligence-coordinator"
+    ]
+  },
+  {
+    "runtimeId": "flagship-investment-research-intelligence",
+    "sourceAgentId": "investment-research-intelligence",
+    "industry": "investment",
+    "department": "research-intelligence",
+    "prioritySpecialists": [
+      "source-hunter",
+      "competitor-watcher",
+      "expert-interview-designer",
+      "evidence-auditor",
+      "diligence-coordinator"
+    ]
+  },
+  {
+    "runtimeId": "flagship-web3-risk-compliance",
+    "sourceAgentId": "web3-risk-compliance",
+    "industry": "web3",
+    "department": "risk-compliance",
+    "prioritySpecialists": [
+      "risk-mapper",
+      "control-designer",
+      "decision-red-teamer",
+      "security-liaison",
+      "escalation-chief"
+    ]
+  },
+  {
+    "runtimeId": "flagship-media-growth-operations",
+    "sourceAgentId": "media-growth-operations",
+    "industry": "media",
+    "department": "growth-operations",
+    "prioritySpecialists": [
+      "funnel-operator",
+      "retention-strategist",
+      "lifecycle-designer",
+      "community-operator",
+      "performance-marketer"
+    ]
+  },
+  {
+    "runtimeId": "flagship-ecommerce-growth-operations",
+    "sourceAgentId": "ecommerce-growth-operations",
+    "industry": "ecommerce",
+    "department": "growth-operations",
+    "prioritySpecialists": [
+      "funnel-operator",
+      "retention-strategist",
+      "lifecycle-designer",
+      "campaign-analyst",
+      "revenue-operator"
+    ]
+  }
+]

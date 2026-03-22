@@ -1,0 +1,67 @@
+[
+  {
+    "runtimeId": "flagship-education-product-delivery",
+    "sourceAgentId": "education-product-delivery",
+    "industry": "education",
+    "department": "product-delivery",
+    "prioritySpecialists": [
+      "product-architect",
+      "workflow-designer",
+      "spec-writer",
+      "ux-optimizer",
+      "qa-strategist"
+    ]
+  },
+  {
+    "runtimeId": "flagship-legal-risk-compliance",
+    "sourceAgentId": "legal-risk-compliance",
+    "industry": "legal",
+    "department": "risk-compliance",
+    "prioritySpecialists": [
+      "risk-mapper",
+      "compliance-interpreter",
+      "policy-drafter",
+      "audit-planner",
+      "escalation-chief"
+    ]
+  },
+  {
+    "runtimeId": "flagship-manufacturing-product-delivery",
+    "sourceAgentId": "manufacturing-product-delivery",
+    "industry": "manufacturing",
+    "department": "product-delivery",
+    "prioritySpecialists": [
+      "workflow-designer",
+      "spec-writer",
+      "delivery-reviewer",
+      "qa-strategist",
+      "implementation-coordinator"
+    ]
+  },
+  {
+    "runtimeId": "flagship-logistics-growth-operations",
+    "sourceAgentId": "logistics-growth-operations",
+    "industry": "logistics",
+    "department": "growth-operations",
+    "prioritySpecialists": [
+      "funnel-operator",
+      "ops-automation-lead",
+      "campaign-analyst",
+      "revenue-operator",
+      "channel-optimizer"
+    ]
+  },
+  {
+    "runtimeId": "flagship-real-estate-strategy-office",
+    "sourceAgentId": "real-estate-strategy-office",
+    "industry": "real-estate",
+    "department": "strategy-office",
+    "prioritySpecialists": [
+      "market-cartographer",
+      "scenario-planner",
+      "portfolio-prioritizer",
+      "segment-strategist",
+      "executive-briefing-lead"
+    ]
+  }
+]

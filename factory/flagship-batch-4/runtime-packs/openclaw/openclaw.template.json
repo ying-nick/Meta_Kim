@@ -1,0 +1,65 @@
+{
+  "agents": {
+    "defaults": {
+      "model": "claude-sonnet-4-5"
+    },
+    "list": [
+      {
+        "id": "flagship-energy-strategy-office",
+        "default": false,
+        "name": "Flagship Energy Strategy Office",
+        "workspace": "__REPO_ROOT__\\factory\\flagship-batch-4\\runtime-packs\\openclaw\\workspaces\\flagship-energy-strategy-office"
+      },
+      {
+        "id": "flagship-automotive-product-delivery",
+        "default": false,
+        "name": "Flagship Automotive Product & Delivery",
+        "workspace": "__REPO_ROOT__\\factory\\flagship-batch-4\\runtime-packs\\openclaw\\workspaces\\flagship-automotive-product-delivery"
+      },
+      {
+        "id": "flagship-travel-growth-operations",
+        "default": false,
+        "name": "Flagship Travel & Hospitality Growth & Operations",
+        "workspace": "__REPO_ROOT__\\factory\\flagship-batch-4\\runtime-packs\\openclaw\\workspaces\\flagship-travel-growth-operations"
+      },
+      {
+        "id": "flagship-biotech-research-intelligence",
+        "default": false,
+        "name": "Flagship Biotech Research & Intelligence",
+        "workspace": "__REPO_ROOT__\\factory\\flagship-batch-4\\runtime-packs\\openclaw\\workspaces\\flagship-biotech-research-intelligence"
+      },
+      {
+        "id": "flagship-public-sector-strategy-office",
+        "default": false,
+        "name": "Flagship Public Sector Strategy Office",
+        "workspace": "__REPO_ROOT__\\factory\\flagship-batch-4\\runtime-packs\\openclaw\\workspaces\\flagship-public-sector-strategy-office"
+      }
+    ]
+  },
+  "bindings": [],
+  "hooks": {
+    "internal": {
+      "enabled": true,
+      "entries": {
+        "session-memory": {
+          "enabled": true
+        },
+        "boot-md": {
+          "enabled": true
+        }
+      }
+    }
+  },
+  "tools": {
+    "agentToAgent": {
+      "enabled": true,
+      "allow": [
+        "flagship-energy-strategy-office",
+        "flagship-automotive-product-delivery",
+        "flagship-travel-growth-operations",
+        "flagship-biotech-research-intelligence",
+        "flagship-public-sector-strategy-office"
+      ]
+    }
+  }
+}

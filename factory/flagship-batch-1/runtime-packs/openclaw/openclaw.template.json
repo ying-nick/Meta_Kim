@@ -1,0 +1,65 @@
+{
+  "agents": {
+    "defaults": {
+      "model": "claude-sonnet-4-5"
+    },
+    "list": [
+      {
+        "id": "flagship-game-strategy-office",
+        "default": false,
+        "name": "Flagship Game Strategy Office",
+        "workspace": "__REPO_ROOT__\\factory\\flagship-batch-1\\runtime-packs\\openclaw\\workspaces\\flagship-game-strategy-office"
+      },
+      {
+        "id": "flagship-internet-growth-operations",
+        "default": false,
+        "name": "Flagship Internet Growth & Operations",
+        "workspace": "__REPO_ROOT__\\factory\\flagship-batch-1\\runtime-packs\\openclaw\\workspaces\\flagship-internet-growth-operations"
+      },
+      {
+        "id": "flagship-finance-strategy-office",
+        "default": false,
+        "name": "Flagship Finance Strategy Office",
+        "workspace": "__REPO_ROOT__\\factory\\flagship-batch-1\\runtime-packs\\openclaw\\workspaces\\flagship-finance-strategy-office"
+      },
+      {
+        "id": "flagship-ai-product-delivery",
+        "default": false,
+        "name": "Flagship AI Product & Delivery",
+        "workspace": "__REPO_ROOT__\\factory\\flagship-batch-1\\runtime-packs\\openclaw\\workspaces\\flagship-ai-product-delivery"
+      },
+      {
+        "id": "flagship-healthcare-risk-compliance",
+        "default": false,
+        "name": "Flagship Healthcare Risk & Compliance",
+        "workspace": "__REPO_ROOT__\\factory\\flagship-batch-1\\runtime-packs\\openclaw\\workspaces\\flagship-healthcare-risk-compliance"
+      }
+    ]
+  },
+  "bindings": [],
+  "hooks": {
+    "internal": {
+      "enabled": true,
+      "entries": {
+        "session-memory": {
+          "enabled": true
+        },
+        "boot-md": {
+          "enabled": true
+        }
+      }
+    }
+  },
+  "tools": {
+    "agentToAgent": {
+      "enabled": true,
+      "allow": [
+        "flagship-game-strategy-office",
+        "flagship-internet-growth-operations",
+        "flagship-finance-strategy-office",
+        "flagship-ai-product-delivery",
+        "flagship-healthcare-risk-compliance"
+      ]
+    }
+  }
+}

@@ -1,0 +1,362 @@
+[
+  {
+    "industry": "game",
+    "department": "strategy-office",
+    "agentId": "game-strategy-office",
+    "reason": "Game verticals win or lose on bet selection, economy direction, and portfolio posture before feature detail.",
+    "specialists": [
+      "market-cartographer",
+      "thesis-architect",
+      "scenario-planner",
+      "pricing-strategist",
+      "portfolio-prioritizer",
+      "ecosystem-mapper",
+      "segment-strategist",
+      "monetization-strategist",
+      "partnership-strategist",
+      "executive-briefing-lead"
+    ]
+  },
+  {
+    "industry": "internet",
+    "department": "growth-operations",
+    "agentId": "internet-growth-operations",
+    "reason": "Internet products usually break on activation, retention, and growth loops before they break on concept volume.",
+    "specialists": [
+      "funnel-operator",
+      "acquisition-planner",
+      "retention-strategist",
+      "lifecycle-designer",
+      "community-operator",
+      "channel-optimizer",
+      "ops-automation-lead",
+      "campaign-analyst",
+      "revenue-operator",
+      "performance-marketer"
+    ]
+  },
+  {
+    "industry": "finance",
+    "department": "strategy-office",
+    "agentId": "finance-strategy-office",
+    "reason": "Finance needs decision spine and capital-allocation discipline before downstream execution specialization.",
+    "specialists": [
+      "market-cartographer",
+      "thesis-architect",
+      "scenario-planner",
+      "pricing-strategist",
+      "portfolio-prioritizer",
+      "ecosystem-mapper",
+      "segment-strategist",
+      "monetization-strategist",
+      "partnership-strategist",
+      "executive-briefing-lead"
+    ]
+  },
+  {
+    "industry": "ai",
+    "department": "product-delivery",
+    "agentId": "ai-product-delivery",
+    "reason": "AI teams fail most often in shipping evaluable systems, not in generating more abstract ideas.",
+    "specialists": [
+      "product-architect",
+      "workflow-designer",
+      "spec-writer",
+      "prototype-lead",
+      "ux-optimizer",
+      "launch-planner",
+      "delivery-reviewer",
+      "qa-strategist",
+      "roadmap-steward",
+      "implementation-coordinator"
+    ]
+  },
+  {
+    "industry": "healthcare",
+    "department": "risk-compliance",
+    "agentId": "healthcare-risk-compliance",
+    "reason": "Healthcare systems need safety, evidence, and escalation discipline built in from the first day.",
+    "specialists": [
+      "risk-mapper",
+      "compliance-interpreter",
+      "control-designer",
+      "incident-reviewer",
+      "decision-red-teamer",
+      "downside-analyst",
+      "security-liaison",
+      "policy-drafter",
+      "audit-planner",
+      "escalation-chief"
+    ]
+  },
+  {
+    "industry": "stocks",
+    "department": "research-intelligence",
+    "agentId": "stocks-research-intelligence",
+    "reason": "Equity work rises or falls on evidence quality, diligence, and valuation signal before narrative polish.",
+    "specialists": [
+      "source-hunter",
+      "benchmark-analyst",
+      "competitor-watcher",
+      "policy-watcher",
+      "customer-insight-miner",
+      "data-scout",
+      "trend-synthesizer",
+      "evidence-auditor",
+      "expert-interview-designer",
+      "diligence-coordinator"
+    ]
+  },
+  {
+    "industry": "investment",
+    "department": "research-intelligence",
+    "agentId": "investment-research-intelligence",
+    "reason": "Investment decisions depend on evidence gathering, diligence quality, and variant perception before committee theater.",
+    "specialists": [
+      "source-hunter",
+      "benchmark-analyst",
+      "competitor-watcher",
+      "policy-watcher",
+      "customer-insight-miner",
+      "data-scout",
+      "trend-synthesizer",
+      "evidence-auditor",
+      "expert-interview-designer",
+      "diligence-coordinator"
+    ]
+  },
+  {
+    "industry": "web3",
+    "department": "risk-compliance",
+    "agentId": "web3-risk-compliance",
+    "reason": "Web3 systems carry governance, token, and security failure modes that demand first-wave risk discipline.",
+    "specialists": [
+      "risk-mapper",
+      "compliance-interpreter",
+      "control-designer",
+      "incident-reviewer",
+      "decision-red-teamer",
+      "downside-analyst",
+      "security-liaison",
+      "policy-drafter",
+      "audit-planner",
+      "escalation-chief"
+    ]
+  },
+  {
+    "industry": "media",
+    "department": "growth-operations",
+    "agentId": "media-growth-operations",
+    "reason": "Creator media compounds through packaging, distribution, and operating cadence more than abstract strategy decks.",
+    "specialists": [
+      "funnel-operator",
+      "acquisition-planner",
+      "retention-strategist",
+      "lifecycle-designer",
+      "community-operator",
+      "channel-optimizer",
+      "ops-automation-lead",
+      "campaign-analyst",
+      "revenue-operator",
+      "performance-marketer"
+    ]
+  },
+  {
+    "industry": "ecommerce",
+    "department": "growth-operations",
+    "agentId": "ecommerce-growth-operations",
+    "reason": "Commerce teams live or die on traffic efficiency, conversion motion, and retention operations.",
+    "specialists": [
+      "funnel-operator",
+      "acquisition-planner",
+      "retention-strategist",
+      "lifecycle-designer",
+      "community-operator",
+      "channel-optimizer",
+      "ops-automation-lead",
+      "campaign-analyst",
+      "revenue-operator",
+      "performance-marketer"
+    ]
+  },
+  {
+    "industry": "education",
+    "department": "product-delivery",
+    "agentId": "education-product-delivery",
+    "reason": "Education products need strong learning-flow design and implementation clarity before adding extra surface area.",
+    "specialists": [
+      "product-architect",
+      "workflow-designer",
+      "spec-writer",
+      "prototype-lead",
+      "ux-optimizer",
+      "launch-planner",
+      "delivery-reviewer",
+      "qa-strategist",
+      "roadmap-steward",
+      "implementation-coordinator"
+    ]
+  },
+  {
+    "industry": "legal",
+    "department": "risk-compliance",
+    "agentId": "legal-risk-compliance",
+    "reason": "Legal work needs explicit issue spotting, rule translation, and escalation logic from the start.",
+    "specialists": [
+      "risk-mapper",
+      "compliance-interpreter",
+      "control-designer",
+      "incident-reviewer",
+      "decision-red-teamer",
+      "downside-analyst",
+      "security-liaison",
+      "policy-drafter",
+      "audit-planner",
+      "escalation-chief"
+    ]
+  },
+  {
+    "industry": "manufacturing",
+    "department": "product-delivery",
+    "agentId": "manufacturing-product-delivery",
+    "reason": "Manufacturing improvement becomes real only when workflows, handoffs, and execution systems are tightened.",
+    "specialists": [
+      "product-architect",
+      "workflow-designer",
+      "spec-writer",
+      "prototype-lead",
+      "ux-optimizer",
+      "launch-planner",
+      "delivery-reviewer",
+      "qa-strategist",
+      "roadmap-steward",
+      "implementation-coordinator"
+    ]
+  },
+  {
+    "industry": "logistics",
+    "department": "growth-operations",
+    "agentId": "logistics-growth-operations",
+    "reason": "Logistics organizations improve through operating cadence, throughput control, and service-level execution.",
+    "specialists": [
+      "funnel-operator",
+      "acquisition-planner",
+      "retention-strategist",
+      "lifecycle-designer",
+      "community-operator",
+      "channel-optimizer",
+      "ops-automation-lead",
+      "campaign-analyst",
+      "revenue-operator",
+      "performance-marketer"
+    ]
+  },
+  {
+    "industry": "real-estate",
+    "department": "strategy-office",
+    "agentId": "real-estate-strategy-office",
+    "reason": "Real-estate decisions depend on thesis quality, portfolio fit, and deal selection before tactical layering.",
+    "specialists": [
+      "market-cartographer",
+      "thesis-architect",
+      "scenario-planner",
+      "pricing-strategist",
+      "portfolio-prioritizer",
+      "ecosystem-mapper",
+      "segment-strategist",
+      "monetization-strategist",
+      "partnership-strategist",
+      "executive-briefing-lead"
+    ]
+  },
+  {
+    "industry": "energy",
+    "department": "strategy-office",
+    "agentId": "energy-strategy-office",
+    "reason": "Energy bets are governed by long-cycle strategic positioning and infrastructure logic more than fast local tweaks.",
+    "specialists": [
+      "market-cartographer",
+      "thesis-architect",
+      "scenario-planner",
+      "pricing-strategist",
+      "portfolio-prioritizer",
+      "ecosystem-mapper",
+      "segment-strategist",
+      "monetization-strategist",
+      "partnership-strategist",
+      "executive-briefing-lead"
+    ]
+  },
+  {
+    "industry": "automotive",
+    "department": "product-delivery",
+    "agentId": "automotive-product-delivery",
+    "reason": "Automotive programs need product and launch discipline because execution complexity punishes vague thinking.",
+    "specialists": [
+      "product-architect",
+      "workflow-designer",
+      "spec-writer",
+      "prototype-lead",
+      "ux-optimizer",
+      "launch-planner",
+      "delivery-reviewer",
+      "qa-strategist",
+      "roadmap-steward",
+      "implementation-coordinator"
+    ]
+  },
+  {
+    "industry": "travel",
+    "department": "growth-operations",
+    "agentId": "travel-growth-operations",
+    "reason": "Travel and hospitality depend on demand capture, occupancy cadence, and service recovery operations.",
+    "specialists": [
+      "funnel-operator",
+      "acquisition-planner",
+      "retention-strategist",
+      "lifecycle-designer",
+      "community-operator",
+      "channel-optimizer",
+      "ops-automation-lead",
+      "campaign-analyst",
+      "revenue-operator",
+      "performance-marketer"
+    ]
+  },
+  {
+    "industry": "biotech",
+    "department": "research-intelligence",
+    "agentId": "biotech-research-intelligence",
+    "reason": "Biotech needs evidence gates, trial logic, and stage-aware diligence before scaling any story.",
+    "specialists": [
+      "source-hunter",
+      "benchmark-analyst",
+      "competitor-watcher",
+      "policy-watcher",
+      "customer-insight-miner",
+      "data-scout",
+      "trend-synthesizer",
+      "evidence-auditor",
+      "expert-interview-designer",
+      "diligence-coordinator"
+    ]
+  },
+  {
+    "industry": "public-sector",
+    "department": "strategy-office",
+    "agentId": "public-sector-strategy-office",
+    "reason": "Public-sector systems need clear policy direction, stakeholder framing, and implementation posture before expansion.",
+    "specialists": [
+      "market-cartographer",
+      "thesis-architect",
+      "scenario-planner",
+      "pricing-strategist",
+      "portfolio-prioritizer",
+      "ecosystem-mapper",
+      "segment-strategist",
+      "monetization-strategist",
+      "partnership-strategist",
+      "executive-briefing-lead"
+    ]
+  }
+]

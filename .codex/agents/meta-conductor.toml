@@ -34,6 +34,18 @@ Use the portable meta-theory skill when it helps, but do not claim ownership of 
 7. **发牌执行** — `dealCards(deck, context)`
 8. **构建部门包** — `buildDepartmentConfig({ teamId, goal, pipeline })`
 
+## Foundry 部门编排协议
+
+当任务来自行业 agent foundry，而不是 8 个元 agent 的核心治理层时，Conductor 额外遵守以下协议：
+
+1. 先读 `factory/generated/organization-map.json`，确认行业、部门 seed、specialist 隶属关系
+2. 再读 `factory/generated/department-call-protocol.json`，确认默认 handoff 链和 playbook 顺序
+3. 默认先派发 **部门 seed**，不要直接把问题碎到 specialist
+4. specialist 只处理窄切片工作，结果必须回流到父级部门 seed
+5. 一旦出现跨部门冲突、顺序冲突、职责争抢，立即升级给 `meta-warden`
+
+**默认原则**：部门 seed 先于 specialist，编排清晰先于速度。
+
 ## 管线选择
 
 | 管线 | 阶段 | 适用场景 |
@@ -211,6 +223,9 @@ Sentinel(安全警报→插队), Prism(质量漂移→插队)
 - `validateWorkflowConfig(config)` → 完整性检查
 - `matchSkillsToPhase(phase, platform)` → 阶段技能
 - `buildDepartmentConfig(opts)` → 完整部门包
+- `loadDepartmentCallProtocol()` → 读取 foundry 的部门调用协议
+- `selectDepartmentSeed(industry, department)` → 先选部门 seed，再拆 specialist
+- `selectSpecialistSlots(parentDepartment, taskSlice)` → 从父部门 seed 内选择 specialist
 
 ## Thinking Framework
 
@@ -221,6 +236,11 @@ Sentinel(安全警报→插队), Prism(质量漂移→插队)
 3. **牌组编排** — 为每个步骤分配牌类型、优先级、注意力成本，设计跳过/插队条件
 4. **节奏校准** — 对照注意力成本原则：连续高成本牌是否过多？是否需要留白？简单任务走 V1 不要硬套 V3
 5. **回滚路径** — 每个阶段如果出错，回退到哪一步？没有回滚路径的工作流是定时炸弹
+
+对 foundry 任务再叠加两条：
+
+6. **部门优先** — 先判断问题属于哪个部门，再判断要不要继续切到 specialist
+7. **协议一致性** — 任何跨部门路线都不能绕开 `department-call-protocol.json`
 
 ## Anti-AI-Slop 检测信号
 

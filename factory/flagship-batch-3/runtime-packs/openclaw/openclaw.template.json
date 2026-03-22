@@ -1,0 +1,65 @@
+{
+  "agents": {
+    "defaults": {
+      "model": "claude-sonnet-4-5"
+    },
+    "list": [
+      {
+        "id": "flagship-education-product-delivery",
+        "default": false,
+        "name": "Flagship Education Product & Delivery",
+        "workspace": "__REPO_ROOT__\\factory\\flagship-batch-3\\runtime-packs\\openclaw\\workspaces\\flagship-education-product-delivery"
+      },
+      {
+        "id": "flagship-legal-risk-compliance",
+        "default": false,
+        "name": "Flagship Legal Risk & Compliance",
+        "workspace": "__REPO_ROOT__\\factory\\flagship-batch-3\\runtime-packs\\openclaw\\workspaces\\flagship-legal-risk-compliance"
+      },
+      {
+        "id": "flagship-manufacturing-product-delivery",
+        "default": false,
+        "name": "Flagship Manufacturing Product & Delivery",
+        "workspace": "__REPO_ROOT__\\factory\\flagship-batch-3\\runtime-packs\\openclaw\\workspaces\\flagship-manufacturing-product-delivery"
+      },
+      {
+        "id": "flagship-logistics-growth-operations",
+        "default": false,
+        "name": "Flagship Logistics Growth & Operations",
+        "workspace": "__REPO_ROOT__\\factory\\flagship-batch-3\\runtime-packs\\openclaw\\workspaces\\flagship-logistics-growth-operations"
+      },
+      {
+        "id": "flagship-real-estate-strategy-office",
+        "default": false,
+        "name": "Flagship Real Estate Strategy Office",
+        "workspace": "__REPO_ROOT__\\factory\\flagship-batch-3\\runtime-packs\\openclaw\\workspaces\\flagship-real-estate-strategy-office"
+      }
+    ]
+  },
+  "bindings": [],
+  "hooks": {
+    "internal": {
+      "enabled": true,
+      "entries": {
+        "session-memory": {
+          "enabled": true
+        },
+        "boot-md": {
+          "enabled": true
+        }
+      }
+    }
+  },
+  "tools": {
+    "agentToAgent": {
+      "enabled": true,
+      "allow": [
+        "flagship-education-product-delivery",
+        "flagship-legal-risk-compliance",
+        "flagship-manufacturing-product-delivery",
+        "flagship-logistics-growth-operations",
+        "flagship-real-estate-strategy-office"
+      ]
+    }
+  }
+}

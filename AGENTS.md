@@ -1,92 +1,113 @@
-# Meta_Kim 仓库说明
+# Meta_Kim Repository Guide
 
-这不是一个“随便造几个 agent”的仓库。
+This is not a repository for casually collecting agent prompts.
 
-这个仓库的目标，是让一套以“元”为治理单元的意图放大方向，在 Codex、Claude Code、OpenClaw 三个运行时里都能落地。
+The goal is to make one meta-based intent-amplification system land consistently across Codex, Claude Code, and OpenClaw.
 
-## 先理解“元”
+## Start with “Meta”
 
-在这个项目里：
+In this project:
 
-**元 = 为了完成意图放大而存在的最小可治理单元。**
+**meta = the smallest governable unit that exists to support intent amplification**
 
-它不是一个模糊角色，不是一个全能助手，也不是一个方便堆叠的功能块。
+A valid meta unit should:
 
-一个合格的元，至少要：
+- own one clear class of responsibility
+- have explicit boundaries against other meta units
+- be orchestratable rather than free-floating
+- be independently reviewable
+- be replaceable or rolled back when it fails
 
-- 只负责一类清晰职责
-- 和其他元有明确边界
-- 能被编排调用
-- 能被单独验证
-- 失败时可以被替换或回退
+## What This Means for Codex
 
-## 这个仓库对 Codex 的意义
+If you open this repository in Codex, read it as:
 
-如果你在 Codex 里打开这个仓库，应该把它理解成：
+- `AGENTS.md` explains what the project is trying to achieve
+- `.codex/agents/` maps the eight meta roles into Codex-native custom agents
+- `.agents/skills/` provides the project skill mirror
 
-- `AGENTS.md` 负责告诉 Codex 这个项目到底想做什么
-- `.codex/agents/` 负责把 8 个元角色映射成 Codex custom agents
-- `.agents/skills/` 负责提供项目级 skill
+Codex should not just see “many files”.
 
-也就是说，Codex 在这个仓库里不应该只是“看见很多文件”，而应该明白：
+It should understand:
 
-**这是一个跨运行时意图放大系统。**
+**this repository is a cross-runtime intent-amplification system.**
 
-## 默认工作方式
+## Default Working Model
 
-用户真正需要面对的，不应该是 8 个元 agent 的细节。
+Users should not need to think in terms of eight specialist agents.
 
-默认应该这样理解：
+The intended default behavior is:
 
-1. 用户给出原始需求
-2. 系统先做意图放大
-3. 再决定要不要调用别的元 agent
-4. 最后回到一个统一的、更完整的结果
+1. the user gives raw intent
+2. the system amplifies the intent first
+3. the system decides whether specialist meta agents are needed
+4. the system returns a single coherent result
 
-所以外部主入口应该优先看作：
+So the external front door should normally be:
 
 - `meta-warden`
 
-其他元 agent 是后台分工，不是用户层菜单。
+The others are backstage specialists, not the public menu.
 
-## 8 个元 agent 的后台分工
+## The Eight Meta Agents
 
-- `meta-warden`：统筹、仲裁、整合
-- `meta-genesis`：提示词人格与 `SOUL.md`
-- `meta-artisan`：skill、MCP、工具匹配
-- `meta-sentinel`：安全、hook、权限、回滚
-- `meta-librarian`：记忆、知识、连续性
-- `meta-conductor`：工作流、节奏、编排
-- `meta-prism`：质量审查、漂移检测
-- `meta-scout`：外部能力发现与评估
+- `meta-warden`: coordination, arbitration, final synthesis
+- `meta-genesis`: prompt identity and `SOUL.md`
+- `meta-artisan`: skills, MCP, and tool mapping
+- `meta-sentinel`: safety, hooks, permissions, rollback
+- `meta-librarian`: memory, knowledge continuity, context policy
+- `meta-conductor`: workflow, sequencing, rhythm
+- `meta-prism`: quality review and drift detection
+- `meta-scout`: external capability discovery and evaluation
 
-## 主源与派生产物
+## Canonical vs Derived Assets
 
-优先修改：
+Preferred edit targets:
 
 - `.claude/agents/*.md`
 - `.claude/skills/meta-theory/SKILL.md`
 
-通常不要手改长期维护：
+Do not treat these as the long-term maintenance source:
 
 - `.codex/agents`
 - `.agents/skills`
 - `openclaw/workspaces`
 
-这些由同步脚本维护。
+Those are generated mirrors maintained by sync tooling.
 
-## 工作闭环
+## Working Loop
 
-修改主源后：
+After changing canonical source files:
 
-1. 运行 `npm run sync:runtimes`
-2. 运行 `npm run validate`
-3. 运行 `npm run eval:agents`
+1. run `npm run sync:runtimes`
+2. run `npm run validate`
+3. run `npm run eval:agents` when you need runtime-level acceptance
 
-## 对 Codex 最重要的一条要求
+## Industry Agent Foundry
 
-不要把这个仓库理解成“一个展示很多 agent 的样板间”。
+This repository also contains a new production scaffold for a department-first industry library.
 
-要把它理解成：
+See:
 
-**一个以意图放大为中心、以元为治理单元、并试图在多个运行时里保持一致行为的架构包。**
+- `factory/`
+- `scripts/generate-industry-agents.mjs`
+
+The current matrix is:
+
+- 20 industries
+- 5 departments per industry
+- 100 department-level agents
+- 1000 generated specialist agents
+- organization and orchestration assets for multi-department routing
+- runtime-pack projections for Claude Code, Codex, and OpenClaw under `factory/runtime-packs/`
+
+The foundry is for scalable domain expansion.  
+It is intentionally separate from the canonical meta-agent source.
+
+## Most Important Instruction
+
+Do not interpret this repository as a showroom for “many agents”.
+
+Interpret it as:
+
+**an architecture pack centered on intent amplification, governed through meta units, and projected consistently across multiple runtimes.**

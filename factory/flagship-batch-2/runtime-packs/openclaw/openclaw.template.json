@@ -1,0 +1,65 @@
+{
+  "agents": {
+    "defaults": {
+      "model": "claude-sonnet-4-5"
+    },
+    "list": [
+      {
+        "id": "flagship-stocks-research-intelligence",
+        "default": false,
+        "name": "Flagship Stocks Research & Intelligence",
+        "workspace": "__REPO_ROOT__\\factory\\flagship-batch-2\\runtime-packs\\openclaw\\workspaces\\flagship-stocks-research-intelligence"
+      },
+      {
+        "id": "flagship-investment-research-intelligence",
+        "default": false,
+        "name": "Flagship Investment Research & Intelligence",
+        "workspace": "__REPO_ROOT__\\factory\\flagship-batch-2\\runtime-packs\\openclaw\\workspaces\\flagship-investment-research-intelligence"
+      },
+      {
+        "id": "flagship-web3-risk-compliance",
+        "default": false,
+        "name": "Flagship Web3 Risk & Compliance",
+        "workspace": "__REPO_ROOT__\\factory\\flagship-batch-2\\runtime-packs\\openclaw\\workspaces\\flagship-web3-risk-compliance"
+      },
+      {
+        "id": "flagship-media-growth-operations",
+        "default": false,
+        "name": "Flagship Creator Media Growth & Operations",
+        "workspace": "__REPO_ROOT__\\factory\\flagship-batch-2\\runtime-packs\\openclaw\\workspaces\\flagship-media-growth-operations"
+      },
+      {
+        "id": "flagship-ecommerce-growth-operations",
+        "default": false,
+        "name": "Flagship E-Commerce Growth & Operations",
+        "workspace": "__REPO_ROOT__\\factory\\flagship-batch-2\\runtime-packs\\openclaw\\workspaces\\flagship-ecommerce-growth-operations"
+      }
+    ]
+  },
+  "bindings": [],
+  "hooks": {
+    "internal": {
+      "enabled": true,
+      "entries": {
+        "session-memory": {
+          "enabled": true
+        },
+        "boot-md": {
+          "enabled": true
+        }
+      }
+    }
+  },
+  "tools": {
+    "agentToAgent": {
+      "enabled": true,
+      "allow": [
+        "flagship-stocks-research-intelligence",
+        "flagship-investment-research-intelligence",
+        "flagship-web3-risk-compliance",
+        "flagship-media-growth-operations",
+        "flagship-ecommerce-growth-operations"
+      ]
+    }
+  }
+}

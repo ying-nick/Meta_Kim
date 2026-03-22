@@ -1,0 +1,67 @@
+[
+  {
+    "runtimeId": "flagship-game-strategy-office",
+    "sourceAgentId": "game-strategy-office",
+    "industry": "game",
+    "department": "strategy-office",
+    "prioritySpecialists": [
+      "market-cartographer",
+      "segment-strategist",
+      "monetization-strategist",
+      "portfolio-prioritizer",
+      "executive-briefing-lead"
+    ]
+  },
+  {
+    "runtimeId": "flagship-internet-growth-operations",
+    "sourceAgentId": "internet-growth-operations",
+    "industry": "internet",
+    "department": "growth-operations",
+    "prioritySpecialists": [
+      "funnel-operator",
+      "retention-strategist",
+      "lifecycle-designer",
+      "channel-optimizer",
+      "performance-marketer"
+    ]
+  },
+  {
+    "runtimeId": "flagship-finance-strategy-office",
+    "sourceAgentId": "finance-strategy-office",
+    "industry": "finance",
+    "department": "strategy-office",
+    "prioritySpecialists": [
+      "thesis-architect",
+      "scenario-planner",
+      "portfolio-prioritizer",
+      "executive-briefing-lead",
+      "ecosystem-mapper"
+    ]
+  },
+  {
+    "runtimeId": "flagship-ai-product-delivery",
+    "sourceAgentId": "ai-product-delivery",
+    "industry": "ai",
+    "department": "product-delivery",
+    "prioritySpecialists": [
+      "product-architect",
+      "spec-writer",
+      "qa-strategist",
+      "prototype-lead",
+      "launch-planner"
+    ]
+  },
+  {
+    "runtimeId": "flagship-healthcare-risk-compliance",
+    "sourceAgentId": "healthcare-risk-compliance",
+    "industry": "healthcare",
+    "department": "risk-compliance",
+    "prioritySpecialists": [
+      "risk-mapper",
+      "compliance-interpreter",
+      "incident-reviewer",
+      "policy-drafter",
+      "escalation-chief"
+    ]
+  }
+]

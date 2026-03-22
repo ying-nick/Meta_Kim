@@ -1,84 +1,74 @@
-# Meta_Kim 的 Claude Code 说明
+# Meta_Kim for Claude Code
 
-这个仓库的目标，不是单独服务 Claude Code。
+Meta_Kim is not a Claude-only repository.
 
-它要做的是：
+Its purpose is to make one meta-based intent-amplification discipline hold across Claude Code, Codex, and OpenClaw, while Claude Code remains the canonical editing runtime.
 
-**让一套以“元”为治理单元的意图放大方向，在 Claude Code、Codex、OpenClaw 三个运行时里都成立。**
+## What “Meta” Means in This Repo
 
-Claude Code 只是当前最主要的主编辑运行时。
+In Meta_Kim:
 
-## 先把“元”讲清楚
+**meta = the smallest governable unit that exists to support intent amplification**
 
-在 Meta_Kim 里：
+The eight meta agents are not here for visual complexity. They exist to:
 
-**元 = 为了完成意图放大而存在的最小可治理单元。**
+- break complex work into governable units
+- preserve clear boundaries between responsibilities
+- keep the whole system aligned with intent amplification rather than shallow task dumping
 
-所以这里的 8 个元 agent，不是为了好看，也不是为了做一个“很多 agent 的展示仓库”。
+## Public and Private Layers
 
-它们存在的原因是：
+The long-form local research manuscript under `meta/` is private research material and is intentionally not part of the public GitHub payload.
 
-- 让复杂问题能被拆开
-- 让拆开的职责能被治理
-- 让治理后的结果仍然服务于“意图放大”这个核心目标
+Claude Code should align with the project goal, but should not depend on that private manuscript.
 
-## 本地研究参考
+## Desired Claude-Side Behavior
 
-作者本地有一份更长的研究参考 `meta/meta.md`。
+The end state in Claude Code should be:
 
-它属于本地研究材料，不随公开仓库一起发布，也不是 Claude 运行时配置。
+1. the user provides raw intent
+2. the system amplifies the intent first
+3. specialized meta agents are invoked only when needed
+4. the system returns a unified result
 
-Claude 侧实现只需要对齐项目目标，不需要依赖这份私有长文原稿。
+So in practice:
 
-## Claude Code 这边真正要成立成什么样
+- `meta-warden` should be treated as the default front door
+- the other meta agents are backstage specialists
 
-在 Claude Code 里，理想状态不是让用户记住 8 个元 agent。
-
-理想状态是：
-
-1. 用户提出原始需求
-2. 系统先做意图放大
-3. 需要时再调用后台元 agent 分工
-4. 最后回到统一结果
-
-所以在 Claude 侧，`meta-warden` 应该被理解为默认入口，
-其他元 agent 是后台分工。
-
-## Claude 侧主源
+## Canonical Claude Sources
 
 - `.claude/agents/*.md`
-  8 个元 agent 的定义主源
+  canonical definitions for the eight meta agents
 - `.claude/skills/meta-theory/SKILL.md`
-  skill 主源
+  canonical skill source
 - `.claude/settings.json`
-  Claude Code 的权限与 hooks
+  Claude Code permissions and hooks
 - `.mcp.json`
-  Claude Code 的项目级 MCP 入口
+  project-level MCP entry for Claude Code
 
-## 8 个元 agent 的后台职责
+## The Eight Meta Agents
 
-- `meta-warden`：统筹、仲裁、整合
-- `meta-genesis`：提示词人格与 `SOUL.md`
-- `meta-artisan`：skill、MCP、工具能力匹配
-- `meta-sentinel`：安全、hook、权限、回滚
-- `meta-librarian`：记忆、知识、连续性
-- `meta-conductor`：工作流、节奏、编排
-- `meta-prism`：质量审查、漂移检测
-- `meta-scout`：外部能力发现与评估
+- `meta-warden`: coordination, arbitration, final synthesis
+- `meta-genesis`: prompt identity and `SOUL.md`
+- `meta-artisan`: skills, MCP, and tool-fit design
+- `meta-sentinel`: safety, hooks, permissions, rollback
+- `meta-librarian`: memory, knowledge continuity, context policy
+- `meta-conductor`: workflow, sequencing, rhythm
+- `meta-prism`: quality review and drift detection
+- `meta-scout`: external capability discovery and evaluation
 
-## 硬规则
+## Hard Rules
 
-- `.claude/agents/*.md` 必须保留合法 YAML frontmatter，否则 Claude Code 不会把它识别为正式子代理。
-- `.claude/agents/*.md` 和 `.claude/skills/meta-theory/SKILL.md` 是唯一主编辑源。
-- `.codex/agents/*`、`.agents/skills/*`、`openclaw/workspaces/*` 都是派生产物，不要长期手改。
-- prompt、skill、运行时契约改动后，必须执行：
+- `.claude/agents/*.md` must keep valid YAML frontmatter or Claude Code will not register them as project agents.
+- `.claude/agents/*.md` and `.claude/skills/meta-theory/SKILL.md` are the only long-term canonical edit targets.
+- `.codex/agents/*`, `.agents/skills/*`, and `openclaw/workspaces/*` are derived artifacts and should not become the maintenance source.
+- After changing prompts, skills, or runtime contracts, run:
   - `npm run sync:runtimes`
   - `npm run validate`
-- 如果要确认三端不只是文件存在，而是真的能工作，再执行：
+- If you need runtime-level acceptance instead of file-level validation, also run:
   - `npm run eval:agents`
 
-## 一句话总结
+## One-Line Summary
 
-Claude Code 在这个仓库里的职责，不是单独形成一套“Claude 专属逻辑”。
-
-而是作为主编辑运行时，帮助这套以“元”为治理单元、以“意图放大”为核心目标的系统首先落地，然后再同步到另外两个运行时。
+Claude Code is the canonical editing runtime for Meta_Kim, not a separate product logic. Its job is to help this meta-based intent-amplification system land cleanly before the same system is projected into Codex and OpenClaw.

@@ -1,0 +1,91 @@
+{
+  "version": 1,
+  "orchestrator": "meta-conductor",
+  "arbiter": "meta-warden",
+  "defaults": {
+    "escalateCrossDepartmentConflictsTo": "meta-warden",
+    "useDepartmentSeedBeforeSpecialist": true,
+    "specialistEscalationReturnsToParentDepartment": true
+  },
+  "departmentHandoffs": {
+    "strategy-office": [
+      "research-intelligence",
+      "risk-compliance",
+      "product-delivery",
+      "growth-operations"
+    ],
+    "research-intelligence": [
+      "strategy-office",
+      "product-delivery",
+      "risk-compliance"
+    ],
+    "product-delivery": [
+      "growth-operations",
+      "risk-compliance",
+      "strategy-office"
+    ],
+    "growth-operations": [
+      "research-intelligence",
+      "product-delivery",
+      "risk-compliance",
+      "strategy-office"
+    ],
+    "risk-compliance": [
+      "strategy-office",
+      "product-delivery",
+      "growth-operations"
+    ]
+  },
+  "playbooks": [
+    {
+      "id": "new-market-entry",
+      "stages": [
+        "strategy-office",
+        "research-intelligence",
+        "risk-compliance",
+        "product-delivery",
+        "growth-operations"
+      ]
+    },
+    {
+      "id": "new-product-launch",
+      "stages": [
+        "strategy-office",
+        "research-intelligence",
+        "product-delivery",
+        "risk-compliance",
+        "growth-operations"
+      ]
+    },
+    {
+      "id": "growth-repair",
+      "stages": [
+        "growth-operations",
+        "research-intelligence",
+        "product-delivery",
+        "risk-compliance",
+        "strategy-office"
+      ]
+    },
+    {
+      "id": "crisis-response",
+      "stages": [
+        "risk-compliance",
+        "research-intelligence",
+        "product-delivery",
+        "strategy-office",
+        "growth-operations"
+      ]
+    },
+    {
+      "id": "capital-allocation",
+      "stages": [
+        "research-intelligence",
+        "strategy-office",
+        "risk-compliance",
+        "product-delivery",
+        "growth-operations"
+      ]
+    }
+  ]
+}

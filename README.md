@@ -1,474 +1,345 @@
 # Meta_Kim
 
+[English](README.md) | [简体中文](README.zh-CN.md)
+
 ![Runtime](https://img.shields.io/badge/runtime-Claude%20Code%20%7C%20Codex%20%7C%20OpenClaw-111827)
-![Method](https://img.shields.io/badge/method-%E5%85%83%20%E2%86%92%20%E7%BB%84%E7%BB%87%E9%95%9C%E5%83%8F%20%E2%86%92%20%E8%8A%82%E5%A5%8F%E7%BC%96%E6%8E%92%20%E2%86%92%20%E6%84%8F%E5%9B%BE%E6%94%BE%E5%A4%A7-0f766e)
+![Method](https://img.shields.io/badge/method-Meta%20-%3E%20Organizational%20Mirroring%20-%3E%20Rhythm%20Orchestration%20-%3E%20Intent%20Amplification-0f766e)
 ![License](https://img.shields.io/badge/license-CC%20BY%204.0-f59e0b)
 
-**Meta_Kim 不是一个“多放几个 agent 文件”的仓库。**
+<div align="center">
 
-**它是一套试图在 Claude Code、Codex、OpenClaw 三个运行时里，建立同一套意图放大规矩的元架构工程。**
+**An open-source meta-architecture for intent amplification across Claude Code, Codex, and OpenClaw**
 
-这个项目背后的判断很明确：
+Meta_Kim is not a prompt dump. It is a cross-runtime operating system for organizing complex work through meta units, organizational mirroring, rhythm orchestration, and intent amplification.
 
-**AI 时代真正的分水岭，不只是模型，而是你会不会组织复杂问题。**
+</div>
 
-今天很多人用 AI 的方式，其实不是在做系统，而是在许愿：
+## What This Project Is
 
-- 扔一句大需求进去
-- 等一个完整世界吐出来
-- 这次刚好能跑，就以为方法成立
+Meta_Kim exists for one reason:
 
-Meta_Kim 不站这个方向。
+**to make the same intent-amplification discipline hold across multiple AI runtimes, instead of collapsing into one-off lucky outputs.**
 
-它要立的是另一套东西：
+The project treats user requests as raw intent, not finished tasks.  
+Before execution, the system should:
 
-- 用户说的是原始意图，不是完整任务
-- 系统不能急着答，必须先做结构化理解
-- 复杂问题不能一口吞，必须先拆、先组、先编排
-- 一次生成成功不值钱，能反复稳定做出来才值钱
-- 这套规矩不能只在一个软件里成立，而要在三个运行时里都成立
+- identify the real objective
+- surface missing constraints
+- choose the right structure
+- decide what should happen now, later, or not at all
+- produce a task shape that is actually executable
 
-这就是 Meta_Kim 的出发点。
+So this repository is not:
 
-* * *
+- a chatbot product
+- a website or SaaS
+- a single giant prompt
+- a random pile of agent files
 
-## 这项目到底在立什么
+It is an architecture pack that combines:
 
-Meta_Kim 想建立的，不是一个“更会说话”的 AI。
+- agents
+- skills
+- MCP integrations
+- hooks
+- memory strategy
+- workspace layouts
+- runtime sync scripts
+- validation and evaluation tooling
 
-它想建立的是一套更成熟的工作方式：
+## The Four-Part Method
 
-**先把人的原始意图看清、补全、组织起来，再开始执行。**
+Meta_Kim is built around one chain:
 
-所以这个仓库不是聊天产品，不是网页，不是 SaaS，也不是一个大 prompt。
-
-它更像一个 AI 助手的内核工程，里面会同时出现：
-
-- agent
-- skill
-- MCP
-- hook
-- memory
-- workspace
-- 配置模板
-- 同步脚本
-- 校验脚本
-
-因为 Meta_Kim 不是在做“回答器”，而是在做“组织器”。
-
-## Meta_Kim 的四条主线
-
-Meta_Kim 真正的主线，不是只讲“元”。
-
-它讲的是一整条链：
-
-**元 → 组织镜像 → 节奏编排 → 意图放大**
+**Meta -> Organizational Mirroring -> Rhythm Orchestration -> Intent Amplification**
 
 ```mermaid
 flowchart LR
-    A["元<br/>最小可治理单元"] --> B["组织镜像<br/>把元组织成结构"]
-    B --> C["节奏编排<br/>决定什么时候给什么"]
-    C --> D["意图放大<br/>把原始意图展开成可执行任务"]
+    A["Meta<br/>the smallest governable unit"] --> B["Organizational Mirroring<br/>turn units into structure"]
+    B --> C["Rhythm Orchestration<br/>control timing and sequencing"]
+    C --> D["Intent Amplification<br/>expand raw intent into executable work"]
 ```
 
-这四个词分别解决四个不同的问题：
+Each layer solves a different problem:
 
-- `元`：解决“怎么拆”
-- `组织镜像`：解决“怎么组”
-- `节奏编排`：解决“怎么发”
-- `意图放大`：解决“怎么成”
+- `Meta` solves decomposition
+- `Organizational Mirroring` solves structure
+- `Rhythm Orchestration` solves timing
+- `Intent Amplification` solves completion
 
-如果少一段，这套方法都不完整。
+If one layer is missing, the method is incomplete.
 
-### 1. 元
+## What “Meta” Means Here
 
-**元 = 系统里最小的可治理单元。**
+In Meta_Kim, a meta unit is:
 
-注意，不是“最小零件”，也不是“最小执行块”，而是：
+**the smallest governable unit that exists to support intent amplification.**
 
-**最小可治理单元。**
+It is not just a small component. It must be:
 
-一个东西想配叫“元”，至少要满足五个标准：
+- independent enough to reason about on its own
+- small enough to stay controllable
+- bounded enough to know what it does not own
+- replaceable without collapsing the whole system
+- reusable across workflows
 
-- 独立：能单独被理解、讨论、调用
-- 足够小：粒度合适，再往下拆就开始反噬
-- 边界清晰：知道自己负责什么，不负责什么
-- 可替换：换掉它，系统不至于整体塌掉
-- 可复用：不是只活一次的临时拼装件
+This is why Meta_Kim uses the word `meta` as an architectural term, not as decoration.
 
-所以 Meta_Kim 讲“元”，不是为了把事情拆碎，而是为了把复杂重新变得可控。
+## Why This Matters
 
-### 2. 组织镜像
+A common failure mode in AI work is mistaking a single successful output for a stable system.
 
-**组织镜像不是修辞，不是比喻，它是一种架构方法。**
+Meta_Kim rejects that.
 
-它的意思是：
+A mature system needs a governance loop. In this project, that loop is framed through a ten-step operating discipline:
 
-把真实组织里的这些机制，映射进 AI 系统：
+1. Direction
+2. Planning
+3. Execution
+4. Review
+5. Meta-review
+6. Revision
+7. Verification
+8. Synthesis
+9. Feedback
+10. Evolution
 
-- 层级委派
-- 职责分工
-- 独立工作空间
-- 评审反馈
-- 持续进化
+The goal is not to look smart once. The goal is to become repeatable, auditable, and improvable.
 
-这样一来，系统就不再像一堆插件或一锅共享上下文，而开始像一个真正能运转的组织。
+## How It Lands in Three Runtimes
 
-组织镜像主要解决三个老问题：
+Meta_Kim does not force Claude Code, Codex, and OpenClaw to look identical.
 
-- 串味：A 角色的判断跑进 B 角色的工作空间
-- 协调爆炸：角色一多，链路迅速打结
-- 认知过载：设计者要手搓所有关系，最后人在伺候系统
-
-Meta_Kim 要的不是“agent 多”，而是“agent 被组织成结构”。
-
-### 3. 节奏编排
-
-只有“拆”和“组”还不够。
-
-成熟系统还得会出牌。
-
-**节奏编排解决的不是“谁先谁后”这么简单，而是系统该在什么时机，给什么、不给什么、跳过什么、插队什么。**
-
-这部分非常关键，但以前 README 没写出来。
-
-它至少包括这些能力：
-
-- 什么时候给用户内容
-- 什么时候不给
-- 哪些内容先给，哪些晚给
-- 哪些步骤应该跳过
-- 哪些风险需要插队处理
-- 哪些时刻应该留白，而不是继续输出
-
-所以 Meta_Kim 不是只关心“流程编排”，还关心“节奏编排”。
-
-它强调：
-
-- 系统不只要会做事
-- 系统还要会出牌
-- 系统不只要会推动
-- 系统还要知道什么时候沉默
-
-### 4. 意图放大
-
-**意图放大 = 高层意图被结构性展开后的结果。**
-
-这不是把一句话说得更长，而是把一句话里原本缺失的关键部分补出来。
-
-比如用户说：
-
-> 帮我做一个项目。
-
-在 Meta_Kim 看来，这根本还不算任务，因为它至少缺：
-
-- 真实目标
-- 范围边界
-- 风险约束
-- 受众对象
-- 成功标准
-- 交付形态
-- 执行顺序
-
-所以 Meta_Kim 的第一步不是回答，而是把这些缺口补出来。
-
-这就叫意图放大。
-
-## 为什么这套方法不是空话
-
-Meta_Kim 反对一个很常见的幻觉：
-
-**很多人把“一次生成成功”，误以为“系统已经成立”。**
-
-不是。
-
-一次生成成功，只能说明这次运气还行。
-
-真正成熟的系统，至少得有治理链路。
-
-这条成熟链路至少包含十步：
-
-1. 方向
-2. 规划
-3. 执行
-4. 评审
-5. 元评审
-6. 修订
-7. 验证
-8. 汇总
-9. 反馈
-10. 进化
-
-这十步的重要性在于，它把系统从“会动”拉向“可靠、可复用、可演化”。
-
-```mermaid
-flowchart LR
-    A["方向"] --> B["规划"] --> C["执行"] --> D["评审"] --> E["元评审"]
-    E --> F["修订"] --> G["验证"] --> H["汇总"] --> I["反馈"] --> J["进化"]
-```
-
-所以 Meta_Kim 真正在意的，不是第一次能写多好，而是：
-
-- 会不会判断
-- 会不会纠偏
-- 会不会验证
-- 会不会回滚
-- 会不会把这一轮经验变成下一轮能力
-
-换句话说：
-
-**Meta_Kim 不是在追求一次漂亮结果，而是在追求一条可持续的自我校正链路。**
-
-## 元不是一层，它至少有三层
-
-README 以前也没把这个讲清楚。
-
-“元”至少分三层：
+It enforces one underlying operating logic while letting each runtime keep its native interface.
 
 ```mermaid
 flowchart TD
-    A["元体系"] --> B["执行元<br/>直接下场做事"]
-    A --> C["编排元<br/>负责调度、节奏、退回、插队"]
-    A --> D["基础设施元<br/>提供提示词、技能、记忆、规则、安全"]
-```
-
-### 执行元
-
-直接下场干业务活的元。
-
-比如：
-
-- 写
-- 查
-- 分析
-- 审校
-- 修订
-
-执行元最重要的不是“全能”，而是“职责纯”。
-
-### 编排元
-
-不一定自己下场写内容，但负责调度整个系统的元。
-
-它要决定：
-
-- 谁先上
-- 谁后上
-- 谁依赖谁
-- 哪一步必须线性
-- 哪一步可以并行
-- 出错退回哪一步
-- 什么时候跳过
-- 什么时候插队
-
-编排元是系统的大脑，不是系统的喇叭。
-
-### 基础设施元
-
-它本身未必直接产出业务结果，但没有它，系统就做不起来。
-
-比如：
-
-- 提示词体系
-- skill 体系
-- 工具体系
-- 知识体系
-- 记忆体系
-- 工作流体系
-- 规则基线
-- 权限控制
-- 安全与回滚机制
-
-有些元不是做事的元，而是造能力的元。
-
-这就是基础设施元的意义。
-
-## Meta_Kim 在工程上怎么落地
-
-Meta_Kim 做的不是“理论展示”。
-
-它做的是把这条主线真正压进三个运行时里：
-
-- Claude Code
-- Codex
-- OpenClaw
-
-重点不是让三家看起来长得一模一样。
-
-重点是让三家都遵守同一套底层规矩。
-
-```mermaid
-flowchart TD
-    A["Meta_Kim 核心方法<br/>元 → 组织镜像 → 节奏编排 → 意图放大"] --> B["Claude Code<br/>CLAUDE.md + .claude/ + .mcp.json"]
+    A["Meta_Kim Core Method"] --> B["Claude Code<br/>CLAUDE.md + .claude/ + .mcp.json"]
     A --> C["Codex<br/>AGENTS.md + .codex/ + .agents/ + codex/config.toml.example"]
     A --> D["OpenClaw<br/>openclaw/workspaces/ + openclaw/openclaw.template.json"]
 ```
 
-| 运行时 | 用户看到的入口 | 仓库里的主要落点 | 作用 |
+| Runtime | User-facing entry | Main repo surface | Purpose |
 | --- | --- | --- | --- |
-| Claude Code | `CLAUDE.md` | `.claude/`、`.mcp.json` | 让 Claude Code 按 Meta_Kim 的元职责、治理规则和上下文约束工作 |
-| Codex | `AGENTS.md` | `.codex/`、`.agents/`、`codex/config.toml.example` | 让 Codex 使用同一套元结构、技能映射和项目约束 |
-| OpenClaw | `openclaw/workspaces/` | `openclaw/` | 让 OpenClaw 的本地 workspace agent 也进入同一套组织结构和节奏逻辑 |
+| Claude Code | `CLAUDE.md` | `.claude/`, `.mcp.json` | Primary editing runtime and canonical source for meta agents and skills |
+| Codex | `AGENTS.md` | `.codex/`, `.agents/`, `codex/config.toml.example` | Codex-native agent and skill projection from the same source |
+| OpenClaw | `openclaw/workspaces/` | `openclaw/` | Local workspace agents that preserve the same governance logic |
 
-也就是说：
+The outer shell can differ.  
+The core discipline cannot.
 
-- 外层壳可以不同
-- 运行时入口可以不同
-- 配置格式可以不同
+## The Eight Meta Agents
 
-但底层核必须一致。
+These are not menu items. They are the current organizational backbone.
 
-这正是“同一意图，多种交付壳”的工程化版本。
+- `meta-warden`: default entry, arbitration, final synthesis
+- `meta-conductor`: orchestration, sequencing, rhythm control
+- `meta-genesis`: prompt identity, persona, `SOUL.md`
+- `meta-artisan`: skills, MCP, tool fit, capability design
+- `meta-sentinel`: hooks, safety, permissions, rollback
+- `meta-librarian`: memory, knowledge continuity, context policy
+- `meta-prism`: quality review, drift detection, anti-slop enforcement
+- `meta-scout`: external tool discovery and evaluation
 
-## 8 个元 agent 不是菜单，而是组织结构
+The default user-facing interpretation should be:
 
-这 8 个元 agent 是 Meta_Kim 当前的组织骨架。
+**`meta-warden` is the front door. The other seven are backstage structure.**
 
-- `meta-warden`：总入口、统筹、仲裁、最终整合
-- `meta-conductor`：编排、调度、节奏控制
-- `meta-genesis`：人格、提示词、`SOUL.md`
-- `meta-artisan`：skill、MCP、工具能力匹配
-- `meta-sentinel`：hook、安全、权限、回滚
-- `meta-librarian`：记忆、知识、连续性
-- `meta-prism`：质量审查、漂移检测、反 AI 套话
-- `meta-scout`：外部工具发现与评估
+## Agent Foundry
 
-如果只从结构上看，它们大致可以理解成：
+The next production layer in this repository is not “add 100 prompts by hand”.
 
-- 编排层：`meta-warden`、`meta-conductor`
-- 基础设施层：`meta-genesis`、`meta-artisan`、`meta-sentinel`、`meta-librarian`
-- 治理与发现层：`meta-prism`、`meta-scout`
+It is a scalable foundry for **department-first industry expansion**.
 
-如果你第一次接触这个项目，先记住一句就够：
+The current scaffold is:
 
-**`meta-warden` 是总入口，其他元 agent 是它背后的组织结构。**
+- **20 industries**
+- **5 departments per industry**
+- **100 department-level agents**
+- **1000 generated specialist agents**
+- **1 organization map plus orchestration playbooks**
 
-## 仓库怎么读
+Industries currently include:
 
-正确读法不是一上来钻脚本。
+- gaming
+- internet products
+- finance
+- AI
+- healthcare
+- stocks
+- investment
+- web3
+- creator media
+- e-commerce
+- education
+- legal
+- manufacturing
+- logistics
+- real estate
+- energy
+- automotive
+- travel and hospitality
+- biotech
+- public sector
 
-正确顺序是：
+The foundry combines:
 
-1. 先看 `README.md`
-作用：理解项目立场、主线、概念、落地方式。
+- industry blueprints
+- department templates
+- expert thinking references
+- tool recommendations
+- a generator that emits structured **department seeds and specialist briefs**
+- a runtime-pack compiler that projects those briefs into Claude Code, Codex, and OpenClaw import assets
 
-2. 再看 `CLAUDE.md` 和 `AGENTS.md`
-作用：理解 Claude Code 和 Codex 怎么承接这套体系。
+See:
 
-3. 再看 `.claude/agents/`
-作用：看 8 个元 agent 的职责定义。
+- [`factory/README.md`](factory/README.md)
+- [`scripts/generate-industry-agents.mjs`](scripts/generate-industry-agents.mjs)
+- [`factory/generated/industry-coverage-matrix.md`](factory/generated/industry-coverage-matrix.md)
+- [`factory/generated/flagship-20.md`](factory/generated/flagship-20.md)
+- [`factory/flagship-batch-1/README.md`](factory/flagship-batch-1/README.md)
+- [`factory/flagship-batch-2/README.md`](factory/flagship-batch-2/README.md)
+- [`factory/flagship-batch-3/README.md`](factory/flagship-batch-3/README.md)
+- [`factory/flagship-batch-4/README.md`](factory/flagship-batch-4/README.md)
 
-4. 最后再看 `.codex/`、`.agents/`、`openclaw/`
-作用：理解这些职责是怎么被投影到不同运行时里的。
+Important: these generated department and specialist agents are a production layer, not the canonical runtime source.  
+They are intended to be refined by the meta system and then compiled into runtime-specific import packs under `factory/runtime-packs/`.
 
-一句话说：
+## Public vs Private Research
 
-**先理解它立什么规矩，再看它怎么把规矩做成工程。**
+The long-form local research manuscript under `meta/` is intentionally not part of the public GitHub payload.
 
-## 仓库结构
+This public repository ships the runtime-facing architecture and production tooling.  
+Private research notes stay local.
+
+## Repository Map
 
 ```text
 Meta_Kim/
-├─ .claude/        Claude Code 主源，包括 agents、skills、hooks、settings
-├─ .codex/         Codex 会直接读取的仓库内 agents 与 skills
-├─ .agents/        Codex 项目级 skills 目录
-├─ codex/          Codex 全局配置示例，不是另一套运行时
-├─ openclaw/       OpenClaw workspace、模板配置、运行时镜像
-├─ scripts/        同步、校验、MCP、自检、OpenClaw 本地准备脚本
-├─ shared-skills/  跨运行时共享的技能镜像
-├─ AGENTS.md       Codex / 通用运行时入口说明
-├─ CLAUDE.md       Claude Code 入口说明
-├─ .mcp.json       Claude Code 项目级 MCP 配置
-└─ README.md       项目总说明
+├─ .claude/        Canonical Claude Code source: agents, skills, hooks, settings
+├─ .codex/         Codex-native agents and skills generated from the Claude source
+├─ .agents/        Codex project-level skill mirror
+├─ codex/          Global Codex config example, not a second runtime
+├─ openclaw/       OpenClaw workspaces, templates, and runtime mirrors
+├─ factory/        Department-agent foundry: catalog, generated seeds, 1000 specialists, protocol files, runtime packs
+├─ scripts/        Sync, validation, MCP, evaluation, and generation scripts
+├─ shared-skills/  Shared skill mirrors across runtimes
+├─ AGENTS.md       Codex and cross-runtime orientation
+├─ CLAUDE.md       Claude Code orientation
+├─ .mcp.json       Claude Code project MCP entry
+├─ README.md       English primary README
+└─ README.zh-CN.md Chinese README
 ```
 
-### 为什么会有 `codex/`
+## Why There Is a `codex/` Folder
 
-这点最容易让人误会。
+This confuses people the most.
 
-因为 Codex 的配置模型分成两部分：
+Codex consumes two kinds of configuration:
 
-- 一部分是仓库内资产，所以放在 `.codex/` 和 `.agents/`
-- 一部分是用户电脑里的全局配置，所以仓库里只能放一个示例文件
+- repo-local assets, which live in `.codex/` and `.agents/`
+- user-global configuration, which cannot live directly inside the repo
 
-因此：
+So:
 
-- `.codex/` 是 Codex 真正会直接读取的仓库内内容
-- `codex/` 只是一个配置示例目录，用来告诉你怎么写 `~/.codex/config.toml`
+- `.codex/` is what Codex reads inside the repository
+- `codex/` is only an example directory showing how to wire `~/.codex/config.toml`
 
-它不是重复目录，也不是偏心 Codex，只是 Codex 的配置方式和另外两家不一样。
+It is not duplication. It is a consequence of Codex's config model.
 
-## 这些命令什么时候才需要跑
+## Human-Friendly Command Guide
 
-不是每个看这个仓库的人，都需要把所有命令跑一遍。
+Not every reader needs to run every command.
 
 ### `npm install`
 
-作用：安装这个仓库依赖的 Node 包。
+Use this when:
 
-什么时候需要：
-- 第一次把项目下载到本地，准备真正使用或验证它
+- you just cloned the repo
+- you want to validate or generate assets locally
 
-什么时候不需要：
-- 只是看文档
-- 只是改纯文字
+Skip this when:
+
+- you are only reading docs
 
 ### `npm run sync:runtimes`
 
-作用：把主源同步成三端真正要吃的运行时文件。
+Use this when:
 
-你可以把它理解成“重新生成三端产物”。
+- you changed canonical agents or skills
+- you changed runtime-facing configuration
+- you want Claude Code, Codex, and OpenClaw mirrors regenerated
 
-什么时候需要：
-- 你改了 agent
-- 你改了 skill
-- 你改了运行时配置
-- 你想确保 Claude Code / Codex / OpenClaw 三端重新对齐
-
-什么时候不需要：
-- 你只改了 README
-- 你只改了许可证
+Think of it as: **rebuild the runtime projections**.
 
 ### `npm run prepare:openclaw-local`
 
-作用：给 OpenClaw 做本机准备。
+Use this only when:
 
-OpenClaw 除了读仓库文件，还依赖你电脑用户目录下的本地授权和 agent 状态。
+- you actually want to run the OpenClaw side on your own machine
 
-什么时候需要：
-- 你准备在自己电脑上真正跑 OpenClaw
-
-什么时候不需要：
-- 你不用 OpenClaw
-- 你只是看项目结构
+This command prepares local OpenClaw auth/state wiring that cannot live purely inside the repo.
 
 ### `npm run verify:all`
 
-作用：做总验收。
+Use this when:
 
-它会统一检查三端资产有没有漏、有没有坏、能不能对上。
+- you are about to publish
+- you changed runtime assets and want a full acceptance pass
+- you want one command that runs the full repo check and evaluation flow
 
-什么时候需要：
-- 你准备提交
-- 你准备发布
-- 你准备开源
-- 你改了一批运行时资产，想确认没配坏
+### `npm run build:agent-foundry`
 
-什么时候不需要：
-- 你只是看说明
-- 你只是小改一段文档
+Use this when:
 
-## 最简单的使用方式
+- you want to regenerate the industry foundry
+- you changed industry blueprints, department templates, or specialist templates
+- you want fresh runtime-pack projections for Claude Code, Codex, and OpenClaw
 
-### 如果你只是第一次看项目
+This command now does two things:
 
-你什么命令都不用跑。
+- regenerates the department seeds and specialist briefs under `factory/generated/`
+- compiles runtime-ready import packs under `factory/runtime-packs/`
+- rebuilds all 20 hand-polished flagship agents under `factory/flagship-batch-{1..4}/`
 
-先把这份 README 看完，再去看 `CLAUDE.md`、`AGENTS.md`、`.claude/agents/`。
+### `npm run check:agent-foundry`
 
-### 如果你第一次把它拉到本地，想确认它不是空壳
+Use this when:
 
-在仓库根目录执行：
+- you want to confirm the foundry outputs and runtime packs are in sync
+- you changed catalog logic and want a targeted check without rerunning the full runtime eval suite
+
+### `npm run build:flagship-batch-1`
+
+Use this when:
+
+- you only want to rebuild the first 5 hand-polished flagship agents
+- you are iterating on the flagship refinement layer without touching the full foundry matrix
+
+### `npm run build:flagship-batch-2`
+
+Use this when:
+
+- you want to rebuild the second 5 hand-polished flagship agents
+- you are iterating on the stocks / investment / web3 / creator media / e-commerce refinement layer
+
+### `npm run build:flagships`
+
+Use this when:
+
+- you want to rebuild all 20 hand-polished flagship agents
+- you want the full flagship layer refreshed without touching the broader foundry logic manually
+
+## Simplest Way to Start
+
+If you are just reading the project:
+
+- read `README.md`
+- read `CLAUDE.md`
+- read `AGENTS.md`
+- inspect `.claude/agents/`
+
+If you want to verify the repo is real and not a shell:
 
 ```bash
 npm install
@@ -476,48 +347,81 @@ npm run sync:runtimes
 npm run verify:all
 ```
 
-### 如果你还要在本机跑 OpenClaw
-
-再补一条：
+If you also want to run OpenClaw locally:
 
 ```bash
 npm run prepare:openclaw-local
 ```
 
-## 方法依据与论文
+If you want to build the 100 department-agent foundry output and runtime packs:
 
-这个仓库的方法依据来自作者关于“基于元的意图放大”的详细评测。
+```bash
+npm run build:agent-foundry
+```
 
-- 论文页面：<https://zenodo.org/records/18957649>
-- DOI：`10.5281/zenodo.18957649`
+If you only want to verify the foundry layer is still in sync:
 
-论文负责回答：
+```bash
+npm run check:agent-foundry
+```
 
-- 为什么是“元”
-- 为什么不是只靠模型
-- 为什么组织镜像和节奏编排是必要层
-- 为什么意图放大是结果层，而不是起点层
+## Paper and Method Basis
 
-仓库负责回答：
+The methodological basis for this repository comes from the author's evaluation work on meta-based intent amplification.
 
-- 怎么把这套东西做成三端都能跑的工程资产
+- Paper: <https://zenodo.org/records/18957649>
+- DOI: `10.5281/zenodo.18957649`
 
-## 适合谁
+The paper explains:
 
-这个项目适合下面这几类人：
+- why meta units matter
+- why structure matters more than isolated model brilliance
+- why organizational mirroring and rhythm orchestration are necessary layers
+- why intent amplification is a result layer, not a starting slogan
 
-- 想把一套 agent 方法同时落到多个 AI 运行时的人
-- 不满足于堆 prompt，而是想做可治理 agent 架构的人
-- 想把 skill、MCP、hook、memory、workspace 一起纳入工程治理的人
-- 想让同一套方法在 Claude Code、Codex、OpenClaw 三端都成立的人
-- 想做的不只是“能跑的 demo”，而是“有组织能力的系统”的人
+This repository explains:
+
+- how to turn that method into runtime-ready engineering assets
+
+## Author and Contact
+
+<div align="center">
+  <img src="images/二维码基础款.png" alt="Contact QR" width="600"/>
+  <p><strong>For updates, discussion, and longer-term project follow-up</strong></p>
+  <p>
+    🌐 <a href="https://www.aiking.dev/">aiking.dev</a> |
+    GitHub <a href="https://github.com/KimYx0207">KimYx0207</a> |
+    𝕏 <a href="https://x.com/KimYx0207">@KimYx0207</a> |
+    WeChat Official Account: <strong>老金带你玩AI</strong>
+  </p>
+  <p>
+    Open knowledge base:
+    <a href="https://my.feishu.cn/wiki/OhQ8wqntFihcI1kWVDlcNdpznFf">Feishu knowledge base</a>
+  </p>
+</div>
+
+## Support the Author
+
+<div align="center">
+  <p><strong>If this method, repository structure, or documentation helps you, support is welcome.</strong></p>
+  <table align="center">
+    <tr>
+      <td align="center">
+        <img src="images/微信.jpg" alt="WeChat donation QR" width="260"/>
+        <br/>
+        <strong>WeChat Pay</strong>
+      </td>
+      <td align="center">
+        <img src="images/支付宝.jpg" alt="Alipay donation QR" width="260"/>
+        <br/>
+        <strong>Alipay</strong>
+      </td>
+    </tr>
+  </table>
+</div>
 
 ## License
 
-本项目采用 [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) 许可协议。
+This project is released under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
 
-你可以分享、改编、再发布，但需要保留署名并标注修改。
-
-## 一句话总结
-
-**Meta_Kim 不是在教 AI 多说话，而是在教 AI 先学会组织复杂问题。**
+You may share and adapt it, as long as attribution is preserved and changes are clearly marked.
