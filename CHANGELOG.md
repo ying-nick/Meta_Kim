@@ -37,7 +37,7 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Codex agent mirrors (`.codex/agents/*.toml`)
 - Shared skills mirror layer (`shared-skills/`)
 - Agent health report script (`scripts/agent-health-report.mjs`)
-- CC BY 4.0 license
+- MIT license
 
 ### Changed
 - Collapse release docs into root READMEs

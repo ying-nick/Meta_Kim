@@ -23,7 +23,7 @@
     "prompt-pack"
   ],
   "author": "KimYx0207",
-  "license": "CC-BY-4.0",
+  "license": "MIT",
   "engines": {
     "node": ">=18"
   },

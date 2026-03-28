@@ -11,7 +11,7 @@
   <img alt="Runtime" src="https://img.shields.io/badge/runtime-Claude%20Code%20%7C%20Codex%20%7C%20OpenClaw-111827"/>
   <img alt="Method" src="https://img.shields.io/badge/method-Meta%20-%3E%20Organizational%20Mirroring%20-%3E%20Rhythm%20Orchestration%20-%3E%20Intent%20Amplification-0f766e"/>
   <img alt="Skill" src="https://img.shields.io/badge/skill-meta--theory%20v1.0.3-7c3aed"/>
-  <img alt="License" src="https://img.shields.io/badge/license-CC%20BY%204.0-f59e0b"/>
+  <img alt="License" src="https://img.shields.io/badge/license-MIT-green"/>
 </p>
 
 **An open-source governance layer that makes AI coding assistants handle complex tasks properly — across Claude Code, Codex, and OpenClaw.**
@@ -409,6 +409,4 @@ This repository turns that method into runtime-ready engineering assets.
 
 ## License
 
-This project is released under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
-
-You may share and adapt it as long as attribution is preserved and changes are clearly marked.
+This project is released under the [MIT License](LICENSE).
