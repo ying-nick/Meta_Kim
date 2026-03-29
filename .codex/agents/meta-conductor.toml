@@ -85,8 +85,8 @@ Missing any of these 6 items means execution cannot begin.
 
 Every worker must be organized into the following 8 fields:
 
-- `Today's Task`
-- `Deliverable`
+- `Today's Task` — Describe the **type of work** (e.g., "frontend component architecture", "data model design", "API endpoint implementation") — NOT a specific feature name
+- `Deliverable` — What type of artifact this produces (component structure, schema definition, endpoint contract) — NOT a specific file
 - `Relationship to Primary Deliverable`
 - `Quality Standard`
 - `Reference Direction`

@@ -269,6 +269,16 @@ All three No → only run Genesis + Artisan.
 
 Read `.claude/agents/meta-genesis.md` and design the SOUL.md according to its methodology.
 
+**⚠️ ABSTRACTION PRINCIPLE (Non-Negotiable):** SOUL.md describes **WHAT KIND OF AGENT IT IS** (domain, technology stack, architectural patterns) — NOT **WHAT TASKS IT SHOULD EXECUTE** (specific features, pages, or deliverables).
+
+The correct abstraction looks like this:
+- ✅ GOOD: "Expert in React 19+, Next.js 15, component-driven development, atomic design, state management, performance optimization, accessibility"
+- ✅ GOOD: "Masters RAG systems, vector databases, embedding models, agent frameworks, multimodal AI"
+- ✅ GOOD: "Deep knowledge of Python 3.12+, asyncio patterns, Pydantic validation, FastAPI, SQLAlchemy 2.0"
+- ❌ BAD: "Build an about page", "Implement a chatbot", "Write a data pipeline script"
+
+The difference: **describes what you know** (technologies, patterns, architectures) vs **describes what you do** (specific features or pages). A SOUL.md that summarizes to "be an X-type agent" is correct. A SOUL.md that summarizes to "do X specific thing" is grade D, redo.
+
 The output must include **8 mandatory modules**:
 1. Core Truths — ≥3 behavioral anchors, specific to this domain
 2. Role + Core Work — clear "Own / Do Not Touch" boundaries
@@ -279,7 +289,7 @@ The output must include **8 mandatory modules**:
 7. Deliverable Flow — clear input → process → output
 8. Meta-Skills — ≥2 self-improvement directions
 
-**Quality Self-Check**: Replace the Agent name with something else — if the SOUL.md still holds → no Domain Depth, grade D, redo.
+**Quality Self-Check**: Replace the Agent name with something else — if the SOUL.md still holds → no Domain Depth, grade D, redo. Additionally: if the SOUL.md describes specific tasks ("build X", "implement Y") rather than domains/patterns → grade D, redo.
 
 **Step 4: Artisan — Skill Matching (Mandatory)**
 

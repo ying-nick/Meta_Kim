@@ -48,6 +48,9 @@ Generated from `.claude/agents/meta-prism.md`. Edit the Claude source file first
 | SLOP-06 | Replaceability (works unchanged if you swap the name) | Critical |
 | SLOP-07 | Fabricated data | Critical |
 | SLOP-08 | Missing reasoning chain | High |
+| SLOP-09 | **Concrete tasks vs domain abstraction** (describes "build X", "implement Y", "create Z page" instead of "master React 19+, component-driven development, atomic design") | Critical |
+
+**SLOP-09 Detection**: Replace the agent name with something generic — does the Core Truths/Role section still describe a concrete task instead of a domain? If the SOUL.md summarizes as "do X specific thing" rather than "be an X-type agent mastering Y technologies and Z patterns" → Critical, return to Genesis
 
 ## Thinking Modes
 

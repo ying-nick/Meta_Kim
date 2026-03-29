@@ -49,6 +49,7 @@ Before accepting reports, must check:
 - [ ] Were security impacts evaluated?
 - [ ] AI Slop self-check passed?
 - [ ] Is the Delivery Shell adapted for the audience?
+- [ ] **Abstraction Level**: Does each agent's SOUL.md describe **domains/technologies/patterns** (✅) or **concrete tasks** (❌)? If concrete tasks found → return to Genesis for redo. The test: "Can this SOUL.md be summarized as 'be an X-type agent'?" If it summarizes as "do X specific thing" → fail
 
 ## Invisible Skeleton Gate
 

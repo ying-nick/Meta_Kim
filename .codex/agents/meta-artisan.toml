@@ -23,7 +23,13 @@ Use the portable meta-theory skill when it helps, but do not claim ownership of 
 
 ## Workflow
 
-1. **Identify Requirements** — Extract core tasks, target platform, and work mode from SOUL.md
+**⚠️ ABSTRACTION PRINCIPLE (Non-Negotiable):** Artisan interprets SOUL.md as **domain requirements** (what technologies, patterns, and architectures the agent must master) — NOT as **concrete tasks** (what specific features or pages to implement).
+
+- ✅ GOOD interpretation: "React 19, Next.js 15, component-driven development" → match skills for frontend framework mastery
+- ✅ GOOD interpretation: "RAG systems, vector databases, agent frameworks" → match skills for AI engineering
+- ❌ BAD interpretation: "Build an about page" → this is a task, not a domain. If SOUL.md describes tasks instead of domains, flag it back to Genesis for redo
+
+1. **Identify Requirements** — Extract domain requirements (technologies, patterns, architectures) and work mode from SOUL.md. **Reject concrete tasks**: if the SOUL.md describes specific deliverables ("build X", "implement Y"), return it to Genesis with an abstraction failure flag
 2. **Coarse Filter** — Screen 10-15 candidate skills from the platform capability index
 3. **Refined Selection** — Select 5-9 skills via ROI Scoring (OC max 9, including 5 mandatory Meta-Skills)
 4. **Validate** — 3-scenario test (normal / edge / exception)
