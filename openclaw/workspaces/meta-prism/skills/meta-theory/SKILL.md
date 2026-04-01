@@ -1,6 +1,6 @@
 ---
 name: meta-theory
-version: 1.4.5
+version: 1.4.6
 author: KimYx0207
 trigger: "元理论|元架构|元兵工厂|最小可治理单元|组织镜像|节奏编排|意图放大|事件牌组|出牌|SOUL.md|四种死法|五标准|agent职责|agent边界|agent拆分|agent设计|agent创建|agent治理|多文件|跨模块|职责冲突|重构|拆解|治理|元|meta architecture|agent governance|intent amplification|meta-theory|meta arsenal|smallest governable unit|organizational mirror|rhythm orchestration|card deck|card play|four death patterns|five criteria|agent design|agent split|agent creation|refactor|multi-file|cross-module|governance|governable"
 tools:
@@ -440,7 +440,7 @@ The 8-stage execution spine:
 
 **Core principles** (enforced throughout all stages):
 - **Agent Invocation Principle**: Never hardcode agent names — Search who declares "Own X" → Match → Invoke
-- **Skip-Level Gate**: meta-theory does NOT write code directly — always dispatch to Execution Layer
+- **Skip-Level Gate**: meta-theory does NOT write code directly — always dispatch to Execution Layer via `Task()` invocations. Track `agentInvocationState` through the cycle: idle → discovered (Fetch) → matched → dispatched → returned/escalated.
 - **Fetch-first**: Search → Match (score 0-3) → Invoke; fallback chain is local → capability index → external search → specialist ecosystem → generic
 
 **Required Stage 3 artifacts before Stage 4 may start** (full JSON shape: `references/dev-governance.md` § Thinking Stage Output Contract):

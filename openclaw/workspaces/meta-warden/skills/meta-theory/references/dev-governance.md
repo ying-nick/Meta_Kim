@@ -48,6 +48,7 @@ The 8-stage spine is the **human-readable orchestration surface**. Underneath it
 | `gateState` | `planning-open / planning-passed / review-open / verification-open / verification-closed / synthesis-ready` | Warden + Prism | Separate stage completion from gate clearance |
 | `surfaceState` | `debug-surface / internal-ready / public-ready` | Warden | Prevent dirty runs from being presented as completed/public |
 | `capabilityState` | `covered / partial / gap / escalated` | Scout + Artisan | Keep Fetch results explicit instead of hand-wavy |
+| `agentInvocationState` | `idle / discovered / matched / dispatched / returned / escalated` | meta-theory skill | Track whether the skill delegates to agents or attempts work directly — enforce the dispatcher role |
 
 **Rule**: this is an **invisible skeleton only**. The user-facing workflow still speaks in stage language and concrete deliverables. State labels exist to support gates, skips, interrupts, and evolution logging — not to become a second product interface.
 
