@@ -291,6 +291,52 @@ direction -> planning -> execution -> review -> meta_review -> revision -> verif
 
 **8 阶段是执行骨架，10 phases 是部门级运行合约。**
 
+## 项目里的流程关系总图
+
+如果按主项目真实设计来讲，Meta_Kim 不是“只有一条流程”，而是几条路径叠在一起：
+
+```mermaid
+flowchart TD
+    A["收到任务"] --> B{"是不是纯 Q / Query"}
+    B -->|"是"| Q["直接回答"]
+    B -->|"否"| C{"任务属于哪一类"}
+    C --> S["简单执行任务<br>owner 驱动压缩路径"]
+    C --> X["复杂开发任务<br>Type C 8 阶段脊柱"]
+    C --> M["元分析任务<br>metaWorkflow 3 phases"]
+    C --> D["已有方案要审<br>Type D 审查流"]
+    X --> T["复杂度再升高时<br>升级到 10 步治理层"]
+    S --> S2["Execution<br>Review<br>Verification<br>Evolution"]
+    X --> X2["Critical<br>Fetch<br>Thinking<br>Execution<br>Review<br>Meta-Review<br>Verification<br>Evolution"]
+    M --> M2["analyze<br>propose<br>report"]
+    D --> D2["读提案<br>checklist<br>输出审查报告"]
+```
+
+这里最容易误解的 4 件事：
+
+- **最简单路径不是“裸执行”**。只有纯 `Q / Query` 才能直答；只要任务会执行、会落盘、会交接，就仍然需要 owner。
+- **简单任务有压缩路径**，但它也不是跳过治理，而是走 `Execution → Review → Verification → Evolution` 这条 owner-driven shortcut。
+- **8 阶段才是复杂开发任务的正式主骨架**，10 步治理是它的升级层，不是替代品。
+- **3 phases 真正存在，但它指的是 `metaWorkflow = analyze → propose → report`**，不是“审查输出 → 验证修复 → evolution”这条你想象中的独立验证流。
+
+### 那能不能“先手搓完，再交给后三段做验证”？
+
+可以分两种情况看：
+
+- **如果你手里的是一个现成方案 / 提案 / agent 定义文档**，那更接近 `Type D`，也就是“读提案 → checklist → 输出审查报告”。
+- **如果你手里的是已经写好的代码或可执行产物**，理论上可以把它当成“外部先做完的产物”接进后半段，但不能假装前面流程不存在。
+
+项目主源的真实要求是：
+
+- `Review` 会先检查 owner coverage 和 protocol compliance
+- 没有 owner、没有 `dispatchBoard`、没有 `workerTaskPacket`、没有 `mergeOwner`，即使代码看起来能跑，也应该先记为协议不合规
+- 所以不能把“手搓完 → 只走一个想象中的 3 阶段验证流”当成项目里的正式默认路径
+
+更准确地说：
+
+- **审文档 / 审方案** → 走 `Type D`
+- **补验已有代码产物** → 可以接入 Review 之后的尾链，但必须补齐 owner 和协议包
+- **真正按项目做复杂开发** → 仍然应从 `Critical / Fetch / Thinking` 开始
+
 ## 隐形状态骨架和公开展示闸门
 
 Meta_Kim 不只是“按顺序走完几个阶段”。

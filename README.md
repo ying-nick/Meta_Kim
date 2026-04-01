@@ -290,6 +290,52 @@ If you remember one sentence, make it this:
 
 **the 8-stage spine is the execution backbone; the 10 phases are the department-level run contract.**
 
+## Workflow Relation Map
+
+According to the actual project design, Meta_Kim does not have just one workflow. It has several paths layered together:
+
+```mermaid
+flowchart TD
+    A["Task arrives"] --> B{"Is it a pure Q / Query"}
+    B -->|"Yes"| Q["Answer directly"]
+    B -->|"No"| C{"What kind of task is it"}
+    C --> S["Simple execution task<br>owner-driven shortcut"]
+    C --> X["Complex development task<br>Type C 8-stage spine"]
+    C --> M["Meta-analysis task<br>metaWorkflow 3 phases"]
+    C --> D["Existing proposal to review<br>Type D review flow"]
+    X --> T["If complexity rises further<br>upgrade to the 10-step governance layer"]
+    S --> S2["Execution<br>Review<br>Verification<br>Evolution"]
+    X --> X2["Critical<br>Fetch<br>Thinking<br>Execution<br>Review<br>Meta-Review<br>Verification<br>Evolution"]
+    M --> M2["analyze<br>propose<br>report"]
+    D --> D2["read proposal<br>checklist<br>review report"]
+```
+
+The 4 easiest misunderstandings here are:
+
+- **the simplest path is not naked direct execution**. Only pure `Q / Query` may answer directly. The moment work executes, writes, hands off, or produces durable artifacts, it needs an owner.
+- **simple tasks still have a compressed governed path**. That shortcut is `Execution → Review → Verification → Evolution`, not “just do it and trust it”.
+- **the 8-stage spine is the formal backbone for complex development work**, while the 10-step governance is an upgrade layer, not a replacement.
+- **the real 3-phase flow does exist, but it means `metaWorkflow = analyze → propose → report`**, not a standalone “review output → verify fixes → evolution” pipeline.
+
+### Can you handcraft something first and then only send it through the last few stages?
+
+There are two different cases:
+
+- **If what you already have is a proposal / design / agent definition document**, that is closer to `Type D`: read proposal → checklist → output review report.
+- **If what you already have is written code or another executable artifact**, you can theoretically treat it as a pre-existing artifact and attach it to the later chain, but you cannot pretend the earlier governance never existed.
+
+The canonical project rules are explicit:
+
+- `Review` first checks owner coverage and protocol compliance
+- if there is no owner, no `dispatchBoard`, no `workerTaskPacket`, and no `mergeOwner`, the run should be marked protocol-non-compliant even if the code looks workable
+- so “handcraft it first, then only run an imagined 3-stage validation flow” is **not** a canonical default path in this project
+
+The more accurate mapping is:
+
+- **reviewing a document / proposal** → use `Type D`
+- **retrospectively validating an existing code artifact** → you may attach it to the review-side tail chain, but only after backfilling owner + protocol packets
+- **doing complex development the Meta_Kim way** → still starts from `Critical / Fetch / Thinking`
+
 ## The Hidden State Skeleton And Public Display Gates
 
 Meta_Kim is not only “a sequence of stages”.
