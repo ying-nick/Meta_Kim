@@ -160,16 +160,19 @@ Open the repo with Claude Code and just describe what you need:
 ```text
 I need to refactor the authentication system — it's spread across 5 files and nobody knows which one handles token refresh anymore.
 ```
+→ **Critical** (clarify scope) → **Fetch** (find who owns each file) → **Thinking** (plan changes) → **Review** (check cross-module impact)
 
 ```text
 Design me an agent that can handle data export jobs for this project.
 ```
+→ **Critical** (confirm intent) → **Fetch** (check existing agents) → **Thinking** (design boundaries) → **Review** (validate SOUL.md quality)
 
 ```text
 Something's wrong — my agents keep writing code that conflicts with each other.
 ```
+→ **Critical** (identify conflict type) → **Fetch** (scan agent boundaries) → **Thinking** (analyze organizational mirror) → **Review** (detect cross-contamination)
 
-The system automatically routes your request through the right governance flow. You don't need to know anything about meta agents, stages, or internal routing.
+The system routes each request through the matching governance stage. You just describe your need; the flow adapts to the task type.
 
 ## What This Project Is
 

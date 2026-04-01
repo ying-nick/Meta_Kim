@@ -159,16 +159,19 @@ node scripts/agent-health-report.mjs
 ```text
 认证系统要重构——散在5个文件里，没人知道 token 刷新到底是哪个文件在处理。
 ```
+→ **Critical**（明确范围）→ **Fetch**（查各文件归属）→ **Thinking**（规划改动）→ **Review**（检查跨模块影响）
 
 ```text
 帮我设计一个 agent，处理这个项目的数据导出任务。
 ```
+→ **Critical**（确认意图）→ **Fetch**（检索现有 agent）→ **Thinking**（设计边界）→ **Review**（验证 SOUL.md 质量）
 
 ```text
 有问题——我的 agent 写的代码老是互相冲突。
 ```
+→ **Critical**（定位冲突类型）→ **Fetch**（扫描 agent 边界）→ **Thinking**（分析组织镜像）→ **Review**（检测跨污染）
 
-系统会自动把你的需求路由到正确的治理流程。你不需要知道任何 meta agent、阶段或内部路由的事情。
+系统把每条需求路由到匹配的治理阶段。你只管描述需求，流程自动适配任务类型。
 
 ## 这是什么项目
 
