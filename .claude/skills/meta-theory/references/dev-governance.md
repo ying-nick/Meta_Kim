@@ -261,7 +261,7 @@ Mark capabilityGap: "no agent declares Own [capability]"
 IF gap is durable / recurring / project-specific
   → trigger Type B creation pipeline before execution
 ELSE
-  → invoke Task(subagent_type="generalPurpose") as a TEMPORARY owner
+  → invoke Agent(subagent_type="generalPurpose") as a TEMPORARY owner
   → record justification + require Evolution follow-up
 ```
 
@@ -378,7 +378,7 @@ Break Stage 1's task into independent sub-tasks:
 
 ### Step 3.5: Protocol-First Dispatch Artifacts
 
-Thinking must lock down the execution protocol before any Task() invocation begins:
+Thinking must lock down the execution protocol before any `Agent` tool invocation begins:
 
 ```json
 {
@@ -487,7 +487,7 @@ Thinking must translate the plan into a **`cardDeck`** — the canonical Stage 3
 
 For each sub-task from Stage 3, invoke the matched agent:
 ```
-Task(
+Agent(
   subagent_type="<selected agent from Stage 2>",
   prompt="""
   Packet: [workerTaskPacket JSON]

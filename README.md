@@ -81,6 +81,28 @@ In one line:
 
 **Meta_Kim cares less about whether a single answer looks right, and more about whether complex work can be sustained, stable, and governable.**
 
+## Meta Architecture View
+
+The safest way to read this repository is not as “some prompts plus config files”, but as one governed system with layered responsibilities:
+
+- **theory sources**: `docs/meta.md` and `.claude/skills/meta-theory/` define the method itself
+- **organization sources**: `.claude/agents/*.md` define the 8 meta roles and their boundaries
+- **contract sources**: `contracts/workflow-contract.json` and related contracts define run discipline, gates, and deliverable closure
+- **runtime projections**: `.codex/`, `.agents/`, `openclaw/`, and `shared-skills/` are projections of the same system into different runtimes
+- **tooling and verification**: `scripts/`, `validate`, `eval:agents`, and `tests/meta-theory/` keep those projections aligned with the sources
+
+That means Meta_Kim is best understood as:
+
+**one meta-theory source system -> one governed meta organization -> one workflow contract -> multiple runtime projections -> one synchronization and verification loop**
+
+The default runtime path is also architectural, not accidental:
+
+`user intent -> meta-warden -> Critical -> Fetch -> Thinking -> specialist execution -> Review -> Verification -> Evolution`
+
+The maintenance rule follows directly from that design:
+
+**edit `.claude/` and `contracts/` first, then sync and validate the runtime mirrors.**
+
 ## Author and Support
 
 <div align="center">

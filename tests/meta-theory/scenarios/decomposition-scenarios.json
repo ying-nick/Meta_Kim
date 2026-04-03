@@ -1,0 +1,212 @@
+[
+  {
+    "id": "DC-01",
+    "input": "Evaluate meta-conductor against the Five Criteria",
+    "expectedDiagnosis": "Five Criteria item-by-item verification with evidence table for meta-conductor",
+    "expectedBehavior": {
+      "detection": "Read meta-conductor.md agent definition",
+      "evaluation": "Fill evidence table for each of the 5 criteria: Independent, Small Enough, Clear Boundaries, Replaceable, Reusable",
+      "output": "Evidence table with specific evidence and Pass/Fail per criterion"
+    },
+    "diagnosticQuestions": [
+      "Does meta-conductor have clear boundaries? (Own X, Do Not Touch Y)",
+      "Can meta-conductor be replaced without collapsing the system?",
+      "When other metas take the field, will there be Cross-contamination with meta-conductor?",
+      "Can meta-conductor combine with other metas?"
+    ],
+    "recommendation": "If all 5 Pass → no action needed; if any Fail → identify specific remediation per failed criterion",
+    "passFailCriteria": {
+      "PASS": "All 5 criteria evaluated with specific evidence from the agent definition file; Four Questions also applied as runtime judgment",
+      "FAIL": "Criteria evaluated with generic statements lacking specific evidence; Four Questions not applied"
+    }
+  },
+  {
+    "id": "DC-02",
+    "input": "一个 agent 什么都能干：理解需求、找文件、设计方案、写代码、验证、解释",
+    "expectedDiagnosis": "Stew-All / Omnipotent Executor Meta Anti-Pattern detected",
+    "expectedBehavior": {
+      "detection": "Identify that the agent spans >2 unrelated domains and performs understanding, file search, design, coding, verification, and explanation all at once",
+      "evaluation": "Check SOUL.md length (>300 lines signals Stew-All); verify if execution happens before thorough understanding",
+      "output": "Flag Omnipotent Executor Meta compression disease; recommend triggering Type B splitting pipeline"
+    },
+    "diagnosticQuestions": [
+      "Does this agent have >2 unrelated domains?",
+      "Is the SOUL.md >300 lines?",
+      "Does execution happen before thorough understanding?",
+      "Are decisions made before complete information gathering?"
+    ],
+    "recommendation": "Trigger Type B splitting pipeline to decompose into focused agents with single responsibility classes",
+    "passFailCriteria": {
+      "PASS": "Stew-All and Omnipotent Executor patterns detected; Type B splitting recommended with specific domain boundaries proposed",
+      "FAIL": "Agent accepted as-is without detecting the anti-pattern; no splitting recommended"
+    }
+  },
+  {
+    "id": "DC-03",
+    "input": "这个 agent 管了前端、后端、数据库三块，需要拆分吗？",
+    "expectedDiagnosis": "Coupling analysis needed — run git co-change data to determine if splitting is warranted",
+    "expectedBehavior": {
+      "detection": "Run git log commands to collect co-change data for the three domains (frontend, backend, database)",
+      "evaluation": "Apply coupling criterion: if A changes, does B frequently need to change? High co-change → merge; low co-change → separate",
+      "output": "Data-driven splitting recommendation with co-change frequencies and domain boundary proposal"
+    },
+    "diagnosticQuestions": [
+      "Do frontend changes frequently trigger backend changes?",
+      "Do backend changes frequently trigger database schema changes?",
+      "Is the change frequency for each domain >5% of total changes?",
+      "What is the co-change frequency between each pair of domains?"
+    ],
+    "recommendation": "Split based on coupling data; present Iron Rule: user overrides data if they insist two domains are different",
+    "passFailCriteria": {
+      "PASS": "Git co-change commands executed; coupling criterion applied; Iron Rule presented; data-driven recommendation with specific frequency thresholds",
+      "FAIL": "Splitting decision made without data; git commands not run; Iron Rule not mentioned"
+    }
+  },
+  {
+    "id": "DC-04",
+    "input": "Runtime diagnosis: is meta-librarian operating correctly within the system?",
+    "expectedDiagnosis": "Four Questions runtime diagnostic applied to meta-librarian",
+    "expectedBehavior": {
+      "detection": "Apply the Meta-Verification Four Questions as runtime judgment rather than design-time Five Criteria",
+      "evaluation": "Answer each of the 4 diagnostic questions with specific evidence from the running system",
+      "output": "Runtime health assessment with specific findings per question and recommended corrective actions"
+    },
+    "diagnosticQuestions": [
+      "Does meta-librarian have clear boundaries? (Own X, Do Not Touch Y)",
+      "Can meta-librarian be replaced without collapsing?",
+      "When other metas take the field, will there be Cross-contamination?",
+      "Can meta-librarian combine with other metas?"
+    ],
+    "recommendation": "Four Questions are more direct for runtime judgment than Five Criteria; use findings to decide if boundary adjustment is needed",
+    "passFailCriteria": {
+      "PASS": "All 4 diagnostic questions answered with runtime evidence; distinction between design-time (Five Criteria) and runtime (Four Questions) acknowledged",
+      "FAIL": "Questions answered generically; no distinction between design-time and runtime checks"
+    }
+  },
+  {
+    "id": "DC-05",
+    "input": "We have 15 micro-agents — each does one tiny thing and needs 3 other agents to produce any output",
+    "expectedDiagnosis": "Shattered Death Pattern detected",
+    "expectedBehavior": {
+      "detection": "Identify that individual agents cannot produce output independently; coordination cost exceeds value",
+      "evaluation": "Apply Shattered diagnostic: 'Needs other agents output to produce? Coordination cost > value?'",
+      "output": "Recommend merging co-dependent agents into larger cohesive units until each can produce independently"
+    },
+    "diagnosticQuestions": [
+      "Does each agent need other agents' output to produce anything?",
+      "Is the coordination cost greater than the value produced?",
+      "Can any agent be understood, invoked, and produce output on its own?",
+      "Would merging reduce coordination overhead without creating Stew-All?"
+    ],
+    "recommendation": "Merge co-dependent agents until each satisfies the Independent criterion; verify merged agents do not become Stew-All",
+    "passFailCriteria": {
+      "PASS": "Shattered pattern diagnosed with specific evidence of inter-dependency; merge proposal preserves independence without creating Stew-All",
+      "FAIL": "Pattern not detected; agents left fragmented; or merging creates new Stew-All"
+    }
+  },
+  {
+    "id": "DC-06",
+    "input": "Our pipeline goes direction → planning → execution. No review step, no meta-review, no evolution.",
+    "expectedDiagnosis": "Governance-Free Execution Death Pattern detected",
+    "expectedBehavior": {
+      "detection": "Identify missing review chain: no review, no meta-review (who reviews the reviewers?), no experience codification",
+      "evaluation": "Apply diagnostic: 'Who reviews? Who reviews the reviewers? How is experience codified?'",
+      "output": "Recommend adding review → meta-review → verification → evolution stages to the pipeline"
+    },
+    "diagnosticQuestions": [
+      "Who reviews the execution output?",
+      "Who reviews the reviewers?",
+      "How is experience codified after each run?",
+      "Will it still work tomorrow? Can someone else take over?"
+    ],
+    "recommendation": "Add Review, Meta-Review, Verification, and Evolution stages; assign specific agents to each review function",
+    "passFailCriteria": {
+      "PASS": "Governance-Free Execution pattern diagnosed; missing stages identified; concrete recommendation to add review/meta-review/verification/evolution chain",
+      "FAIL": "Pipeline accepted as sufficient; missing governance stages not detected"
+    }
+  },
+  {
+    "id": "DC-07",
+    "input": "Agents frequently Cross-contaminate — meta-prism starts designing agents, meta-genesis starts reviewing quality",
+    "expectedDiagnosis": "Cross-contamination / Organizational Mirror failure detected",
+    "expectedBehavior": {
+      "detection": "Identify boundary violations: meta-prism operating outside its quality review domain; meta-genesis operating outside its design domain",
+      "evaluation": "Apply Organizational Mirror: mature org has division, escalation, review, fallback — agents must mirror this",
+      "output": "Re-establish clear Own/Do Not Touch boundaries for each agent; verify no Cross-contamination after fix"
+    },
+    "diagnosticQuestions": [
+      "When other metas take the field, will there be Cross-contamination?",
+      "Are Own and Do Not Touch boundaries explicit for each agent?",
+      "Does each agent stay within its declared responsibility class?",
+      "Is the Organizational Mirror principle (division/escalation/review/fallback) reflected in agent boundaries?"
+    ],
+    "recommendation": "Audit each agent boundary definition; enforce Own/Do Not Touch declarations; use Organizational Mirror to ensure proper division of labor",
+    "passFailCriteria": {
+      "PASS": "Cross-contamination identified with specific agent pairs; Organizational Mirror applied to redesign boundaries; Own/Do Not Touch enforced",
+      "FAIL": "Boundary violations not detected; agents allowed to operate outside declared domains"
+    }
+  },
+  {
+    "id": "DC-08",
+    "input": "We ran the system once and it worked great. Now we treat that single run as the permanent playbook.",
+    "expectedDiagnosis": "Result-Chasing Without Structure Death Pattern detected",
+    "expectedBehavior": {
+      "detection": "Identify that one successful run is being treated as gospel without structural reproducibility",
+      "evaluation": "Apply diagnostic: 'Will it still work tomorrow? Can someone else take over and run it?'",
+      "output": "Recommend codifying the run into repeatable structure: patterns, documentation, and handoff protocol"
+    },
+    "diagnosticQuestions": [
+      "Will it still work tomorrow under different conditions?",
+      "Can someone else take over and run it?",
+      "Is the success reproducible or was it situational?",
+      "Has the successful run been codified into reusable patterns or documentation?"
+    ],
+    "recommendation": "Extract structural lessons from the successful run; write patterns to memory/patterns/; create handoff documentation; add Evolution stage to all future runs",
+    "passFailCriteria": {
+      "PASS": "Result-Chasing pattern detected; recommendation to codify into repeatable structure; evolution writeback plan created",
+      "FAIL": "Single run accepted as permanent solution; no reproducibility or handoff analysis"
+    }
+  },
+  {
+    "id": "DC-09",
+    "input": "Our system has one mega-agent that does everything (Stew-All), but also it has no review chain (Governance-Free) and we just copy what worked last time (Result-Chasing)",
+    "expectedDiagnosis": "Compound Death Patterns: Stew-All + Governance-Free Execution + Result-Chasing Without Structure",
+    "expectedBehavior": {
+      "detection": "Identify all three patterns simultaneously; prioritize remediation by severity",
+      "evaluation": "Apply all Four Death Pattern diagnostics; determine interaction effects between patterns",
+      "output": "Prioritized remediation plan: address Stew-All first (split), then Governance-Free (add review chain), then Result-Chasing (codify structure)"
+    },
+    "diagnosticQuestions": [
+      "Does the mega-agent have >2 unrelated domains? (Stew-All check)",
+      "Who reviews the output? Who reviews the reviewers? (Governance-Free check)",
+      "Will the current approach still work tomorrow? (Result-Chasing check)",
+      "Are the three patterns reinforcing each other (e.g., no review enables the mega-agent to persist)?"
+    ],
+    "recommendation": "Remediate in order: (1) Split Stew-All via Type B pipeline, (2) Add governance chain (review/meta-review/verification/evolution), (3) Codify successful runs into patterns",
+    "passFailCriteria": {
+      "PASS": "All three patterns detected and named; interaction effects identified; prioritized remediation plan with specific ordering",
+      "FAIL": "Only one pattern detected; compound effects missed; remediation plan absent or unprioritized"
+    }
+  },
+  {
+    "id": "DC-10",
+    "input": "We just split a mega-agent into 3 focused agents. Verify they each pass the Five Criteria.",
+    "expectedDiagnosis": "Post-split verification using Five Criteria for each of the 3 new agents",
+    "expectedBehavior": {
+      "detection": "Read each of the 3 new agent definitions",
+      "evaluation": "Apply Five Criteria independently to each agent; verify no new Shattered pattern was introduced by the split",
+      "output": "Evidence table per agent; global check that the split did not create Shattered or Cross-contamination"
+    },
+    "diagnosticQuestions": [
+      "Can each new agent be understood, invoked, and produce output independently?",
+      "Is each new agent small enough that further splitting would be meaningless?",
+      "Do the new agents have clear Own/Do Not Touch boundaries without overlap?",
+      "Did the split introduce a Shattered pattern (too fragmented, high coordination cost)?"
+    ],
+    "recommendation": "If all 3 agents pass Five Criteria and no Shattered pattern → split is successful; if any fail → targeted remediation per agent",
+    "passFailCriteria": {
+      "PASS": "Five Criteria verified per agent with evidence; Shattered and Cross-contamination checks performed post-split; clear verdict per agent",
+      "FAIL": "Verification skipped or performed superficially; new death patterns not checked after splitting"
+    }
+  }
+]

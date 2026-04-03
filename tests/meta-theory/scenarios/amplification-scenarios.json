@@ -1,0 +1,355 @@
+[
+  {
+    "id": "IA-01",
+    "intentCore": "Token 刷新机制需要实现",
+    "dimensions": {
+      "audience": ["CEO", "developer", "reviewer"],
+      "touchpoint": "varies by audience",
+      "contextDensity": "首次",
+      "attentionBudget": "中"
+    },
+    "expectedShells": {
+      "CEO": {
+        "audience": "CEO",
+        "abstractionLevel": "高抽象",
+        "format": "摘要 + 关键数据 + 建议行动",
+        "exampleText": "认证模块还差一个安全关键功能，预计增加 2 天工期",
+        "forbiddenContent": ["code snippets", "file paths", "function names", "technical implementation details"]
+      },
+      "developer": {
+        "audience": "开发者",
+        "abstractionLevel": "低抽象",
+        "format": "技术说明 + 文件路径 + 代码片段",
+        "exampleText": "需要实现 refreshToken() 函数，JWT 过期前 5 分钟触发，详见 API 设计文档",
+        "forbiddenContent": ["vague business summaries without technical detail", "missing file references"]
+      },
+      "reviewer": {
+        "audience": "审查员",
+        "abstractionLevel": "中等抽象",
+        "format": "断言 + 证据 + 判定",
+        "exampleText": "断言：Token 刷新逻辑需覆盖过期前窗口。证据：当前无刷新实现。判定：缺失关键安全功能。",
+        "forbiddenContent": ["unsupported claims", "assertions without evidence"]
+      }
+    },
+    "passFailCriteria": {
+      "PASS": "Same intent core expressed in 3 different shells; CEO shell has no code/file paths; developer shell has specific technical details; reviewer shell has assertion+evidence+judgment structure; core message consistent across all 3",
+      "FAIL": "Any shell contradicts another on core facts; CEO shell contains code; developer shell lacks technical specifics; reviewer shell missing evidence chain"
+    }
+  },
+  {
+    "id": "IA-02",
+    "intentCore": "系统上线延迟一周",
+    "dimensions": {
+      "audience": "CEO",
+      "touchpoint": "通知",
+      "contextDensity": "紧急",
+      "attentionBudget": "低"
+    },
+    "expectedShells": {
+      "result": {
+        "shellType": "一句话摘要",
+        "attentionCost": "low",
+        "format": "one-line conclusion with action item",
+        "characteristics": ["高抽象", "重结论", "附决策建议"],
+        "contextAdjustment": "紧急 → 只给结论和行动项",
+        "budgetAdjustment": "低 → 一句话摘要"
+      }
+    },
+    "passFailCriteria": {
+      "PASS": "Shell is one-line or near one-line; contains conclusion + recommended action; no background context (urgent mode); no detailed explanation (low budget); CEO-appropriate abstraction level",
+      "FAIL": "Shell is multi-paragraph; includes background context despite urgent mode; detailed technical explanation despite low budget; missing action recommendation"
+    }
+  },
+  {
+    "id": "IA-03",
+    "intentCore": "当前进度状态",
+    "dimensions": {
+      "audience": ["CEO", "developer"],
+      "touchpoint": "报告",
+      "contextDensity": "复查",
+      "attentionBudget": "中"
+    },
+    "expectedShells": {
+      "violation": {
+        "ceoShell": "进度正常，预计按时交付",
+        "developerShell": "进度落后预期 20%，3 个模块未完成",
+        "contradiction": true,
+        "rule": "核心信息必须一致 — 不能给CEO说进度正常，给开发者说进度延迟",
+        "resolution": "回溯意图核，确认事实后统一"
+      }
+    },
+    "passFailCriteria": {
+      "PASS": "Cross-audience consistency violation detected; contradiction between CEO and developer shells identified; resolution process triggered (trace back to intent core, confirm facts, unify); corrected shells maintain consistent core message",
+      "FAIL": "Contradictory shells accepted without detection; no consistency check performed; CEO told 'normal' while developer told 'behind'"
+    }
+  },
+  {
+    "id": "IA-04",
+    "intentCore": "进化检测结果触发结构性放大",
+    "dimensions": null,
+    "expectedShells": null,
+    "evolutionAmplification": {
+      "fivePlusOne": {
+        "dimension1_pattern": {
+          "name": "模式复用 → 提取放大",
+          "trigger": "发现可复用的代码模式",
+          "action": "提取为 Skill → 注册到 Artisan 候选池",
+          "executor": "Artisan"
+        },
+        "dimension2_boundary": {
+          "name": "agent边界 → 结构放大",
+          "trigger": "agent 职责膨胀（>2域）",
+          "action": "触发拆分 → 走类型B创建流水线",
+          "executor": "Warden"
+        },
+        "dimension3_guidance": {
+          "name": "引导优化 → 交互放大",
+          "trigger": "追问轮数 >2",
+          "action": "优化引导牌触发条件 → 预设常见意图模板",
+          "executor": "Conductor"
+        },
+        "dimension4_bottleneck": {
+          "name": "流程瓶颈 → 效率放大",
+          "trigger": "某步骤耗时最长",
+          "action": "分析原因 → 增加并行或预计算",
+          "executor": "Conductor"
+        },
+        "dimension5_capability": {
+          "name": "能力覆盖 → 规模放大",
+          "trigger": "发现新能力缺口",
+          "action": "创建新元/Skill → 或调用 Scout 搜索外部工具",
+          "executor": "Scout/Genesis"
+        },
+        "overlay_scars": {
+          "name": "伤疤编码化 (overlay)",
+          "trigger": "execution failure or boundary violation",
+          "action": "codify as scar → prevent recurrence",
+          "types": ["overstep", "boundary-violation", "process-gap", "false-positive"]
+        }
+      }
+    },
+    "passFailCriteria": {
+      "PASS": "All 5 structural dimensions identified with correct trigger/action/executor pairs; scars overlay recognized as 6th dimension; each detection result maps to a concrete amplification operation, not vague 'improvement'",
+      "FAIL": "Dimensions missing or conflated; no concrete amplification operations; evolution treated as passive logging instead of active structural change"
+    }
+  },
+  {
+    "id": "IA-05",
+    "intentCore": "连续3轮高成本出牌后的强制留白",
+    "dimensions": {
+      "audience": "developer",
+      "touchpoint": "对话",
+      "contextDensity": "复查",
+      "attentionBudget": "depleted after 3 high-cost cards"
+    },
+    "expectedShells": {
+      "silenceCard": {
+        "trigger": "≥3 consecutive rounds of high-density pushes without a pause",
+        "action": "forced silence card — intentional pause for user digestion",
+        "cardType": "留白",
+        "attentionCost": "zero",
+        "rationale": "silence is also design — Three Laws of Attention Cost"
+      }
+    },
+    "passFailCriteria": {
+      "PASS": "Silence card triggered after 3 consecutive high-cost cards; system pauses to allow user digestion; silence is intentional design not system failure; resumes normal card play after pause",
+      "FAIL": "4th high-cost card played without pause; no silence mechanism; system continues information overload"
+    }
+  },
+  {
+    "id": "IA-06",
+    "intentCore": "新的缓存架构方案需要评估",
+    "dimensions": {
+      "audience": "developer",
+      "touchpoint": "文档",
+      "contextDensity": "首次",
+      "attentionBudget": "高"
+    },
+    "expectedShells": {
+      "result": {
+        "shellType": "完整技术文档",
+        "attentionCost": "high",
+        "characteristics": ["低抽象", "重实现细节", "附代码引用"],
+        "contextAdjustment": "首次 → 补充背景说明",
+        "budgetAdjustment": "高 → 完整详细输出",
+        "expectedContent": ["file paths", "code snippets", "API endpoints", "architecture diagrams", "background context"]
+      }
+    },
+    "passFailCriteria": {
+      "PASS": "Full technical document shell selected; low abstraction with implementation details; background context included (first-time); complete detailed output (high budget); contains code references, file paths, and technical specifics",
+      "FAIL": "Summary shell selected despite high budget; missing background despite first-time context; high abstraction inappropriate for developer audience"
+    }
+  },
+  {
+    "id": "IA-07",
+    "intentCore": "缓存架构方案的第二轮审查",
+    "dimensions": {
+      "audience": "reviewer",
+      "touchpoint": "报告",
+      "contextDensity": "复查",
+      "attentionBudget": "中"
+    },
+    "expectedShells": {
+      "result": {
+        "shellType": "差异增量",
+        "attentionCost": "low",
+        "characteristics": ["中等抽象", "重证据链", "附断言验证"],
+        "contextAdjustment": "复查 → 只给差异和变化",
+        "budgetAdjustment": "中 → 核心内容 + 可展开链接",
+        "expectedContent": ["delta from previous review", "changed assertions", "updated evidence", "new findings only"]
+      }
+    },
+    "passFailCriteria": {
+      "PASS": "Delta-only shell selected for re-review; only differences from previous review shown; reviewer-appropriate evidence chain; medium budget respected with core + expandable; no redundant background",
+      "FAIL": "Full document repeated despite re-review context; no delta identification; background context re-explained unnecessarily"
+    }
+  },
+  {
+    "id": "IA-08",
+    "intentCore": "正在执行常规开发任务时 Sentinel 检测到安全漏洞",
+    "dimensions": {
+      "audience": "developer",
+      "touchpoint": "通知",
+      "contextDensity": "紧急",
+      "attentionBudget": "immediately elevated"
+    },
+    "expectedShells": {
+      "interrupt": {
+        "mechanism": "Sentinel → Conductor interrupt signal channel",
+        "interruptType": "security alert",
+        "action": "current card preempted; security card played immediately",
+        "shellCharacteristics": ["紧急 → 只给结论和行动项", "interrupt priority overrides normal card dealing"],
+        "postInterrupt": "resume normal card sequence after security issue addressed"
+      }
+    },
+    "passFailCriteria": {
+      "PASS": "Sentinel interrupt correctly preempts current card; security alert delivered with urgency shell (conclusion + action only); normal card sequence resumes after resolution; interrupt channel Sentinel→Conductor functions correctly",
+      "FAIL": "Security alert queued behind normal cards; interrupt not recognized; full context delivered despite urgency; no mechanism to resume normal flow"
+    }
+  },
+  {
+    "id": "IA-09",
+    "intentCore": "系统健康状况周报",
+    "dimensions": {
+      "audience": "CEO",
+      "touchpoint": "报告",
+      "contextDensity": "复查",
+      "attentionBudget": "中"
+    },
+    "expectedShells": {
+      "selfCheck": {
+        "rule": "CEO报告不应包含代码片段或文件路径",
+        "checks": [
+          "报告是否按受众调整了抽象层级",
+          "关键结论是否前置",
+          "是否附带决策建议",
+          "信息密度是否匹配注意力预算"
+        ],
+        "forbiddenInCEOShell": ["code snippets", "file paths", "function names", "technical jargon", "API endpoints"],
+        "requiredInCEOShell": ["conclusion first", "key data points", "recommended actions", "CEO-level abstraction"]
+      }
+    },
+    "passFailCriteria": {
+      "PASS": "CEO shell contains zero code snippets and zero file paths; conclusion is in first paragraph; decision recommendations attached; information density matches medium budget; re-review context means delta-only",
+      "FAIL": "CEO shell contains any code/file paths; conclusion buried in middle; no actionable recommendations; information overload for medium budget"
+    }
+  },
+  {
+    "id": "IA-10",
+    "intentCore": "意图放大与节奏编排交叉场景",
+    "dimensions": {
+      "audience": "developer",
+      "touchpoint": "对话",
+      "contextDensity": "首次",
+      "attentionBudget": "中"
+    },
+    "expectedShells": {
+      "integration": {
+        "rhythmOrchestration": {
+          "cardDealing": "Conductor selects card based on priority and context",
+          "deliveryShellSelection": "each card gets shell based on 4 dimensions",
+          "attentionCostControl": "shell type determines attention cost per card"
+        },
+        "intentAmplification": {
+          "intentCore": "extracted from card content",
+          "shellWrapping": "wrapped according to audience + touchpoint + context + budget",
+          "consistency": "same intent core across all shells"
+        },
+        "interplay": "Conductor provides timing and budget → Intent Amplification provides shell wrapping → together they control WHAT is said, WHEN, and HOW"
+      }
+    },
+    "passFailCriteria": {
+      "PASS": "Rhythm orchestration and intent amplification work together: Conductor controls timing/budget, shell selection wraps content appropriately; card dealing rules respected while shell dimensions applied; attention cost matches shell type",
+      "FAIL": "Rhythm and intent treated as independent systems; shell selection ignores card priority; attention cost not linked to shell type"
+    }
+  },
+  {
+    "id": "IA-11",
+    "intentCore": "单次进化检测触发多维度级联放大",
+    "dimensions": null,
+    "expectedShells": null,
+    "evolutionCascade": {
+      "trigger": "发现可复用的工作流模式 that also reveals agent boundary issue and capability gap",
+      "cascade": [
+        {
+          "dimension": "dimension1_pattern",
+          "action": "提取为编排模板 → 注册到 Conductor 模板库",
+          "executor": "Conductor"
+        },
+        {
+          "dimension": "dimension2_boundary",
+          "action": "agent 职责膨胀检测 → 触发拆分评估",
+          "executor": "Warden",
+          "cascadedFrom": "pattern extraction revealed boundary overlap"
+        },
+        {
+          "dimension": "dimension5_capability",
+          "action": "触发 Scout 扫描 → ROI 评估 → 引入决策",
+          "executor": "Scout",
+          "cascadedFrom": "boundary analysis exposed missing capability"
+        }
+      ]
+    },
+    "passFailCriteria": {
+      "PASS": "Single detection cascades across multiple evolution dimensions; each cascaded dimension has explicit trigger reason traced to previous dimension; all cascaded amplification operations executed with correct executors",
+      "FAIL": "Only first dimension processed; cascading not detected; subsequent dimensions treated as independent instead of linked"
+    }
+  },
+  {
+    "id": "IA-12",
+    "intentCore": "XSS 漏洞已修复，影响范围 3 个页面，需要验证",
+    "dimensions": {
+      "audience": ["CEO", "developer", "reviewer"],
+      "touchpoint": "报告",
+      "contextDensity": "首次",
+      "attentionBudget": "中"
+    },
+    "expectedShells": {
+      "CEO": {
+        "audience": "CEO",
+        "abstractionLevel": "高抽象",
+        "exampleText": "安全关键修复完成，3个面向用户的页面已加固。建议行动：安排一次安全审查确认。",
+        "forbiddenContent": ["code snippets", "file paths", "function names", "DOMPurify", "innerHTML"],
+        "requiredContent": ["business impact", "recommended action", "conclusion first"]
+      },
+      "developer": {
+        "audience": "开发者",
+        "abstractionLevel": "低抽象",
+        "exampleText": "修复了 pages/profile.tsx:42、pages/settings.tsx:88、pages/dashboard.tsx:156 的 XSS 漏洞。使用 DOMPurify sanitize 用户输入。需要 code review + 回归测试。",
+        "forbiddenContent": ["vague summaries", "missing specific file locations"],
+        "requiredContent": ["file paths with line numbers", "technical method used", "next steps"]
+      },
+      "reviewer": {
+        "audience": "审查员",
+        "abstractionLevel": "中等抽象",
+        "exampleText": "断言：所有用户输入路径已做 sanitize。证据：3 处 innerHTML 替换为 DOMPurify.sanitize()。验证方法：注入 <script>alert(1)</script> 测试。",
+        "forbiddenContent": ["unsupported assertions", "missing verification method"],
+        "requiredContent": ["assertion", "evidence", "verification method"]
+      }
+    },
+    "passFailCriteria": {
+      "PASS": "Three shells for same XSS fix intent; CEO shell has no code, high abstraction, action recommendation; developer shell has file paths with line numbers, technical detail; reviewer shell has assertion+evidence+verification structure; all three agree on core fact (3 pages fixed)",
+      "FAIL": "Any shell contradicts on facts; CEO shell contains code; developer shell lacks file paths; reviewer shell missing evidence or verification method"
+    }
+  }
+]

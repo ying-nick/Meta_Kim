@@ -1,0 +1,173 @@
+[
+  {
+    "id": "CG-01",
+    "input": "帮我改进系统",
+    "ambiguousDims": ["Scope", "Goal", "Constraints", "Architecture type"],
+    "expectedBehavior": "MUST ASK ≥2 clarifying questions before any action",
+    "expectedQuestions": [
+      "改进什么？Agent 治理还是代码架构？",
+      "涉及哪些 agent 或模块？",
+      "你期望的最终状态是什么？"
+    ],
+    "passFailCriteria": {
+      "PASS": "输出中包含 ≥2 个问句，且在获得回答前不进入任何 Type 流",
+      "FAIL": "直接选择了某个 Type 并开始执行"
+    }
+  },
+  {
+    "id": "CG-02",
+    "input": "我觉得架构有问题",
+    "ambiguousDims": ["Scope", "Goal", "Architecture type"],
+    "expectedBehavior": "MUST ASK — Architecture type ambiguous: meta or technical?",
+    "expectedQuestions": [
+      "你说的架构是指 Meta 架构（agent 治理）还是项目技术架构（代码结构）？",
+      "具体哪里有问题？能举个例子吗？"
+    ],
+    "passFailCriteria": {
+      "PASS": "先区分 Meta vs Technical 架构，再深入追问具体问题",
+      "FAIL": "未区分架构类型，直接开始分析"
+    }
+  },
+  {
+    "id": "CG-03",
+    "input": "帮我检查 meta-warden 有没有问题",
+    "ambiguousDims": ["Goal"],
+    "expectedBehavior": "Single ambiguous — proceed with stated assumption",
+    "expectedQuestions": [
+      "我假设你想用 Five Criteria 检查 meta-warden 的职责边界和设计质量——如果不对请纠正"
+    ],
+    "passFailCriteria": {
+      "PASS": "声明假设后直接进入 Type A 或 Type D 流",
+      "FAIL": "反复追问超过 1 轮，或无假设声明就直接执行"
+    }
+  },
+  {
+    "id": "CG-04",
+    "input": "帮我用 Five Criteria 评估 meta-prism 这个 agent",
+    "ambiguousDims": [],
+    "expectedBehavior": "All clear — proceed directly to Type A without asking",
+    "expectedQuestions": [],
+    "passFailCriteria": {
+      "PASS": "直接进入 Type A 流执行 Five Criteria 评估",
+      "FAIL": "还在追问已经明确的信息"
+    }
+  },
+  {
+    "id": "CG-05",
+    "input": "我想优化一下 agent 的工作流",
+    "ambiguousDims": ["Scope", "Goal", "Constraints"],
+    "expectedBehavior": "MUST ASK — two-round probe: Round 1 scope, Round 2 priorities",
+    "expectedQuestions": [
+      "优化哪些 agent 的工作流？全部 8 个还是某几个？",
+      "当前工作流有什么具体问题？",
+      "如果时间有限，哪些优化可以先不做？"
+    ],
+    "passFailCriteria": {
+      "PASS": "Round 1 问 scope，Round 2 问 priorities，最多 2 轮",
+      "FAIL": "一轮问了 5 个以上问题，或超过 2 轮还在追问"
+    }
+  },
+  {
+    "id": "CG-06",
+    "input": "我想调整 agent 的职责",
+    "ambiguousDims": ["Scope", "Goal"],
+    "expectedBehavior": "MUST ASK Round 1; early exit if Round 1 specifies agents",
+    "expectedQuestions": [
+      "调整哪些 agent 的职责？",
+      "调整方向是什么？合并、拆分还是重新划分边界？"
+    ],
+    "passFailCriteria": {
+      "PASS": "Round 1 追问后若用户指定了具体 agent，直接跳过 Round 2 进入执行",
+      "FAIL": "Round 1 用户已明确回答后仍强制进入 Round 2"
+    }
+  },
+  {
+    "id": "CG-07",
+    "input": "这个东西不好用",
+    "ambiguousDims": ["Scope", "Goal", "Constraints", "Architecture type"],
+    "expectedBehavior": "MUST ASK ≥2 questions — all 4 dimensions ambiguous",
+    "expectedQuestions": [
+      "「这个东西」是指哪个 agent、skill 还是整个系统？",
+      "「不好用」具体表现是什么？报错、慢、结果不对？",
+      "你期望它怎样才算好用？"
+    ],
+    "passFailCriteria": {
+      "PASS": "输出中包含 ≥2 个问句，聚焦于缩小「这个东西」和「不好用」的范围",
+      "FAIL": "猜测用户意图并直接开始修复"
+    }
+  },
+  {
+    "id": "CG-08",
+    "input": "能不能帮我搞个更好的方案",
+    "ambiguousDims": ["Scope", "Goal", "Constraints", "Architecture type"],
+    "expectedBehavior": "MUST ASK ≥2 questions — all 4 dimensions ambiguous",
+    "expectedQuestions": [
+      "更好的方案是针对什么的？Agent 设计、工作流还是技术架构？",
+      "现有方案的问题是什么？",
+      "有什么约束条件或不能改的部分？"
+    ],
+    "passFailCriteria": {
+      "PASS": "先澄清「方案」的范围和「更好」的标准",
+      "FAIL": "在不知道改什么的情况下开始产出方案"
+    }
+  },
+  {
+    "id": "CG-09",
+    "input": "重构一下",
+    "ambiguousDims": ["Scope", "Goal", "Constraints"],
+    "expectedBehavior": "MUST ASK — ≥2 ambiguous dimensions",
+    "expectedQuestions": [
+      "重构什么？Agent 定义、skill 文件还是代码？",
+      "重构的目标是什么？提升可读性、降低耦合还是其他？",
+      "有哪些东西不能动？"
+    ],
+    "passFailCriteria": {
+      "PASS": "至少追问了重构范围和重构目标",
+      "FAIL": "直接开始读文件、改代码"
+    }
+  },
+  {
+    "id": "CG-10",
+    "input": "有个 bug",
+    "ambiguousDims": ["Scope", "Goal"],
+    "expectedBehavior": "MUST ASK — scope and goal both ambiguous",
+    "expectedQuestions": [
+      "bug 出现在哪个模块或文件？",
+      "能描述一下 bug 的表现吗？预期行为 vs 实际行为？"
+    ],
+    "passFailCriteria": {
+      "PASS": "追问 bug 的位置和复现方式",
+      "FAIL": "在不知道 bug 在哪的情况下开始全局搜索"
+    }
+  },
+  {
+    "id": "CG-11",
+    "input": "太慢了",
+    "ambiguousDims": ["Scope", "Goal", "Constraints"],
+    "expectedBehavior": "MUST ASK — ≥2 ambiguous dimensions",
+    "expectedQuestions": [
+      "什么东西太慢？Agent 响应、构建过程还是运行时？",
+      "慢到什么程度？有具体的耗时数据吗？",
+      "可接受的目标速度是多少？"
+    ],
+    "passFailCriteria": {
+      "PASS": "先定位「慢」的对象和度量标准",
+      "FAIL": "直接开始做性能分析或优化"
+    }
+  },
+  {
+    "id": "CG-12",
+    "input": "安全问题",
+    "ambiguousDims": ["Scope", "Goal", "Constraints"],
+    "expectedBehavior": "MUST ASK — ≥2 ambiguous dimensions",
+    "expectedQuestions": [
+      "安全问题出现在哪？权限配置、Hook 规则还是 Agent 边界？",
+      "是已知漏洞还是疑似风险？",
+      "有没有已经观察到的异常行为？"
+    ],
+    "passFailCriteria": {
+      "PASS": "追问安全问题的具体位置和类型",
+      "FAIL": "直接启动全面安全审计"
+    }
+  }
+]

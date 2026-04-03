@@ -73,8 +73,8 @@ For complex development work, Claude Code should behave as the dispatcher first,
 This applies to **all meta-theory Type flows**, not just development tasks:
 
 - **Type A (Analysis)**: meta-theory gathers information (Steps 1-2), then dispatches `meta-prism` for quality audit and `meta-warden` for synthesis
-- **Type B (Agent Creation)**: meta-theory plans (Phases 1-2), then dispatches station agents (`meta-genesis`, `meta-artisan`, etc.) via `Task()` for design work
-- **Type C (Development)**: meta-theory handles Stages 1-3 (Critical/Fetch/Thinking), then dispatches specialists via `Task()` for Stages 4-8
+- **Type B (Agent Creation)**: meta-theory plans (Phases 1-2), then dispatches station agents (`meta-genesis`, `meta-artisan`, etc.) via the `Agent` tool for design work
+- **Type C (Development)**: meta-theory handles Stages 1-3 (Critical/Fetch/Thinking), then dispatches specialists via the `Agent` tool for Stages 4-8
 - **Type D (Review)**: meta-theory reads the proposal, then dispatches `meta-prism` + `meta-scout` + `meta-warden` for review execution
 - **Type E (Rhythm)**: meta-theory diagnoses issues (Steps 1-3), then dispatches `meta-conductor` for Card Deck design and `meta-warden` for synthesis
 
@@ -90,7 +90,7 @@ For those tasks:
 
 1. use the `meta-theory` skill
 2. follow the 8-stage spine
-3. in `Execution`, spawn sub-agents via `Task()`
+3. in `Execution`, spawn sub-agents via the `Agent` tool
 4. keep the main thread focused on scope, delegation, review, and synthesis
 
 The 8-stage spine is:
@@ -158,7 +158,7 @@ You:
 - Critical: clarify scope
 - Fetch: search existing capabilities
 - Thinking: define ownership and deliverables
-- Execution: Task(...) the right specialists
+- Execution: use the `Agent` tool to dispatch the right specialists
 - Review: inspect outputs
 - Verification: confirm the applied state
 - Evolution: capture the reusable pattern

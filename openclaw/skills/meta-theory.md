@@ -66,7 +66,7 @@ Everything else → Agent tool call.
 
 ---
 
-## Canonical narrative (aligns with `C:/Users/admin/.claude/meta-kim/docs/meta.md`)
+## Canonical narrative (aligns with `docs/meta.md`)
 
 **元 → 组织镜像 → 节奏编排 → 意图放大**: smallest governable units first; mirror mature org division/escalation/review/fallback; orchestrate who acts when (card play, skip, interrupt, silence); turn intent into concrete next actions and delivery — not slogans.
 
@@ -93,7 +93,7 @@ You are the **Meta Architecture Execution Framework**. When a trigger condition 
 
 **The #1 failure mode of this skill is self-execution instead of agent dispatch.** Every Type A/B/C/D/E flow requires spawning agents for execution work. This section explains HOW.
 
-### The Real Tool: `Agent`, Not `Task()`
+### The Real Tool: `Agent`
 
 In Claude Code, you dispatch agents using the **Agent tool** with these parameters:
 
@@ -246,7 +246,7 @@ Read each agent definition file to understand the current state.
 
 **Step 2.5: Agent Dispatch (MANDATORY)**
 
-Type A analysis involves quality audit and pattern detection — this is execution work, not thinking. Spawn agents via `Task()`:
+Type A analysis involves quality audit and pattern detection — this is execution work, not thinking. Spawn agents via the `Agent` tool:
 
 | Analysis Need | Agent to Spawn | Responsibility |
 |---------------|---------------|----------------|
@@ -303,7 +303,7 @@ For each agent, fill in the table:
 The user requests creating a new agent or splitting an existing agent's responsibilities.
 
 ### Your Role
-You play the role of **meta-warden** (pipeline coordinator). `C:/Users/admin/.claude/agents/meta-*.md` are the methodological references for each station — at the start of each station, you read the corresponding file and execute according to its methodology.
+You play the role of **meta-warden** (pipeline coordinator). `.claude/agents/meta-*.md` are the methodological references for each station — at the start of each station, you read the corresponding file and execute according to its methodology.
 
 ### Two Entry Modes
 
@@ -452,7 +452,7 @@ Rule: a station only counts as complete when its deliverables are explicit enoug
 
 **Step 3: Genesis — Soul Design (Mandatory, dispatched to meta-genesis)**
 
-Spawn **meta-genesis** agent via `Task()` with the ABSTRACTION PRINCIPLE and 8-module requirements below. meta-genesis reads its own methodology at `C:/Users/admin/.claude/agents/meta-genesis.md` and produces the SOUL.md draft.
+Spawn **meta-genesis** via the `Agent` tool with the ABSTRACTION PRINCIPLE and 8-module requirements below. meta-genesis reads its own methodology at `.claude/agents/meta-genesis.md` and produces the SOUL.md draft.
 
 **⚠️ ABSTRACTION PRINCIPLE (Non-Negotiable):** SOUL.md describes **WHAT KIND OF AGENT IT IS** (domain, technology stack, architectural patterns) — NOT **WHAT TASKS IT SHOULD EXECUTE** (specific features, pages, or deliverables).
 
@@ -464,7 +464,7 @@ The correct abstraction looks like this:
 
 The difference: **describes what you know** (technologies, patterns, architectures) vs **describes what you do** (specific features or pages). A SOUL.md that summarizes to "be an X-type agent" is correct. A SOUL.md that summarizes to "do X specific thing" is grade D, redo.
 
-The output must include **8 mandatory modules** (same labels and thresholds as `C:/Users/admin/.claude/agents/meta-genesis.md`):
+The output must include **8 mandatory modules** (same labels and thresholds as `.claude/agents/meta-genesis.md`):
 1. Core Truths — ≥3 behavioral anchors, specific to this domain
 2. Role + Core Work — clear "Own / Do Not Touch" boundaries
 3. Decision Rules — ≥3 if/then rules (use ≥5 when the role spans multiple modes or high-risk paths)
@@ -484,7 +484,7 @@ The output must include **8 mandatory modules** (same labels and thresholds as `
 
 **Step 4: Artisan — Skill Matching (Mandatory, dispatched to meta-artisan)**
 
-Spawn **meta-artisan** agent via `Task()`. meta-artisan reads `C:/Users/admin/.claude/agents/meta-artisan.md`.
+Spawn **meta-artisan** via the `Agent` tool. meta-artisan reads `.claude/agents/meta-artisan.md`.
 
 1. Scan available Skills: `ls .claude/skills/*/SKILL.md` + system built-in Skills
 2. ROI scoring: `ROI = (task coverage × usage frequency) / (context cost + learning curve)`
@@ -499,7 +499,7 @@ Spawn **meta-artisan** agent via `Task()`. meta-artisan reads `C:/Users/admin/.c
 
 **Step 5: Sentinel — Security Design (On Demand, dispatched to meta-sentinel)**
 
-Spawn **meta-sentinel** agent via `Task()` when triggered. meta-sentinel reads `C:/Users/admin/.claude/agents/meta-sentinel.md`.
+Spawn **meta-sentinel** via the `Agent` tool when triggered. meta-sentinel reads `.claude/agents/meta-sentinel.md`.
 - Threat modeling: Top 5 threats in this Agent's domain
 - Permission design: 3 levels (CAN / CANNOT / NEVER)
 - Hook design: PreToolUse / PostToolUse / Stop hooks
@@ -513,7 +513,7 @@ Spawn **meta-sentinel** agent via `Task()` when triggered. meta-sentinel reads `
 
 **Step 6: Librarian — Memory Design (On Demand, dispatched to meta-librarian)**
 
-Spawn **meta-librarian** agent via `Task()` when triggered. meta-librarian reads `C:/Users/admin/.claude/agents/meta-librarian.md`.
+Spawn **meta-librarian** via the `Agent` tool when triggered. meta-librarian reads `.claude/agents/meta-librarian.md`.
 - Memory architecture: 3 layers (index layer / topic layer / archive layer)
 - Expiration policy: set expiration rules by type
 - Output: MEMORY.md template + persistence strategy
@@ -526,7 +526,7 @@ Spawn **meta-librarian** agent via `Task()` when triggered. meta-librarian reads
 
 **Step 7: Conductor — Orchestration Design (On Demand, dispatched to meta-conductor)**
 
-Spawn **meta-conductor** agent via `Task()` when triggered. meta-conductor reads `C:/Users/admin/.claude/agents/meta-conductor.md`.
+Spawn **meta-conductor** via the `Agent` tool when triggered. meta-conductor reads `.claude/agents/meta-conductor.md`.
 - Collaboration flow: invocation order between Agents, parallel/sequential
 - Trigger conditions: under what circumstances to spawn this Agent
 - Output: Workflow configuration + trigger rules
@@ -541,7 +541,7 @@ Spawn **meta-conductor** agent via `Task()` when triggered. meta-conductor reads
 
 **Step 8: Critical Review (dispatched to meta-prism)**
 
-Spawn **meta-prism** agent via `Task()` to review each Agent's complete design. meta-prism answers 4 questions:
+Spawn **meta-prism** via the `Agent` tool to review each Agent's complete design. meta-prism answers 4 questions:
 1. What assumptions did I make? Is there data to support them?
 2. If I replace the Agent name with something else, does the design still hold? (If yes = no Domain Depth, redo)
 3. Are there traces of Scope Creep? (Responsibility overflow into other Agents' domains)
@@ -566,7 +566,7 @@ AI-Slop Quantitative Detection:
 
 **Step 10: Integration and Write (dispatched to meta-warden)**
 
-Spawn **meta-warden** agent via `Task()` to synthesize all station outputs into the final agent definition.
+Spawn **meta-warden** via the `Agent` tool to synthesize all station outputs into the final agent definition.
 
 Generate `.claude/agents/{name}.md`, with structure including: identity, responsibility boundaries, Core Truths, Decision Rules, Thinking Framework, Anti-AI-Slop, Output Quality, Deliverable Flow, Meta-Skills, skill equipment, security rules (if any), memory strategy (if any), workflow (if any), Five Criteria verification table.
 
@@ -619,7 +619,7 @@ The 8-stage execution spine:
 **Core principles** (enforced throughout all stages):
 - **Agent Invocation Principle**: Never hardcode agent names — Search who declares "Own X" → Match → Invoke
 - **Agent Ownership Rule**: Only pure `Q / Query` may bypass agent ownership. Any executable or handoff-able task must have an explicit owner.
-- **Skip-Level Gate**: meta-theory does NOT write code directly — always dispatch to Execution Layer via `Task()` invocations. Track `agentInvocationState` through the cycle: idle → discovered (Fetch) → matched → dispatched → returned/escalated.
+- **Skip-Level Gate**: meta-theory does NOT write code directly — always dispatch to the Execution Layer via the `Agent` tool. Track `agentInvocationState` through the cycle: idle → discovered (Fetch) → matched → dispatched → returned/escalated.
 - **Fetch-first**: Search → Match (score 0-3) → Invoke; fallback chain is local → capability index → external search → specialist ecosystem → owner-resolution branch
 - **Option Exploration (MANDATORY)**: Stage 3 MUST analyze **≥2 solution paths** with Pros/Cons before selecting one. Present as a comparison table. Record the chosen path AND rejected alternatives with reasons in a Decision Record. Skipping this step is a Stage 3 violation.
 - **Protocol-first Dispatch**: Stage 4 may not start until Stage 3 has produced run header, dispatch board, worker task packets, merge plan, review packet plan, verification packet plan, and evolution writeback plan.
@@ -662,7 +662,7 @@ Read the user-specified agent definition file, proposal document, article, or do
 
 **Step 1.5: Agent Dispatch (MANDATORY)**
 
-Type D is a governance flow — you are the DISPATCHER, not the executor. Spawn the following agents via `Task()` based on review needs:
+Type D is a governance flow — you are the DISPATCHER, not the executor. Spawn the following agents via the `Agent` tool based on review needs:
 
 | Review Need | Agent to Spawn | Responsibility |
 |-------------|---------------|----------------|
@@ -723,8 +723,8 @@ Then check three internal mechanisms:
 
 **Step 3: Search Existing Orchestration**
 ```
-Glob: C:/Users/admin/.claude/agents/meta-conductor.md
-Grep: "card|orchestration|rhythm" --path C:/Users/admin/.claude/agents/*.md
+Glob: .claude/agents/meta-conductor.md
+Grep: "card|orchestration|rhythm" --path .claude/agents/*.md
 ```
 
 **Step 3.5: Agent Dispatch (MANDATORY)**
@@ -823,7 +823,7 @@ skill-creator:test-framework → eval prompts → assertion grading → redo if 
 | `references/intent-amplification.md` | Type C Evolution | Intent Core + Delivery Shell model |
 | `references/ten-step-governance.md` | Type C/D governance | Complete 10-step governance path |
 | `references/create-agent.md` | Type B Phase 3-4 | Station templates, output file template |
-| `C:/Users/admin/.claude/agents/meta-*.md` | Type B each station | Meta agent methodology |
+| `.claude/agents/meta-*.md` | Type B each station | Meta agent methodology |
 
 ---
 
@@ -841,9 +841,9 @@ Use the following scenarios to verify skill effectiveness:
 
 **Test 3: Complex Development Task (Type C) — Dispatcher Verification**
 > "I need to implement a user authentication system, including login, registration, token refresh, permission verification"
-> Expected: Go through the 8-stage execution spine, Critical → Fetch (search agents) → Thinking (plan sub-tasks) → **Execution: Task() spawns agents** (NOT self-execution) → Review → Meta-Review + Verification → Evolution
+> Expected: Go through the 8-stage execution spine, Critical → Fetch (search agents) → Thinking (plan sub-tasks) → **Execution: Agent tool spawns agents** (NOT self-execution) → Review → Meta-Review + Verification → Evolution
 >
-> **PASS criteria**: Stage 4 must show explicit `Task()` invocations, every executable sub-task must have an owner, and Stage 3 must define protocol artifacts before dispatch. If the response shows direct code writing without any `Task()` calls or uses anonymous execution with no owner → FAIL, Grade D.
+> **PASS criteria**: Stage 4 must show explicit `Agent` tool invocations, every executable sub-task must have an owner, and Stage 3 must define protocol artifacts before dispatch. If the response shows direct code writing without any `Agent` calls or uses anonymous execution with no owner → FAIL, Grade D.
 
 **Test 4: Review Proposal (Type D)**
 > "Help me review whether this agent's definition is reasonable"

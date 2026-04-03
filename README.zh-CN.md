@@ -81,6 +81,28 @@ Meta_Kim 的核心思路是：先做 **意图放大**，再做执行。
 
 **Meta_Kim 关心的不是“单次答得像不像”，而是“复杂任务能不能被持续、稳定、可治理地完成”。**
 
+## 元架构视角
+
+看这个仓库，最稳的方式不是把它理解成“一堆 prompt 加一些配置文件”，而是把它理解成一套分层治理系统：
+
+- **理论主源层**：`docs/meta.md` 和 `.claude/skills/meta-theory/` 定义方法本身
+- **组织主源层**：`.claude/agents/*.md` 定义 8 个元角色及其边界
+- **契约主源层**：`contracts/workflow-contract.json` 及相关 contract 定义 run 纪律、闸门和交付闭环
+- **运行时投影层**：`.codex/`、`.agents/`、`openclaw/`、`shared-skills/` 是同一套系统在不同运行时里的投影
+- **工具与验证层**：`scripts/`、`validate`、`eval:agents`、`tests/meta-theory/` 负责让这些投影持续和主源对齐
+
+所以，`Meta_Kim` 更准确的结构应该记成：
+
+**一套 meta-theory 主源系统 -> 一套可治理的元组织 -> 一套 workflow contract -> 多 runtime 投影 -> 一条同步与验证闭环**
+
+它的默认运行路径也不是偶然拼出来的，而是架构的一部分：
+
+`用户意图 -> meta-warden -> Critical -> Fetch -> Thinking -> 专业角色执行 -> Review -> Verification -> Evolution`
+
+对应的维护原则也很直接：
+
+**优先改 `.claude/` 和 `contracts/`，然后再同步并校验各 runtime 镜像。**
+
 ## 作者与支持
 
 <div align="center">

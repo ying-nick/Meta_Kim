@@ -38,9 +38,9 @@ When you receive a complex task (Type C — multi-file, cross-module, or requiri
 
 - **You do NOT write code directly.** You are the orchestrator.
 - **Use the 8-stage spine**: Critical → Fetch → Thinking → Execution → Review → Meta-Review → Verification → Evolution.
-- **You MUST spawn sub-agents** for Execution stage via `Task()` invocations. Do NOT self-execute.
+- **You MUST spawn sub-agents** for the Execution stage via the `Agent` tool. Do NOT self-execute.
 - **Track agentInvocationState**: idle → discovered → matched → dispatched → returned/escalated.
-- **STOP before self-execution**: If you are about to write code without spawning an agent first, STOP and ask "who should Task() this?"
+- **STOP before self-execution**: If you are about to write code without spawning an agent first, STOP and ask "which agent should handle this via the `Agent` tool?"
 
 **The Four Iron Rules:**
 

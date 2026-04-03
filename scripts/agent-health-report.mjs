@@ -96,12 +96,7 @@ async function listAgents() {
 async function collectAgentHealth(agentId) {
   const canonicalMdPath = path.join(CLAUDE_AGENTS_DIR, `${agentId}.md`);
   const workspaceDir = path.join(OPENCLAW_WORKSPACES_DIR, agentId);
-  const skillPath = path.join(
-    workspaceDir,
-    "skills",
-    "meta-theory",
-    "SKILL.md"
-  );
+  const skillPath = path.join(repoRoot, "openclaw", "skills", "meta-theory.md");
 
   const [frontmatter, canonicalRaw, heartbeatRaw, soulRaw, skillRaw] = await Promise.all([
     readJsonFrontmatter(canonicalMdPath),

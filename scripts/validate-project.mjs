@@ -248,6 +248,9 @@ async function validateRequiredFiles() {
     "openclaw/openclaw.template.json",
     "codex/config.toml.example",
     "contracts/workflow-contract.json",
+    "memory/patterns/.gitkeep",
+    "memory/scars/.gitkeep",
+    "memory/capability-gaps.md",
     "scripts/mcp/meta-runtime-server.mjs",
     "scripts/eval-meta-agents.mjs",
     "scripts/prepare-openclaw-local.mjs"
@@ -447,33 +450,6 @@ async function validateOpenClawArtifacts(agentIds) {
         assertNoForbiddenMarkers(workspaceSoul, workspaceFile);
       }
     }
-    const workspaceSkill = path.join(
-      openclawWorkspacesDir,
-      agentId,
-      "skills",
-      "meta-theory",
-      "SKILL.md"
-    );
-    assert(
-      await exists(workspaceSkill),
-      `Missing OpenClaw workspace skill: ${path.relative(repoRoot, workspaceSkill)}`
-    );
-    const workspaceSkillRaw = await fs.readFile(workspaceSkill, "utf8");
-    assertNoForbiddenMarkersInSkill(workspaceSkillRaw, workspaceSkill);
-    for (const referenceFile of referenceFiles) {
-      const workspaceReference = path.join(
-        openclawWorkspacesDir,
-        agentId,
-        "skills",
-        "meta-theory",
-        "references",
-        referenceFile
-      );
-      assert(
-        await exists(workspaceReference),
-        `Missing OpenClaw workspace skill reference: ${path.relative(repoRoot, workspaceReference)}`
-      );
-    }
   }
 }
 
@@ -600,8 +576,7 @@ async function validateCodexArtifacts(agentIds) {
     "sandbox_mode",
     "[agents]",
     "[mcp_servers.meta_kim_runtime]",
-    "[[skills.config]]",
-    ".agents/skills/meta-theory"
+    ".agents/skills/"
   ]) {
     assert(
       configExample.includes(expected),
@@ -938,9 +913,9 @@ async function main() {
   console.log("========================================");
 
   // 1. Required files
-  step(current++, TOTAL, "Checking required files", "README.md, CLAUDE.md, package.json, etc. (24 files)");
+  step(current++, TOTAL, "Checking required files", "README.md, CLAUDE.md, package.json, memory assets, etc. (27 files)");
   await validateRequiredFiles();
-  pass("All 24 required files present");
+  pass("All 27 required files present");
 
   // 2. Workflow contract
   step(current++, TOTAL, "Validating workflow contract", "single-department run discipline, primary deliverable, closed deliverable chain");

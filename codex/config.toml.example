@@ -18,7 +18,3 @@ max_depth = 1
 [mcp_servers.meta_kim_runtime]
 command = "node"
 args = ["REPLACE_WITH_REPO_ROOT/scripts/mcp/meta-runtime-server.mjs"]
-
-[[skills.config]]
-path = "REPLACE_WITH_REPO_ROOT/.agents/skills/meta-theory"
-enabled = true

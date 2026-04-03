@@ -10,6 +10,7 @@ import { fileURLToPath } from "node:url";
 const execFileAsync = promisify(execFile);
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const repoRoot = path.resolve(__dirname, "..");
+const requireAllRuntimes = process.argv.includes("--require-all-runtimes");
 const claudeAgentsDir = path.join(repoRoot, ".claude", "agents");
 const openclawLocalConfigPath = path.join(repoRoot, "openclaw", "openclaw.local.json");
 const prepareOpenClawScriptPath = path.join(repoRoot, "scripts", "prepare-openclaw-local.mjs");
@@ -1349,9 +1350,12 @@ async function main() {
     passed: runtimeStatuses.filter((item) => item.status === "passed").map((item) => item.runtime),
     skipped: runtimeStatuses.filter((item) => item.status === "skipped").map((item) => item.runtime),
     failed: runtimeStatuses.filter((item) => item.status === "failed").map((item) => item.runtime),
+    strictRuntimesRequired: requireAllRuntimes,
   };
 
-  const overallOk = report.summary.failed.length === 0;
+  const overallOk =
+    report.summary.failed.length === 0 &&
+    (!requireAllRuntimes || report.summary.skipped.length === 0);
 
   console.log(JSON.stringify(report, null, 2));
   if (!overallOk) {
