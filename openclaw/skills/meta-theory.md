@@ -625,10 +625,24 @@ The 8-stage execution spine:
 - **Protocol-first Dispatch**: Stage 4 may not start until Stage 3 has produced task classification, card plan, run header, dispatch board, worker task packets, merge plan, review packet plan, verification packet plan, summary packet plan, and evolution writeback plan.
 - **Parallelism Discipline**: If sub-tasks are independent, they must be parallelized. Every parallel group needs declared dependencies and a merge owner.
 
+### Thinking-stage intent lock-in (Prometheus-style; maps to `intentPacket` + `intentGatePacket`)
+
+For `complex_dev` and `meta_analysis`, freeze intent **before** Stage 4. Use this checklist so Thinking does not stay prose-only:
+
+| Check | Artifact field |
+|-------|------------------|
+| What does the user actually want (one sentence)? | `intentPacket.trueUserIntent` |
+| How do we know we are done? | `intentPacket.successCriteria` |
+| What is explicitly out of scope? | `intentPacket.nonGoals` |
+| Are scope / goal / constraints unambiguous? | `intentGatePacket.ambiguitiesResolved` |
+| Does the user still owe a product or policy choice? | `intentGatePacket.requiresUserChoice` (if true, fill `pendingUserChoices[]`) |
+| What are we assuming if they stay silent? | `intentGatePacket.defaultAssumptions[]` |
+
 **Required Stage 3 artifacts before Stage 4 may start** (full JSON shape: `references/dev-governance.md` § Thinking Stage Output Contract):
 - `optionExploration` — ≥2 solution paths with Pros/Cons table + Decision Record (selected path, rejected options with reasons)
 - `subTasks` — each task has owner, file scope, and parallel/sequential marker
 - `taskClassification` — `taskClass + requestClass + governanceFlow + trigger/upgrade/bypass reasons`
+- For `complex_dev` / `meta_analysis` governed JSON: **`intentPacket`** + **`intentGatePacket`** (see `contracts/workflow-contract.json` → `protocolFirst`)
 - `cardPlanPacket` — dealer owner, cards, silence decision, control decisions, delivery shells
 - `runHeader` — the 6-field contract for the current run
 - `dispatchBoard` — one-board summary tying all work to the sole primary deliverable

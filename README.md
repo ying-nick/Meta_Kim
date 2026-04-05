@@ -547,21 +547,28 @@ Each run must now also emit an explicit `writebackDecision`:
 
 For runs where `governanceFlow` is `complex_dev` or `meta_analysis`, treat a **single JSON run artifact** as the source of truth alongside chat:
 
-1. During Thinking, capture **`intentPacket`** (`trueUserIntent`, `successCriteria`, `nonGoals`, `intentPacketVersion: v1`) — intent lock-in before heavy execution (see `contracts/workflow-contract.json` → `protocols.intentPacket` and `runDiscipline.protocolFirst.intentPacketRequiredWhenGovernanceFlows`).
-2. Keep the full packet chain required by `runDiscipline.protocolFirst.requiredPackets` in that file (or merge incrementally each round).
-3. Before claiming **public-ready** or **done**, run:
+1. During Thinking, capture **`intentPacket`** (`trueUserIntent`, `successCriteria`, `nonGoals`, `intentPacketVersion: v1`) — intent lock-in before heavy execution (see `protocols.intentPacket` and `intentPacketRequiredWhenGovernanceFlows`).
+2. Capture **`intentGatePacket`** (`ambiguitiesResolved`, `requiresUserChoice`, `defaultAssumptions`, `intentGatePacketVersion: v1`; if `requiresUserChoice` is true, add `pendingUserChoices[]`) — structured ambiguity gate (see `protocols.intentGatePacket` and `intentGatePacketRequiredWhenGovernanceFlows`).
+3. Keep the full packet chain required by `runDiscipline.protocolFirst.requiredPackets` in that file (or merge incrementally each round).
+4. Before claiming **public-ready** or **done**, run:
 
 ```bash
 npm run validate:run -- path/to/your-run.json
 ```
 
-4. If validation fails or findings are still open, get a concrete next-iteration checklist:
+5. If validation fails or findings are still open, get a concrete next-iteration checklist:
 
 ```bash
 npm run prompt:next-iteration -- path/to/your-run.json
 ```
 
 Optional **Stop hook** guard (off by default): set `META_KIM_STOP_COMPLETION_GUARD=hint` for stderr-only reminders, or `=block` to force another turn when the last assistant text claims completion without governance cues. See `.claude/hooks/stop-completion-guard.mjs`.
+
+**`npm run doctor:governance`** runs a narrow health check: contract readable, Claude hook command set matches expectations, `npm run check:runtimes`, and `validate:run` on the sample fixture.
+
+Optional **soft todo gate** during `validate:run`: set `META_KIM_SOFT_PUBLIC_READY_GATES=1`. When `summaryPacket.publicReady` is true, no `workerTaskPacket` may have `taskTodoState: "open"`. Omit `taskTodoState` if you are not tracking todos. See `runDiscipline.runArtifactValidation.softPublicReadyTodoGate` in the contract.
+
+Optional **soft comment-review gate**: set `META_KIM_SOFT_COMMENT_REVIEW=1`. When `summaryPacket.publicReady` is true, `summaryPacket.commentReviewAcknowledged` must be `true`. See `softCommentReviewGate` in the contract.
 
 ## The Eight Yuan / Meta Agents
 
@@ -974,6 +981,7 @@ The system routes each request through the matching governance stage.
 | `npm run test:meta-theory`             | after changing `meta-theory`, contracts, or its tests | runs `tests/meta-theory/*.test.mjs`                               |
 | `npm run validate`                     | before committing                                | runs static integrity validation                                      |
 | `npm run validate:run -- <run.json>`   | when you want to verify a recorded real run      | validates packet lineage, summary/public-ready truthfulness, and finding closure |
+| `npm run doctor:governance`            | before release or when mirrors/hooks drift       | contract + hook list + `check:runtimes` + sample `validate:run`                    |
 | `npm run prompt:next-iteration -- <run.json>` | when a run failed validation or findings are open | prints the next closure checklist from the artifact                         |
 | `npm run check`                        | when you want a quick static pass                | runs `check:runtimes + validate`                                    |
 | `npm run eval:agents`                  | for fast runtime smoke                           | runs CLI/config/hook/runtime-registry smoke without LLM prompt checks |

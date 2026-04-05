@@ -32,6 +32,15 @@
     "nonGoals": "No unrelated auth flows (login UI, OAuth providers); no production deploy in this run.",
     "intentPacketVersion": "v1"
   },
+  "intentGatePacket": {
+    "ambiguitiesResolved": true,
+    "requiresUserChoice": false,
+    "defaultAssumptions": [
+      "Scope is the existing auth refresh path only; no new identity providers.",
+      "Secrets load from environment in test and CI as today."
+    ],
+    "intentGatePacketVersion": "v1"
+  },
   "cardPlanPacket": {
     "dealerOwner": "meta-conductor",
     "dealerMode": "conductor-primary-warden-escalation",
@@ -241,6 +250,7 @@
     "deliverableChainClosed": true,
     "consolidatedDeliverablePresent": true,
     "publicReady": true,
+    "commentReviewAcknowledged": true,
     "deliveryShellsUsed": [
       "shell-structured-status",
       "shell-review-delta"

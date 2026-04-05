@@ -240,6 +240,7 @@ After changing canonical prompts, skills, hooks, or runtime-facing contracts:
 Useful supporting commands:
 
 - `npm run check:runtimes`
+- `npm run doctor:governance`
 - `npm run probe:clis`
 - `npm run test:mcp`
 - `node scripts/agent-health-report.mjs`

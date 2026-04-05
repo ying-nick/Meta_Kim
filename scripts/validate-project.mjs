@@ -1021,7 +1021,7 @@ async function validateClaudeSettings() {
   const expected = [...EXPECTED_CLAUDE_HOOK_COMMANDS].sort();
   assert(
     JSON.stringify(found) === JSON.stringify(expected),
-    `.claude/settings.json hook commands must match documented 7-hook coverage (expected ${expected.length}, found ${found.length}).`
+    `.claude/settings.json hook commands must match documented hook coverage (expected ${expected.length}, found ${found.length}).`
   );
 }
 

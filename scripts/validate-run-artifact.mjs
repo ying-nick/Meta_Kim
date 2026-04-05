@@ -14,6 +14,7 @@ const PACKET_LOCATIONS = {
   runHeader: "runHeader",
   taskClassification: "taskClassification",
   intentPacket: "intentPacket",
+  intentGatePacket: "intentGatePacket",
   cardPlanPacket: "cardPlanPacket",
   dispatchBoard: "dispatchBoard",
   workerTaskPacket: "workerTaskPackets",
@@ -123,6 +124,92 @@ function validateIntentPacketWhenRequired(contract, artifact) {
     intent.intentPacketVersion === "v1",
     'intentPacket.intentPacketVersion must be "v1" for this contract revision.'
   );
+}
+
+function validateIntentGatePacketWhenRequired(contract, artifact) {
+  const when = contract.runDiscipline.protocolFirst.intentGatePacketRequiredWhenGovernanceFlows;
+  if (!Array.isArray(when) || when.length === 0) {
+    return;
+  }
+  const flow = artifact.taskClassification?.governanceFlow;
+  if (!when.includes(flow)) {
+    return;
+  }
+  const gate = artifact.intentGatePacket;
+  ensure(gate && typeof gate === "object", `intentGatePacket is required when governanceFlow is ${flow}.`);
+  ensureFields(gate, contract.protocols.intentGatePacket.requiredFields, "intentGatePacket");
+  ensure(
+    typeof gate.ambiguitiesResolved === "boolean",
+    "intentGatePacket.ambiguitiesResolved must be a boolean."
+  );
+  ensure(
+    typeof gate.requiresUserChoice === "boolean",
+    "intentGatePacket.requiresUserChoice must be a boolean."
+  );
+  ensure(Array.isArray(gate.defaultAssumptions), "intentGatePacket.defaultAssumptions must be an array.");
+  for (const [i, item] of gate.defaultAssumptions.entries()) {
+    ensure(
+      typeof item === "string" && item.trim().length >= 1,
+      `intentGatePacket.defaultAssumptions[${i}] must be a non-empty string.`
+    );
+  }
+  ensure(
+    gate.intentGatePacketVersion === "v1",
+    'intentGatePacket.intentGatePacketVersion must be "v1" for this contract revision.'
+  );
+  if (gate.requiresUserChoice === true) {
+    ensure(
+      Array.isArray(gate.pendingUserChoices) && gate.pendingUserChoices.length >= 1,
+      "intentGatePacket.requiresUserChoice=true requires non-empty pendingUserChoices array."
+    );
+    for (const [i, c] of gate.pendingUserChoices.entries()) {
+      ensure(
+        typeof c === "string" && c.trim().length >= 1,
+        `intentGatePacket.pendingUserChoices[${i}] must be a non-empty string.`
+      );
+    }
+  }
+}
+
+function validateSoftPublicReadyGates(contract, artifact) {
+  const soft = contract.runDiscipline?.runArtifactValidation?.softPublicReadyTodoGate;
+  const envKey = soft?.environmentVariable ?? "META_KIM_SOFT_PUBLIC_READY_GATES";
+  const envVal = soft?.environmentValue ?? "1";
+  if (process.env[envKey] !== envVal) {
+    return;
+  }
+  const sp = artifact.summaryPacket;
+  if (!sp || sp.publicReady !== true) {
+    return;
+  }
+  const packets = artifact.workerTaskPackets;
+  ensureArray(packets, "workerTaskPackets");
+  for (const [index, packet] of packets.entries()) {
+    if (packet?.taskTodoState === "open") {
+      fail(
+        `Soft gate (${envKey}=${envVal}): workerTaskPackets[${index}] has taskTodoState=open while summaryPacket.publicReady=true.`
+      );
+    }
+  }
+}
+
+function validateSoftCommentReviewGate(contract, artifact) {
+  const gate = contract.runDiscipline?.runArtifactValidation?.softCommentReviewGate;
+  const envKey = gate?.environmentVariable ?? "META_KIM_SOFT_COMMENT_REVIEW";
+  const envVal = gate?.environmentValue ?? "1";
+  if (process.env[envKey] !== envVal) {
+    return;
+  }
+  const sp = artifact.summaryPacket;
+  if (!sp || sp.publicReady !== true) {
+    return;
+  }
+  const field = gate?.summaryBooleanField ?? "commentReviewAcknowledged";
+  if (sp[field] !== true) {
+    fail(
+      `Soft gate (${envKey}=${envVal}): summaryPacket.publicReady=true requires summaryPacket.${field}=true.`
+    );
+  }
 }
 
 function validateCardPlan(contract, artifact) {
@@ -433,11 +520,14 @@ async function main() {
   ensureFields(artifact.runHeader, contract.protocols.runHeader.requiredFields, "runHeader");
   validateTaskClassification(contract, artifact.taskClassification);
   validateIntentPacketWhenRequired(contract, artifact);
+  validateIntentGatePacketWhenRequired(contract, artifact);
   validateCardPlan(contract, artifact);
   ensureFields(artifact.dispatchBoard, contract.protocols.dispatchBoard.requiredFields, "dispatchBoard");
   validateWorkerPackets(contract, artifact);
   validateFindingChain(contract, artifact);
   validateSummaryAndEvolution(contract, artifact);
+  validateSoftPublicReadyGates(contract, artifact);
+  validateSoftCommentReviewGate(contract, artifact);
 
   console.log(
     JSON.stringify(

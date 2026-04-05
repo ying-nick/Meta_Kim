@@ -65,7 +65,7 @@ Before Stage 4 starts, Thinking must produce explicit protocol artifacts for the
 
 If these protocol artifacts do not exist, the run is not ready for Execution.
 
-For `governanceFlow` in `complex_dev` or `meta_analysis`, the machine-validated JSON artifact must also include **`intentPacket`** (`trueUserIntent`, `successCriteria`, `nonGoals`, `intentPacketVersion: v1`) before Execution — see `contracts/workflow-contract.json` (`protocols.intentPacket`, `runDiscipline.protocolFirst.intentPacketRequiredWhenGovernanceFlows`).
+For `governanceFlow` in `complex_dev` or `meta_analysis`, the machine-validated JSON artifact must also include **`intentPacket`** (`trueUserIntent`, `successCriteria`, `nonGoals`, `intentPacketVersion: v1`) and **`intentGatePacket`** (`ambiguitiesResolved`, `requiresUserChoice`, `defaultAssumptions`, `intentGatePacketVersion: v1`; if `requiresUserChoice` is true, include non-empty `pendingUserChoices[]`) before Execution — see `contracts/workflow-contract.json` (`protocols.intentPacket`, `protocols.intentGatePacket`, `runDiscipline.protocolFirst.intentPacketRequiredWhenGovernanceFlows` / `intentGatePacketRequiredWhenGovernanceFlows`).
 
 ---
 
@@ -81,7 +81,15 @@ When work is not done after one pass (open review findings, `verificationPacket.
 
 Stop when `validate:run` passes **or** the user explicitly accepts risk with documented `accepted_risk` and honest `publicReady=false`.
 
+**Session recovery (API / compact / tool failure):** The governed artifact is the source of truth. After an interrupted session, reload at minimum: `runHeader`, `taskClassification`, `intentPacket`, `intentGatePacket` (when required), `cardPlanPacket`, `dispatchBoard`, `workerTaskPackets` / `workerResultPackets`, `reviewPacket`, `verificationPacket`, `summaryPacket`, `evolutionWritebackPacket`. Re-run `npm run validate:run -- <artifact.json>` before claiming closure. The same packet list is printed by `npm run prompt:next-iteration -- <artifact.json>` under **Minimal context reload**.
+
+Optional **soft todo gate** (off by default): set `META_KIM_SOFT_PUBLIC_READY_GATES=1` when running `validate:run`. If `summaryPacket.publicReady` is true, no `workerTaskPacket` may have `taskTodoState: "open"`. Omit `taskTodoState` if not tracking todos. See `contracts/workflow-contract.json` → `runDiscipline.runArtifactValidation.softPublicReadyTodoGate`.
+
+Optional **soft comment-review gate**: set `META_KIM_SOFT_COMMENT_REVIEW=1` when running `validate:run`. If `summaryPacket.publicReady` is true, `summaryPacket.commentReviewAcknowledged` must be `true`. See `runDiscipline.runArtifactValidation.softCommentReviewGate`.
+
 Optional Claude **Stop hook** (project default off): `META_KIM_STOP_COMPLETION_GUARD=hint` logs a stderr reminder when the last assistant message claims completion without governance cues; `=block` returns `{"decision":"block",...}` so the model continues. See `.claude/hooks/stop-completion-guard.mjs`.
+
+**Governance doctor:** `npm run doctor:governance` checks contract readability, Claude hook command set, `npm run check:runtimes`, and `validate:run` on the sample fixture — use before release or when mirrors drift.
 
 ---
 

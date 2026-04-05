@@ -407,7 +407,11 @@
         "complex_dev",
         "meta_analysis"
       ],
-      "description": "intentPacket is required in run artifacts when taskClassification.governanceFlow is listed in intentPacketRequiredWhenGovernanceFlows (IntentGate-style intent lock-in)."
+      "intentGatePacketRequiredWhenGovernanceFlows": [
+        "complex_dev",
+        "meta_analysis"
+      ],
+      "description": "intentPacket is required in run artifacts when taskClassification.governanceFlow is listed in intentPacketRequiredWhenGovernanceFlows (IntentGate-style intent lock-in). intentGatePacket is required for the same flows (structured ambiguity / assumptions gate before Execution)."
     },
     "findingClosure": {
       "findingIdRequired": true,
@@ -498,7 +502,19 @@
       "deliverableLinkMustReferencePrimaryDeliverable": true,
       "publicReadyField": "summaryPacket.publicReady",
       "summaryPacketRequired": true,
-      "cardPlanPacketRequired": true
+      "cardPlanPacketRequired": true,
+      "softPublicReadyTodoGate": {
+        "environmentVariable": "META_KIM_SOFT_PUBLIC_READY_GATES",
+        "environmentValue": "1",
+        "optionalWorkerField": "taskTodoState",
+        "description": "When the env var is set to 1 and summaryPacket.publicReady is true, no workerTaskPacket may have taskTodoState === \"open\". Omitted field is treated as compliant."
+      },
+      "softCommentReviewGate": {
+        "environmentVariable": "META_KIM_SOFT_COMMENT_REVIEW",
+        "environmentValue": "1",
+        "summaryBooleanField": "commentReviewAcknowledged",
+        "description": "When the env var is set to 1 and summaryPacket.publicReady is true, summaryPacket.commentReviewAcknowledged must be true (team acknowledgment that comments/docs were reviewed for AI-slop patterns)."
+      }
     }
   },
   "protocols": {
@@ -534,6 +550,15 @@
         "intentPacketVersion"
       ],
       "description": "Structured user-intent lock before heavy execution: what they really want, how we know we are done, and explicit out-of-scope items."
+    },
+    "intentGatePacket": {
+      "requiredFields": [
+        "ambiguitiesResolved",
+        "requiresUserChoice",
+        "defaultAssumptions",
+        "intentGatePacketVersion"
+      ],
+      "description": "Structured pre-execution gate: whether ambiguities are cleared, if the user must still choose, documented default assumptions, aligned with intentPacket fields."
     },
     "cardPlanPacket": {
       "requiredFields": [

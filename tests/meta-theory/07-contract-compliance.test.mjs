@@ -251,6 +251,23 @@ describe("workflow-contract.json — schema compliance", async () => {
     }
   });
 
+  test("intentGatePacket protocol and conditional governance flows are defined", () => {
+    const when = contract.runDiscipline?.protocolFirst?.intentGatePacketRequiredWhenGovernanceFlows ?? [];
+    assert.ok(when.includes("complex_dev"));
+    assert.ok(when.includes("meta_analysis"));
+    const fields = contract.protocols?.intentGatePacket?.requiredFields ?? [];
+    for (const field of ["ambiguitiesResolved", "requiresUserChoice", "defaultAssumptions", "intentGatePacketVersion"]) {
+      assert.ok(fields.includes(field), `intentGatePacket missing ${field}`);
+    }
+    const soft = contract.runDiscipline?.runArtifactValidation?.softPublicReadyTodoGate;
+    assert.ok(soft?.environmentVariable, "softPublicReadyTodoGate.environmentVariable");
+    assert.equal(soft?.environmentValue, "1");
+    const comment = contract.runDiscipline?.runArtifactValidation?.softCommentReviewGate;
+    assert.ok(comment?.environmentVariable, "softCommentReviewGate.environmentVariable");
+    assert.equal(comment?.environmentValue, "1");
+    assert.ok(comment?.summaryBooleanField, "softCommentReviewGate.summaryBooleanField");
+  });
+
   test("finding closure rules are explicit", () => {
     const closure = contract.runDiscipline?.findingClosure ?? {};
     assert.equal(closure.findingIdRequired, true);

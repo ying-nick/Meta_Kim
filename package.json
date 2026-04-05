@@ -19,6 +19,7 @@
     "eval:agents": "node scripts/eval-meta-agents.mjs",
     "eval:agents:live": "node scripts/eval-meta-agents.mjs --live",
     "validate:run": "node scripts/validate-run-artifact.mjs",
+    "doctor:governance": "node scripts/doctor-governance.mjs",
     "prompt:next-iteration": "node scripts/prompt-next-iteration.mjs",
     "probe:clis": "node scripts/eval-meta-agents.mjs --probe-clis-only",
     "test:meta-theory": "node --test tests/meta-theory/*.test.mjs",

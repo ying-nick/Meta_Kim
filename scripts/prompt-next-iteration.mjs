@@ -44,6 +44,13 @@ async function main() {
     actionItems += 1;
   }
 
+  if (!artifact.intentGatePacket && (flow === "complex_dev" || flow === "meta_analysis")) {
+    lines.push(
+      "- [ ] Add intentGatePacket (ambiguitiesResolved, requiresUserChoice, defaultAssumptions[], intentGatePacketVersion: v1; if requiresUserChoice=true add pendingUserChoices[])."
+    );
+    actionItems += 1;
+  }
+
   const findings = artifact.reviewPacket?.findings;
   const closedByVerify = new Set();
   for (const r of artifact.verificationPacket?.verificationResults ?? []) {
@@ -108,6 +115,15 @@ async function main() {
       "No open findings or obvious packet gaps were detected from this artifact snapshot. If npm run validate:run still fails, use the validator error message as the source of truth."
     );
   }
+
+  lines.push("");
+  lines.push("Minimal context reload (after API error, compaction, or new session):");
+  lines.push(
+    "  Reload into context: runHeader, taskClassification, intentPacket, intentGatePacket (if complex_dev/meta_analysis), cardPlanPacket, dispatchBoard,"
+  );
+  lines.push(
+    "  workerTaskPackets, workerResultPackets, reviewPacket, verificationPacket, summaryPacket, evolutionWritebackPacket — then npm run validate:run -- <artifact.json>."
+  );
 
   console.log(lines.join("\n"));
 }
