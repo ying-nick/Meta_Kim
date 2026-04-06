@@ -6,7 +6,9 @@
 
 <p>
   <a href="README.md">English</a> |
-  <a href="README.zh-CN.md">简体中文</a>
+  <a href="README.zh-CN.md">简体中文</a> |
+  <a href="README.ja-JP.md">日本語</a> |
+  <a href="README.ko-KR.md">한국어</a>
 </p>
 
 <p>
@@ -805,6 +807,8 @@ Meta_Kim/
 ├─ shared-skills/  Shared skill mirrors across runtimes
 ├─ README.md
 ├─ README.zh-CN.md
+├─ README.ja-JP.md
+├─ README.ko-KR.md
 ├─ CLAUDE.md
 ├─ AGENTS.md
 └─ CHANGELOG.md
@@ -820,6 +824,8 @@ If you are maintaining Meta_Kim, start with these:
 - `contracts/workflow-contract.json`
 - `README.md`
 - `README.zh-CN.md`
+- `README.ja-JP.md`
+- `README.ko-KR.md`
 - `CLAUDE.md`
 - `AGENTS.md`
 

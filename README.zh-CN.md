@@ -6,7 +6,9 @@
 
 <p>
   <a href="README.md">English</a> |
-  <a href="README.zh-CN.md">简体中文</a>
+  <a href="README.zh-CN.md">简体中文</a> |
+  <a href="README.ja-JP.md">日本語</a> |
+  <a href="README.ko-KR.md">한국어</a>
 </p>
 
 <p>
@@ -807,6 +809,8 @@ Meta_Kim/
 ├─ shared-skills/  跨运行时共享 skill 镜像
 ├─ README.md
 ├─ README.zh-CN.md
+├─ README.ja-JP.md
+├─ README.ko-KR.md
 ├─ CLAUDE.md
 ├─ AGENTS.md
 └─ CHANGELOG.md
@@ -822,6 +826,8 @@ Meta_Kim/
 - `contracts/workflow-contract.json`
 - `README.md`
 - `README.zh-CN.md`
+- `README.ja-JP.md`
+- `README.ko-KR.md`
 - `CLAUDE.md`
 - `AGENTS.md`
 
