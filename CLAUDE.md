@@ -244,6 +244,9 @@ Useful supporting commands:
 - `npm run probe:clis`
 - `npm run test:mcp`
 - `node scripts/agent-health-report.mjs`
+- `npm run deps:install` or `npm run deps:install:all-runtimes` — install the nine third-party skill repos into global runtime skill dirs (all-runtimes also targets Codex/OpenClaw; see README)
+- `npm run deps:install:claude-plugins` — optional Claude Code marketplace plugins (e.g. full Superpowers bundle)
+- `npm run sync:global:meta-theory` — sync portable `meta-theory` + merge Meta_Kim hooks into user-level Claude settings
 
 `eval:agents` is now the lightweight runtime smoke layer: it checks CLI availability, runtime wiring, hooks, and registry/config scaffolding without opening live prompt sessions. Use the `:live` variants only when you actually need real Claude / Codex / OpenClaw prompt-backed acceptance.
 

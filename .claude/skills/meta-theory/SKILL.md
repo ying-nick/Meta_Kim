@@ -1,6 +1,6 @@
 ---
 name: meta-theory
-version: 1.5.0
+version: 1.5.1
 author: KimYx0207
 trigger: "元理论|元架构|元兵工厂|最小可治理单元|组织镜像|节奏编排|意图放大|事件牌组|出牌|SOUL.md|四种死法|五标准|agent职责|agent边界|agent拆分|agent设计|agent创建|agent治理|多文件|跨模块|职责冲突|重构|拆解|治理|元|meta architecture|agent governance|intent amplification|meta-theory|meta arsenal|smallest governable unit|organizational mirror|rhythm orchestration|card deck|card play|four death patterns|five criteria|agent design|agent split|agent creation|refactor|multi-file|cross-module|governance|governable"
 tools:
@@ -798,7 +798,24 @@ Format: scenario description → problem diagnosis → Card Deck configuration (
 
 ## Dependency Skills — Active Invocation Map
 
-> These 9 skills (from `install-deps.sh`) are **actively invoked** at the corresponding workflow stage. They are NOT passive references.
+> These 9 skills (from `install-deps.sh`, mirrored by `npm run deps:install:all-runtimes`) are **actively invoked** at the corresponding workflow stage. They are NOT passive references.
+
+### Operator bootstrap vs runtime (who does what)
+
+| Role | Responsibility |
+|------|----------------|
+| **Human / operator** | Ensures repos exist under global runtime homes and the capability index is fresh (npm scripts below). Meta agents **name** skills and stages; they do **not** replace a missing install. |
+| **meta-theory / meta-* (runtime)** | After bootstrap, **invoke** the right dependency at the right stage per the table below and per each agent’s “Dependency Skill Invocations” section. |
+
+| Situation | Operator command (from Meta_Kim repo root) |
+|-----------|--------------------------------------------|
+| First setup; skills only needed under `~/.claude/skills` | `npm run deps:install` (bash) |
+| Same 9 skill repos also for **Codex** / **OpenClaw** global trees | `npm run deps:install:all-runtimes` |
+| **Claude Code plugin-shaped** bundle (e.g. Superpowers: slash commands + hooks + skills) | `npm run deps:install:claude-plugins` **or** `/plugin install …` per README — **not** implied by `npm install` |
+| Portable **meta-theory** + Meta_Kim **hooks** into user `~/.claude` | `npm run sync:global:meta-theory` |
+| Fetch Step 2 needs an accurate index | `npm run discover:global` (after any new global agents/skills/plugins/hooks) |
+
+**If Fetch fails because a skill is missing on disk**: treat as **install gap** — report the gap, cite the **dependency skill** name, and point the operator to the matching **bootstrap row** above. Do not assume the skill is loaded.
 
 | Skill | Core Capabilities | Primary Usage |
 |-------|-------------------|---------------|

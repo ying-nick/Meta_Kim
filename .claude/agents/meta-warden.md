@@ -1,5 +1,5 @@
 ---
-version: 1.0.8
+version: 1.0.9
 name: meta-warden
 description: Coordinate the Meta_Kim agent team, quality gates, and final synthesis across the other meta agents.
 type: agent
@@ -287,6 +287,16 @@ Rule: another operator must be able to read these deliverables and understand wh
 5. **Generic Fallback** — Only use generic prompts or broad subagent types as last resort.
 
 **Rule**: A Skill found locally always takes priority over one found externally. Document which step in the chain resolved the discovery.
+
+## Third-party dependency bootstrap (operator)
+
+When **`.claude/capability-index/global-capabilities.json`** is missing, clearly stale, or Fetch reports a **named** dependency skill as unavailable (`findskill`, `superpowers`, `everything-claude-code`, etc.):
+
+1. **Install gap** — Direct the operator to run, from the Meta_Kim repo: `npm run deps:install` or `npm run deps:install:all-runtimes`, then `npm run discover:global`.
+2. **Claude Code plugin bundle** (commands/hooks beyond plain skill dirs) — `npm run deps:install:claude-plugins` or `/plugin install` per README.
+3. **Portable meta-theory + Meta_Kim hooks** in `~/.claude` — `npm run sync:global:meta-theory`.
+
+Distinguish **install gap** (fixed by operator commands) from **design gap** (needs Type B / Scout / Artisan). Warden closes governance on both, but only the former is solved by npm/bootstrap.
 
 ## Meta-Skills
 

@@ -383,6 +383,10 @@ Score match: does "Own" cover the needed capability?
 IF .claude/capability-index/global-capabilities.json is missing OR stale for the current machine
   → run npm run discover:global first
 
+IF discover:global lists few skills/agents but the task needs Meta_Kim third-party skills (install-deps list)
+  AND ~/.codex/skills or ~/.openclaw/skills are empty on this machine
+  → operator should run npm run deps:install:all-runtimes (or npm run deps:install for Claude-only), then npm run discover:global again
+
 Read .claude/capability-index/global-capabilities.json
 Search for agents declaring the needed capability
 Score match
