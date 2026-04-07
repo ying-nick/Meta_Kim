@@ -394,7 +394,7 @@ Score match
 
 **Step 3 — External skill discovery** (if the local + indexed baseline still has no perfect match):
 ```
-Invoke the available findskill / find-skills capability
+Invoke the **findskill** skill
 Search the Skills.sh ecosystem for the missing capability
 Record what was searched and what was found
 ```

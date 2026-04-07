@@ -14,7 +14,7 @@ If you only remember three things:
 
 Packs such as **findskill** are installed by **`node setup.mjs`** from **`KimYx0207/*`** repos declared in `setup.mjs`. These are **maintained and optimized for Meta_Kim** on top of public-ecosystem baselines.
 
-**Canonical path:** install and document through **this repository** — do not parallel-install duplicate marketplace copies under different folder names unless you explicitly need both. If you see labels like `find-skills`, they often refer to the same capability family as the `findskill` skill directory.
+**Canonical path:** install and document through **this repository** — do not parallel-install duplicate marketplace copies under different folder names unless you explicitly need both. **In this repo, call it `findskill` everywhere** (agents, skills, mirrors) so it matches `~/.claude/skills/findskill/` and `setup.mjs`.
 
 ## Read This Repository Correctly
 

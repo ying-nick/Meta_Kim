@@ -7,10 +7,11 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Documentation
 
-- State that **Meta_Kim** (`node setup.mjs`) is the canonical install path for **KimYx0207/findskill** (maintained/optimized on top of public baselines); discourage parallel duplicate installs and note that labels like `find-skills` often name the same capability family (`README.md`, `README.zh-CN.md`, `README.ko-KR.md`, `README.ja-JP.md`, `CLAUDE.md`).
+- Document **Meta_Kim** (`node setup.mjs`) as the canonical install path for **KimYx0207/findskill**; four README languages plus `CLAUDE.md` state that **in-repo naming uses `findskill` only** (aligned with `~/.claude/skills/findskill/`).
 
 ### Fixed
 
+- Unify **findskill** naming across this repository: remove mixed **`find-skills`** wording in `meta-scout` / `meta-artisan` (`.claude`, `.codex`, OpenClaw SOUL), all `dev-governance` mirrors, and `docs/zh-CN/agents`, so prompts match the installed skill directory.
 - Install **planning-with-files** from `skills/planning-with-files/` (sparse/subdir copy) in `install-deps.sh`, `setup.mjs`, and `install-global-skills-all-runtimes.mjs` so `~/.claude/skills/planning-with-files/SKILL.md` exists and Claude Code can load the skill and its frontmatter hooks. Whole-repo clone left SKILL only nested, so the skill was invisible.
 - Install **findskill** from `windows/` on Windows and `original/` elsewhere (`KimYx0207/findskill` keeps no top-level `SKILL.md`). Same three install entrypoints updated.
 

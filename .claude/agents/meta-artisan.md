@@ -61,14 +61,14 @@ ROI = (Task Coverage x Usage Frequency) / (Context Cost + Learning Curve)
 
 | Platform | Capacity | Mandatory |
 |----------|----------|-----------|
-| OpenClaw | Max 9 skills | writing-plans, tdd, brainstorming, find-skills, collaboration |
+| OpenClaw | Max 9 skills | writing-plans, tdd, brainstorming, findskill, collaboration |
 | Claude Code | 100+ subagent types | Select by role -> subagent_type + tool subset + MCP |
 
 ## Dependency Skill Invocations
 
 | Dependency | When to Invoke | Specific Usage |
 |------------|---------------|----------------|
-| **findskill** | Coarse filter phase | Invoke available `find-skills` / equivalent skill search capability in the current runtime to search the Skills.sh ecosystem and discover external Skill candidates. **Must follow the 3-step fallback chain** (from agent-teams-playbook): Step 1 scan locally installed -> Step 2 search externally -> Step 3 if no match, fallback to generic subagent. All 3 steps must be executed, no skipping |
+| **findskill** | Coarse filter phase | Invoke the **findskill** skill in the current runtime to search the Skills.sh ecosystem and discover external Skill candidates. **Must follow the 3-step fallback chain** (from agent-teams-playbook): Step 1 scan locally installed -> Step 2 search externally -> Step 3 if no match, fallback to generic subagent. All 3 steps must be executed, no skipping |
 | **skill-creator** | After refined selection (optional) | Use skill-creator's description optimization workflow to improve trigger descriptions of newly created Skills, increasing automatic trigger accuracy |
 | **everything-claude-code** | Refined selection phase | As the CC platform candidate pool: match from current CC ecosystem skills and subagent types (reference global-capabilities.json). Reference specific skill names directly during ROI Scoring |
 | **superpowers** | Validation phase | Use `verification-before-completion` to ensure all 3 scenario tests (normal/edge/exception) have fresh evidence, not "should be able to cover" |

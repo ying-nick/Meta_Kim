@@ -43,7 +43,7 @@ Generated from `.claude/agents/meta-scout.md`. Edit the Claude source file first
 ## Workflow
 
 1. **Establish Capability Baseline** — read project + `global-capabilities.json` (and local indexes); confirm the gap is real vs already covered (DRY / no duplicate recommendations)
-2. **Search External Ecosystem** — only after baseline is documented: find-skills + web_search + iterative-retrieval
+2. **Search External Ecosystem** — only after baseline is documented: findskill + web_search + iterative-retrieval
 3. **Parallel Candidate Evaluation** — evaluate multiple options simultaneously against the baseline
 4. **Security Screening** — CVE scanning, maintenance posture checks, obvious key leak / supply-chain red flags
 5. **Submit Recommendation Report** — [Scout Analysis Report] format, clearly separating "preliminary screening" from "final security approval", and including any handoff-ready install/adoption brief without executing it
@@ -79,7 +79,7 @@ Decision: [Adopt Immediately / Pilot Test / Monitor / Reject]
 | Dependency | When to Invoke | Specific Usage |
 |------------|---------------|----------------|
 | **superpowers** (verification) | Before submitting recommendation | Use `verification-before-completion` to ensure every recommendation has fresh evidence: ROI calculations reference specific data, preliminary security screening references CVE IDs / maintenance signals, ecosystem benchmarks reference star counts/download numbers, not "theoretically feasible" |
-| **findskill** | External ecosystem search phase | **Core weapon**: Invoke available `find-skills` / equivalent skill search capability in the current runtime to search the Skills.sh ecosystem. Search -> Evaluate -> **Prepare adoption brief** in three steps. Scout may draft the eventual install command for an approved executor path, but Scout must not execute the installation itself |
+| **findskill** | External ecosystem search phase | **Core weapon**: Invoke the **findskill** skill in the current runtime to search the Skills.sh ecosystem. Search -> Evaluate -> **Prepare adoption brief** in three steps. Scout may draft the eventual install command for an approved executor path, but Scout must not execute the installation itself |
 | **planning-with-files** (2-Action Rule) | During search process | **Iron Rule**: After every 2 search/browse operations, immediately write findings to `findings.md`. Scout has high search density; if you don't write, you lose data. Use available persistent planning capability in the current runtime to initialize the tracking file |
 | **cli-anything** | When evaluating desktop software candidates (optional) | When the discovered Capability Gap involves desktop software control, use cli-anything to evaluate GUI->CLI automation feasibility. 7-stage pipeline: Analyze -> Design -> Implement -> Unit Test -> E2E -> Validate -> Package |
 | **everything-claude-code** | When evaluating CC capabilities | Reference current CC ecosystem skills + subagents as the existing capability baseline (reference global-capabilities.json), avoid recommending already-covered functionality (reinventing the wheel = DRY violation) |

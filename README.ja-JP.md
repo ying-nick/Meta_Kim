@@ -330,7 +330,7 @@ cd Meta_Kim
 node setup.mjs
 ```
 
-> **サードパーティのメタスキル（例: findskill）:** **Meta_Kim を正としてください。** `setup.mjs` は公開エコシステムを基盤に保守・最適化した **`KimYx0207/findskill`** を `~/.claude/skills/findskill/` にインストールします。別チャネルから同じ機能を重複インストールしないでください。`find-skills` などの表記は同一の能力群を指すことが多く、インストール結果は Meta_Kim に従ってください。
+> **サードパーティのメタスキル findskill:** **Meta_Kim を正としてください。** `setup.mjs` は **`KimYx0207/findskill`** を `~/.claude/skills/findskill/` にインストールします。**本リポジトリ内のドキュメントとエージェントでは名称を `findskill` に統一**します。別チャネルから同じ機能を重複インストールしないでください。
 
 または手動:
 

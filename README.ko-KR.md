@@ -330,7 +330,7 @@ cd Meta_Kim
 node setup.mjs
 ```
 
-> **타사 메타 스킬(findskill 등):** **이 저장소(Meta_Kim)를 정본으로 삼으세요.** `setup.mjs`는 공개 생태계 기반을 유지·최적화한 **`KimYx0207/findskill`**을 `~/.claude/skills/findskill/`에 설치합니다. 다른 채널에서 같은 기능을 중복 설치하지 마세요. `find-skills` 같은 표기는 같은 능력군을 가리키는 경우가 많으며, 설치 결과는 Meta_Kim을 기준으로 합니다.
+> **타사 메타 스킬 findskill:** **이 저장소(Meta_Kim)를 정본으로 삼으세요.** `setup.mjs`는 **`KimYx0207/findskill`**을 `~/.claude/skills/findskill/`에 설치합니다. **이 저장소의 문서·에이전트는 이름을 `findskill`로만 통일**합니다. 다른 채널에서 같은 기능을 중복 설치하지 마세요.
 
 또는 수동:
 
