@@ -44,22 +44,57 @@ Intent amplification (deliver) ← Output: structured outcomes under rhythm cont
 **Meta = smallest governable unit** must satisfy:
 
 1. **Independent** — understandable, invokable, and productive on its own
-2. **Small enough** — further split is pointless or costs more than it saves
-3. **Clear boundary** — explicit “owns” vs “does not touch”
+2. **Small Enough** — further split is pointless or costs more than it saves
+3. **Clear Boundaries** — explicit “owns” vs “does not touch”
 4. **Replaceable** — swap without collapse; can upgrade or reorganize
 5. **Reusable** — useful across scenarios, not one-off
 
+Five Criteria evidence table (use when auditing):
+
+| Criterion | Evidence | Pass |
+|-----------|----------|------|
+| Independent | Observable invocations + outputs | Yes / No |
+| Small Enough | Split cost vs benefit | Yes / No |
+| Clear Boundaries | Written owns / does-not-touch | Yes / No |
+| Replaceable | Swap experiment notes | Yes / No |
+| Reusable | Cross-scenario reuse proof | Yes / No |
+
 ### Four death patterns
 
-| Pattern | Symptom | Diagnosis |
-|---------|---------|-----------|
-| **Everything pot** | One agent does everything | >2 unrelated domains? SOUL.md >300 lines? |
-| **Shattered bits** | Too many tiny agents | Needs other agents’ output to produce anything? |
-| **Execution without governance** | Only direction → plan → execute; no review → verify → evolve | Who reviews? Who reviews the reviewer? Who verifies fixes? How is learning captured? |
-| **Outcome chasing without structure** | “It ran once” treated as gospel | Will it run tomorrow? Can a handoff work? Can another model adapt? |
+| Death Pattern | Symptoms | Diagnostic Questions |
+|---------------|----------|----------------------|
+| **Stew-All** | One agent does everything | >2 unrelated domains? SOUL.md >300 lines? |
+| **Shattered** | Too many tiny agents | Needs other agents’ output to produce anything? |
+| **Governance-Free Execution** | Only direction → plan → execute; no review → verify → evolve | Who reviews? Who reviews the reviewer? Who verifies fixes? How is learning captured? |
+| **Result-Chasing Without Structure** | “It ran once” treated as gospel | Will it run tomorrow? Can a handoff work? Can another model adapt? |
 
 > Death patterns 1–2 are split extremes; 3–4 are governance gaps.
 > The first pair makes the system unstable; the second pair keeps it from maturing.
+
+### Omnipotent Executor Meta Anti-Pattern
+
+**Omnipotent Executor Meta Anti-Pattern** — one meta absorbs execution, review, and synthesis until the system shows **compression disease** (everything collapses into one overloaded role). Remediation: **trigger Type B splitting** so Genesis/Artisan stations rebuild boundaries.
+
+Symptoms to flag:
+
+- **execution before thorough understanding**
+- **decisions before complete information gathering**
+- **modifying shared logic before exposing risks**
+
+**Stew-All** diagnostics (aligned with the table above): watch for **>2 unrelated domains** in one SOUL and **>300 lines** in SOUL.md without a split plan.
+
+**Iron Rule** (splitting): If **the user says** “**these two** concerns are **different**; **split them apart**,” treat that as a forced split even when git data shows high coupling — **user override** on coupling decisions is final.
+
+**Coupling probe** (data + judgment): **if A changes, does B frequently need to change?** High **co-change frequency** → candidates **merge**; low **co-change frequency** → domains may stay **separate**.
+
+Plain-language merge rule (for search/regex checks): high co-change frequency should be merged; low co-change frequency can be separated.
+
+**Meta-verification four questions** (after a split proposal):
+
+1. **Does it have clear boundaries** between owns / does-not-touch?
+2. **Can it be replaced without collapsing** neighboring metas?
+3. Where could **Cross-contamination** still leak?
+4. **Can this meta combine with other metas** without role collapse?
 
 ### Golden band for splitting
 

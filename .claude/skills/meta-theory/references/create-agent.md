@@ -39,6 +39,44 @@
 
 ---
 
+## Two Entry Modes (dispatch contract)
+
+Use the same **Mode A: Discovery** vs **Mode B: Direct** split as above; this heading exists so dispatchers can grep one block.
+
+## Formal five-phase contract
+
+### Phase 1 — Discovery and Splitting
+
+- **Step 0: Data Collection** — git history + file distribution (commands below).
+- **Capability Dimension Enumeration** — name the capability dimensions implied by the repo.
+- **Coupling Grouping** — merge high-coupling areas; split low-coupling domains.
+
+### Phase 2 — Pre-Design Decision (Global vs Project-Specific)
+
+Decide **Global vs Project-Specific** need using **3 Hard Criteria**: **Domain Gap**, **Project Uniqueness**, **Frequency**. If a global agent already covers the capability, intercept here.
+
+### Phase 3 — Design On Demand
+
+**Genesis** is **Mandatory**. **Artisan** is **Mandatory**.
+
+**Sentinel**, **Librarian**, and **Conductor** are **On Demand** — add a station only when its trigger fires.
+
+On-demand trigger questions (answer honestly before skipping):
+
+- Will it modify files, call external APIs, or operate databases?
+- Must it need to remember what it did last time across sessions?
+- Must it hand off results to other Agents or coordinate execution order across agents?
+
+### Phase 4 — Review and Revision
+
+Run **meta-prism** review. Map **S/A Pass** (grades S or A count as Pass), treat **B** and **C** as Revise, and use **D redo** when the design is shallow or template-only.
+
+### Phase 5 — Integration and Verification
+
+Integrate files, verify five criteria / death patterns, obtain user sign-off.
+
+---
+
 ## Phase 1: Data collection & split
 
 ### Step 0: Data collection commands

@@ -134,6 +134,16 @@ export async function readJson(relativePath) {
   return JSON.parse(raw);
 }
 
+/** Canonical skill + references — use for assertions whose content lives across files. */
+export async function loadMetaTheoryCorpus() {
+  const skill = await readFile(".claude/skills/meta-theory/SKILL.md");
+  const devGov = await readFile(".claude/skills/meta-theory/references/dev-governance.md");
+  const metaTheory = await readFile(".claude/skills/meta-theory/references/meta-theory.md");
+  const createAgent = await readFile(".claude/skills/meta-theory/references/create-agent.md");
+  const combined = `${skill}\n${devGov}\n${metaTheory}\n${createAgent}`;
+  return { skill, devGov, metaTheory, createAgent, combined };
+}
+
 export async function fileExists(relativePath) {
   try {
     await fs.access(path.join(REPO_ROOT, relativePath));

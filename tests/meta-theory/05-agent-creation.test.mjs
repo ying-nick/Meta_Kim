@@ -21,13 +21,17 @@ const SCENARIOS_PATH = path.join(
 );
 
 let skillContent;
+/** SKILL.md + create-agent.md — Part A phases live in the reference, not only the skill stub. */
+let pipelineCorpus;
 let scenarios;
 
 async function loadFixtures() {
   if (!skillContent) {
-    skillContent = await readFile(
-      ".claude/skills/meta-theory/SKILL.md"
+    skillContent = await readFile(".claude/skills/meta-theory/SKILL.md");
+    const createAgent = await readFile(
+      ".claude/skills/meta-theory/references/create-agent.md"
     );
+    pipelineCorpus = `${skillContent}\n${createAgent}`;
   }
   if (!scenarios) {
     const raw = await readFileRaw(SCENARIOS_PATH, "utf-8");
@@ -38,31 +42,31 @@ async function loadFixtures() {
 describe("05 — Type B Agent Creation Pipeline", async () => {
   await loadFixtures();
 
-  describe("Part A: Pipeline Structure (SKILL.md verification)", () => {
+  describe("Part A: Pipeline Structure (SKILL + create-agent reference)", () => {
     test("A-01: Two entry modes documented (Mode A Discovery / Mode B Direct)", () => {
-      assert.match(skillContent, /Mode A.*Discovery/i);
-      assert.match(skillContent, /Mode B.*Direct/i);
+      assert.match(pipelineCorpus, /Mode A.*Discovery/i);
+      assert.match(pipelineCorpus, /Mode B.*Direct/i);
       assert.match(
-        skillContent,
+        pipelineCorpus,
         /Two Entry Modes/i,
         "Missing 'Two Entry Modes' heading"
       );
     });
 
     test("A-02: Phase 1 — Discovery and Splitting exists", () => {
-      assert.match(skillContent, /Phase 1.*Discovery and Splitting/i);
+      assert.match(pipelineCorpus, /Phase 1.*Discovery and Splitting/is);
       assert.match(
-        skillContent,
+        pipelineCorpus,
         /Step 0.*Data Collection/i,
         "Phase 1 should include Step 0 Data Collection"
       );
       assert.match(
-        skillContent,
+        pipelineCorpus,
         /Capability Dimension Enumeration/i,
         "Phase 1 should include capability dimension enumeration"
       );
       assert.match(
-        skillContent,
+        pipelineCorpus,
         /Coupling Grouping/i,
         "Phase 1 should include coupling grouping"
       );
@@ -70,12 +74,12 @@ describe("05 — Type B Agent Creation Pipeline", async () => {
 
     test("A-03: Phase 2 — Pre-Design Decision (Global vs Project-Specific) exists", () => {
       assert.match(
-        skillContent,
-        /Phase 2.*Pre-Design Decision/i,
+        pipelineCorpus,
+        /Phase 2.*Pre-Design Decision/is,
         "Missing Phase 2 heading"
       );
       assert.match(
-        skillContent,
+        pipelineCorpus,
         /Global vs Project-Specific/i,
         "Phase 2 should mention Global vs Project-Specific"
       );
@@ -83,46 +87,46 @@ describe("05 — Type B Agent Creation Pipeline", async () => {
 
     test("A-04: Phase 3 — Design On Demand exists", () => {
       assert.match(
-        skillContent,
-        /Phase 3.*Design On Demand/i,
+        pipelineCorpus,
+        /Phase 3.*Design On Demand/is,
         "Missing Phase 3 heading"
       );
     });
 
     test("A-05: Phase 4 — Review and Revision exists", () => {
       assert.match(
-        skillContent,
-        /Phase 4.*Review and Revision/i,
+        pipelineCorpus,
+        /Phase 4.*Review and Revision/is,
         "Missing Phase 4 heading"
       );
     });
 
     test("A-06: Phase 5 — Integration and Verification exists", () => {
       assert.match(
-        skillContent,
-        /Phase 5.*Integration and Verification/i,
+        pipelineCorpus,
+        /Phase 5.*Integration and Verification/is,
         "Missing Phase 5 heading"
       );
     });
 
     test("A-07: 3 Hard Criteria for project-specific decision (Domain Gap, Project Uniqueness, Frequency)", () => {
       assert.match(
-        skillContent,
+        pipelineCorpus,
         /3 Hard Criteria/i,
         "Missing '3 Hard Criteria' section"
       );
       assert.match(
-        skillContent,
+        pipelineCorpus,
         /Domain Gap/i,
         "Missing 'Domain Gap' criterion"
       );
       assert.match(
-        skillContent,
+        pipelineCorpus,
         /Project Uniqueness/i,
         "Missing 'Project Uniqueness' criterion"
       );
       assert.match(
-        skillContent,
+        pipelineCorpus,
         /Frequency/i,
         "Missing 'Frequency' criterion"
       );
@@ -130,7 +134,7 @@ describe("05 — Type B Agent Creation Pipeline", async () => {
 
     test("A-08: Genesis marked as Mandatory", () => {
       assert.match(
-        skillContent,
+        pipelineCorpus,
         /Genesis.*Mandatory/i,
         "Genesis should be marked as Mandatory"
       );
@@ -138,7 +142,7 @@ describe("05 — Type B Agent Creation Pipeline", async () => {
 
     test("A-09: Artisan marked as Mandatory", () => {
       assert.match(
-        skillContent,
+        pipelineCorpus,
         /Artisan.*Mandatory/i,
         "Artisan should be marked as Mandatory"
       );
@@ -148,32 +152,32 @@ describe("05 — Type B Agent Creation Pipeline", async () => {
       const onDemandStations = ["Sentinel", "Librarian", "Conductor"];
       for (const station of onDemandStations) {
         assert.match(
-          skillContent,
+          pipelineCorpus,
           new RegExp(`${station}.*On Demand`, "i"),
           `${station} should be marked as On Demand`
         );
       }
 
       assert.match(
-        skillContent,
-        /Will it modify files.*call external APIs.*operate databases/i,
+        pipelineCorpus,
+        /Will it modify files.*call external APIs.*operate databases/is,
         "Missing Sentinel trigger question"
       );
       assert.match(
-        skillContent,
+        pipelineCorpus,
         /need to remember what it did last time/i,
         "Missing Librarian trigger question"
       );
       assert.match(
-        skillContent,
-        /hand off results to other Agents.*coordinate execution order/i,
+        pipelineCorpus,
+        /hand off results to other Agents.*coordinate execution order/is,
         "Missing Conductor trigger question"
       );
     });
 
     test("A-11: Station Deliverable Contract table covers all participating agents", () => {
       assert.match(
-        skillContent,
+        pipelineCorpus,
         /Station Deliverable Contract/i,
         "Missing Station Deliverable Contract section"
       );
@@ -190,7 +194,7 @@ describe("05 — Type B Agent Creation Pipeline", async () => {
       ];
       for (const station of expectedStations) {
         assert.match(
-          skillContent,
+          pipelineCorpus,
           new RegExp(`\\|\\s*${station}[^|]*\\|`, "i"),
           `Station Deliverable Contract should include ${station}`
         );
@@ -200,19 +204,19 @@ describe("05 — Type B Agent Creation Pipeline", async () => {
     test("A-12: Quality grading scale S/A/B/C/D documented", () => {
       for (const grade of QUALITY_GRADES) {
         assert.match(
-          skillContent,
+          pipelineCorpus,
           new RegExp(`\\b${grade}\\b`),
           `Quality grade '${grade}' should be documented`
         );
       }
 
       assert.match(
-        skillContent,
+        pipelineCorpus,
         /S\/A.*Pass/i,
         "S/A should map to Pass"
       );
       assert.match(
-        skillContent,
+        pipelineCorpus,
         /D.*redo/i,
         "D grade should trigger redo"
       );
