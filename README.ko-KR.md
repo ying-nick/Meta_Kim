@@ -64,13 +64,13 @@
 
 **유지보수 원칙**: 먼저 `.claude/`와 `contracts/`를 고치고, 그다음 런타임 거울을 동기화·검증합니다.
 
+그림은**개념 옆**에 둡니다(그림만 있는 장이 아님). 단계 상세·이중 어휘·분기 지도는 영어 정본 [README.md](README.md)의 [Development Governance Spine](README.md#complex-spine-en)·[The 8-Stage Spine And The Business Workflow](README.md#meta-kim-diagram-two-layers-en)·[Workflow Relation Map](README.md#task-routing-en)을 참고하세요. 노드 표기는 Mermaid 호환을 위해 영어로 둡니다.
+
 <a id="meta-kim-visual-maps-ko"></a>
 
-## 다이어그램: 부품 연결
+#### 그림: 정본·도구·런타임 미러
 
-(다이어그램 노드는 Mermaid 호환을 위해 영어로 유지합니다.)
-
-### 1. 정본 → 런타임 미러 → 검증 루프
+<div align="center">
 
 ```mermaid
 flowchart TB
@@ -102,9 +102,15 @@ flowchart TB
   SK --> VAL
 ```
 
-### 2. 기본 경로: 의도 → 진입 → 8단계 척추
+</div>
 
-`meta-theory`는 **스킬**(트리거 시 로드되는 방법서). `meta-warden`은 **에이전트**(기본 공개 진입, 게이트·종합).
+<a id="default-path-ko"></a>
+
+#### 그림: 기본 경로(진입·meta-theory 스킬·8단계 척추 개요)
+
+`meta-theory`는 **스킬**(트리거 시 로드되는 방법서). `meta-warden`은 **에이전트**(기본 공개 진입). **전 단계 전개**는 아래「개발 거버넌스 척추」와 영어판을 참고하세요.
+
+<div align="center">
 
 ```mermaid
 flowchart LR
@@ -114,81 +120,7 @@ flowchart LR
   P --> OUT["deliverable verify evolve"]
 ```
 
-### 3. 8단계 척추
-
-```mermaid
-flowchart TD
-  S1["1 Critical: scope goals constraints meta vs tech"]
-  S2["2 Fetch: agents skills index"]
-  S3["3 Thinking: dispatchBoard mergeOwner parallel"]
-  S4["4 Execution: Agent to owners"]
-  S5["5 Review: quality boundaries protocol"]
-  S6["6 Meta-Review: review standard"]
-  S7["7 Verification: landed gates"]
-  S8["8 Evolution: patterns writeback"]
-  S1 --> S2 --> S3 --> S4 --> S5 --> S6 --> S7 --> S8
-```
-
-```mermaid
-flowchart LR
-  I1["Critical beats Guessing"] --> I2["Fetch beats Assuming"]
-  I2 --> I3["Thinking beats Rushing"]
-  I3 --> I4["Review beats Trusting"]
-```
-
-### 4. 이중 워크플로(척추 vs 부서 계약)
-
-```mermaid
-flowchart LR
-  subgraph Spine["8-stage spine"]
-    A1[critical] --> A2[fetch] --> A3[thinking] --> A4[execution]
-    A4 --> A5[review] --> A6[meta_review] --> A7[verification] --> A8[evolution]
-  end
-```
-
-```mermaid
-flowchart LR
-  subgraph Biz["10-phase business contract"]
-    B1[direction] --> B2[planning] --> B3[execution] --> B4[review]
-    B4 --> B5[meta_review] --> B6[revision] --> B7[verify]
-    B7 --> B8[summary] --> B9[feedback] --> B10[evolve]
-  end
-```
-
-업무 단계는 척추 단계 이름을 **바꾸지 않습니다**. run 계약·표시·산출물 포장 층입니다.
-
-### 5. 작업 분기
-
-```mermaid
-flowchart TD
-  T["Task arrives"] --> Q{"Pure Query? no writes no side effects"}
-  Q -->|Yes| D1["Answer directly"]
-  Q -->|No| K["What kind of work"]
-  K -->|Simple| P1["Shortcut spine"]
-  K -->|Complex| P2["8-stage Type C"]
-  K -->|Meta analysis| P3["metaWorkflow analyze propose report"]
-  K -->|Proposal review| P4["Type D prism scout warden"]
-  P1 --> E1["Exec Review Verify Evolution"]
-  P2 --> E2["Critical through Evolution"]
-  P3 --> E3["analyze propose report"]
-  P4 --> E4["proposal checklist report"]
-  P2 --> UP["Complexity rising?"]
-  UP -->|Yes| G["10-step governance"]
-  UP -->|No| E2
-```
-
-### 6. 핵심 방법 사슬(확장)
-
-```mermaid
-flowchart TB
-  Y["Meta (元) smallest governable unit"] --> OM["Org mirror division escalation"]
-  OM --> RO["Rhythm conductor stageState parallel"]
-  RO --> IA["Intent amplification closure"]
-  Y -.-> R1["split"]
-  OM -.-> R2["org shape"]
-  RO -.-> R3["when who"]
-  IA -.-> R4["done"]
-```
+</div>
 
 ## 저자·지원
 
@@ -209,11 +141,28 @@ flowchart TB
 
 **Meta_Kim은 세 개의 별도 프로젝트가 아니라 하나의 방법의 세 가지 투영입니다.**
 
+<div align="center">
+
 | 런타임 | 진입점 | 저장소 내 주요 위치 | 역할 |
 | ------ | ------ | ------------------- | ---- |
 | Claude Code | [CLAUDE.md](CLAUDE.md) | `.claude/`, `.mcp.json` | 정본 편집 런타임 |
 | Codex | [AGENTS.md](AGENTS.md) | `.codex/`, `.agents/`, `codex/` | Codex 투영 |
 | OpenClaw | `openclaw/workspaces/` | `openclaw/` | 로컬 workspace 투영 |
+
+</div>
+
+**같은 방법을 세 곳에 내려놓기** 요약(세부는 위 [그림: 정본·도구·런타임 미러](#meta-kim-visual-maps-ko)):
+
+<div align="center">
+
+```mermaid
+flowchart LR
+  SRC["정본 .claude 와 contracts"] --> CC["Claude Code 편집 런타임"]
+  SRC -->|미러| CX["Codex"]
+  SRC -->|workspace| OW["OpenClaw"]
+```
+
+</div>
 
 - 유지보수는 **`.claude/`와 `contracts/workflow-contract.json`에서 시작**
 - `.codex/`, `openclaw/` 대부분은 생성물 또는 런타임 전용
@@ -246,22 +195,41 @@ flowchart LR
     C --> D["Intent Amplification"]
 ```
 
-하나라도 빠지면 방법이 불완전합니다. 더 자세한 그림은 위「다이어그램」절을 보세요.
+하나라도 빠지면 방법이 불완전합니다. 상세 그림·분기는 영어 정본 [README.md](README.md)의 [Meta Architecture View](README.md#meta-kim-visual-maps-en) 이하를 참고하세요.
+
+<a id="complex-spine-ko"></a>
 
 ## 개발 거버넌스 척추(8단계)
 
-복잡한 작업(멀티 파일·다중 역량 등)은 8단계 척추를 따릅니다.
+복잡한 작업(멀티 파일·다중 역량 등)은 8단계 척추를 따릅니다. 단계는 **2행×4**로 읽기 쉽게(아래 표와 같은 순).
+
+<div align="center">
 
 ```mermaid
-graph LR
-  S1[1 Critical] --> S2[2 Fetch]
-  S2 --> S3[3 Thinking]
-  S3 --> S4[4 Execution]
-  S4 --> S5[5 Review]
-  S5 --> S6[6 Meta-Review]
-  S6 --> S7[7 Verification]
-  S7 --> S8[8 Evolution]
+flowchart TB
+  subgraph upper["1–4 단계"]
+    direction LR
+    S1["1 Critical"] --> S2["2 Fetch"] --> S3["3 Thinking"] --> S4["4 Execution"]
+  end
+  subgraph lower["5–8 단계"]
+    direction LR
+    S5["5 Review"] --> S6["6 Meta-Review"] --> S7["7 Verification"] --> S8["8 Evolution"]
+  end
+  S4 --> S5
 ```
+
+</div>
+
+<div align="center">
+
+```mermaid
+flowchart LR
+  I1["Critical > Guessing"] --> I2["Fetch > Assuming"]
+  I2 --> I3["Thinking > Rushing"]
+  I3 --> I4["Review > Trusting"]
+```
+
+</div>
 
 | 단계 | 목적(요약) |
 | ---- | ---------- |
@@ -278,28 +246,99 @@ graph LR
 
 ## 8단계 척추와 비즈니스 워크플로는 다름
 
-- **8단계**: 복잡 개발의 실행 척추 (`meta-theory` / `dev-governance.md`)
-- **10단계**: 부서 run 계약·표시·산출물 규율 (`workflow-contract.json`)
+두 층은 **별도 어휘**입니다. 비즈니스 페이즈가 척추 단계 이름을 **바꾸지 않습니다**.
 
-비즈니스 층은 척추를 **대체하지 않습니다**. 자세한 내용은 영문 [§ The 8-Stage Spine And The Business Workflow](README.md#the-8-stage-spine-and-the-business-workflow-are-not-the-same-thing)를 참고하세요.
+<a id="meta-kim-diagram-two-layers-ko"></a>
+
+**그림:** 한 그림에 두 줄 — 위는 **실행 척추**(8단계), 아래는 **부서 run 계약**(비즈니스 10페이즈). 병렬 어휘이며 비즈니스가 척추 단계를 개명하지 않습니다.
+
+<div align="center">
+
+```mermaid
+flowchart TB
+  subgraph Spine["8-stage spine (실행 척추)"]
+    direction LR
+    A1[critical] --> A2[fetch] --> A3[thinking] --> A4[execution]
+    A4 --> A5[review] --> A6[meta_review] --> A7[verification] --> A8[evolution]
+  end
+  subgraph Biz["10-phase business contract (부서 run)"]
+    direction LR
+    B1[direction] --> B2[planning] --> B3[execution] --> B4[review]
+    B4 --> B5[meta_review] --> B6[revision] --> B7[verify]
+    B7 --> B8[summary] --> B9[feedback] --> B10[evolve]
+  end
+```
+
+</div>
+
+8단계 척추(한 줄):
+
+<div align="center">
+
+```text
+Critical -> Fetch -> Thinking -> Execution -> Review -> Meta-Review -> Verification -> Evolution
+```
+
+</div>
+
+비즈니스 워크플로(별도):
+
+<div align="center">
+
+```text
+direction -> planning -> execution -> review -> meta_review -> revision -> verify -> summary -> feedback -> evolve
+```
+
+</div>
+
+요점:
+
+- **비즈니스 워크플로가 8단계 척추를 대체하지 않음**
+- run 계약·표시·산출물 포장 층으로 이해하는 편이 가깝다
+- 복잡 개발의 실제 척추는 여전히 8단계
+- `summary` / `feedback` / `evolve` 등은 run 관리·클로저에 가깝고 기저 실행 단계의 개명이 아님
+
+한 문장:**8단계가 실행 척추, 10페이즈가 부서 수준 run 계약.**
 
 ## 워크플로 관계 지도
 
+<a id="task-routing-ko"></a>
+
+**작업 라우팅**(아래 표와 같은 토폴로지): 가로 배치로 세로 공간을 줄입니다.
+
+<div align="center">
+
 ```mermaid
-flowchart TD
-    A[Task arrives] --> B{Pure Query?}
-    B -->|Yes| Q[Answer directly]
-    B -->|No| C{Task type}
-    C --> S[Simple shortcut]
-    C --> X[Type C 8-stage]
-    C --> M[Meta metaWorkflow]
-    C --> D[Type D review]
-    S --> S2[Exec Review Verify Evolution]
-    X --> X2[Critical through Evolution]
-    X --> T[Add 10-step if needed]
-    M --> M2[analyze propose report]
-    D --> D2[read dispatch report]
+flowchart LR
+  T[Task arrives] --> Q{Pure Query?}
+  Q -->|Yes| D[Answer directly]
+  Q -->|No| K{Route}
+  K -->|Simple| P1[Shortcut spine tail]
+  K -->|Complex Type C| P2[Full 8-stage chain]
+  K -->|Meta analysis| P3[mw: analyze / propose / report]
+  K -->|Proposal| P4[Type D]
+  P1 --> E[ERV → Evo]
+  P2 --> UP{Rising?}
+  UP -->|Yes| G["+ 10-step governance"]
+  UP -->|No| E
+  P3 --> E
+  P4 --> E
 ```
+
+</div>
+
+<div align="center">
+
+| 분기 | 의미 |
+| --- | --- |
+| 단순·단일 오너 | 압축 척추: Exec → Review → Verify → Evolution |
+| 복잡·다중 파일 | 전체 `Critical`…`Evolution`, 복잡도가 오르면 10단 거버넌스 추가 가능 |
+| 메타 부서 분석 | `metaWorkflow`: analyze → propose → report |
+| Type D | 제안·체크리스트·prism / scout / warden 검토 보고 |
+
+</div>
+
+**위 그림과의 관계:** 이 절은 같은 그래프에서 **읽기 쉬운 오해**만 모읍니다. 영어 정본 [Workflow Relation Map](README.md#task-routing-en)과 함께 읽으세요.
 
 ## 여덟 메타 에이전트
 
@@ -315,6 +354,20 @@ flowchart TD
 | `meta-scout` | 외부 역량 발견·평가 |
 
 **공개 정문은 `meta-warden`.**
+
+조직 관계(**정문**만 먼저 기억해도 됨):
+
+<div align="center">
+
+```mermaid
+flowchart LR
+  U[사용자 의도] --> W[meta-warden 기본 정문]
+  W --> R[나머지 7역 — 백스테이지 전문]
+```
+
+</div>
+
+진입·스킬·척추 **개요**는 위 [기본 경로](#default-path-ko)를 참고하세요.
 
 ## 빠른 시작(요점)
 

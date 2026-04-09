@@ -34,22 +34,6 @@ Meta_Kim is a **governance layer for AI coding assistants**: one unified discipl
 - Discipline: one department, one primary deliverable, one closed handoff chain
 - The long-term source of truth mostly lives in `.claude/` and `contracts/workflow-contract.json`
 
-## Why It Gets Lighter Over Time
-
-One of the most interesting things about Meta_Kim is not that it is cheapest on day one, but that:
-
-**it gradually turns expensive temporary reasoning into reusable long-term capability assets.**
-
-In practice that means:
-
-- **the early phase is heavier**: you are still building agents, skills, hooks, tools, contracts, memory, and review / verification discipline
-- **later runs get lighter**: repeated work no longer has to rediscover capabilities, redraw boundaries, or relearn the same lesson from scratch
-- **what shrinks is not all token usage, but repeated token usage**: recurring or familiar task families become much cheaper on average
-
-The more precise statement is:
-
-**Meta_Kim is not trying to make every single run as cheap as possible. It is trying to convert temporary reasoning cost into one-time capability-building cost that can be reused later.**
-
 ## What This Project Is
 
 Meta_Kim is not mainly about making AI write more code. It is about reducing the failure modes that show up when AI touches complex work:
@@ -81,6 +65,22 @@ In one line:
 
 **Meta_Kim cares less about whether a single answer looks right, and more about whether complex work can be sustained, stable, and governable.**
 
+## Why It Gets Lighter Over Time
+
+With that **problem framing** in mind, one of the most interesting things about Meta_Kim is not that it is cheapest on day one, but that:
+
+**it gradually turns expensive temporary reasoning into reusable long-term capability assets.**
+
+In practice that means:
+
+- **the early phase is heavier**: you are still building agents, skills, hooks, tools, contracts, memory, and review / verification discipline
+- **later runs get lighter**: repeated work no longer has to rediscover capabilities, redraw boundaries, or relearn the same lesson from scratch
+- **what shrinks is not all token usage, but repeated token usage**: recurring or familiar task families become much cheaper on average
+
+The more precise statement is:
+
+**Meta_Kim is not trying to make every single run as cheap as possible. It is trying to convert temporary reasoning cost into one-time capability-building cost that can be reused later.**
+
 ## Meta Architecture View
 
 The safest way to read this repository is not as “some prompts plus config files”, but as one governed system with layered responsibilities:
@@ -103,13 +103,13 @@ The maintenance rule follows directly from that design:
 
 **edit `.claude/` and `contracts/` first, then sync and validate the runtime mirrors.**
 
+Figures below sit **next to the concepts above**: sources, mirrors, and the default entry path. Per-stage detail, two-layer vocabulary, and task routing are under [Development Governance Spine](#complex-spine-en), [The 8-Stage Spine And The Business Workflow](#meta-kim-diagram-two-layers-en), and [Workflow Relation Map](#task-routing-en). [README.zh-CN.md](README.zh-CN.md) uses the same structure (Chinese node labels where applicable).
+
 <a id="meta-kim-visual-maps-en"></a>
 
-## Visual maps (how the pieces connect)
+#### Diagram: Canonical sources, tooling, and runtime mirrors
 
-These diagrams mirror [README.zh-CN.md#meta-kim-visual-maps-zh](README.zh-CN.md#meta-kim-visual-maps-zh) (简体中文节点文案). Use them when the prose feels abstract.
-
-### 1. Canonical sources → runtime mirrors → validation loop
+<div align="center">
 
 ```mermaid
 flowchart TB
@@ -141,9 +141,15 @@ flowchart TB
   SK --> VAL
 ```
 
-### 2. Default path: user intent → entry → eight-stage spine
+</div>
 
-`meta-theory` (skill) is the **method playbook** loaded on triggers; `meta-warden` (agent) is the **default public entry role** that coordinates gates and synthesis.
+<a id="default-path-en"></a>
+
+#### Diagram: Default path (entry, meta-theory skill, eight-stage spine overview)
+
+`meta-theory` (skill) is the **method playbook** loaded on triggers; `meta-warden` (agent) is the **default public entry role** that coordinates gates and synthesis. This is **not** the full per-stage chart — that is in [Development Governance Spine](#complex-spine-en).
+
+<div align="center">
 
 ```mermaid
 flowchart LR
@@ -153,87 +159,7 @@ flowchart LR
   P --> OUT["deliverable verify evolve"]
 ```
 
-### 3. Eight-stage spine — what each stage does
-
-```mermaid
-flowchart TD
-  S1["1 Critical: scope goals constraints meta vs tech"]
-  S2["2 Fetch: agents skills index"]
-  S3["3 Thinking: dispatchBoard mergeOwner parallel"]
-  S4["4 Execution: Agent to owners"]
-  S5["5 Review: quality boundaries protocol"]
-  S6["6 Meta-Review: review standard"]
-  S7["7 Verification: landed gates"]
-  S8["8 Evolution: patterns writeback"]
-  S1 --> S2 --> S3 --> S4 --> S5 --> S6 --> S7 --> S8
-```
-
-Iron rules alignment (same order as stages 1–3 and 5):
-
-```mermaid
-flowchart LR
-  I1["Critical beats Guessing"] --> I2["Fetch beats Assuming"]
-  I2 --> I3["Thinking beats Rushing"]
-  I3 --> I4["Review beats Trusting"]
-```
-
-<a id="meta-kim-diagram-two-layers-en"></a>
-
-### 4. Two workflow layers: spine vs department contract
-
-**Do not merge these mentally.** The spine runs development governance; the 10 phases package department runs and closure language.
-
-```mermaid
-flowchart LR
-  subgraph Spine["8-stage spine"]
-    A1[critical] --> A2[fetch] --> A3[thinking] --> A4[execution]
-    A4 --> A5[review] --> A6[meta_review] --> A7[verification] --> A8[evolution]
-  end
-```
-
-```mermaid
-flowchart LR
-  subgraph Biz["10-phase business contract"]
-    B1[direction] --> B2[planning] --> B3[execution] --> B4[review]
-    B4 --> B5[meta_review] --> B6[revision] --> B7[verify]
-    B7 --> B8[summary] --> B9[feedback] --> B10[evolve]
-  end
-```
-
-The two rows are **parallel vocabularies**: business phases do not rename spine stages; they add run-contract, display, and deliverable packaging.
-
-### 5. Task routing (which path applies)
-
-```mermaid
-flowchart TD
-  T["Task arrives"] --> Q{"Pure Query? no writes no side effects"}
-  Q -->|Yes| D1["Answer directly"]
-  Q -->|No| K["What kind of work"]
-  K -->|Simple| P1["Shortcut spine"]
-  K -->|Complex| P2["8-stage Type C"]
-  K -->|Meta analysis| P3["metaWorkflow analyze propose report"]
-  K -->|Proposal review| P4["Type D prism scout warden"]
-  P1 --> E1["Exec Review Verify Evolution"]
-  P2 --> E2["Critical through Evolution"]
-  P3 --> E3["analyze propose report"]
-  P4 --> E4["proposal checklist report"]
-  P2 --> UP["Complexity rising?"]
-  UP -->|Yes| G["10-step governance"]
-  UP -->|No| E2
-```
-
-### 6. Core method chain (Meta → mirror → rhythm → amplification) expanded
-
-```mermaid
-flowchart TB
-  Y["Meta (元) smallest governable unit"] --> OM["Org mirror division escalation"]
-  OM --> RO["Rhythm conductor stageState parallel"]
-  RO --> IA["Intent amplification closure"]
-  Y -.-> R1["split"]
-  OM -.-> R2["org shape"]
-  RO -.-> R3["when who"]
-  IA -.-> R4["done"]
-```
+</div>
 
 ## Contact and support
 
@@ -297,11 +223,28 @@ The most important sentence in this repository is:
 
 **Meta_Kim is one method projected into three runtimes, not three separate projects.**
 
+<div align="center">
+
 | Runtime     | Entry point              | Main locations in this repo           | Role                                                  |
 | ----------- | ------------------------ | ------------------------------------- | ----------------------------------------------------- |
-| Claude Code | [CLAUDE.md](CLAUDE.md)      | `.claude/`, `.mcp.json`           | Canonical editing runtime and primary source of truth |
+| Claude Code | [CLAUDE.md](CLAUDE.md)      | `.claude/`, `.mcp.json`           | Canonical (primary editing / source-of-truth) runtime |
 | Codex       | [AGENTS.md](AGENTS.md)      | `.codex/`, `.agents/`, `codex/` | Codex-native custom agent and skill projection        |
 | OpenClaw    | `openclaw/workspaces/` | `openclaw/`                         | OpenClaw local workspace projection                   |
+
+</div>
+
+One figure for **one method, three landing points** (details: [Meta Architecture View](#meta-kim-visual-maps-en)):
+
+<div align="center">
+
+```mermaid
+flowchart LR
+  SRC[Sources .claude + contracts] --> CC[Claude Code]
+  SRC -->|mirror| CX[Codex]
+  SRC -->|workspace map| OW[OpenClaw]
+```
+
+</div>
 
 The practical takeaway is simple:
 
@@ -382,22 +325,47 @@ flowchart LR
 
 Remove any one of these and the method is incomplete.
 
-**More diagrams:** see [Visual maps (how the pieces connect)](#meta-kim-visual-maps-en) earlier in this file — maintenance loop, entry vs skill, per-stage spine, two-layer workflows, task routing, and the expanded Meta chain.
+**Where the figures are:** sources and entry path — [Meta Architecture View](#meta-kim-visual-maps-en); per-stage spine and iron rules — this section; spine vs 10-phase contract — [The 8-Stage Spine And The Business Workflow](#meta-kim-diagram-two-layers-en); task routing map — [Workflow Relation Map](#task-routing-en).
+
+<a id="complex-spine-en"></a>
 
 ## Development Governance Spine (The Core - Read This First)
 
 For **complex work** (multi-file, cross-module, or requiring multiple capabilities), Meta_Kim follows an eight-stage spine. The early chain lines up with the **four iron rules**: clarify before guessing, search before assuming, plan before rushing, verify before trusting, with **Thinking** in the middle to shape the deck and delivery shell.
 
+The eight stages read compactly as **two rows of four** (same order as the table below).
+
+<div align="center">
+
 ```mermaid
-graph LR
-  S1[1 Critical] --> S2[2 Fetch]
-  S2 --> S3[3 Thinking]
-  S3 --> S4[4 Execution]
-  S4 --> S5[5 Review]
-  S5 --> S6[6 Meta-Review]
-  S6 --> S7[7 Verification]
-  S7 --> S8[8 Evolution]
+flowchart TB
+  subgraph upper["Stages 1–4 (clarify → execute)"]
+    direction LR
+    S1["1 Critical"] --> S2["2 Fetch"] --> S3["3 Thinking"] --> S4["4 Execution"]
+  end
+  subgraph lower["Stages 5–8 (review → evolve)"]
+    direction LR
+    S5["5 Review"] --> S6["6 Meta-Review"] --> S7["7 Verification"] --> S8["8 Evolution"]
+  end
+  S4 --> S5
 ```
+
+</div>
+
+Full names: 1 scope (meta vs tech); 2 search agents/skills; 3 `dispatchBoard` / `mergeOwner`; 4 assign owners; 5 quality boundaries; 6 review standard; 7 verification gates; 8 patterns and writeback.
+
+Iron rules alignment (stages 1–3 and review):
+
+<div align="center">
+
+```mermaid
+flowchart LR
+  I1["Critical beats Guessing"] --> I2["Fetch beats Assuming"]
+  I2 --> I3["Thinking beats Rushing"]
+  I3 --> I4["Review beats Trusting"]
+```
+
+</div>
 
 | Stage            | Purpose           | Plain-English meaning                                            |
 | ---------------- | ----------------- | ---------------------------------------------------------------- |
@@ -409,15 +377,6 @@ graph LR
 | `Meta-Review`  | Review the review | make sure the review standard itself is sound                    |
 | `Verification` | Close the loop    | confirm the fix really landed                                    |
 | `Evolution`    | Learn             | keep patterns, scars, and reusable knowledge                     |
-
-The four iron rules underneath that flow are:
-
-```mermaid
-graph TD
-  CR[Critical beats Guessing] --> FE[Fetch beats Assuming]
-  FE --> TH[Thinking shapes deck and shell]
-  TH --> RV[Review beats Trusting]
-```
 
 - `Critical > Guessing`
 - `Fetch > Assuming`
@@ -446,8 +405,6 @@ There are 4 additional rules now enforced in the canonical sources:
 
 ## The 8-Stage Spine And The Business Workflow Are Not The Same Thing
 
-**Diagram:** [Visual maps → §4](#meta-kim-diagram-two-layers-en) shows the spine and the 10-phase contract side by side.
-
 This distinction matters because it is one of the easiest ways to misunderstand Meta_Kim.
 
 There are two layers of workflow language in the project:
@@ -457,17 +414,48 @@ There are two layers of workflow language in the project:
 | **8-stage spine**              | `meta-theory` / `dev-governance.md` | canonical execution chain for complex development work                                  |
 | **10-phase business workflow** | `contracts/workflow-contract.json`    | run-contract language, display language, and deliverable discipline for department runs |
 
-The 8-stage spine remains the underlying execution backbone:
+<a id="meta-kim-diagram-two-layers-en"></a>
+
+**Diagram:** one figure, two stacked rows — top row is the **execution spine** (8-stage), bottom row is the **department run contract** (10 business phases). They are parallel vocabularies; business phases do not rename spine stages.
+
+<div align="center">
+
+```mermaid
+flowchart TB
+  subgraph Spine["8-stage spine (execution backbone)"]
+    direction LR
+    A1[critical] --> A2[fetch] --> A3[thinking] --> A4[execution]
+    A4 --> A5[review] --> A6[meta_review] --> A7[verification] --> A8[evolution]
+  end
+  subgraph Biz["10-phase business contract (department run)"]
+    direction LR
+    B1[direction] --> B2[planning] --> B3[execution] --> B4[review]
+    B4 --> B5[meta_review] --> B6[revision] --> B7[verify]
+    B7 --> B8[summary] --> B9[feedback] --> B10[evolve]
+  end
+```
+
+</div>
+
+The 8-stage spine remains the underlying execution backbone (text shorthand):
+
+<div align="center">
 
 ```text
 Critical -> Fetch -> Thinking -> Execution -> Review -> Meta-Review -> Verification -> Evolution
 ```
 
+</div>
+
 The business workflow is a separate department-run vocabulary:
+
+<div align="center">
 
 ```text
 direction -> planning -> execution -> review -> meta_review -> revision -> verify -> summary -> feedback -> evolve
 ```
+
+</div>
 
 The key relationship is:
 
@@ -482,23 +470,45 @@ If you remember one sentence, make it this:
 
 ## Workflow Relation Map
 
-According to the actual project design, Meta_Kim does not have just one workflow. It has several paths layered together:
+<a id="task-routing-en"></a>
+
+**Task routing (same graph as the prose below):** horizontal layout to save vertical space; see the table for branch meanings.
+
+<div align="center">
 
 ```mermaid
-flowchart TD
-    A[Task arrives] --> B{Pure Query?}
-    B -->|Yes| Q[Answer directly]
-    B -->|No| C{Task type}
-    C --> S[Simple shortcut]
-    C --> X[Type C 8-stage]
-    C --> M[Meta metaWorkflow]
-    C --> D[Type D review]
-    S --> S2[Exec Review Verify Evolution]
-    X --> X2[Critical through Evolution]
-    X --> T[Add 10-step if needed]
-    M --> M2[analyze propose report]
-    D --> D2[read dispatch report]
+flowchart LR
+  T[Task arrives] --> Q{Pure Query?}
+  Q -->|Yes| D[Answer directly]
+  Q -->|No| K{Route}
+  K -->|Simple| P1[Shortcut spine tail]
+  K -->|Complex Type C| P2[Full 8-stage chain]
+  K -->|Meta analysis| P3[mw: analyze / propose / report]
+  K -->|Proposal| P4[Type D]
+  P1 --> E[ERV → Evo]
+  P2 --> UP{Rising?}
+  UP -->|Yes| G["+ 10-step governance"]
+  UP -->|No| E
+  P3 --> E
+  P4 --> E
 ```
+
+</div>
+
+<div align="center">
+
+| Branch | Meaning |
+| --- | --- |
+| Simple single-owner | Shortcut spine segment: Exec → Review → Verify → Evolution |
+| Complex multi-file | Full `Critical`…`Evolution`; may add 10-step governance if complexity keeps rising |
+| Meta department analysis | `metaWorkflow`: analyze → propose → report |
+| Type D | Proposal, checklist, prism / scout / warden review report |
+
+</div>
+
+**Relationship to the diagram above:** this section collects **easy-to-misread implications** on that same graph; it does not re-explain every fork.
+
+According to the actual project design, Meta_Kim does not have just one workflow. It has several paths layered together (same routing map as above).
 
 The 4 easiest misunderstandings here are:
 
@@ -679,6 +689,8 @@ Each run must now also emit an explicit `writebackDecision`:
 11. **Validates real runs, not just the contract**: `validate:run` checks whether a recorded run artifact actually satisfies the full packet chain
 12. **Writes learning back into the system**: reusable patterns, scars, and owner / skill / contract adjustments are persisted
 
+> **Reader note:** the following is for **complex tasks**, JSON **run artifacts**, and contract-field validation. Skip if you only use chat-style workflows.
+
 ## Governed run artifacts (complex work)
 
 For runs where `governanceFlow` is `complex_dev` or `meta_analysis`, treat a **single JSON run artifact** as the source of truth alongside chat:
@@ -723,9 +735,25 @@ If you are a normal user, remember just one thing:
 
 **the public front door is `meta-warden`.**
 
+Organization (remember the **front door** first; you do not need the full table on day one):
+
+<div align="center">
+
+```mermaid
+flowchart LR
+  U[User intent] --> W[meta-warden default entry]
+  W --> R[Seven other meta roles — backstage specialists]
+```
+
+</div>
+
+Entry vs skill vs spine overview: [Meta Architecture View → Default path](#default-path-en).
+
 ## How the System Works
 
 You do not need to know the internals. But if you are curious:
+
+<div align="center">
 
 ```mermaid
 flowchart TD
@@ -736,6 +764,10 @@ flowchart TD
     E --> F[Review output]
     F --> G[Capture patterns]
 ```
+
+</div>
+
+For routing and stacked paths, see [Workflow Relation Map](#task-routing-en).
 
 Every valid business run must keep a single organizing thread:
 
@@ -873,7 +905,7 @@ Meta_Kim ships 8 hook command scripts in `.claude/settings.json` (the `Stop` eve
 
 Codex and OpenClaw use their own native mechanisms for equivalent behavior.
 
-## Code Knowledge Graph (graphify)
+## Code Knowledge Graph (graphify) (advanced)
 
 Meta_Kim can leverage [graphify](https://github.com/safishamsi/graphify) (`pip install graphifyy`) to generate compressed code knowledge graphs for **target projects** — not Meta_Kim itself. This provides up to **71x token compression** via subgraph extraction instead of raw file reading.
 
@@ -915,6 +947,8 @@ npm run graphify:check
 - God nodes (high in-degree) → flagged as serial bottlenecks for `meta-conductor`
 
 ## Quick Start (Clone to Working in 5 Minutes)
+
+**How to read on from here:** finish **One-Click / Manual Setup** below, then continue with [Runtime Entry Points](#runtime-entry-points) → [How To Use It](#how-to-use-it) → [Commands](#commands). Sections **above** Quick Start cover intent, [Meta Architecture diagrams](#meta-kim-visual-maps-en), and governance spine; deeper charts link from [Development Governance Spine](#complex-spine-en) and [Workflow Relation Map](#task-routing-en).
 
 ### Prerequisites
 

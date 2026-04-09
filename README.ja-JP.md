@@ -64,13 +64,13 @@
 
 **メンテの原則**: まず `.claude/` と `contracts/` を編集し、その後ランタイム鏡像を同期・検証する。
 
+図は**概念の横**に置きます（独立した「図だけの章」ではありません）。段階の詳細・二層の語彙・分岐の地図は英語正典 [README.md](README.md) の [Development Governance Spine](README.md#complex-spine-en)・[The 8-Stage Spine And The Business Workflow](README.md#meta-kim-diagram-two-layers-en)・[Workflow Relation Map](README.md#task-routing-en) を参照。ノード表記は Mermaid 互換のため英語のままです。
+
 <a id="meta-kim-visual-maps-ja"></a>
 
-## 図解: 各部のつながり
+#### 図: 主源・ツール・ランタイム鏡像
 
-（図中のノードは Mermaid 互換のため英語表記のままです。）
-
-### 1. 主源 → ランタイム鏡像 → 検証ループ
+<div align="center">
 
 ```mermaid
 flowchart TB
@@ -102,9 +102,15 @@ flowchart TB
   SK --> VAL
 ```
 
-### 2. 既定パス: 意図 → 入口 → 八段階スパイン
+</div>
 
-`meta-theory` は**スキル**（トリガーで読み込まれる手順書）。`meta-warden` は**エージェント**（既定の公開入口、ゲートと総合）。
+<a id="default-path-ja"></a>
+
+#### 図: 既定パス（入口・meta-theory スキル・八段階スパインの略図）
+
+`meta-theory` は**スキル**（トリガーで読み込まれる手順書）。`meta-warden` は**エージェント**（既定の公開入口）。**全段の展開**は下文「開発ガバナンスの背骨」と英語版を参照。
+
+<div align="center">
 
 ```mermaid
 flowchart LR
@@ -114,81 +120,7 @@ flowchart LR
   P --> OUT["deliverable verify evolve"]
 ```
 
-### 3. 八段階スパイン（各段の意味）
-
-```mermaid
-flowchart TD
-  S1["1 Critical: scope goals constraints meta vs tech"]
-  S2["2 Fetch: agents skills index"]
-  S3["3 Thinking: dispatchBoard mergeOwner parallel"]
-  S4["4 Execution: Agent to owners"]
-  S5["5 Review: quality boundaries protocol"]
-  S6["6 Meta-Review: review standard"]
-  S7["7 Verification: landed gates"]
-  S8["8 Evolution: patterns writeback"]
-  S1 --> S2 --> S3 --> S4 --> S5 --> S6 --> S7 --> S8
-```
-
-```mermaid
-flowchart LR
-  I1["Critical beats Guessing"] --> I2["Fetch beats Assuming"]
-  I2 --> I3["Thinking beats Rushing"]
-  I3 --> I4["Review beats Trusting"]
-```
-
-### 4. 二層のワークフロー（スパイン vs 部門契約）
-
-```mermaid
-flowchart LR
-  subgraph Spine["8-stage spine"]
-    A1[critical] --> A2[fetch] --> A3[thinking] --> A4[execution]
-    A4 --> A5[review] --> A6[meta_review] --> A7[verification] --> A8[evolution]
-  end
-```
-
-```mermaid
-flowchart LR
-  subgraph Biz["10-phase business contract"]
-    B1[direction] --> B2[planning] --> B3[execution] --> B4[review]
-    B4 --> B5[meta_review] --> B6[revision] --> B7[verify]
-    B7 --> B8[summary] --> B9[feedback] --> B10[evolve]
-  end
-```
-
-業務フェーズはスパインの段階名を**置き換えません**。run 契約・表示・成果物パッケージの層です。
-
-### 5. タスク分岐
-
-```mermaid
-flowchart TD
-  T["Task arrives"] --> Q{"Pure Query? no writes no side effects"}
-  Q -->|Yes| D1["Answer directly"]
-  Q -->|No| K["What kind of work"]
-  K -->|Simple| P1["Shortcut spine"]
-  K -->|Complex| P2["8-stage Type C"]
-  K -->|Meta analysis| P3["metaWorkflow analyze propose report"]
-  K -->|Proposal review| P4["Type D prism scout warden"]
-  P1 --> E1["Exec Review Verify Evolution"]
-  P2 --> E2["Critical through Evolution"]
-  P3 --> E3["analyze propose report"]
-  P4 --> E4["proposal checklist report"]
-  P2 --> UP["Complexity rising?"]
-  UP -->|Yes| G["10-step governance"]
-  UP -->|No| E2
-```
-
-### 6. コア方法の連鎖（拡張）
-
-```mermaid
-flowchart TB
-  Y["Meta (元) smallest governable unit"] --> OM["Org mirror division escalation"]
-  OM --> RO["Rhythm conductor stageState parallel"]
-  RO --> IA["Intent amplification closure"]
-  Y -.-> R1["split"]
-  OM -.-> R2["org shape"]
-  RO -.-> R3["when who"]
-  IA -.-> R4["done"]
-```
+</div>
 
 ## 著者・サポート
 
@@ -209,11 +141,28 @@ flowchart TB
 
 **Meta_Kim は三つの別プロジェクトではなく、一つの方法の三つの投影です。**
 
+<div align="center">
+
 | ランタイム | 入口 | リポジトリ内の主な場所 | 役割 |
 | ---------- | ---- | ---------------------- | ---- |
 | Claude Code | [CLAUDE.md](CLAUDE.md) | `.claude/`、`.mcp.json` | 正典編集ランタイム |
 | Codex | [AGENTS.md](AGENTS.md) | `.codex/`、`.agents/`、`codex/` | Codex 向け投影 |
 | OpenClaw | `openclaw/workspaces/` | `openclaw/` | ローカル workspace 投影 |
+
+</div>
+
+**同一の方法を三か所に落とす**略図（詳細は上文 [図: 主源・ツール・ランタイム鏡像](#meta-kim-visual-maps-ja)）:
+
+<div align="center">
+
+```mermaid
+flowchart LR
+  SRC["正典 .claude と contracts"] --> CC["Claude Code 編集ランタイム"]
+  SRC -->|鏡像| CX["Codex"]
+  SRC -->|workspace| OW["OpenClaw"]
+```
+
+</div>
 
 - メンテは **`.claude/` と `contracts/workflow-contract.json` から**
 - `.codex/`、`openclaw/` の多くは生成物またはランタイム用
@@ -246,22 +195,41 @@ flowchart LR
     C --> D["Intent Amplification"]
 ```
 
-いずれかを欠くと方法として未完成です。より詳しい図は上文「図解」を参照。
+いずれかを欠くと方法として未完成です。詳細な図・分岐は英語正典 [README.md](README.md) の [Meta Architecture View](README.md#meta-kim-visual-maps-en) 以降を参照。
+
+<a id="complex-spine-ja"></a>
 
 ## 開発ガバナンスの背骨（八段階）
 
-複雑な仕事（マルチファイル・複数能力など）は八段階スパインに乗ります。
+複雑な仕事（マルチファイル・複数能力など）は八段階スパインに乗ります。段階は**2 行×4**で読みやすく（下表と同じ順）。
+
+<div align="center">
 
 ```mermaid
-graph LR
-  S1[1 Critical] --> S2[2 Fetch]
-  S2 --> S3[3 Thinking]
-  S3 --> S4[4 Execution]
-  S4 --> S5[5 Review]
-  S5 --> S6[6 Meta-Review]
-  S6 --> S7[7 Verification]
-  S7 --> S8[8 Evolution]
+flowchart TB
+  subgraph upper["1–4 段"]
+    direction LR
+    S1["1 Critical"] --> S2["2 Fetch"] --> S3["3 Thinking"] --> S4["4 Execution"]
+  end
+  subgraph lower["5–8 段"]
+    direction LR
+    S5["5 Review"] --> S6["6 Meta-Review"] --> S7["7 Verification"] --> S8["8 Evolution"]
+  end
+  S4 --> S5
 ```
+
+</div>
+
+<div align="center">
+
+```mermaid
+flowchart LR
+  I1["Critical > Guessing"] --> I2["Fetch > Assuming"]
+  I2 --> I3["Thinking > Rushing"]
+  I3 --> I4["Review > Trusting"]
+```
+
+</div>
 
 | 段階 | 目的（要約） |
 | ---- | ------------ |
@@ -278,28 +246,99 @@ graph LR
 
 ## 八段階スパインと業務ワークフローは別物
 
-- **八段階**: 複雑開発の実行背骨（`meta-theory` / `dev-governance.md`）
-- **十フェーズ**: 部門 run の契約・表示・成果物規律（`workflow-contract.json`）
+混同しやすいので、二層は**別語彙**として並べます。業務フェーズはスパインの段階名を**置き換えません**。
 
-業務側はスパインを**置換しません**。詳細は英語版 [§ The 8-Stage Spine And The Business Workflow](README.md#the-8-stage-spine-and-the-business-workflow-are-not-the-same-thing) を参照。
+<a id="meta-kim-diagram-two-layers-ja"></a>
+
+**図:** 上段が**実行スパイン**（八段階）、下段が**部門 run 契約**（業務十フェーズ）。並行する語彙であり、業務がスパインの段階を改名するわけではありません。
+
+<div align="center">
+
+```mermaid
+flowchart TB
+  subgraph Spine["八段階スパイン（実行背骨）"]
+    direction LR
+    A1[critical] --> A2[fetch] --> A3[thinking] --> A4[execution]
+    A4 --> A5[review] --> A6[meta_review] --> A7[verification] --> A8[evolution]
+  end
+  subgraph Biz["十フェーズ業務契約（部門 run）"]
+    direction LR
+    B1[direction] --> B2[planning] --> B3[execution] --> B4[review]
+    B4 --> B5[meta_review] --> B6[revision] --> B7[verify]
+    B7 --> B8[summary] --> B9[feedback] --> B10[evolve]
+  end
+```
+
+</div>
+
+八段階スパイン（短文）:
+
+<div align="center">
+
+```text
+Critical -> Fetch -> Thinking -> Execution -> Review -> Meta-Review -> Verification -> Evolution
+```
+
+</div>
+
+業務ワークフロー（別語彙）:
+
+<div align="center">
+
+```text
+direction -> planning -> execution -> review -> meta_review -> revision -> verify -> summary -> feedback -> evolve
+```
+
+</div>
+
+要点:
+
+- **業務ワークフローは八段階スパインを置き換えない**
+- run 契約・表示・成果物の梱包層として理解するのが近い
+- 複雑開発の実際の背骨は八段階のまま
+- `summary` / `feedback` / `evolve` などは run 管理とクロージャの話であり、下の実行段階の改名ではない
+
+一文で言うなら:**八段階が実行背骨、十フェーズが部門レベルの run 契約。**
 
 ## ワークフロー関係の地図
 
+<a id="task-routing-ja"></a>
+
+**タスク分岐**（下表と同じトポロジ）: 横置きで縦スペースを節約します。
+
+<div align="center">
+
 ```mermaid
-flowchart TD
-    A[Task arrives] --> B{Pure Query?}
-    B -->|Yes| Q[Answer directly]
-    B -->|No| C{Task type}
-    C --> S[Simple shortcut]
-    C --> X[Type C 8-stage]
-    C --> M[Meta metaWorkflow]
-    C --> D[Type D review]
-    S --> S2[Exec Review Verify Evolution]
-    X --> X2[Critical through Evolution]
-    X --> T[Add 10-step if needed]
-    M --> M2[analyze propose report]
-    D --> D2[read dispatch report]
+flowchart LR
+  T[Task arrives] --> Q{Pure Query?}
+  Q -->|Yes| D[Answer directly]
+  Q -->|No| K{Route}
+  K -->|Simple| P1[Shortcut spine tail]
+  K -->|Complex Type C| P2[Full 8-stage chain]
+  K -->|Meta analysis| P3[mw: analyze / propose / report]
+  K -->|Proposal| P4[Type D]
+  P1 --> E[ERV → Evo]
+  P2 --> UP{Rising?}
+  UP -->|Yes| G["+ 10-step governance"]
+  UP -->|No| E
+  P3 --> E
+  P4 --> E
 ```
+
+</div>
+
+<div align="center">
+
+| 分岐 | 意味 |
+| --- | --- |
+| 単純・単一オーナー | 圧縮スパイン: Exec → Review → Verify → Evolution |
+| 複雑・多ファイル | 全 `Critical`…`Evolution`、複雑度が上がれば十段ガバナンスを追加し得る |
+| メタ部門分析 | `metaWorkflow`: analyze → propose → report |
+| Type D | 提案・チェックリスト・prism / scout / warden レビュー報告 |
+
+</div>
+
+**上図との関係:** ここでは**読み違えやすい含意**だけを集め、各フォークの再説明はしません。英語正典 [Workflow Relation Map](README.md#task-routing-en) と併読してください。
 
 ## 八つのメタエージェント
 
@@ -315,6 +354,20 @@ flowchart TD
 | `meta-scout` | 外部能力の発見と評価 |
 
 **公開の前門は `meta-warden`。**
+
+組織関係（まず**前門**だけ覚えれば足ります）:
+
+<div align="center">
+
+```mermaid
+flowchart LR
+  U[ユーザー意図] --> W[meta-warden 既定前門]
+  W --> R[残り 7 役 — バックステージ専門]
+```
+
+</div>
+
+入口・スキル・スパインの**略図**は上文 [既定パス](#default-path-ja) を参照。
 
 ## クイックスタート（要点）
 
