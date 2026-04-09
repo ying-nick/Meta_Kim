@@ -70,8 +70,6 @@
 
 #### 図: 主源・ツール・ランタイム鏡像
 
-<div align="center">
-
 ```mermaid
 flowchart TB
   subgraph Canon["Canonical sources, edit first"]
@@ -102,15 +100,11 @@ flowchart TB
   SK --> VAL
 ```
 
-</div>
-
 <a id="default-path-ja"></a>
 
 #### 図: 既定パス（入口・meta-theory スキル・八段階スパインの略図）
 
 `meta-theory` は**スキル**（トリガーで読み込まれる手順書）。`meta-warden` は**エージェント**（既定の公開入口）。**全段の展開**は下文「開発ガバナンスの背骨」と英語版を参照。
-
-<div align="center">
 
 ```mermaid
 flowchart LR
@@ -119,8 +113,6 @@ flowchart LR
   SK --> P["8-stage spine"]
   P --> OUT["deliverable verify evolve"]
 ```
-
-</div>
 
 ## 著者・サポート
 
@@ -153,16 +145,12 @@ flowchart LR
 
 **同一の方法を三か所に落とす**略図（詳細は上文 [図: 主源・ツール・ランタイム鏡像](#meta-kim-visual-maps-ja)）:
 
-<div align="center">
-
 ```mermaid
 flowchart LR
   SRC["正典 .claude と contracts"] --> CC["Claude Code 編集ランタイム"]
   SRC -->|鏡像| CX["Codex"]
   SRC -->|workspace| OW["OpenClaw"]
 ```
-
-</div>
 
 - メンテは **`.claude/` と `contracts/workflow-contract.json` から**
 - `.codex/`、`openclaw/` の多くは生成物またはランタイム用
@@ -206,29 +194,19 @@ flowchart LR
 
 **上行 1–4 段（明確化 → 実行）**
 
-<div align="center">
-
 ```mermaid
 flowchart LR
   S1["1 Critical"] --> S2["2 Fetch"] --> S3["3 Thinking"] --> S4["4 Execution"]
 ```
 
-</div>
-
 **接続:** `4 Execution` → `5 Review`
 
 **下行 5–8 段（審査 → 進化）**
-
-<div align="center">
 
 ```mermaid
 flowchart LR
   S5["5 Review"] --> S6["6 Meta-Review"] --> S7["7 Verification"] --> S8["8 Evolution"]
 ```
-
-</div>
-
-<div align="center">
 
 ```mermaid
 flowchart LR
@@ -236,8 +214,6 @@ flowchart LR
   I2 --> I3["Thinking > Rushing"]
   I3 --> I4["Review > Trusting"]
 ```
-
-</div>
 
 <div align="center">
 
@@ -277,28 +253,20 @@ flowchart LR
 
 **上行：八段階スパイン（実行背骨）**
 
-<div align="center">
-
 ```mermaid
-flowchart LR
+graph LR
   A1[critical] --> A2[fetch] --> A3[thinking] --> A4[execution]
   A4 --> A5[review] --> A6[meta_review] --> A7[verification] --> A8[evolution]
 ```
 
-</div>
-
 **下行：十フェーズ業務契約（部門 run）**
 
-<div align="center">
-
 ```mermaid
-flowchart LR
+graph LR
   B1[direction] --> B2[planning] --> B3[execution] --> B4[review]
   B4 --> B5[meta_review] --> B6[revision] --> B7[verify]
   B7 --> B8[summary] --> B9[feedback] --> B10[evolve]
 ```
-
-</div>
 
 八段階スパイン（短文）:
 
@@ -335,8 +303,6 @@ direction -> planning -> execution -> review -> meta_review -> revision -> verif
 
 **タスク分岐**（下表と同じトポロジ）: 横置きで縦スペースを節約します。
 
-<div align="center">
-
 ```mermaid
 flowchart LR
   T[Task arrives] --> Q{Pure Query?}
@@ -353,8 +319,6 @@ flowchart LR
   P3 --> E
   P4 --> E
 ```
-
-</div>
 
 <div align="center">
 
@@ -390,15 +354,11 @@ flowchart LR
 
 組織関係（まず**前門**だけ覚えれば足ります）:
 
-<div align="center">
-
 ```mermaid
 flowchart LR
   U[ユーザー意図] --> W[meta-warden 既定前門]
   W --> R[残り 7 役 — バックステージ専門]
 ```
-
-</div>
 
 入口・スキル・スパインの**略図**は上文 [既定パス](#default-path-ja) を参照。
 

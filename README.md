@@ -109,8 +109,6 @@ Figures below sit **next to the concepts above**: sources, mirrors, and the defa
 
 #### Diagram: Canonical sources, tooling, and runtime mirrors
 
-<div align="center">
-
 ```mermaid
 flowchart TB
   subgraph Canon["Canonical sources, edit first"]
@@ -141,15 +139,11 @@ flowchart TB
   SK --> VAL
 ```
 
-</div>
-
 <a id="default-path-en"></a>
 
 #### Diagram: Default path (entry, meta-theory skill, eight-stage spine overview)
 
 `meta-theory` (skill) is the **method playbook** loaded on triggers; `meta-warden` (agent) is the **default public entry role** that coordinates gates and synthesis. This is **not** the full per-stage chart — that is in [Development Governance Spine](#complex-spine-en).
-
-<div align="center">
 
 ```mermaid
 flowchart LR
@@ -158,8 +152,6 @@ flowchart LR
   SK --> P["8-stage spine"]
   P --> OUT["deliverable verify evolve"]
 ```
-
-</div>
 
 ## Contact and support
 
@@ -235,16 +227,12 @@ The most important sentence in this repository is:
 
 One figure for **one method, three landing points** (details: [Meta Architecture View](#meta-kim-visual-maps-en)):
 
-<div align="center">
-
 ```mermaid
 flowchart LR
   SRC[Sources .claude + contracts] --> CC[Claude Code]
   SRC -->|mirror| CX[Codex]
   SRC -->|workspace map| OW[OpenClaw]
 ```
-
-</div>
 
 The practical takeaway is simple:
 
@@ -343,33 +331,23 @@ The eight stages read compactly as **two rows of four** (same order as the table
 
 **Row 1 — stages 1–4 (clarify → execute)**
 
-<div align="center">
-
 ```mermaid
 flowchart LR
   S1["1 Critical"] --> S2["2 Fetch"] --> S3["3 Thinking"] --> S4["4 Execution"]
 ```
 
-</div>
-
 **Between rows:** stage 4 `Execution` → stage 5 `Review`
 
 **Row 2 — stages 5–8 (review → evolve)**
-
-<div align="center">
 
 ```mermaid
 flowchart LR
   S5["5 Review"] --> S6["6 Meta-Review"] --> S7["7 Verification"] --> S8["8 Evolution"]
 ```
 
-</div>
-
 Full names: 1 scope (meta vs tech); 2 search agents/skills; 3 `dispatchBoard` / `mergeOwner`; 4 assign owners; 5 quality boundaries; 6 review standard; 7 verification gates; 8 patterns and writeback.
 
 Iron rules alignment (stages 1–3 and review):
-
-<div align="center">
 
 ```mermaid
 flowchart LR
@@ -377,8 +355,6 @@ flowchart LR
   I2 --> I3["Thinking beats Rushing"]
   I3 --> I4["Review beats Trusting"]
 ```
-
-</div>
 
 <div align="center">
 
@@ -441,28 +417,20 @@ There are two layers of workflow language in the project:
 
 **Row 1 — 8-stage spine (execution backbone)**
 
-<div align="center">
-
 ```mermaid
-flowchart LR
+graph LR
   A1[critical] --> A2[fetch] --> A3[thinking] --> A4[execution]
   A4 --> A5[review] --> A6[meta_review] --> A7[verification] --> A8[evolution]
 ```
 
-</div>
-
 **Row 2 — 10-phase business contract (department run)**
 
-<div align="center">
-
 ```mermaid
-flowchart LR
+graph LR
   B1[direction] --> B2[planning] --> B3[execution] --> B4[review]
   B4 --> B5[meta_review] --> B6[revision] --> B7[verify]
   B7 --> B8[summary] --> B9[feedback] --> B10[evolve]
 ```
-
-</div>
 
 The 8-stage spine remains the underlying execution backbone (text shorthand):
 
@@ -501,8 +469,6 @@ If you remember one sentence, make it this:
 
 **Task routing (same graph as the prose below):** horizontal layout to save vertical space; see the table for branch meanings.
 
-<div align="center">
-
 ```mermaid
 flowchart LR
   T[Task arrives] --> Q{Pure Query?}
@@ -519,8 +485,6 @@ flowchart LR
   P3 --> E
   P4 --> E
 ```
-
-</div>
 
 <div align="center">
 
@@ -784,23 +748,17 @@ If you are a normal user, remember just one thing:
 
 Organization (remember the **front door** first; you do not need the full table on day one):
 
-<div align="center">
-
 ```mermaid
 flowchart LR
   U[User intent] --> W[meta-warden default entry]
   W --> R[Seven other meta roles — backstage specialists]
 ```
 
-</div>
-
 Entry vs skill vs spine overview: [Meta Architecture View → Default path](#default-path-en).
 
 ## How the System Works
 
 You do not need to know the internals. But if you are curious:
-
-<div align="center">
 
 ```mermaid
 flowchart TD
@@ -811,8 +769,6 @@ flowchart TD
     E --> F[Review output]
     F --> G[Capture patterns]
 ```
-
-</div>
 
 For routing and stacked paths, see [Workflow Relation Map](#task-routing-en).
 

@@ -4,6 +4,12 @@ All notable changes to Meta_Kim are documented here.
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 When you tag a release, add a new **`## [version] - YYYY-MM-DD`** section at the top (above older entries) and list changes there.
 
+## [1.2.3] - 2026-04-04
+
+### Documentation
+
+- **README (all four languages)**: remove `<div align="center">` wrappers around fenced Mermaid code blocks so **Cursor** (and similar previews) can render diagrams instead of **Unable to render rich display**; keep `div` centering for Markdown **tables** only. Repo-wide pass: `README.md` 9 blocks, `README.zh-CN.md` 9, `README.ja-JP.md` / `README.ko-KR.md` 8 each.
+
 ## [1.2.2] - 2026-04-03
 
 ### Documentation

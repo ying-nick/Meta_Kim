@@ -70,8 +70,6 @@
 
 #### 그림: 정본·도구·런타임 미러
 
-<div align="center">
-
 ```mermaid
 flowchart TB
   subgraph Canon["Canonical sources, edit first"]
@@ -102,15 +100,11 @@ flowchart TB
   SK --> VAL
 ```
 
-</div>
-
 <a id="default-path-ko"></a>
 
 #### 그림: 기본 경로(진입·meta-theory 스킬·8단계 척추 개요)
 
 `meta-theory`는 **스킬**(트리거 시 로드되는 방법서). `meta-warden`은 **에이전트**(기본 공개 진입). **전 단계 전개**는 아래「개발 거버넌스 척추」와 영어판을 참고하세요.
-
-<div align="center">
 
 ```mermaid
 flowchart LR
@@ -119,8 +113,6 @@ flowchart LR
   SK --> P["8-stage spine"]
   P --> OUT["deliverable verify evolve"]
 ```
-
-</div>
 
 ## 저자·지원
 
@@ -153,16 +145,12 @@ flowchart LR
 
 **같은 방법을 세 곳에 내려놓기** 요약(세부는 위 [그림: 정본·도구·런타임 미러](#meta-kim-visual-maps-ko)):
 
-<div align="center">
-
 ```mermaid
 flowchart LR
   SRC["정본 .claude 와 contracts"] --> CC["Claude Code 편집 런타임"]
   SRC -->|미러| CX["Codex"]
   SRC -->|workspace| OW["OpenClaw"]
 ```
-
-</div>
 
 - 유지보수는 **`.claude/`와 `contracts/workflow-contract.json`에서 시작**
 - `.codex/`, `openclaw/` 대부분은 생성물 또는 런타임 전용
@@ -206,29 +194,19 @@ flowchart LR
 
 **상단 1–4단계 (명확화 → 실행)**
 
-<div align="center">
-
 ```mermaid
 flowchart LR
   S1["1 Critical"] --> S2["2 Fetch"] --> S3["3 Thinking"] --> S4["4 Execution"]
 ```
 
-</div>
-
 **연결:** `4 Execution` → `5 Review`
 
 **하단 5–8단계 (검토 → 진화)**
-
-<div align="center">
 
 ```mermaid
 flowchart LR
   S5["5 Review"] --> S6["6 Meta-Review"] --> S7["7 Verification"] --> S8["8 Evolution"]
 ```
-
-</div>
-
-<div align="center">
 
 ```mermaid
 flowchart LR
@@ -236,8 +214,6 @@ flowchart LR
   I2 --> I3["Thinking > Rushing"]
   I3 --> I4["Review > Trusting"]
 ```
-
-</div>
 
 <div align="center">
 
@@ -277,28 +253,20 @@ flowchart LR
 
 **상단: 8단계 척추(실행 척추)**
 
-<div align="center">
-
 ```mermaid
-flowchart LR
+graph LR
   A1[critical] --> A2[fetch] --> A3[thinking] --> A4[execution]
   A4 --> A5[review] --> A6[meta_review] --> A7[verification] --> A8[evolution]
 ```
 
-</div>
-
 **하단: 10페이즈 비즈니스 계약(부서 run)**
 
-<div align="center">
-
 ```mermaid
-flowchart LR
+graph LR
   B1[direction] --> B2[planning] --> B3[execution] --> B4[review]
   B4 --> B5[meta_review] --> B6[revision] --> B7[verify]
   B7 --> B8[summary] --> B9[feedback] --> B10[evolve]
 ```
-
-</div>
 
 8단계 척추(한 줄):
 
@@ -335,8 +303,6 @@ direction -> planning -> execution -> review -> meta_review -> revision -> verif
 
 **작업 라우팅**(아래 표와 같은 토폴로지): 가로 배치로 세로 공간을 줄입니다.
 
-<div align="center">
-
 ```mermaid
 flowchart LR
   T[Task arrives] --> Q{Pure Query?}
@@ -353,8 +319,6 @@ flowchart LR
   P3 --> E
   P4 --> E
 ```
-
-</div>
 
 <div align="center">
 
@@ -390,15 +354,11 @@ flowchart LR
 
 조직 관계(**정문**만 먼저 기억해도 됨):
 
-<div align="center">
-
 ```mermaid
 flowchart LR
   U[사용자 의도] --> W[meta-warden 기본 정문]
   W --> R[나머지 7역 — 백스테이지 전문]
 ```
-
-</div>
 
 진입·스킬·척추 **개요**는 위 [기본 경로](#default-path-ko)를 참고하세요.
 
