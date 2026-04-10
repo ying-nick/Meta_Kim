@@ -1,5 +1,7 @@
 import { describe, test } from "node:test";
 import assert from "node:assert/strict";
+import { promises as fs } from "node:fs";
+import os from "node:os";
 import { promisify } from "node:util";
 import { execFile } from "node:child_process";
 import path from "node:path";
@@ -10,15 +12,37 @@ const execFileAsync = promisify(execFile);
 describe("validate-run-artifact.mjs", () => {
   const validFixture = path.join(REPO_ROOT, "tests", "fixtures", "run-artifacts", "valid-run.json");
   const invalidFixture = path.join(REPO_ROOT, "tests", "fixtures", "run-artifacts", "invalid-run-public-ready.json");
+  const invalidCompactionFixture = path.join(
+    REPO_ROOT,
+    "tests",
+    "fixtures",
+    "run-artifacts",
+    "invalid-run-compaction-open-findings.json"
+  );
 
-  test("accepts a valid run artifact with full finding lineage", async () => {
+  async function validateFixture(fixturePath) {
     const { stdout } = await execFileAsync(
       "node",
-      ["scripts/validate-run-artifact.mjs", validFixture],
+      ["scripts/validate-run-artifact.mjs", fixturePath],
       { cwd: REPO_ROOT }
     );
-    const result = JSON.parse(stdout);
+    return JSON.parse(stdout);
+  }
+
+  async function writeTempFixture(mutate) {
+    const raw = await fs.readFile(validFixture, "utf8");
+    const artifact = JSON.parse(raw);
+    mutate(artifact);
+    const dir = await fs.mkdtemp(path.join(os.tmpdir(), "meta-kim-validate-"));
+    const file = path.join(dir, "fixture.json");
+    await fs.writeFile(file, `${JSON.stringify(artifact, null, 2)}\n`, "utf8");
+    return file;
+  }
+
+  test("accepts a valid run artifact with full finding lineage", async () => {
+    const result = await validateFixture(validFixture);
     assert.equal(result.ok, true);
+    assert.ok(result.validatedPackets.includes("dispatchEnvelopePacket"));
     assert.ok(result.validatedPackets.includes("cardPlanPacket"));
     assert.ok(result.validatedPackets.includes("summaryPacket"));
   });
@@ -28,6 +52,62 @@ describe("validate-run-artifact.mjs", () => {
       execFileAsync("node", ["scripts/validate-run-artifact.mjs", invalidFixture], {
         cwd: REPO_ROOT,
       })
+    );
+  });
+
+  test("rejects compaction packets that drop open findings", async () => {
+    await assert.rejects(
+      execFileAsync("node", ["scripts/validate-run-artifact.mjs", invalidCompactionFixture], {
+        cwd: REPO_ROOT,
+      })
+    );
+  });
+
+  test("rejects dispatch envelopes without ownerAgent", async () => {
+    const tempFixture = await writeTempFixture((artifact) => {
+      artifact.dispatchEnvelopePacket.ownerAgent = "";
+    });
+    await assert.rejects(
+      execFileAsync("node", ["scripts/validate-run-artifact.mjs", tempFixture], { cwd: REPO_ROOT })
+    );
+  });
+
+  test("rejects dispatch envelopes with overlapping allowed/blocked capabilities", async () => {
+    const tempFixture = await writeTempFixture((artifact) => {
+      artifact.dispatchEnvelopePacket.blockedCapabilities = [
+        ...artifact.dispatchEnvelopePacket.blockedCapabilities,
+        artifact.dispatchEnvelopePacket.allowedCapabilities[0],
+      ];
+    });
+    await assert.rejects(
+      execFileAsync("node", ["scripts/validate-run-artifact.mjs", tempFixture], { cwd: REPO_ROOT })
+    );
+  });
+
+  test("rejects dispatch envelopes with illegal memoryMode", async () => {
+    const tempFixture = await writeTempFixture((artifact) => {
+      artifact.dispatchEnvelopePacket.memoryMode = "inherit_random_context";
+    });
+    await assert.rejects(
+      execFileAsync("node", ["scripts/validate-run-artifact.mjs", tempFixture], { cwd: REPO_ROOT })
+    );
+  });
+
+  test("rejects dispatch envelopes missing reviewOwner", async () => {
+    const tempFixture = await writeTempFixture((artifact) => {
+      artifact.dispatchEnvelopePacket.reviewOwner = "";
+    });
+    await assert.rejects(
+      execFileAsync("node", ["scripts/validate-run-artifact.mjs", tempFixture], { cwd: REPO_ROOT })
+    );
+  });
+
+  test("rejects dispatch envelopes missing verificationOwner", async () => {
+    const tempFixture = await writeTempFixture((artifact) => {
+      artifact.dispatchEnvelopePacket.verificationOwner = "";
+    });
+    await assert.rejects(
+      execFileAsync("node", ["scripts/validate-run-artifact.mjs", tempFixture], { cwd: REPO_ROOT })
     );
   });
 });

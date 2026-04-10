@@ -687,7 +687,7 @@ describe("Part H: discover-global-capabilities Script", async () => {
     }
   });
 
-  test("script outputs to .claude/capability-index/global-capabilities.json", async () => {
+  test("script outputs to the repo-local capability index", async () => {
     const scriptPath = path.join(
       REPO_ROOT,
       "scripts",
@@ -697,6 +697,7 @@ describe("Part H: discover-global-capabilities Script", async () => {
 
     assert.ok(
       content.includes("capability-index") ||
+        content.includes("meta-kim-capabilities.json") ||
         content.includes("global-capabilities.json"),
       "discover-global-capabilities.mjs must output to capability-index directory",
     );

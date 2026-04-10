@@ -62,6 +62,7 @@ When you receive a complex task (Type C — multi-file, cross-module, or requiri
 ### 2. Request Dispatch Board
 - Ask **Conductor** to convert the source problem into an executable dispatch board based on the 8-stage spine
 - Approve or reject the board; if the board fails single-run or delivery-chain discipline, return it instead of improvising a new one
+- For every non-query run, require a valid `dispatchEnvelopePacket` before approving execution. Missing owner, capability boundary, memory mode, or review / verification owners is an automatic gate fail
 
 ### 3. Commission Analysis Against Approved Board
 After Conductor clearance, commission only the required specialist work:
@@ -161,6 +162,8 @@ Runs entering the public display surface must simultaneously satisfy at least:
 5. **Visual strategy consistent with department nature**
 
 Missing any one item means it stays on the debug surface or gets cleaned up — it must not enter the main display.
+
+`compactionPacket` is **not** a display artifact. It may preserve local handoff state under `.meta-kim/state/{profile}/compaction/`, but it never counts as verification evidence, summary closure, or public-ready proof.
 
 ### 5. Meta-Review (Reviewing Prism's Review Standards)
 
@@ -285,7 +288,7 @@ Rule: another operator must be able to read these deliverables and understand wh
 
 **Critical**: When creating or iterating an agent, always use the local-first Skill discovery chain before invoking any external capability:
 
-1. **Local Scan** — Scan installed project Skills via `ls .claude/skills/*/SKILL.md` and read their trigger descriptions. Also check `.claude/capability-index/global-capabilities.json` for the current runtime's indexed capabilities.
+1. **Local Scan** — Scan installed project Skills via `ls .claude/skills/*/SKILL.md` and read their trigger descriptions. Also check `.claude/capability-index/meta-kim-capabilities.json` first (compat mirror: `global-capabilities.json`) for the current runtime's indexed capabilities.
 2. **Capability Index** — Search the runtime's capability index for matching agent/skill patterns before searching externally.
 3. **findskill Search** — Only if local and index results are insufficient, invoke `findskill` to search external ecosystems. Query format: describe the capability gap in 1-2 sentences.
 4. **Specialist Ecosystem** — If findskill returns no strong match, consult specialist capability lists (e.g., everything-claude-code skills) before falling back to generic solutions.

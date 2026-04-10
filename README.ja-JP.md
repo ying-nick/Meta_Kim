@@ -422,7 +422,7 @@ npm run sync:runtimes
 npm run validate
 ```
 
-グローバル能力索引: `npm run discover:global`（ローカルパスを含むため、通常はコミットしない）
+グローバル能力索引: `npm run discover:global`（`.claude/capability-index/meta-kim-capabilities.json` を再生成し、互換ミラー `global-capabilities.json` も更新。どちらもローカルパスを含むため、通常はコミットしない）
 
 ## よく使う npm スクリプト（抜粋）
 
@@ -436,12 +436,25 @@ npm run validate
 | `npm run test:meta-theory` | メタ理論テストスイート |
 | `npm run eval:agents` | ランタイムの軽量スモーク |
 | `npm run validate:run -- <run.json>` | 記録された run アーティファクトの検証 |
-| `npm run doctor:governance` | 契約・フック・鏡像・サンプル validate:run の狭いヘルスチェック |
+| `npm run index:runs -- <dir-or-file>` | 妥当な governed run だけを `.meta-kim/state/{profile}/run-index.sqlite` に索引 |
+| `npm run query:runs -- --owner meta-warden` | flow / owner / publicReady / open findings でローカル run index を検索 |
+| `npm run migrate:meta-kim -- <source-dir> --apply` | 旧 prompt pack / 単一 agent リポジトリから persona / skill / contract 周辺資産だけを staging |
+| `npm run doctor:governance` | canonical contract・mirror parity・runtime hooks・local profile/run-index health の分層ヘルスチェック |
 | `npm run verify:all` | 本番前の広いスタック（グローバル meta-theory 同期状況にも依存） |
 
 </div>
 
 全文のコマンド一覧は英語正典 [README.md — Commands](README.md#commands) を参照。
+
+## 補足 FAQ
+
+### 旧 prompt pack / 単一 agent リポジトリはどう移行する？
+
+```bash
+npm run migrate:meta-kim -- ../old-agent-repo --apply
+```
+
+このコマンドは persona / skill / contract 周辺資産だけを `.meta-kim/state/{profile}/migrations/...` に staging し、未検証 run state・SQLite キャッシュ・ログ・artifact は拒否します。正典 `.claude/` や `contracts/` に移す前に、生成された `manifest.json` を確認してください。
 
 ## コードナレッジグラフ（graphify）
 

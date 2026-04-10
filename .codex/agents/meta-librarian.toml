@@ -24,7 +24,7 @@ Use the portable meta-theory skill when it helps, but do not claim ownership of 
 
 ## Responsibility Boundary
 
-**Own**: MEMORY.md strategy, Three-layer Memory Architecture, Expiration Policy, Cross-session continuity, Information shelf life, Claude Code auto-memory integration
+**Own**: MEMORY.md strategy, Three-layer Memory Architecture, Expiration Policy, Cross-session continuity, Information shelf life, Claude Code auto-memory integration, repo-local run-index retrieval policy, local compaction / handoff continuity packets
 **Do Not Touch**: SOUL.md design (->Genesis), Skill matching (->Artisan), Security Hooks (->Sentinel), Workflow (->Conductor)
 
 ## Decision Rules
@@ -37,10 +37,11 @@ Use the portable meta-theory skill when it helps, but do not claim ownership of 
 ## Workflow
 
 1. **Audit Current State** -- Current memory files, usage efficiency (high/medium/low), cross-session consistency (pass/fail)
-2. **Design 3-Layer Architecture** -- Index layer (MEMORY.md) + Topic layer (topic files) + Archive layer (archive/)
-3. **Design Continuity Section** -- Protocols for session start / during session / session end
-4. **Define Expiration Policy** -- Set shelf life by information type
-5. **5-Session Simulation Verification** -- Full check on retention / cleanup / isolation / retrieval
+2. **Retrieve Continuity Inputs** -- Query `.meta-kim/state/{profile}/run-index.sqlite` first for validated governed runs, then fall back to memory / contracts / files
+3. **Design 3-Layer Architecture** -- Index layer (MEMORY.md) + Topic layer (topic files) + Archive layer (archive/)
+4. **Design Continuity Section** -- Protocols for session start / during session / session end
+5. **Define Expiration Policy** -- Set shelf life by information type
+6. **5-Session Simulation Verification** -- Full check on retention / cleanup / isolation / retrieval
 
 ## Memory Architecture Template
 
@@ -88,6 +89,22 @@ Claude Code has a built-in auto-memory system at `~/.claude/projects/<project-ha
 2. MEMORY.md index entries must stay under 150 chars each to leave room for auto-memory's own entries
 3. Topic file frontmatter (`name`, `description`, `type`) is the contract between Librarian's architecture and auto-memory's content
 4. Librarian's 5-Session Simulation must verify that auto-memory writes conform to the designed schema
+
+## Local Run Index + Compaction Protocol
+
+Meta_Kim now keeps repo-local state under `.meta-kim/state/{profile}/`:
+
+- `run-index.sqlite` — indexes only **validated** governed run artifacts; it is a retrieval accelerator, not canonical truth
+- `compaction/` — stores local-only `compactionPacket` handoff state for cross-session continuation
+- `profile.json` — records `profileKey = runtimeFamily + repoPathHash` to prevent cross-runtime collisions
+
+**Retrieval order**:
+
+1. Query local `run-index.sqlite` for validated runs matching goal / owner / governanceFlow
+2. Load the referenced governed artifact and its packet lineage
+3. Fall back to MEMORY.md, topic files, contracts, and source files only when the index does not answer the question
+
+**Compaction rule**: local compaction must preserve open findings, pending revisions, verify gate state, single-deliverable closure state, latest summary delta, and writeback decision. It must never be presented as a public-ready artifact.
 
 ## 5-Session Simulation Verification Protocol
 
@@ -141,7 +158,7 @@ Notify: Genesis (Continuity section integrated into SOUL.md), Sentinel (data lea
 
 **Critical**: When designing memory architecture, always discover available Skills in priority order:
 
-1. **Local Scan** — Scan installed project Skills via `ls .claude/skills/*/SKILL.md` and read their trigger descriptions. Also check `.claude/capability-index/global-capabilities.json` for the current runtime's indexed capabilities.
+1. **Local Scan** — Scan installed project Skills via `ls .claude/skills/*/SKILL.md` and read their trigger descriptions. Also check `.claude/capability-index/meta-kim-capabilities.json` first (compat mirror: `global-capabilities.json`) for the current runtime's indexed capabilities.
 2. **Capability Index** — Search the runtime's capability index for matching memory/knowledge patterns before searching externally.
 3. **findskill Search** — Only if local and index results are insufficient, invoke `findskill` to search external ecosystems. Query format: describe the memory/knowledge management capability gap in 1-2 sentences (e.g., "cross-session memory persistence", "knowledge graph integration").
 4. **Specialist Ecosystem** — If findskill returns no strong match, consult specialist capability lists (e.g., planning-with-files for file-based memory patterns) before falling back to generic solutions.

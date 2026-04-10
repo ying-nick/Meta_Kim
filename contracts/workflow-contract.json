@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 3,
+  "schemaVersion": 4,
   "owner": "Meta_Kim",
   "businessWorkflow": {
     "id": "business",
@@ -395,6 +395,7 @@
         "runHeader",
         "taskClassification",
         "cardPlanPacket",
+        "dispatchEnvelopePacket",
         "dispatchBoard",
         "workerTaskPacket",
         "workerResultPacket",
@@ -402,6 +403,13 @@
         "verificationPacket",
         "summaryPacket",
         "evolutionWritebackPacket"
+      ],
+      "dispatchEnvelopePacketRequiredWhenGovernanceFlows": [
+        "simple_exec",
+        "complex_dev",
+        "meta_analysis",
+        "proposal_review",
+        "rhythm"
       ],
       "intentPacketRequiredWhenGovernanceFlows": [
         "complex_dev",
@@ -411,7 +419,30 @@
         "complex_dev",
         "meta_analysis"
       ],
-      "description": "intentPacket is required in run artifacts when taskClassification.governanceFlow is listed in intentPacketRequiredWhenGovernanceFlows (IntentGate-style intent lock-in). intentGatePacket is required for the same flows (structured ambiguity / assumptions gate before Execution)."
+      "description": "intentPacket is required in run artifacts when taskClassification.governanceFlow is listed in intentPacketRequiredWhenGovernanceFlows (IntentGate-style intent lock-in). intentGatePacket is required for the same flows (structured ambiguity / assumptions gate before Execution). dispatchEnvelopePacket is required for all non-pure-query flows so every executable run has an explicit owner, capability boundary, memory mode, and review / verification routing before dispatch."
+    },
+    "localState": {
+      "root": ".meta-kim/state",
+      "defaultProfile": "default",
+      "profileKeyRequires": [
+        "repo_path_hash",
+        "runtime_family"
+      ],
+      "trackedFilesForbidden": true,
+      "runIndex": {
+        "pathPattern": ".meta-kim/state/{profile}/run-index.sqlite",
+        "indexesValidatedArtifactsOnly": true,
+        "canonicalSource": false
+      },
+      "compaction": {
+        "pathPattern": ".meta-kim/state/{profile}/compaction/",
+        "localOnly": true,
+        "publicArtifactForbidden": true
+      },
+      "doctorCache": {
+        "pathPattern": ".meta-kim/state/{profile}/doctor-cache/",
+        "localOnly": true
+      }
     },
     "findingClosure": {
       "findingIdRequired": true,
@@ -503,6 +534,11 @@
       "publicReadyField": "summaryPacket.publicReady",
       "summaryPacketRequired": true,
       "cardPlanPacketRequired": true,
+      "dispatchEnvelopePacketRequiredForNonQuery": true,
+      "compactionPacketOptional": true,
+      "compactionPacketLocalOnly": true,
+      "compactionPacketMustPreserveOpenFindings": true,
+      "compactionPacketPublicReadyRequiresVerifiedRun": true,
       "softPublicReadyTodoGate": {
         "environmentVariable": "META_KIM_SOFT_PUBLIC_READY_GATES",
         "environmentValue": "1",
@@ -570,6 +606,25 @@
         "controlDecisions",
         "defaultShellId"
       ]
+    },
+    "dispatchEnvelopePacket": {
+      "requiredFields": [
+        "ownerAgent",
+        "taskRef",
+        "allowedCapabilities",
+        "blockedCapabilities",
+        "memoryMode",
+        "workspaceHint",
+        "resultSchemaRef",
+        "reviewOwner",
+        "verificationOwner"
+      ],
+      "memoryModeEnum": [
+        "fresh_context",
+        "inherit_summary_only",
+        "inherit_full_context"
+      ],
+      "description": "Mandatory execution shell for non-query flows: who owns the task, which capabilities are allowed/blocked, what memory policy the child gets, and which owners close review / verification."
     },
     "cardDecision": {
       "requiredFields": [
@@ -722,6 +777,26 @@
         "deliveryShellsUsed",
         "blockedBy"
       ]
+    },
+    "compactionPacket": {
+      "requiredFields": [
+        "packetVersion",
+        "runRef",
+        "profile",
+        "profileKey",
+        "openFindings",
+        "pendingRevisions",
+        "verifyGateState",
+        "singleDeliverableState",
+        "summaryDelta",
+        "writebackDecision"
+      ],
+      "verifyGateStateEnum": [
+        "pending_verify",
+        "verified",
+        "accepted_risk"
+      ],
+      "description": "Local-only handoff packet stored under .meta-kim/state. It preserves unresolved findings, pending revision state, verify gate status, single-deliverable closure state, summary delta, and writeback decision for compaction / cross-session continuation. It is not a public-ready artifact."
     },
     "evolutionWritebackPacket": {
       "requiredFields": [

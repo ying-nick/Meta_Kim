@@ -1,6 +1,6 @@
 {
   "name": "meta-kim",
-  "version": "1.2.3",
+  "version": "1.3.0",
   "description": "Governance layer for AI coding: meta agents, workflow contract, meta-theory; canonical in .claude/, with generated Codex/OpenClaw companions.",
   "private": true,
   "type": "module",
@@ -12,6 +12,10 @@
     "sync:global:meta-theory:codex-active": "node scripts/sync-global-meta-theory.mjs --activate-codex",
     "show:global:meta-theory-targets": "node scripts/sync-global-meta-theory.mjs --print-targets",
     "discover:global": "node scripts/discover-global-capabilities.mjs",
+    "index:runs": "node scripts/run-index.mjs index",
+    "query:runs": "node scripts/run-index.mjs query",
+    "rebuild:run-index": "node scripts/run-index.mjs rebuild",
+    "migrate:meta-kim": "node scripts/migrate-into-meta-kim.mjs",
     "deps:install": "bash install-deps.sh",
     "deps:update": "bash install-deps.sh --update",
     "deps:install:all-runtimes": "node scripts/install-global-skills-all-runtimes.mjs",

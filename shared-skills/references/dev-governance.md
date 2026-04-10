@@ -17,7 +17,7 @@ Need an agent for X → Search who declares "Own X" → Call the best match
 
 | Step | Action |
 |------|--------|
-| 1. Search | `Glob: .claude/agents/*.md` + read global-capabilities.json |
+| 1. Search | `Glob: .claude/agents/*.md` + read meta-kim-capabilities.json (compat: global-capabilities.json) |
 | 2. Match | Score each agent's "Own" boundary against needed capability (3=perfect / 1-2=partial / 0=none) |
 | 3. Invoke | 3 → invoke directly / 1-2 → invoke + note gaps / 0 → capability gap detected |
 
@@ -56,6 +56,7 @@ Before Stage 4 starts, Thinking must produce explicit protocol artifacts for the
 - `runHeader`
 - `taskClassification`
 - `cardPlanPacket`
+- `dispatchEnvelopePacket`
 - `dispatchBoard`
 - `workerTaskPackets`
 - `resultMergePlan`
@@ -82,7 +83,7 @@ When work is not done after one pass (open review findings, `verificationPacket.
 
 Stop when `validate:run` passes **or** the user explicitly accepts risk with documented `accepted_risk` and honest `publicReady=false`.
 
-**Session recovery (API / compact / tool failure):** The governed artifact is the source of truth. After an interrupted session, reload at minimum: `runHeader`, `taskClassification`, `intentPacket`, `intentGatePacket` (when required), `cardPlanPacket`, `dispatchBoard`, `workerTaskPackets` / `workerResultPackets`, `reviewPacket`, `verificationPacket`, `summaryPacket`, `evolutionWritebackPacket`. Re-run `npm run validate:run -- <artifact.json>` before claiming closure. The same packet list is printed by `npm run prompt:next-iteration -- <artifact.json>` under **Minimal context reload**.
+**Session recovery (API / compact / tool failure):** Check `.meta-kim/state/{profile}/run-index.sqlite` first for the latest validated governed run, then load the governed artifact as the source of truth. After an interrupted session, reload at minimum: `runHeader`, `taskClassification`, `intentPacket`, `intentGatePacket` (when required), `cardPlanPacket`, `dispatchEnvelopePacket`, `dispatchBoard`, `workerTaskPackets` / `workerResultPackets`, `reviewPacket`, `verificationPacket`, `summaryPacket`, `evolutionWritebackPacket`. If a local `compactionPacket` exists, use it only as continuity aid; it never replaces the governed artifact. Re-run `npm run validate:run -- <artifact.json>` before claiming closure. The same packet list is printed by `npm run prompt:next-iteration -- <artifact.json>` under **Minimal context reload**.
 
 Optional **soft todo gate** (off by default): set `META_KIM_SOFT_PUBLIC_READY_GATES=1` when running `validate:run`. If `summaryPacket.publicReady` is true, no `workerTaskPacket` may have `taskTodoState: "open"`. Omit `taskTodoState` if not tracking todos. See `contracts/workflow-contract.json` → `runDiscipline.runArtifactValidation.softPublicReadyTodoGate`.
 
@@ -399,14 +400,14 @@ CHECK: Does graphify-out/graph.json exist in the target project root?
 
 **Step 2 — Capability index search** (if no perfect local match):
 ```
-IF .claude/capability-index/global-capabilities.json is missing OR stale for the current machine
+IF .claude/capability-index/meta-kim-capabilities.json is missing OR stale for the current machine
   → run npm run discover:global first
 
 IF discover:global lists few skills/agents but the task needs Meta_Kim third-party skills (install-deps list)
   AND ~/.codex/skills or ~/.openclaw/skills are empty on this machine
   → operator should run npm run deps:install:all-runtimes (or npm run deps:install for Claude-only), then npm run discover:global again
 
-Read .claude/capability-index/global-capabilities.json
+Read .claude/capability-index/meta-kim-capabilities.json
 Search for agents declaring the needed capability
 Score match
 ```

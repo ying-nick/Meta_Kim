@@ -23,6 +23,7 @@ import {
 import { join, resolve } from "node:path";
 import { homedir, platform, tmpdir } from "node:os";
 import { createInterface } from "node:readline";
+import { ensureProfileState, toRepoRelative } from "./scripts/meta-kim-local-state.mjs";
 
 // ── Config ──────────────────────────────────────────────
 
@@ -1396,6 +1397,9 @@ ${C.bold}  ${t.howToUse}${C.reset}
     ${C.dim}node setup.mjs --check       # ${t.cmdCheck}${C.reset}
     ${C.dim}npm run doctor:governance     # ${t.cmdDoctor}${C.reset}
     ${C.dim}npm run verify:all            # ${t.cmdVerify}${C.reset}
+    ${C.dim}npm run rebuild:run-index -- tests/fixtures/run-artifacts${C.reset}
+    ${C.dim}npm run query:runs -- --owner meta-warden${C.reset}
+    ${C.dim}npm run migrate:meta-kim -- <source-dir> --apply${C.reset}
 `);
 }
 
@@ -1567,6 +1571,13 @@ async function main() {
       openclaw: existsSync(join(PROJECT_DIR, "openclaw")),
     };
     checkSync(fakeRuntimes);
+    const localState = await ensureProfileState();
+    console.log(`${C.bold}  Local state${C.reset}`);
+    console.log(`    ${C.dim}profile=${localState.profile} key=${localState.metadata.profileKey}${C.reset}`);
+    console.log(`    ${C.dim}run index: ${toRepoRelative(localState.runIndexPath)}${C.reset}`);
+    console.log(`    ${C.dim}compaction: ${toRepoRelative(localState.compactionDir)}${C.reset}`);
+    console.log(`    ${C.dim}dispatch envelope: contracts/workflow-contract.json -> protocols.dispatchEnvelopePacket${C.reset}`);
+    console.log(`    ${C.dim}migration helper: npm run migrate:meta-kim -- <source-dir> --apply${C.reset}\n`);
     process.exit(0);
   }
 

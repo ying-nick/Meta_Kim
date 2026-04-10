@@ -151,9 +151,11 @@ Claude-side synthesis should also respect public-display discipline. A run is no
 
 - explicit `taskClassification` before execution
 - explicit `cardPlanPacket` so dealing / silence / skip / interrupt decisions are auditable
+- explicit `dispatchEnvelopePacket` before every non-query execution so owner, capability boundary, memory mode, and review / verification owners are fixed before work starts
 - finding-level closure across `reviewPacket -> revisionResponses -> verificationResults -> closeFindings`
 - explicit `summaryPacket` before any public-ready claim
 - explicit `writebackDecision = writeback | none`
+- local-only `compactionPacket` handoff state under `.meta-kim/state/{profile}/compaction/` when continuity has to survive a session break
 - hard public-display blocking until verification, summary, and deliverable closure all pass
 
 ### Anti-Pattern
@@ -286,16 +288,24 @@ After changing canonical prompts, skills, hooks, or runtime-facing contracts:
 2. run `npm run discover:global`
 3. run `npm run validate`
 4. run `npm run validate:run -- <artifact.json>` when you want to verify a recorded governed run
-5. run `npm run eval:agents` when smoke-level runtime acceptance matters
-6. run `npm run eval:agents:live` only when you explicitly need slower prompt-backed runtime acceptance
-7. run `npm run verify:all` before release or after larger changes
-8. run `npm run verify:all:live` only before runtime-sensitive releases that need the live acceptance layer
-9. check `docs/runtime-capability-matrix.md` when changing behavior that must stay parity-aligned across Claude / Codex / OpenClaw
+5. run `npm run index:runs -- <artifact-dir-or-file>` when validated governed runs should become queryable from the local run index
+6. use `npm run query:runs -- --owner <agent>` when continuity should consult the local run index before memory/files
+7. run `npm run doctor:governance` when mirrors, hooks, local profiles, or run-index health may have drifted
+8. run `npm run migrate:meta-kim -- <source-dir> --apply` when importing an older prompt pack or single-agent repo into local migration state
+9. run `npm run eval:agents` when smoke-level runtime acceptance matters
+10. run `npm run eval:agents:live` only when you explicitly need slower prompt-backed runtime acceptance
+11. run `npm run verify:all` before release or after larger changes
+12. run `npm run verify:all:live` only before runtime-sensitive releases that need the live acceptance layer
+13. check `docs/runtime-capability-matrix.md` when changing behavior that must stay parity-aligned across Claude / Codex / OpenClaw
 
 Useful supporting commands:
 
 - `npm run check:runtimes`
 - `npm run doctor:governance`
+- `npm run index:runs -- <artifact-dir-or-file>`
+- `npm run query:runs -- --owner <agent>`
+- `npm run rebuild:run-index -- <artifact-dir-or-file>`
+- `npm run migrate:meta-kim -- <source-dir> --apply`
 - `npm run probe:clis`
 - `npm run test:mcp`
 - `node scripts/agent-health-report.mjs`

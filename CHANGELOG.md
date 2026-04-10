@@ -4,6 +4,24 @@ All notable changes to Meta_Kim are documented here.
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 When you tag a release, add a new **`## [version] - YYYY-MM-DD`** section at the top (above older entries) and list changes there.
 
+## [1.3.0] - 2026-04-10
+
+### Added
+
+- Runtime-level `dispatchEnvelopePacket` governance for non-query runs, plus validator coverage for owner, capability boundary, memory mode, and review / verification ownership.
+- Repo-local state layout under `.meta-kim/state/{profile}/`, including `run-index.sqlite`, local `compactionPacket` continuity state, and profile collision safeguards.
+- Operator commands `index:runs`, `query:runs`, `rebuild:run-index`, and `migrate:meta-kim` for governed-run retrieval and staged migration from older prompt-pack / single-agent repos.
+
+### Changed
+
+- `discover:global` now rebuilds `.claude/capability-index/meta-kim-capabilities.json` first and keeps `global-capabilities.json` as a compatibility mirror.
+- `doctor:governance` now reports layered health across canonical contracts, mirror parity, runtime hooks, and local profile / run-index state.
+- Sync all runtime-facing governance docs to the new run-index / dispatch-envelope / compaction model, including `.claude/agents/*.md`, `CLAUDE.md`, `AGENTS.md`, and all four README language variants.
+
+### Fixed
+
+- Fill the previously missing README updates in `README.ja-JP.md` and `README.ko-KR.md` so the multilingual docs now cover the new capability index, local run index, migration helper, and layered governance doctor flow.
+
 ## [1.2.3] - 2026-04-04
 
 ### Documentation

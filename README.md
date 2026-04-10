@@ -1082,7 +1082,8 @@ npm run discover:global
 This scans your machine and generates:
 
 ```text
-.claude/capability-index/global-capabilities.json
+.claude/capability-index/meta-kim-capabilities.json
+.claude/capability-index/global-capabilities.json   # compatibility mirror
 ```
 
 It covers:
@@ -1249,13 +1250,17 @@ The system routes each request through the matching governance stage.
 | `npm run graphify:check`              | check graphify availability                     | verifies Python 3.10+ and graphify CLI                               |
 | `npm run graphify:install`            | install graphify                                | `pip install graphifyy` + register Claude skill                      |
 | `npm run graphify:update`             | update project graph                            | incremental `graphify --update` on target project                    |
-| `npm run discover:global`              | first setup and after adding global capabilities | rebuilds the global capability index                                  |
+| `npm run discover:global`              | first setup and after adding global capabilities | rebuilds `.claude/capability-index/meta-kim-capabilities.json` (and the compatibility mirror `global-capabilities.json`) |
+| `npm run index:runs -- <dir-or-file>`  | after recording governed runs                    | validates artifacts first, then indexes only valid runs into `.meta-kim/state/{profile}/run-index.sqlite` |
+| `npm run query:runs -- --owner meta-warden` | when you want continuity / retrieval fast     | queries the local run index by flow, owner, publicReady, and open findings |
+| `npm run rebuild:run-index -- <dir-or-file>` | when you want to reset the local index       | clears and rebuilds the profile-local SQLite run index |
+| `npm run migrate:meta-kim -- <source-dir> --apply` | when importing a prompt pack / single-agent repo | stages persona / skill / contract-adjacent assets into local migration state and refuses unverified run state |
 | `npm run probe:clis`                   | when CLI availability is unclear                 | probes Claude / Codex / OpenClaw CLIs                                 |
 | `npm run test:mcp`                     | after changing MCP-related code                  | self-tests `meta-runtime-server`                                    |
 | `npm run test:meta-theory`             | after changing `meta-theory`, contracts, or its tests | runs `tests/meta-theory/*.test.mjs`                               |
 | `npm run validate`                     | before committing                                | runs static integrity validation                                      |
 | `npm run validate:run -- <run.json>`   | when you want to verify a recorded real run      | validates packet lineage, summary/public-ready truthfulness, and finding closure |
-| `npm run doctor:governance`            | before release or when mirrors/hooks drift       | contract + hook list + `check:runtimes` + sample `validate:run`                    |
+| `npm run doctor:governance`            | before release or when mirrors/hooks drift       | layered health check: canonical contract + mirror parity + runtime hooks + local profile/run-index health |
 | `npm run prompt:next-iteration -- <run.json>` | when a run failed validation or findings are open | prints the next closure checklist from the artifact                         |
 | `npm run check`                        | when you want a quick static pass                | runs `check:runtimes + validate`                                    |
 | `npm run eval:agents`                  | for fast runtime smoke                           | runs CLI/config/hook/runtime-registry smoke without LLM prompt checks |
@@ -1300,7 +1305,17 @@ Technically yes, but that is not the intended maintenance path. In most cases, e
 
 ### 3. Should I commit the `discover:global` output?
 
-Usually no. It is machine-local capability inventory with local absolute paths.
+Usually no. `meta-kim-capabilities.json` and the compatibility mirror `global-capabilities.json` are machine-local capability inventories with local absolute paths.
+
+### 4. How do I migrate an older prompt pack or single-agent repo?
+
+Use the local migration helper:
+
+```bash
+npm run migrate:meta-kim -- ../old-agent-repo --apply
+```
+
+It stages only persona / skill / contract-adjacent assets into `.meta-kim/state/{profile}/migrations/...` and explicitly blocks unverified run state, SQLite caches, logs, and artifacts. Review the generated `manifest.json` before moving anything into canonical `.claude/` or `contracts/`.
 
 ### 4. If `eval:agents` says `skipped`, is the project broken?
 

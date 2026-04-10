@@ -141,7 +141,7 @@ Rule: another operator must be able to regenerate the same agent identity from t
 
 **Critical**: Before starting SOUL.md design, always discover available Skills in priority order:
 
-1. **Local Scan** — Scan installed project Skills via `ls .claude/skills/*/SKILL.md` and read their trigger descriptions. Also check `.claude/capability-index/global-capabilities.json` for the current runtime's indexed capabilities.
+1. **Local Scan** — Scan installed project Skills via `ls .claude/skills/*/SKILL.md` and read their trigger descriptions. Also check `.claude/capability-index/meta-kim-capabilities.json` first (compat mirror: `global-capabilities.json`) for the current runtime's indexed capabilities.
 2. **Capability Index** — Search the runtime's capability index for matching agent/skill patterns before searching externally.
 3. **findskill Search** — Only if local and index results are insufficient, invoke `findskill` to search external ecosystems. Query format: describe the capability gap in 1-2 sentences.
 4. **Specialist Ecosystem** — If findskill returns no strong match, consult specialist capability lists (e.g., everything-claude-code skills) before falling back to generic solutions.

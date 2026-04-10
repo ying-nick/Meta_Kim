@@ -5,6 +5,7 @@ image/
 openclaw/openclaw.local.json
 openclaw/workspaces/*/.openclaw/
 .claude/capability-index/
+.meta-kim/state/
 
 # Memory — auto-generated run records, not source code
 memory/governance-reviews/*.md

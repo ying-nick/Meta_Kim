@@ -159,9 +159,11 @@ The current hardening layer now expects:
 
 - `taskClassification` before execution (`taskClass + requestClass + governanceFlow + trigger/upgrade/bypass reasons`)
 - `cardPlanPacket` before execution (`dealerOwner + cards + silenceDecision + controlDecisions + deliveryShells`)
+- `dispatchEnvelopePacket` before every non-query execution (`ownerAgent + taskRef + allowed/blocked capabilities + memoryMode + reviewOwner + verificationOwner`)
 - finding-level closure (`reviewPacket.findings -> revisionResponses -> verificationResults -> closeFindings`)
 - explicit `summaryPacket` before any public-ready claim
 - explicit evolution decision (`writebackDecision = writeback | none`)
+- local-only `compactionPacket` handoff state under `.meta-kim/state/{profile}/compaction/` when continuity is needed between sessions
 - no final public-ready claim before the public-display gate passes
 
 Main-thread responsibility in Codex:
@@ -222,6 +224,8 @@ Files that should usually be treated as mirrors or adapters:
 
 - `.codex/agents/*.toml`
 - `.agents/skills/meta-theory/`
+- `.claude/capability-index/meta-kim-capabilities.json`
+- `.claude/capability-index/global-capabilities.json`
 - `.codex/skills/meta-theory.md`
 - `shared-skills/meta-theory.md`
 - `openclaw/workspaces/*`
@@ -234,16 +238,24 @@ After changing canonical files:
 2. run `npm run discover:global`
 3. run `npm run validate`
 4. run `npm run validate:run -- <artifact.json>` when you want to verify a recorded governed run
-5. run `npm run eval:agents` when smoke-level runtime acceptance matters
-6. run `npm run eval:agents:live` only when you explicitly need slower prompt-backed runtime acceptance
-7. run `npm run verify:all` before release or after larger changes
-8. run `npm run verify:all:live` only before runtime-sensitive releases that need the live acceptance layer
-9. read `docs/runtime-capability-matrix.md` whenever you touch trigger, card, silence, shell, review, verification, stop, or writeback behavior across runtimes
+5. run `npm run index:runs -- <artifact-dir-or-file>` when you want validated governed runs queryable from the local run index
+6. use `npm run query:runs -- --owner <agent>` when continuity or retrieval should consult the local run index first
+7. run `npm run doctor:governance` when mirrors, hooks, local profiles, or run-index health might have drifted
+8. run `npm run migrate:meta-kim -- <source-dir> --apply` when importing an older prompt pack or single-agent repo into local migration state
+9. run `npm run eval:agents` when smoke-level runtime acceptance matters
+10. run `npm run eval:agents:live` only when you explicitly need slower prompt-backed runtime acceptance
+11. run `npm run verify:all` before release or after larger changes
+12. run `npm run verify:all:live` only before runtime-sensitive releases that need the live acceptance layer
+13. read `docs/runtime-capability-matrix.md` whenever you touch trigger, card, silence, shell, review, verification, stop, or writeback behavior across runtimes
 
 Useful supporting commands:
 
 - `npm run check:runtimes`
 - `npm run doctor:governance`
+- `npm run index:runs -- <artifact-dir-or-file>`
+- `npm run query:runs -- --owner <agent>`
+- `npm run rebuild:run-index -- <artifact-dir-or-file>`
+- `npm run migrate:meta-kim -- <source-dir> --apply`
 - `npm run probe:clis`
 - `npm run test:mcp`
 - `node scripts/agent-health-report.mjs`

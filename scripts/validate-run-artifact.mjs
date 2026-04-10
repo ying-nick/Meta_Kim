@@ -10,18 +10,20 @@ const repoRoot = path.resolve(__dirname, "..");
 const contractPath = path.join(repoRoot, "contracts", "workflow-contract.json");
 const artifactArg = process.argv[2];
 
-const PACKET_LOCATIONS = {
+export const PACKET_LOCATIONS = {
   runHeader: "runHeader",
   taskClassification: "taskClassification",
   intentPacket: "intentPacket",
   intentGatePacket: "intentGatePacket",
   cardPlanPacket: "cardPlanPacket",
+  dispatchEnvelopePacket: "dispatchEnvelopePacket",
   dispatchBoard: "dispatchBoard",
   workerTaskPacket: "workerTaskPackets",
   workerResultPacket: "workerResultPackets",
   reviewPacket: "reviewPacket",
   verificationPacket: "verificationPacket",
   summaryPacket: "summaryPacket",
+  compactionPacket: "compactionPacket",
   evolutionWritebackPacket: "evolutionWritebackPacket",
 };
 
@@ -64,6 +66,35 @@ async function readJson(targetPath) {
 
 function getPacket(artifact, packetName) {
   return artifact[PACKET_LOCATIONS[packetName] ?? packetName];
+}
+
+function ensureString(value, context) {
+  ensure(typeof value === "string" && value.trim().length >= 1, `${context} must be a non-empty string.`);
+}
+
+function ensureStringArray(value, context) {
+  ensureArray(value, context);
+  for (const [index, item] of value.entries()) {
+    ensureString(item, `${context}[${index}]`);
+  }
+}
+
+function computePendingFindingIds(artifact) {
+  const reviewFindings = artifact.reviewPacket?.findings ?? [];
+  const closedIds = new Set(artifact.verificationPacket?.closeFindings ?? []);
+  return reviewFindings
+    .filter((finding) => !closedIds.has(finding.findingId))
+    .map((finding) => finding.findingId);
+}
+
+function deriveVerifyGateState(artifact) {
+  if (artifact.verificationPacket?.verified !== true) {
+    return "pending_verify";
+  }
+  const hasAcceptedRisk = (artifact.verificationPacket?.verificationResults ?? []).some(
+    (result) => result.closeState === "accepted_risk"
+  );
+  return hasAcceptedRisk ? "accepted_risk" : "verified";
 }
 
 function validateTaskClassification(contract, taskClassification) {
@@ -169,6 +200,40 @@ function validateIntentGatePacketWhenRequired(contract, artifact) {
       );
     }
   }
+}
+
+function validateDispatchEnvelope(contract, artifact) {
+  const when = contract.runDiscipline.protocolFirst.dispatchEnvelopePacketRequiredWhenGovernanceFlows ?? [];
+  const flow = artifact.taskClassification?.governanceFlow;
+  if (!when.includes(flow)) {
+    return;
+  }
+
+  const packet = artifact.dispatchEnvelopePacket;
+  ensure(packet && typeof packet === "object", `dispatchEnvelopePacket is required when governanceFlow is ${flow}.`);
+  ensureFields(packet, contract.protocols.dispatchEnvelopePacket.requiredFields, "dispatchEnvelopePacket");
+  ensureString(packet.ownerAgent, "dispatchEnvelopePacket.ownerAgent");
+  ensureString(packet.taskRef, "dispatchEnvelopePacket.taskRef");
+  ensureStringArray(packet.allowedCapabilities, "dispatchEnvelopePacket.allowedCapabilities");
+  ensureStringArray(packet.blockedCapabilities, "dispatchEnvelopePacket.blockedCapabilities");
+  ensure(packet.allowedCapabilities.length >= 1, "dispatchEnvelopePacket.allowedCapabilities must contain at least one capability.");
+  ensureEnum(
+    packet.memoryMode,
+    contract.protocols.dispatchEnvelopePacket.memoryModeEnum,
+    "dispatchEnvelopePacket.memoryMode"
+  );
+  ensureString(packet.workspaceHint, "dispatchEnvelopePacket.workspaceHint");
+  ensureString(packet.resultSchemaRef, "dispatchEnvelopePacket.resultSchemaRef");
+  ensureString(packet.reviewOwner, "dispatchEnvelopePacket.reviewOwner");
+  ensureString(packet.verificationOwner, "dispatchEnvelopePacket.verificationOwner");
+
+  const overlaps = packet.allowedCapabilities.filter((capability) =>
+    packet.blockedCapabilities.includes(capability)
+  );
+  ensure(
+    overlaps.length === 0,
+    `dispatchEnvelopePacket capability boundary overlaps are forbidden: ${overlaps.join(", ")}`
+  );
 }
 
 function validateSoftPublicReadyGates(contract, artifact) {
@@ -500,11 +565,122 @@ function validateSummaryAndEvolution(contract, artifact) {
   }
 }
 
+function validateCompactionPacket(contract, artifact) {
+  const packet = artifact.compactionPacket;
+  if (!packet) {
+    return;
+  }
+
+  ensureFields(packet, contract.protocols.compactionPacket.requiredFields, "compactionPacket");
+  ensureString(packet.packetVersion, "compactionPacket.packetVersion");
+  ensureString(packet.runRef, "compactionPacket.runRef");
+  ensureString(packet.profile, "compactionPacket.profile");
+  ensureString(packet.profileKey, "compactionPacket.profileKey");
+  ensureStringArray(packet.openFindings, "compactionPacket.openFindings");
+  ensureStringArray(packet.pendingRevisions, "compactionPacket.pendingRevisions");
+  ensureEnum(
+    packet.verifyGateState,
+    contract.protocols.compactionPacket.verifyGateStateEnum,
+    "compactionPacket.verifyGateState"
+  );
+  ensure(
+    packet.singleDeliverableState && typeof packet.singleDeliverableState === "object",
+    "compactionPacket.singleDeliverableState must be an object."
+  );
+  ensure(
+    packet.summaryDelta && typeof packet.summaryDelta === "object",
+    "compactionPacket.summaryDelta must be an object."
+  );
+  ensure(
+    packet.writebackDecision === artifact.evolutionWritebackPacket.writebackDecision,
+    "compactionPacket.writebackDecision must match evolutionWritebackPacket.writebackDecision."
+  );
+
+  const pendingFindingIds = computePendingFindingIds(artifact).sort();
+  const packetOpenFindings = [...packet.openFindings].sort();
+  ensure(
+    JSON.stringify(packetOpenFindings) === JSON.stringify(pendingFindingIds),
+    `compactionPacket.openFindings must exactly match unresolved review findings (${pendingFindingIds.join(", ")}).`
+  );
+
+  if (pendingFindingIds.length > 0) {
+    ensure(
+      packet.pendingRevisions.length >= 1,
+      "compactionPacket.pendingRevisions must retain at least one pending revision while findings remain open."
+    );
+  }
+
+  ensure(
+    packet.verifyGateState === deriveVerifyGateState(artifact),
+    "compactionPacket.verifyGateState must match verificationPacket closure state."
+  );
+  ensure(
+    packet.singleDeliverableState.singleDeliverableMaintained === artifact.summaryPacket.singleDeliverableMaintained,
+    "compactionPacket.singleDeliverableState.singleDeliverableMaintained must match summaryPacket."
+  );
+  ensure(
+    packet.singleDeliverableState.deliverableChainClosed === artifact.summaryPacket.deliverableChainClosed,
+    "compactionPacket.singleDeliverableState.deliverableChainClosed must match summaryPacket."
+  );
+  ensure(
+    packet.summaryDelta.publicReady === artifact.summaryPacket.publicReady,
+    "compactionPacket.summaryDelta.publicReady must match summaryPacket.publicReady."
+  );
+  ensure(
+    packet.summaryDelta.verifyPassed === artifact.summaryPacket.verifyPassed,
+    "compactionPacket.summaryDelta.verifyPassed must match summaryPacket.verifyPassed."
+  );
+  ensure(
+    packet.summaryDelta.summaryClosed === artifact.summaryPacket.summaryClosed,
+    "compactionPacket.summaryDelta.summaryClosed must match summaryPacket.summaryClosed."
+  );
+
+  if (packet.summaryDelta.publicReady === true) {
+    ensure(
+      artifact.verificationPacket.verified === true && pendingFindingIds.length === 0,
+      "compactionPacket must not claim publicReady while verification or finding closure remains open."
+    );
+  }
+}
+
 function validateRequiredPackets(contract, artifact) {
   for (const packetName of contract.runDiscipline.protocolFirst.requiredPackets) {
+    if (
+      packetName === "dispatchEnvelopePacket" &&
+      !(contract.runDiscipline.protocolFirst.dispatchEnvelopePacketRequiredWhenGovernanceFlows ?? []).includes(
+        artifact.taskClassification?.governanceFlow
+      )
+    ) {
+      continue;
+    }
     const packet = getPacket(artifact, packetName);
     ensure(packet !== undefined, `run artifact is missing required packet ${packetName}.`);
   }
+}
+
+export function validateArtifact(contract, artifact) {
+  validateRequiredPackets(contract, artifact);
+  ensureFields(artifact.runHeader, contract.protocols.runHeader.requiredFields, "runHeader");
+  validateTaskClassification(contract, artifact.taskClassification);
+  validateIntentPacketWhenRequired(contract, artifact);
+  validateIntentGatePacketWhenRequired(contract, artifact);
+  validateCardPlan(contract, artifact);
+  validateDispatchEnvelope(contract, artifact);
+  ensureFields(artifact.dispatchBoard, contract.protocols.dispatchBoard.requiredFields, "dispatchBoard");
+  validateWorkerPackets(contract, artifact);
+  validateFindingChain(contract, artifact);
+  validateSummaryAndEvolution(contract, artifact);
+  validateCompactionPacket(contract, artifact);
+  validateSoftPublicReadyGates(contract, artifact);
+  validateSoftCommentReviewGate(contract, artifact);
+}
+
+export async function validateArtifactFile(artifactFilePath) {
+  const artifactPath = path.resolve(process.cwd(), artifactFilePath);
+  const artifact = await readJson(artifactPath);
+  const contract = await readJson(contractPath);
+  validateArtifact(contract, artifact);
+  return artifact;
 }
 
 async function main() {
@@ -513,21 +689,8 @@ async function main() {
   }
 
   const artifactPath = path.resolve(process.cwd(), artifactArg);
-  const artifact = await readJson(artifactPath);
+  const artifact = await validateArtifactFile(artifactPath);
   const contract = await readJson(contractPath);
-
-  validateRequiredPackets(contract, artifact);
-  ensureFields(artifact.runHeader, contract.protocols.runHeader.requiredFields, "runHeader");
-  validateTaskClassification(contract, artifact.taskClassification);
-  validateIntentPacketWhenRequired(contract, artifact);
-  validateIntentGatePacketWhenRequired(contract, artifact);
-  validateCardPlan(contract, artifact);
-  ensureFields(artifact.dispatchBoard, contract.protocols.dispatchBoard.requiredFields, "dispatchBoard");
-  validateWorkerPackets(contract, artifact);
-  validateFindingChain(contract, artifact);
-  validateSummaryAndEvolution(contract, artifact);
-  validateSoftPublicReadyGates(contract, artifact);
-  validateSoftCommentReviewGate(contract, artifact);
 
   console.log(
     JSON.stringify(
@@ -542,7 +705,9 @@ async function main() {
   );
 }
 
-main().catch((error) => {
-  console.error(error.message);
-  process.exitCode = 1;
-});
+if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+  main().catch((error) => {
+    console.error(error.message);
+    process.exitCode = 1;
+  });
+}

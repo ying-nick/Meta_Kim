@@ -422,7 +422,7 @@ npm run sync:runtimes
 npm run validate
 ```
 
-전역 역량 색인: `npm run discover:global` (로컬 절대 경로 포함 → 보통 커밋하지 않음)
+전역 역량 색인: `npm run discover:global` (`.claude/capability-index/meta-kim-capabilities.json`을 다시 만들고 호환 미러 `global-capabilities.json`도 함께 갱신. 둘 다 로컬 절대 경로를 포함하므로 보통 커밋하지 않음)
 
 전체 절차·명령 표는 영어 정본 [README.md — Commands](README.md#commands)를 보세요.
 
@@ -438,12 +438,25 @@ npm run validate
 | `npm run test:meta-theory` | 메타이론 테스트 스위트 |
 | `npm run eval:agents` | 런타임 경량 스모크 |
 | `npm run validate:run -- <run.json>` | 기록된 run 아티팩트 검증 |
-| `npm run doctor:governance` | 계약·훅·미러·샘플 validate:run 좁은 헬스체크 |
+| `npm run index:runs -- <dir-or-file>` | 유효한 governed run만 `.meta-kim/state/{profile}/run-index.sqlite`에 색인 |
+| `npm run query:runs -- --owner meta-warden` | flow / owner / publicReady / open findings 기준으로 로컬 run index 조회 |
+| `npm run migrate:meta-kim -- <source-dir> --apply` | 예전 prompt pack / 단일 agent 저장소에서 persona / skill / contract 인접 자산만 staging |
+| `npm run doctor:governance` | canonical contract·mirror parity·runtime hooks·local profile/run-index health를 층별로 점검 |
 | `npm run verify:all` | 릴리스 전 넓은 스택(전역 meta-theory 동기 상태에도 의존) |
 
 </div>
 
 ## 코드 지식 그래프 (graphify)
+
+## 보충 FAQ
+
+### 예전 prompt pack / 단일 agent 저장소는 어떻게 옮기나?
+
+```bash
+npm run migrate:meta-kim -- ../old-agent-repo --apply
+```
+
+이 명령은 persona / skill / contract 인접 자산만 `.meta-kim/state/{profile}/migrations/...`에 staging하고, 검증되지 않은 run state·SQLite 캐시·로그·artifact는 막습니다. 정본 `.claude/`나 `contracts/`로 옮기기 전에 생성된 `manifest.json`을 먼저 검토하세요.
 
 [graphify](https://github.com/safishamsi/graphify) (`pip install graphifyy`)를 사용하여 **대상 프로젝트**(Meta_Kim 자체가 아님)의 코드 지식 그래프를 생성합니다. 서브그래프 추출로 최대 **71배 토큰 압축**을 실현합니다.
 

@@ -24,6 +24,21 @@
     "classifierVersion": "v2",
     "complexity": "medium"
   },
+  "intentPacket": {
+    "trueUserIntent": "Harden refresh-token handling so secrets never live inline in source; one consolidated deliverable for the auth module.",
+    "successCriteria": "Tests pass with env-only secrets; review finding finding-001 can be verified_closed; run artifact validates with npm run validate:run.",
+    "nonGoals": "No unrelated auth flows (login UI, OAuth providers); no production deploy in this run.",
+    "intentPacketVersion": "v1"
+  },
+  "intentGatePacket": {
+    "ambiguitiesResolved": true,
+    "requiresUserChoice": false,
+    "defaultAssumptions": [
+      "Scope is the existing auth refresh path only; no new identity providers.",
+      "Secrets load from environment in test and CI as today."
+    ],
+    "intentGatePacketVersion": "v1"
+  },
   "cardPlanPacket": {
     "dealerOwner": "meta-conductor",
     "dealerMode": "conductor-primary-warden-escalation",
@@ -76,6 +91,21 @@
       }
     ],
     "defaultShellId": "shell-review-delta"
+  },
+  "dispatchEnvelopePacket": {
+    "ownerAgent": "meta-conductor",
+    "taskRef": "task-001",
+    "allowedCapabilities": [
+      "auth_refresh_hardening"
+    ],
+    "blockedCapabilities": [
+      "security_policy_override"
+    ],
+    "memoryMode": "inherit_summary_only",
+    "workspaceHint": "auth-refresh-hardening",
+    "resultSchemaRef": "contracts/workflow-contract.json#/protocols/workerResultPacket",
+    "reviewOwner": "meta-prism",
+    "verificationOwner": "meta-warden"
   },
   "dispatchBoard": {
     "boardId": "dispatch-001",

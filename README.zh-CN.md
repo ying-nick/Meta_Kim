@@ -223,7 +223,8 @@ npm run discover:global
 这一步会扫描你电脑里的全局能力，并生成：
 
 ```text
-.claude/capability-index/global-capabilities.json
+.claude/capability-index/meta-kim-capabilities.json
+.claude/capability-index/global-capabilities.json   # 兼容镜像
 ```
 
 扫描范围包括：
@@ -687,13 +688,17 @@ npm run graphify:check
 | `npm run graphify:check` | 检查 graphify 是否可用 | 验证 Python 3.10+ 和 graphify CLI |
 | `npm run graphify:install` | 安装 graphify | `pip install graphifyy` + 注册 Claude 技能 |
 | `npm run graphify:update` | 更新目标项目图谱 | 对目标项目执行增量 `graphify --update` |
-| `npm run discover:global` | 首次安装后、装了新全局能力后 | 生成全局能力索引 |
+| `npm run discover:global` | 首次安装后、装了新全局能力后 | 生成 `.claude/capability-index/meta-kim-capabilities.json`（并同步兼容镜像 `global-capabilities.json`） |
+| `npm run index:runs -- <目录或文件>` | 录完 governed run 后 | 先做 contract 校验，再把合法 run 索引进 `.meta-kim/state/{profile}/run-index.sqlite` |
+| `npm run query:runs -- --owner meta-warden` | 想快速做 continuity / retrieval 时 | 按 flow、owner、publicReady、open findings 查询本地 run index |
+| `npm run rebuild:run-index -- <目录或文件>` | 想重建本地索引时 | 清空并重建 profile-local SQLite run index |
+| `npm run migrate:meta-kim -- <source-dir> --apply` | 从 prompt pack / 单 agent 仓库迁入时 | 只暂存 persona / skill / contract 相关资产，拒绝导入未验证 run state |
 | `npm run probe:clis` | 怀疑 CLI 没配好时 | 探测 Claude / Codex / OpenClaw CLI |
 | `npm run test:mcp` | 改了 MCP 相关逻辑时 | 自测 `meta-runtime-server` |
 | `npm run test:meta-theory` | 改了 `meta-theory` skill / contract / tests 时 | 跑 `tests/meta-theory/*.test.mjs` |
 | `npm run validate` | 每次准备提交前 | 做静态完整性校验 |
 | `npm run validate:run -- <run.json>` | 要校验真实 run 产物链时 | 检查 packet 对齐、finding closure、summary/public-ready 是否真实 |
-| `npm run doctor:governance` | 发布前或怀疑 hook/镜像漂移时 | 契约 + hook 列表 + `check:runtimes` + 样例 `validate:run` |
+| `npm run doctor:governance` | 发布前或怀疑 hook/镜像漂移时 | 分层体检：canonical contract + mirror parity + runtime hooks + 本地 profile/run-index 健康 |
 | `npm run prompt:next-iteration -- <run.json>` | run 未过校验或 finding 未关时 | 从 artifact 打印下一轮闭环待办 |
 | `npm run check` | 想快速做一轮静态检查 | `check:runtimes + validate` |
 | `npm run eval:agents` | 要快速做一轮 runtime smoke 时 | 做 CLI / 配置 / hook / registry 级别的轻量检查，不跑 LLM prompt 验收 |
@@ -738,7 +743,17 @@ npm run graphify:check
 
 #### 3. `discover:global` 生成的索引要提交吗？
 
-通常不用。它是本机能力索引，带本地路径，按机器重新生成。
+通常不用。`meta-kim-capabilities.json` 以及兼容镜像 `global-capabilities.json` 都是本机能力索引，带本地路径，按机器重新生成。
+
+#### 4. 旧 prompt pack / 单 agent 仓库怎么迁到 Meta_Kim？
+
+先用本地迁移脚本做 staging：
+
+```bash
+npm run migrate:meta-kim -- ../old-agent-repo --apply
+```
+
+它会把 persona / skill / contract 相关资产暂存到 `.meta-kim/state/{profile}/migrations/...`，并明确拒绝未验证 run state、SQLite 缓存、日志和 artifacts。先审 `manifest.json`，再决定哪些内容值得进入 canonical `.claude/` 或 `contracts/`。
 
 #### 4. `eval:agents` 里看到 `skipped` 是不是就说明项目坏了？
 

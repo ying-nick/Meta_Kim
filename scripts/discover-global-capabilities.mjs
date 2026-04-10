@@ -569,6 +569,9 @@ async function scanPlatform(platformId, platform) {
 async function buildCapabilityIndex(scannedResults) {
   const index = {
     generatedAt: new Date().toISOString(),
+    registryName: "meta-kim-capabilities",
+    canonicalProjection: ".claude/capability-index/meta-kim-capabilities.json",
+    compatibilityMirror: ".claude/capability-index/global-capabilities.json",
     summary: {
       totalAgents: 0,
       totalSkills: 0,
@@ -685,11 +688,13 @@ async function main() {
   // 写入索引文件（相对仓库根，避免从子目录调用时写错路径）
   const indexDir = path.join(repoRoot, ".claude", "capability-index");
   await fs.mkdir(indexDir, { recursive: true });
-  await fs.writeFile(
-    path.join(indexDir, "global-capabilities.json"),
-    JSON.stringify(index, null, 2)
-  );
-  console.error(`\n✅ Index written to: ${path.join(indexDir, "global-capabilities.json")}`);
+  const metaKimIndex = path.join(indexDir, "meta-kim-capabilities.json");
+  const compatibilityIndex = path.join(indexDir, "global-capabilities.json");
+  const content = JSON.stringify(index, null, 2);
+  await fs.writeFile(metaKimIndex, content);
+  await fs.writeFile(compatibilityIndex, content);
+  console.error(`\n✅ Index written to: ${metaKimIndex}`);
+  console.error(`✅ Compatibility mirror written to: ${compatibilityIndex}`);
 }
 
 await main();

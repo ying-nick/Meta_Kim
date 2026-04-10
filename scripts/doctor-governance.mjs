@@ -12,6 +12,11 @@ import path from "node:path";
 import process from "node:process";
 import { promisify } from "node:util";
 import { fileURLToPath } from "node:url";
+import {
+  detectProfileCollision,
+  ensureProfileState,
+  toRepoRelative,
+} from "./meta-kim-local-state.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const repoRoot = path.resolve(__dirname, "..");
@@ -116,52 +121,110 @@ async function checkValidateRun() {
   }
 }
 
+async function checkLocalState() {
+  const state = await ensureProfileState();
+  const collision = await detectProfileCollision({
+    profile: state.profile,
+    runtimeFamily: state.runtimeFamily,
+  });
+  if (collision.collision) {
+    throw new Error(
+      `profile collision detected for ${state.profile}: expected ${collision.expectedProfileKey}, found ${collision.existing?.profileKey}`
+    );
+  }
+  let runIndexReady = false;
+  try {
+    await fs.access(state.runIndexPath);
+    runIndexReady = true;
+  } catch {
+    runIndexReady = false;
+  }
+
+  return {
+    profile: state.profile,
+    profileKey: state.metadata.profileKey,
+    runtimeFamily: state.runtimeFamily,
+    runIndexReady,
+    runIndexPath: toRepoRelative(state.runIndexPath),
+    compactionDir: toRepoRelative(state.compactionDir),
+  };
+}
+
 async function main() {
   console.log("meta-kim doctor:governance");
-  const lines = [];
+  const canonicalLines = [];
+  const mirrorLines = [];
+  const runtimeLines = [];
+  const localLines = [];
   let failed = false;
 
   try {
     const schemaVersion = await checkContract();
-    lines.push(`  [ok] workflow-contract.json schemaVersion=${schemaVersion}`);
+    canonicalLines.push(`  [ok] workflow-contract.json schemaVersion=${schemaVersion}`);
   } catch (e) {
     failed = true;
-    lines.push(`  [fail] contract: ${e.message}`);
-  }
-
-  try {
-    await checkHooks();
-    lines.push(`  [ok] .claude/settings.json hook commands (${EXPECTED_CLAUDE_HOOK_COMMANDS.length} commands)`);
-  } catch (e) {
-    failed = true;
-    lines.push(`  [fail] hooks: ${e.message}`);
-  }
-
-  try {
-    await checkSync();
-    lines.push("  [ok] npm run check:runtimes (mirrors match canonical)");
-  } catch (e) {
-    failed = true;
-    lines.push(`  [fail] sync: ${e.message}`);
-    if (e.stderr) {
-      lines.push(String(e.stderr).trim());
-    }
+    canonicalLines.push(`  [fail] contract: ${e.message}`);
   }
 
   try {
     await checkValidateRun();
-    lines.push(`  [ok] validate:run on ${path.relative(repoRoot, FIXTURE).replace(/\\/g, "/")}`);
+    canonicalLines.push(`  [ok] validate:run on ${path.relative(repoRoot, FIXTURE).replace(/\\/g, "/")}`);
   } catch (e) {
     failed = true;
-    lines.push(`  [fail] validate:run: ${e.message}`);
+    canonicalLines.push(`  [fail] validate:run: ${e.message}`);
     if (e.stderr) {
-      lines.push(String(e.stderr).trim());
+      canonicalLines.push(String(e.stderr).trim());
     }
   }
 
-  console.log(lines.join("\n"));
+  try {
+    await checkSync();
+    mirrorLines.push("  [ok] npm run check:runtimes (mirrors match canonical)");
+  } catch (e) {
+    failed = true;
+    mirrorLines.push(`  [fail] sync: ${e.message}`);
+    if (e.stderr) {
+      mirrorLines.push(String(e.stderr).trim());
+    }
+  }
+
+  try {
+    await checkHooks();
+    runtimeLines.push(`  [ok] .claude/settings.json hook commands (${EXPECTED_CLAUDE_HOOK_COMMANDS.length} commands)`);
+  } catch (e) {
+    failed = true;
+    runtimeLines.push(`  [fail] hooks: ${e.message}`);
+    if (e.stderr) {
+      runtimeLines.push(String(e.stderr).trim());
+    }
+  }
+
+  try {
+    const localState = await checkLocalState();
+    localLines.push(
+      `  [ok] profile=${localState.profile} runtime=${localState.runtimeFamily} key=${localState.profileKey}`
+    );
+    localLines.push(
+      `  [ok] run index ${localState.runIndexReady ? "ready" : "not-built-yet"}: ${localState.runIndexPath}`
+    );
+    localLines.push(`  [ok] compaction dir: ${localState.compactionDir}`);
+  } catch (e) {
+    failed = true;
+    localLines.push(`  [fail] local state: ${e.message}`);
+  }
+
+  console.log("Canonical health");
+  console.log(canonicalLines.join("\n"));
+  console.log("Mirror health");
+  console.log(mirrorLines.join("\n"));
+  console.log("Runtime health");
+  console.log(runtimeLines.join("\n"));
+  console.log("Local index health");
+  console.log(localLines.join("\n"));
   if (failed) {
-    console.error("\nDoctor finished with failures. Fix the items above, then run: npm run sync:runtimes && npm run validate");
+    console.error(
+      "\nDoctor finished with failures. Fix the items above, then run: npm run sync:runtimes && npm run validate"
+    );
     process.exitCode = 1;
   } else {
     console.log("\nAll governance doctor checks passed.");

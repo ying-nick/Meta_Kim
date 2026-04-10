@@ -13,7 +13,7 @@ describe("workflow-contract.json — schema compliance", async () => {
 
   test("schemaVersion exists", () => {
     assert.notEqual(contract.schemaVersion, undefined);
-    assert.ok(contract.schemaVersion >= 3, "schemaVersion should be >= 3 after card-governance hardening");
+    assert.ok(contract.schemaVersion >= 4, "schemaVersion should be >= 4 after dispatch-envelope + local-state hardening");
   });
 
   test('owner is "Meta_Kim"', () => {
@@ -127,24 +127,26 @@ describe("workflow-contract.json — schema compliance", async () => {
     );
   });
 
-  test("protocols has all 10 packet types", () => {
+  test("protocols has all 12 governed packet types", () => {
     const expected = [
       "runHeader",
       "taskClassification",
       "cardPlanPacket",
+      "dispatchEnvelopePacket",
       "dispatchBoard",
       "workerTaskPacket",
       "workerResultPacket",
       "reviewPacket",
       "verificationPacket",
       "summaryPacket",
+      "compactionPacket",
       "evolutionWritebackPacket",
     ];
     const keys = Object.keys(contract.protocols ?? {});
     for (const packet of expected) {
       assert.ok(keys.includes(packet), `missing protocol packet: ${packet}`);
     }
-    assert.equal(expected.length, 10);
+    assert.equal(expected.length, 12);
   });
 
   test("publicDisplayRequires has all 5 conditions", () => {
@@ -238,7 +240,69 @@ describe("workflow-contract.json — schema compliance", async () => {
     const requiredPackets = contract.runDiscipline?.protocolFirst?.requiredPackets ?? [];
     assert.ok(requiredPackets.includes("taskClassification"));
     assert.ok(requiredPackets.includes("cardPlanPacket"));
+    assert.ok(requiredPackets.includes("dispatchEnvelopePacket"));
     assert.ok(requiredPackets.includes("summaryPacket"));
+  });
+
+  test("dispatch envelope is mandatory for non-query governance flows", () => {
+    const envelopeWhen =
+      contract.runDiscipline?.protocolFirst?.dispatchEnvelopePacketRequiredWhenGovernanceFlows ?? [];
+    assert.ok(envelopeWhen.includes("simple_exec"));
+    assert.ok(envelopeWhen.includes("complex_dev"));
+    assert.ok(envelopeWhen.includes("meta_analysis"));
+    assert.ok(!envelopeWhen.includes("query"));
+
+    const fields = contract.protocols?.dispatchEnvelopePacket?.requiredFields ?? [];
+    for (const field of [
+      "ownerAgent",
+      "taskRef",
+      "allowedCapabilities",
+      "blockedCapabilities",
+      "memoryMode",
+      "workspaceHint",
+      "resultSchemaRef",
+      "reviewOwner",
+      "verificationOwner",
+    ]) {
+      assert.ok(fields.includes(field), `dispatchEnvelopePacket missing ${field}`);
+    }
+    assert.deepEqual(contract.protocols?.dispatchEnvelopePacket?.memoryModeEnum, [
+      "fresh_context",
+      "inherit_summary_only",
+      "inherit_full_context",
+    ]);
+  });
+
+  test("local state + compaction policy are explicit", () => {
+    const localState = contract.runDiscipline?.localState ?? {};
+    assert.equal(localState.root, ".meta-kim/state");
+    assert.equal(localState.defaultProfile, "default");
+    assert.ok(localState.profileKeyRequires?.includes("repo_path_hash"));
+    assert.ok(localState.profileKeyRequires?.includes("runtime_family"));
+    assert.equal(localState.runIndex?.canonicalSource, false);
+    assert.equal(localState.compaction?.localOnly, true);
+    assert.equal(localState.compaction?.publicArtifactForbidden, true);
+
+    const compactionFields = contract.protocols?.compactionPacket?.requiredFields ?? [];
+    for (const field of [
+      "packetVersion",
+      "runRef",
+      "profile",
+      "profileKey",
+      "openFindings",
+      "pendingRevisions",
+      "verifyGateState",
+      "singleDeliverableState",
+      "summaryDelta",
+      "writebackDecision",
+    ]) {
+      assert.ok(compactionFields.includes(field), `compactionPacket missing ${field}`);
+    }
+    assert.deepEqual(contract.protocols?.compactionPacket?.verifyGateStateEnum, [
+      "pending_verify",
+      "verified",
+      "accepted_risk",
+    ]);
   });
 
   test("intentPacket protocol and conditional governance flows are defined", () => {
