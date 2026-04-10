@@ -1,0 +1,240 @@
+[
+  {
+    "id": "CD-01",
+    "name": "Agent discovery via MCP list_meta_agents",
+    "input": "I need to find an agent that can review code quality",
+    "capabilityTypes": ["AGENT", "SKILL"],
+    "expectedDiscovery": {
+      "method": "MCP list_meta_agents + local .claude/agents/ scan",
+      "scoring": "capability description matching (0-3), not name matching",
+      "expectedAgents": ["meta-prism"],
+      "expectedSkills": []
+    },
+    "passFailCriteria": {
+      "PASS": "meta-prism discovered via capability matching; list_meta_agents called; no hardcoded agent name",
+      "FAIL": "Agent hardcoded by name without search; list_meta_agents not used"
+    }
+  },
+  {
+    "id": "CD-02",
+    "name": "Skill discovery via 5-step chain",
+    "input": "Find me a skill for testing Python code",
+    "capabilityTypes": ["SKILL", "AGENT"],
+    "expectedDiscovery": {
+      "method": "5-step chain: local -> index -> findskill -> expert -> generic",
+      "scoring": "ROI formula: (Task Coverage × Frequency) / (Context Cost + Learning Curve)",
+      "expectedSkills": ["python-testing"],
+      "expectedAgents": []
+    },
+    "passFailCriteria": {
+      "PASS": "All 5 steps documented; ROI calculated; best-fit skill selected; findskill called if local insufficient",
+      "FAIL": "Single-step discovery; ROI not calculated; wrong skill selected"
+    }
+  },
+  {
+    "id": "CD-03",
+    "name": "MCP tool discovery",
+    "input": "I need to execute some code in a sandboxed environment",
+    "capabilityTypes": ["MCP_TOOL", "COMMAND"],
+    "expectedDiscovery": {
+      "method": ".mcp.json scan + deferred tools loading",
+      "scoring": "tool availability, permissions, parameters",
+      "expectedMcpTools": ["mcp__ide__executeCode"],
+      "expectedCommands": []
+    },
+    "passFailCriteria": {
+      "PASS": "MCP tools scanned; mcp__ide__executeCode considered; permissions checked",
+      "FAIL": "MCP tools not discovered; tool not considered despite availability"
+    }
+  },
+  {
+    "id": "CD-04",
+    "name": "Command/script discovery",
+    "input": "Run the validation suite to check if everything is wired correctly",
+    "capabilityTypes": ["COMMAND"],
+    "expectedDiscovery": {
+      "method": "package.json scripts scan",
+      "scoring": "command availability, description match",
+      "expectedCommands": ["npm run validate", "npm run test"]
+    },
+    "passFailCriteria": {
+      "PASS": "package.json scanned; validate/test scripts discovered and used",
+      "FAIL": "Scripts not scanned; hardcoded npm commands without discovery"
+    }
+  },
+  {
+    "id": "CD-05",
+    "name": "Memory recall via Librarian",
+    "input": "Did we handle similar JWT auth issues before?",
+    "capabilityTypes": ["MEMORY"],
+    "expectedDiscovery": {
+      "method": "sqlite-vec vector search + Librarian recall",
+      "scoring": "relevance score, recency, source credibility",
+      "expectedMemory": "prior JWT auth implementations or patterns"
+    },
+    "passFailCriteria": {
+      "PASS": "sqlite-vec queried; related memories retrieved; Librarian invoked",
+      "FAIL": "Memory not consulted; past patterns ignored"
+    }
+  },
+  {
+    "id": "CD-06",
+    "name": "Knowledge Graph via graphify",
+    "input": "What modules depend on the auth module?",
+    "capabilityTypes": ["KNOWLEDGE_GRAPH"],
+    "expectedDiscovery": {
+      "method": "graphify graph auto-detect + subgraph extraction",
+      "scoring": "AMBIGUOUS nodes < 30%, total nodes >= 10",
+      "expectedGraph": "dependency graph with auth as center"
+    },
+    "passFailCriteria": {
+      "PASS": "graphify-out/graph.json detected; subgraph extracted for auth; nodes/edges returned",
+      "FAIL": "Graph not detected; raw file reading instead of graph query"
+    }
+  },
+  {
+    "id": "CD-07",
+    "name": "Cross-platform capability discovery",
+    "input": "Find me a blockchain security expert from anywhere",
+    "capabilityTypes": ["AGENT", "SKILL"],
+    "expectedDiscovery": {
+      "method": "3-platform scan: Claude Code + Codex + OpenClaw",
+      "scoring": "cross-platform capability index match",
+      "expectedAgents": ["blockchain-developer"],
+      "platforms": ["claudeCode", "codex"]
+    },
+    "passFailCriteria": {
+      "PASS": "discover-global-capabilities.mjs executed; blockchain-developer discovered from global index; cross-platform fallback used",
+      "FAIL": "Only local capabilities scanned; external platforms ignored"
+    }
+  },
+  {
+    "id": "CD-08",
+    "name": "DRY conflict detection",
+    "input": "Find me a skill for auth testing — we already have python-testing",
+    "capabilityTypes": ["SKILL"],
+    "expectedDiscovery": {
+      "method": "overlap detection > 50% triggers conflict resolution",
+      "scoring": "dedupe, merge, or explicit rejection",
+      "expectedSkills": ["python-testing (already covers auth testing)"]
+    },
+    "passFailCriteria": {
+      "PASS": "DRY overlap detected (>50%); existing python-testing recommended for auth; duplicate rejected or merged",
+      "FAIL": "New auth-testing skill created despite python-testing covering it; DRY violation"
+    }
+  },
+  {
+    "id": "CD-09",
+    "name": "Capability gap detection and logging",
+    "input": "I need an agent that can audit Kubernetes manifests",
+    "capabilityTypes": [],
+    "expectedDiscovery": {
+      "method": "exhaustive search -> no match -> gap logged",
+      "scoring": "gap recorded to memory/capability-gaps.md",
+      "expectedGap": "Kubernetes audit capability gap"
+    },
+    "passFailCriteria": {
+      "PASS": "All discovery steps exhausted; no match found; gap logged to memory/capability-gaps.md; Type B creation queued or temporary fallback assigned",
+      "FAIL": "Gap silently ignored; meta-theory self-executes; no evolution writeback"
+    }
+  },
+  {
+    "id": "CD-10",
+    "name": "Multi-capability combination dispatch",
+    "input": "Implement a REST API endpoint with auth, validation, and logging",
+    "capabilityTypes": ["AGENT", "SKILL", "MCP_TOOL"],
+    "expectedDiscovery": {
+      "method": "single capability insufficient -> combine multiple",
+      "scoring": "agent (architecture) + skill (auth) + MCP tool (execution) + command (testing)",
+      "expectedCombination": {
+        "agent": "python-pro or fastapi-pro",
+        "skill": "auth patterns",
+        "mcpTool": "mcp__ide__executeCode",
+        "command": "npm run test"
+      }
+    },
+    "passFailCriteria": {
+      "PASS": "Multiple capabilities discovered and combined; each sub-task mapped to specific capability; parallel dispatch where appropriate",
+      "FAIL": "Single capability forced to handle all sub-tasks; capability mismatch"
+    }
+  },
+  {
+    "id": "CD-11",
+    "name": "Priority ordering: Agent > Skill > MCP > Command",
+    "input": "I need to secure the payment module",
+    "capabilityTypes": ["AGENT", "SKILL", "MCP_TOOL"],
+    "expectedDiscovery": {
+      "method": "capability match score determines priority",
+      "scoring": "3=perfect -> direct invoke; 1-2=partial -> invoke with gap note; 0=no match -> gap",
+      "expectedPriority": ["meta-sentinel (Agent)", "security-review (Skill)", "mcp security tools (MCP)"]
+    },
+    "passFailCriteria": {
+      "PASS": "Capabilities discovered in priority order; highest-scoring capability dispatched; lower-priority considered as backup",
+      "FAIL": "Lower-priority capability selected over higher-scoring one; priority ignored"
+    }
+  },
+  {
+    "id": "CD-12",
+    "name": "Skill ROI calculation and filtering",
+    "input": "Find me a testing skill — I need high coverage, frequent use",
+    "capabilityTypes": ["SKILL"],
+    "expectedDiscovery": {
+      "method": "ROI = (Task Coverage × Usage Frequency) / (Context Cost + Learning Curve)",
+      "scoring": "ROI >= 3: 5-star; ROI < 1: exclude",
+      "expectedSkills": ["python-testing (high ROI)"]
+    },
+    "passFailCriteria": {
+      "PASS": "ROI formula applied; python-testing selected (high coverage, high frequency, low cost); low-ROI skills excluded",
+      "FAIL": "ROI not calculated; lowest-cost skill selected regardless of coverage; high-ROI skill ignored"
+    }
+  },
+  {
+    "id": "CD-13",
+    "name": "Evolution writeback after capability gap",
+    "input": "We keep needing blockchain security — this is the 4th time this month",
+    "capabilityTypes": [],
+    "expectedDiscovery": {
+      "method": "recurring gap (>=3 occurrences) -> patternReuse writeback",
+      "scoring": "Evolution triggers Type B for recurring gap",
+      "expectedWriteback": {
+        "target": ".claude/agents/blockchain-developer.md",
+        "reason": "recurring gap >= 3 times"
+      }
+    },
+    "passFailCriteria": {
+      "PASS": "Evolution detects recurring pattern; Type B creation triggered; blockchain-developer agent created and registered",
+      "FAIL": "Gap repeatedly logged but never resolved; no Type B triggered"
+    }
+  },
+  {
+    "id": "CD-14",
+    "name": "Fetch-first vs hardcoded name detection",
+    "input": "Call meta-prism to review my code",
+    "capabilityTypes": ["AGENT"],
+    "expectedDiscovery": {
+      "method": "capability-first: search -> match -> invoke (meta-prism)",
+      "scoring": "3=perfect match, invoke directly",
+      "expectedAgents": ["meta-prism"]
+    },
+    "passFailCriteria": {
+      "PASS": "Fetch-first search executed; meta-prism matched by capability (not hardcoded); dispatch follows",
+      "FAIL": "Hardcoded name used without search; capability matching bypassed"
+    }
+  },
+  {
+    "id": "CD-15",
+    "name": "Partial match with gap note",
+    "input": "I need a data visualization agent — do we have one?",
+    "capabilityTypes": ["AGENT", "SKILL"],
+    "expectedDiscovery": {
+      "method": "score 1-2 = partial match with gap note",
+      "scoring": "partial match + explicit gap documentation",
+      "expectedAgents": ["generalPurpose (partial)"],
+      "expectedGaps": ["data visualization capability gap"]
+    },
+    "passFailCriteria": {
+      "PASS": "Partial match found (score 1-2); generalPurpose fallback used with gap note; capability gap documented",
+      "FAIL": "Perfect match claimed for imperfect capability; gap ignored; wrong agent selected"
+    }
+  }
+]

@@ -25,7 +25,7 @@ subagent_type: general-purpose
 
 ## Responsibility Boundary
 
-**Own**: Skill search, ROI Scoring, gap analysis, MCP matching, MCP server configuration governance (`.mcp.json` tool/resource registration), subagent type selection
+**Own**: Skill search, ROI Scoring, gap analysis, MCP matching, MCP server configuration governance (`.mcp.json` tool/resource registration), **Command/script discovery** (`package.json` scripts), subagent type selection
 **Do Not Touch**: SOUL.md design (->Genesis), Safety Hooks (->Sentinel), Memory strategy (->Librarian), Workflow (->Conductor), MCP tool permission auditing (->Sentinel)
 
 ## Decision Rules
@@ -45,9 +45,16 @@ subagent_type: general-purpose
 - ❌ BAD interpretation: "Build an about page" → this is a task, not a domain. If SOUL.md describes tasks instead of domains, flag it back to Genesis for redo
 
 1. **Identify Requirements** — Extract domain requirements (technologies, patterns, architectures) and work mode from SOUL.md. **Reject concrete tasks**: if the SOUL.md describes specific deliverables ("build X", "implement Y"), return it to Genesis with an abstraction failure flag
-2. **Coarse Filter** — Screen 10-15 candidate skills from the platform capability index
-3. **Refined Selection** — Select 5-9 skills via ROI Scoring (OC max 9, including 5 mandatory Meta-Skills)
-4. **Validate** — 3-scenario test (normal / edge / exception)
+2. **Capability Discovery** — Discover ALL capability types in priority order:
+   - **Agent**: Scan `.claude/agents/*.md` + MCP `list_meta_agents`
+   - **Skill**: Scan `.claude/skills/*/SKILL.md` + findskill
+   - **MCP Tool**: Parse `.mcp.json` + deferred tools
+   - **Command**: Parse `package.json` scripts
+   - **Memory**: Librarian sqlite-vec recall (if installed)
+   - **Knowledge Graph**: graphify auto-detect (if graph exists)
+3. **Coarse Filter** — Screen 10-15 candidate skills from the platform capability index
+4. **Refined Selection** — Select 5-9 skills via ROI Scoring (OC max 9, including 5 mandatory Meta-Skills)
+5. **Validate** — 3-scenario test (normal / edge / exception)
 
 ## ROI Scoring
 
@@ -99,17 +106,19 @@ Notify: Sentinel (security impact), Genesis (SOUL.md skill reference update)
 ## Core Functions
 
 - `matchSkillsToAgent(soulProfile, platform)` -> Skill/tool loadout for **one agent identity** (post-Genesis SOUL)
-- `loadPlatformCapabilities()` -> Current platform available skills and subagent type index
+- `loadPlatformCapabilities()` -> Current platform available skills, MCP tools, commands, and subagent type index
+- `discoverCommands()` -> Parse `package.json` scripts, return available npm commands with descriptions
 - `resolveAgentDependencies(teamId)` -> Team roster
 
 ## Thinking Framework
 
-4-step reasoning chain for skill matching:
+5-step reasoning chain for capability matching:
 
-1. **Requirement Extraction** — From SOUL.md's Core Work and Decision Rules, extract: What operations does this agent perform most frequently? What types of external capabilities does it need?
-2. **Candidate Filtering** — Initial screening with ROI formula: `ROI = (Task Coverage x Usage Frequency) / (Context Cost + Learning Curve)`. ROI < 1 is eliminated immediately
-3. **Conflict Detection** — Do candidate skills have functional overlap? If overlap > 50%, keep only the one with higher ROI
-4. **Gap Scan** — Are any core tasks "running naked" (no skill coverage at all)? If yes -> mark as Capability Gap -> notify Scout
+1. **Requirement Extraction** — From SOUL.md's Core Work and Decision Rules, extract: What operations does this agent perform most frequently? What types of capabilities does it need?
+2. **Multi-Type Discovery** — Discover ALL capability types: Agent → Skill → MCP Tool → Command → Memory → Knowledge Graph. Do NOT stop at skills — evaluate each type for fit
+3. **ROI Scoring** — For each candidate capability, apply ROI formula: `ROI = (Task Coverage x Usage Frequency) / (Context Cost + Learning Curve)`. ROI < 1 is eliminated immediately
+4. **Conflict Detection** — Do candidates have functional overlap? If overlap > 50%, keep only the one with higher ROI. Apply DRY: if a capability is already covered, do not recommend a duplicate
+5. **Gap Scan** — Are any core tasks "running naked" (no capability coverage at all)? If yes -> mark as Capability Gap -> notify Scout
 
 ## Anti-AI-Slop Detection Signals
 
@@ -157,8 +166,8 @@ Rule: the deliverables must answer "what is the best capability stack for this a
 
 | Criterion | Pass | Evidence |
 |-----------|------|----------|
-| Independent | Yes | Given a role, can output optimal skill combination |
-| Small Enough | Yes | Covers only 2/9 dimensions (skills + tools) |
+| Independent | Yes | Given a role, can output optimal capability combination (skill + MCP + command) |
+| Small Enough | Yes | Covers only 2/9 dimensions (skills + tools) + command discovery |
 | Clear Boundary | Yes | Does not touch persona/safety/memory/workflow |
 | Replaceable | Yes | Removal does not affect other meta agents |
-| Reusable | Yes | Needed every time an agent is created / skill audit is performed |
+| Reusable | Yes | Needed every time an agent is created / capability audit is performed |
