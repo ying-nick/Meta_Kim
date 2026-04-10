@@ -1958,7 +1958,7 @@ async function main() {
       `    ${C.dim}compaction: ${toRepoRelative(localState.compactionDir)}${C.reset}`,
     );
     console.log(
-      `    ${C.dim}dispatch envelope: contracts/workflow-contract.json -> protocols.dispatchEnvelopePacket${C.reset}`,
+      `    ${C.dim}dispatch envelope: config/contracts/workflow-contract.json -> protocols.dispatchEnvelopePacket${C.reset}`,
     );
     console.log(
       `    ${C.dim}migration helper: npm run migrate:meta-kim -- <source-dir> --apply${C.reset}\n`,

@@ -27,12 +27,12 @@
       "id": "superpowers",
       "repo": "obra/superpowers",
       "claudePlugin": "superpowers@claude-plugins-official",
-      "targets": ["claude"]
+      "targets": ["claude", "codex", "openclaw"]
     },
     {
       "id": "everything-claude-code",
       "repo": "affaan-m/everything-claude-code",
-      "targets": ["claude"]
+      "targets": ["claude", "codex", "openclaw"]
     },
     {
       "id": "planning-with-files",

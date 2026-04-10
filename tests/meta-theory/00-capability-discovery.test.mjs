@@ -27,13 +27,13 @@ const SCENARIOS_PATH = path.join(
 const CAPABILITY_TYPES = {
   AGENT: {
     name: "Agent",
-    sources: [".claude/agents/"],
+    sources: ["canonical/agents/"],
     discoveryMethods: ["Glob", "MCP list_meta_agents"],
     keyFilePattern: /\.md$/,
   },
   SKILL: {
     name: "Skill",
-    sources: [".claude/skills/", "~/.claude/skills/"],
+    sources: ["canonical/skills/", "~/.claude/skills/"],
     discoveryMethods: ["Glob", "findskill"],
     keyFilePattern: /SKILL\.md$/,
   },
@@ -68,13 +68,13 @@ const CAPABILITY_TYPES = {
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 describe("Part A: SKILL.md documents all capability types", async () => {
-  const skillContent = await readFile(".claude/skills/meta-theory/SKILL.md");
+  const skillContent = await readFile("canonical/skills/meta-theory/SKILL.md");
 
   test("Fetch stage covers Agent discovery", () => {
     const agentPatterns = [
       /Agent.*discovery/i,
       /list_meta_agents/i,
-      /\.claude\/agents/i,
+      /canonical\/agents/i,
       /meta-agent/i,
     ];
     const found = agentPatterns.some((p) => p.test(skillContent));
@@ -84,7 +84,8 @@ describe("Part A: SKILL.md documents all capability types", async () => {
   test("Fetch stage covers Skill discovery", () => {
     const skillPatterns = [
       /Skill.*discovery/i,
-      /\.claude\/skills/i,
+      /\bskill\b/i,
+      /canonical\/skills/i,
       /findskill/i,
       /ROI/i,
     ];
@@ -108,7 +109,7 @@ describe("Part A: SKILL.md documents all capability types", async () => {
 
   test("Command discovery is covered by meta-artisan or meta-theory", async () => {
     // Command discovery is Artisan's responsibility per the expanded scope
-    const artisanContent = await readFile(".claude/agents/meta-artisan.md");
+    const artisanContent = await readFile("canonical/agents/meta-artisan.md");
     const cmdPatterns = [
       /Command.*discover/i,
       /npm.*script/i,
@@ -315,18 +316,18 @@ describe("Part B: Runtime MCP Integration", async () => {
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 describe("Part C: Agent Discovery", async () => {
-  test("All 8 meta-agents have .md files in .claude/agents/", async () => {
+  test("All 8 meta-agents have .md files in canonical/agents/", async () => {
     for (const agent of ALL_AGENTS) {
       const agentPath = path.join(
         REPO_ROOT,
-        ".claude",
+        "canonical",
         "agents",
         `${agent}.md`,
       );
       try {
         await fs.access(agentPath);
       } catch {
-        assert.fail(`Agent file .claude/agents/${agent}.md must exist`);
+        assert.fail(`Agent file canonical/agents/${agent}.md must exist`);
       }
     }
   });
@@ -335,7 +336,7 @@ describe("Part C: Agent Discovery", async () => {
     for (const agent of ALL_AGENTS) {
       const agentPath = path.join(
         REPO_ROOT,
-        ".claude",
+        "canonical",
         "agents",
         `${agent}.md`,
       );
@@ -353,7 +354,7 @@ describe("Part C: Agent Discovery", async () => {
     }
   });
 
-  test("meta-runtime-server loads agents from .claude/agents/ directory", async () => {
+  test("meta-runtime-server loads agents from canonical/agents/ directory", async () => {
     const serverPath = path.join(
       REPO_ROOT,
       "scripts",
@@ -363,8 +364,9 @@ describe("Part C: Agent Discovery", async () => {
     const content = await fs.readFile(serverPath, "utf8");
 
     assert.ok(
-      content.includes(".claude/agents") || content.includes('"agents"'),
-      "meta-runtime-server.mjs must reference .claude/agents directory",
+      content.includes("canonicalAgentsDir") ||
+        content.includes("canonical/agents"),
+      "meta-runtime-server.mjs must reference canonical/agents directory",
     );
     assert.ok(
       content.includes("loadAgents") || content.includes("files"),
@@ -374,7 +376,7 @@ describe("Part C: Agent Discovery", async () => {
 
   test("SKILL.md documents capability-first (no hardcoded agent names)", () => {
     // The Fetch section should guide toward capability matching, not name matching
-    const skillContent = readFile(".claude/skills/meta-theory/SKILL.md");
+    const skillContent = readFile("canonical/skills/meta-theory/SKILL.md");
     // This is verified through dispatch tests; here we just confirm the principle exists
     return skillContent.then((content) => {
       const hasCapabilityMatching = /capability.*match/i.test(content);
@@ -392,10 +394,10 @@ describe("Part C: Agent Discovery", async () => {
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 describe("Part D: Skill Discovery", async () => {
-  test("meta-theory skill has SKILL.md in .claude/skills/meta-theory/", async () => {
+  test("meta-theory skill has SKILL.md in canonical/skills/meta-theory/", async () => {
     const skillPath = path.join(
       REPO_ROOT,
-      ".claude",
+      "canonical",
       "skills",
       "meta-theory",
       "SKILL.md",
@@ -405,7 +407,7 @@ describe("Part D: Skill Discovery", async () => {
 
   test("SKILL.md has valid frontmatter", async () => {
     const raw = await fs.readFile(
-      path.join(REPO_ROOT, ".claude", "skills", "meta-theory", "SKILL.md"),
+      path.join(REPO_ROOT, "canonical", "skills", "meta-theory", "SKILL.md"),
       "utf8",
     );
     // SKILL.md uses description: | multi-line scalar; parseFrontmatter may not capture it
@@ -423,18 +425,25 @@ describe("Part D: Skill Discovery", async () => {
   });
 
   test("SKILL.md documents 5-step discovery chain", async () => {
-    const skillContent = await readFile(".claude/skills/meta-theory/SKILL.md");
+    const skillContent = await readFile(
+      "canonical/skills/meta-theory/SKILL.md",
+    );
 
     const stepPatterns = [
-      [/local.*scan/i, /agents.*scan/i, /\.claude\/agents/i],
-      [/capability.*index/i, /global.*capabilities/i],
-      [/findskill/i, /external.*search/i],
+      [/search.*match.*invoke/i, /Fetch-first pattern/i, /canonical\/agents/i],
+      [
+        /capability.*index/i,
+        /global.*capabilities/i,
+        /global agent already covers the need/i,
+      ],
+      [/findskill/i, /external.*search/i, /external.*capability.*discovery/i],
       [
         /expert.*ecosystem/i,
         /everything-claude-code/i,
         /specialist.*fallback/i,
+        /meta-scout/i,
       ],
-      [/generic.*fallback/i, /general.*purpose/i],
+      [/generic.*fallback/i, /general.*purpose/i, /temporary fallback/i],
     ];
 
     const stepsFound = stepPatterns.filter((stepPatters) =>
@@ -448,7 +457,9 @@ describe("Part D: Skill Discovery", async () => {
   });
 
   test("SKILL.md documents ROI formula for skill selection", async () => {
-    const skillContent = await readFile(".claude/skills/meta-theory/SKILL.md");
+    const skillContent = await readFile(
+      "canonical/skills/meta-theory/SKILL.md",
+    );
     const roiPatterns = [
       /ROI/i,
       /Coverage.*Frequency.*Cost/i,
@@ -498,7 +509,9 @@ describe("Part E: MCP Tool Discovery", async () => {
   });
 
   test("SKILL.md mentions MCP integration for tool discovery", async () => {
-    const skillContent = await readFile(".claude/skills/meta-theory/SKILL.md");
+    const skillContent = await readFile(
+      "canonical/skills/meta-theory/SKILL.md",
+    );
     const mcpPatterns = [/MCP/i, /\.mcp\.json/i, /deferred.*tool/i];
     const found = mcpPatterns.some((p) => p.test(skillContent));
     assert.ok(
@@ -537,7 +550,9 @@ describe("Part F: Command Discovery", async () => {
   });
 
   test("SKILL.md mentions command/script discovery in Fetch stage", async () => {
-    const skillContent = await readFile(".claude/skills/meta-theory/SKILL.md");
+    const skillContent = await readFile(
+      "canonical/skills/meta-theory/SKILL.md",
+    );
     const cmdPatterns = [
       /Command.*discover/i,
       /npm.*run/i,
@@ -568,7 +583,7 @@ describe("Part G: Memory & Knowledge Graph", async () => {
       // memory/ might not exist yet; this is created by Evolution
       // Just verify the contract references it
       const skillContent = await readFile(
-        ".claude/skills/meta-theory/SKILL.md",
+        "canonical/skills/meta-theory/SKILL.md",
       );
       const mentionsMemory = /memory\//i.test(skillContent);
       assert.ok(
@@ -578,24 +593,28 @@ describe("Part G: Memory & Knowledge Graph", async () => {
     }
   });
 
-  test("contracts/evolution-contract.json references memory/ paths", async () => {
+  test("config/contracts/evolution-contract.json references memory/ paths", async () => {
     const evolutionContract = await readJson(
-      "contracts/evolution-contract.json",
+      "config/contracts/evolution-contract.json",
     );
     const contractStr = JSON.stringify(evolutionContract);
     const hasMemoryRefs =
       /memory\//.test(contractStr) ||
       /memory\//.test(
-        await readFile("contracts/evolution-contract.json").catch(() => ""),
+        await readFile("config/contracts/evolution-contract.json").catch(
+          () => "",
+        ),
       );
     assert.ok(
       hasMemoryRefs,
-      "contracts/evolution-contract.json must reference memory/ paths",
+      "config/contracts/evolution-contract.json must reference memory/ paths",
     );
   });
 
   test("graphify is referenced if available, or SKILL.md handles its absence", async () => {
-    const skillContent = await readFile(".claude/skills/meta-theory/SKILL.md");
+    const skillContent = await readFile(
+      "canonical/skills/meta-theory/SKILL.md",
+    );
     const graphifyMentioned = /graphify/i.test(skillContent);
 
     if (graphifyMentioned) {
@@ -617,7 +636,9 @@ describe("Part G: Memory & Knowledge Graph", async () => {
   });
 
   test("sqlite-vec memory integration is referenced or graceful fallback exists", async () => {
-    const skillContent = await readFile(".claude/skills/meta-theory/SKILL.md");
+    const skillContent = await readFile(
+      "canonical/skills/meta-theory/SKILL.md",
+    );
     const hasVecRef = /sqlite-vec/i.test(skillContent);
     const hasFallback = /fallback/i.test(skillContent);
 
@@ -729,7 +750,9 @@ describe("Part H: discover-global-capabilities Script", async () => {
 
 describe("Part I: Capability Gap Resolution", async () => {
   test("SKILL.md documents capability gap resolution ladder", async () => {
-    const skillContent = await readFile(".claude/skills/meta-theory/SKILL.md");
+    const skillContent = await readFile(
+      "canonical/skills/meta-theory/SKILL.md",
+    );
 
     const ladderSteps = [
       [/existing owner/i, /direct dispatch/i],
@@ -749,7 +772,7 @@ describe("Part I: Capability Gap Resolution", async () => {
 
   test("Evolution contract documents capability-gaps.md as writeback target", async () => {
     const evolutionContract = await readJson(
-      "contracts/evolution-contract.json",
+      "config/contracts/evolution-contract.json",
     );
     const contractStr = JSON.stringify(evolutionContract);
     assert.ok(
@@ -759,7 +782,9 @@ describe("Part I: Capability Gap Resolution", async () => {
   });
 
   test("Capability combination (multi-capability dispatch) is documented", async () => {
-    const skillContent = await readFile(".claude/skills/meta-theory/SKILL.md");
+    const skillContent = await readFile(
+      "canonical/skills/meta-theory/SKILL.md",
+    );
     const comboPatterns = [
       /capability.*combin/i,
       /combin.*agent.*skill/i,

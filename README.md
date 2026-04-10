@@ -21,7 +21,7 @@
 
 </div>
 
-<!-- Maintainer: suggested GitHub About (avoid implying “only a mirror stack”). Example: Governance layer for AI coding: meta agents, workflow contract, meta-theory; canonical in .claude/, with generated companion assets for Codex and OpenClaw. -->
+<!-- Maintainer: suggested GitHub About (avoid implying “only a mirror stack”). Example: Governance layer for AI coding: meta agents, workflow contract, meta-theory; canonical in canonical/, with generated runtime projections for Claude, Codex, and OpenClaw. -->
 
 ## At a Glance
 
@@ -32,7 +32,7 @@ Meta_Kim is a **governance layer for AI coding assistants**: one unified discipl
 - Every complex task goes through: clarify -> search -> execute -> review -> evolve
 - **Four iron rules**: Critical > Guessing, Fetch > Assuming, Thinking > Rushing, Review > Trusting
 - Discipline: one department, one primary deliverable, one closed handoff chain
-- The long-term source of truth mostly lives in `.claude/` and `contracts/workflow-contract.json`
+- The long-term source of truth mostly lives in `canonical/` and `config/contracts/workflow-contract.json`
 
 ## What This Project Is
 
@@ -85,9 +85,9 @@ The more precise statement is:
 
 The safest way to read this repository is not as “some prompts plus config files”, but as one governed system with layered responsibilities:
 
-- **theory sources**: `.claude/skills/meta-theory/` and its `references/` define the method itself
-- **organization sources**: `.claude/agents/*.md` define the 8 meta roles and their boundaries
-- **contract sources**: `contracts/workflow-contract.json` and related contracts define run discipline, gates, and deliverable closure
+- **theory sources**: `canonical/skills/meta-theory/` and its `references/` define the method itself
+- **organization sources**: `canonical/agents/*.md` define the 8 meta roles and their boundaries
+- **contract sources**: `config/contracts/workflow-contract.json` and related contracts define run discipline, gates, and deliverable closure
 - **runtime projections**: `.codex/`, `.agents/`, `openclaw/`, and `shared-skills/` are projections of the same system into different runtimes
 - **tooling and verification**: `scripts/`, `validate`, `eval:agents`, and `tests/meta-theory/` keep those projections aligned with the sources
 
@@ -101,7 +101,7 @@ The default runtime path is also architectural, not accidental:
 
 The maintenance rule follows directly from that design:
 
-**edit `.claude/` and `contracts/` first, then sync and validate the runtime mirrors.**
+**edit `canonical/` and `config/contracts/` first, then sync and validate the runtime mirrors.**
 
 Figures below sit **next to the concepts above**: sources, mirrors, and the default entry path. Per-stage detail, two-layer vocabulary, and task routing are under [Development Governance Spine](#complex-spine-en), [The 8-Stage Spine And The Business Workflow](#meta-kim-diagram-two-layers-en), and [Workflow Relation Map](#task-routing-en). [README.zh-CN.md](README.zh-CN.md) uses the same structure (Chinese node labels where applicable).
 
@@ -237,7 +237,7 @@ flowchart LR
 
 The practical takeaway is simple:
 
-- **If you are maintaining the project, start from `.claude/` and `contracts/workflow-contract.json`.**
+- **If you are maintaining the project, start from `canonical/` and `config/contracts/workflow-contract.json`.**
 - Most content under `.codex/`, `.agents/`, and `openclaw/` is generated or runtime-specific.
 - After editing canonical files, resync the runtime mirrors with the provided scripts.
 
@@ -251,11 +251,11 @@ Claude Code automatically reads `CLAUDE.md`, `.claude/agents/`, `.claude/skills/
 
 ##### meta-theory skill
 
-The **meta-theory** skill is the portable governance playbook ([`.claude/skills/meta-theory/SKILL.md`](.claude/skills/meta-theory/SKILL.md)). It is **user-invocable**: in Claude Code, type **`/meta-theory`** to load it. The skill separates **meta architecture** (agent boundaries, collaboration, governance) from **project technical architecture** (stack, modules, code layout), classifies the request into flows A–E, and routes work along the eight-stage spine (**Critical → Fetch → Thinking → Execution → Review → Meta-Review → Verification → Evolution**). It is a **dispatcher**, not a substitute for execution agents: substantive work goes to named agents, and **Gate 3 mandates that meta-theory must validate its dispatch decision with `meta-warden` before spawning any execution agents** — `meta-warden` is both the default public entry and the validator that enforces the dispatcher discipline.
+The **meta-theory** skill is the portable governance playbook ([`canonical/skills/meta-theory/SKILL.md`](canonical/skills/meta-theory/SKILL.md)). It is **user-invocable**: in Claude Code, type **`/meta-theory`** to load it. The skill separates **meta architecture** (agent boundaries, collaboration, governance) from **project technical architecture** (stack, modules, code layout), classifies the request into flows A–E, and routes work along the eight-stage spine (**Critical → Fetch → Thinking → Execution → Review → Meta-Review → Verification → Evolution**). It is a **dispatcher**, not a substitute for execution agents: substantive work goes to named agents, and **Gate 3 mandates that meta-theory must validate its dispatch decision with `meta-warden` before spawning any execution agents** — `meta-warden` is both the default public entry and the validator that enforces the dispatcher discipline.
 
 #### In Codex
 
-Codex reads `AGENTS.md`, `.codex/agents/`, `.agents/skills/`, and uses `codex/config.toml.example` as the MCP wiring example. Important: **Codex is a read / execute runtime, not the canonical editing runtime**. Edit `.claude/` first, then sync to Codex with `npm run sync:runtimes`.
+Codex reads `AGENTS.md`, `.codex/agents/`, `.agents/skills/`, and uses `codex/config.toml.example` as the MCP wiring example. Important: **Codex is a read / execute runtime, not the canonical editing runtime**. Edit `canonical/` first, then sync to Codex with `npm run sync:runtimes`.
 
 #### In OpenClaw
 
@@ -408,7 +408,7 @@ There are two layers of workflow language in the project:
 | Layer                                | Defined in                              | Purpose                                                                                 |
 | ------------------------------------ | --------------------------------------- | --------------------------------------------------------------------------------------- |
 | **8-stage spine**              | `meta-theory` / `dev-governance.md` | canonical execution chain for complex development work                                  |
-| **10-phase business workflow** | `contracts/workflow-contract.json`    | run-contract language, display language, and deliverable discipline for department runs |
+| **10-phase business workflow** | `config/contracts/workflow-contract.json`    | run-contract language, display language, and deliverable discipline for department runs |
 
 </div>
 
@@ -648,9 +648,9 @@ Typical outputs and storage locations are:
 | -------------------------- | ---------------------------------------------------------- | --------------------------------------------- |
 | Reusable patterns          | `memory/patterns/{pattern-name}.md`                      | preserve repeatable solutions                 |
 | Scars                      | `memory/scars/{scar-id}.yaml`                            | turn failures into future prevention rules    |
-| New skills                 | `.claude/skills/{skill-name}/SKILL.md`                   | convert learning into callable capability     |
-| Agent boundary adjustments | `.claude/agents/{agent}.md`                              | usually followed by `npm run sync:runtimes` |
-| Rhythm optimizations       | `contracts/workflow-contract.json` or Conductor defaults | improve the next dispatch cycle               |
+| New skills                 | `canonical/skills/{skill-name}/SKILL.md`                 | convert learning into callable capability     |
+| Agent boundary adjustments | `canonical/agents/{agent}.md`                            | usually followed by `npm run sync:runtimes` |
+| Rhythm optimizations       | `config/contracts/workflow-contract.json` or Conductor defaults | improve the next dispatch cycle               |
 | Capability gap records     | `memory/capability-gaps.md`                              | keep unresolved gaps visible to Scout         |
 
 </div>
@@ -834,12 +834,13 @@ My agents keep overlapping responsibilities. Fix the organizational structure.
 
 | Path | Description |
 | --- | --- |
-| `.claude/` | Canonical source: agents, skills, hooks, settings |
+| `canonical/` | Runtime-neutral source of agents, skills, and runtime assets |
+| `.claude/` | Claude projection: generated agents, skills, hooks, settings |
 | `.codex/` | Codex custom agent mirrors |
 | `.agents/` | Codex project-level skill mirror |
 | `codex/` | Codex global config example |
 | `openclaw/` | OpenClaw workspaces, skills, config templates |
-| `contracts/` | Runtime governance contracts |
+| `config/contracts/` | Runtime governance contracts |
 | `docs/` | Internal/private notes plus selected tracked runtime docs |
 | `scripts/` | Sync, validation, discovery, MCP, health scripts |
 | `shared-skills/` | Shared skill mirrors across runtimes |
@@ -857,10 +858,10 @@ My agents keep overlapping responsibilities. Fix the organizational structure.
 
 If you are maintaining Meta_Kim, start with these:
 
-- `.claude/agents/*.md`
-- `.claude/skills/meta-theory/SKILL.md`
-- `.claude/skills/meta-theory/references/*.md`
-- `contracts/workflow-contract.json`
+- `canonical/agents/*.md`
+- `canonical/skills/meta-theory/SKILL.md`
+- `canonical/skills/meta-theory/references/*.md`
+- `config/contracts/workflow-contract.json`
 - `README.md`
 - `README.zh-CN.md`
 - `README.ja-JP.md`
@@ -878,12 +879,10 @@ Unless you know exactly why, do not treat these as the long-term maintenance sou
 - `shared-skills/meta-theory.md`
 - `openclaw/skills/meta-theory.md`
 - `openclaw/workspaces/*`
-- `openclaw/openclaw.local.json`
 
 Those are normally maintained by:
 
 - `npm run sync:runtimes`
-- `npm run prepare:openclaw-local`
 
 ### Why There Is a `codex/` Folder
 
@@ -1006,7 +1005,8 @@ node setup.mjs
 | Usage                              | Description                                              |
 | ---------------------------------- | -------------------------------------------------------- |
 | `npx --yes github:KimYx0207/Meta_Kim meta-kim` | Same as `node setup.mjs`; skips manual `git clone` / `cd` |
-| `node setup.mjs`                   | Interactive setup (language → install / update / check)  |
+| `node setup.mjs`                   | Interactive setup (language → install / update / check; choose local active runtimes)  |
+| `node setup.mjs --targets claude,codex` | Non-interactive runtime activation selection | saves local `activeTargets` then syncs/install only for those runtimes |
 | `node setup.mjs --lang en`         | Skip language selection, English UI                      |
 | `node setup.mjs --lang zh-CN`      | Skip language selection, Chinese UI                      |
 | `node setup.mjs --lang ja-JP`      | Skip language selection, Japanese UI                     |
@@ -1045,7 +1045,7 @@ npm install
 npm run sync:runtimes
 ```
 
-This rebuilds the Codex, OpenClaw, and shared-skill projections from the canonical `.claude/` source.
+This rebuilds the Claude, Codex, OpenClaw, and shared-skill projections from the neutral `canonical/` source.
 
 If you only want to check whether they are already in sync, use:
 
@@ -1105,22 +1105,16 @@ npm run show:global:meta-theory-targets
 npm run sync:global:meta-theory
 ```
 
-This syncs the canonical `.claude/skills/meta-theory/` into your user-level runtime homes:
+This syncs the canonical `canonical/skills/meta-theory/` into your user-level runtime homes. By default it uses your local `activeTargets`; pass `--targets claude,codex` to override:
 
 - `~/.claude/skills/meta-theory`
 - `~/.openclaw/skills/meta-theory`
-- `~/.codex/skills/.disabled/meta-theory` (standby by default, not directly active)
+- `~/.codex/skills/meta-theory`
 
 If you only want to check for drift, use:
 
 ```bash
 npm run check:global:meta-theory
-```
-
-If you want the Codex global `meta-theory` skill active instead of parked under `.disabled/`, use:
-
-```bash
-npm run sync:global:meta-theory:codex-active
 ```
 
 If you need to override the resolved runtime homes explicitly, set:
@@ -1231,20 +1225,19 @@ The system routes each request through the matching governance stage.
 | Command                                  | When to use it                                   | What it does                                                          |
 | ---------------------------------------- | ------------------------------------------------ | --------------------------------------------------------------------- |
 | `npx --yes github:KimYx0207/Meta_Kim meta-kim` | **without cloning first**                  | same as `node setup.mjs` (`npx` fetches this repo)                    |
-| `node setup.mjs`                       | **first setup**                            | interactive wizard: language → install / update / check        |
+| `node setup.mjs`                       | **first setup**                            | interactive wizard: language → install / update / check + choose local active runtimes |
 | `node setup.mjs --update`              | when skills/deps need updating                   | update all skills + optional runtime sync                      |
 | `node setup.mjs --check`               | when you want an environment preflight          | env + dependency + cross-runtime sync verification             |
 | `npm install`                          | manual setup                                     | installs Node dependencies                                            |
 | `npm run sync:runtimes`                | after editing canonical source                   | rebuilds runtime mirrors                                              |
 | `npm run check:runtimes`               | when you only want a diff check                  | verifies mirrors are current without rewriting                        |
 | `npm run show:global:meta-theory-targets` | before touching user-level runtime homes       | prints the resolved global `meta-theory` sync targets and Claude hook paths |
-| `npm run sync:global:meta-theory`      | after changing canonical `meta-theory` or `.claude/hooks` | syncs global Claude/OpenClaw `meta-theory`, copies hooks to `~/.claude/hooks/meta-kim/`, merges hook entries into `~/.claude/settings.json`, parks Codex in standby |
+| `npm run sync:global:meta-theory`      | after changing canonical `meta-theory` or `canonical/runtime-assets/claude/hooks` | syncs user-level `meta-theory` for local `activeTargets`; when Claude is active, also copies hooks to `~/.claude/hooks/meta-kim/` and merges entries into `~/.claude/settings.json` |
 | `npm run sync:global:meta-theory -- --skip-global-hooks` | when you must not touch user `settings.json`/hooks | same as above but skips Claude global hooks merge |
 | `npm run check:global:meta-theory`     | when you want a read-only drift check            | verifies global `meta-theory` mirrors and Claude `hooks/meta-kim` copy without rewriting |
-| `npm run sync:global:meta-theory:codex-active` | when you want Codex global `meta-theory` active | writes the Codex global skill into the active path instead of `.disabled/` |
 | `npm run deps:install`                 | first Claude ecosystem setup                     | installs 9 global meta-skills                                         |
 | `npm run deps:update`                  | when skill dependencies need updating            | updates installed meta-skills                                         |
-| `npm run deps:install:all-runtimes`    | Windows or when you use Codex/OpenClaw globally too | clones the same 9 skill repos into `~/.claude/skills`, `~/.codex/skills`, `~/.openclaw/skills`; runs `claude plugin install superpowers@claude-plugins-official` if `claude` is on PATH |
+| `npm run deps:install:all-runtimes`    | when local `activeTargets` need the same skill set | clones the same 9 skill repos into the selected runtime homes; runs `claude plugin install superpowers@claude-plugins-official` when Claude is active and `claude` is on PATH |
 | `npm run deps:update:all-runtimes`     | refresh all three skill trees                    | same as above with `--update`                                         |
 | `npm run deps:install:claude-plugins`  | only official CC plugin bundles                | runs `claude plugin install …` only (no git clones)                  |
 | `npm run graphify:check`              | check graphify availability                     | verifies Python 3.10+ and graphify CLI                               |
@@ -1281,8 +1274,8 @@ The system routes each request through the matching governance stage.
 
 If you are changing agents, skills, README files, or runtime-facing config, the safest loop is:
 
-1. edit canonical `.claude/` sources or shared documentation
-2. if the change affects run discipline, gates, or deliverable policy, update `contracts/workflow-contract.json`
+1. edit canonical `canonical/` sources or shared documentation
+2. if the change affects run discipline, gates, or deliverable policy, update `config/contracts/workflow-contract.json`
 3. run `npm run sync:runtimes`
 4. if you changed canonical `meta-theory` and you maintain user-level runtime homes, run `npm run sync:global:meta-theory`
 5. run `npm run discover:global`
@@ -1315,7 +1308,7 @@ Use the local migration helper:
 npm run migrate:meta-kim -- ../old-agent-repo --apply
 ```
 
-It stages only persona / skill / contract-adjacent assets into `.meta-kim/state/{profile}/migrations/...` and explicitly blocks unverified run state, SQLite caches, logs, and artifacts. Review the generated `manifest.json` before moving anything into canonical `.claude/` or `contracts/`.
+It stages only persona / skill / contract-adjacent assets into `.meta-kim/state/{profile}/migrations/...` and explicitly blocks unverified run state, SQLite caches, logs, and artifacts. Review the generated `manifest.json` before moving anything into `canonical/` or `config/contracts/`.
 
 ### 4. If `eval:agents` says `skipped`, is the project broken?
 

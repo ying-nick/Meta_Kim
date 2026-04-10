@@ -154,7 +154,7 @@
     ],
     "memoryMode": "inherit_summary_only",
     "workspaceHint": "auth-refresh-hardening",
-    "resultSchemaRef": "contracts/workflow-contract.json#/protocols/workerResultPacket",
+    "resultSchemaRef": "config/contracts/workflow-contract.json#/protocols/workerResultPacket",
     "reviewOwner": "meta-prism",
     "verificationOwner": "meta-warden"
   },
@@ -299,7 +299,7 @@
     "decisionReason": "auth hardening pattern should be captured as a governance example",
     "writebacks": [
       {
-        "target": "contracts/workflow-contract.json",
+        "target": "config/contracts/workflow-contract.json",
         "reason": "run artifact closure expectations tightened"
       }
     ],

@@ -32,7 +32,7 @@
 - 복잡한 작업 흐름: 명확화 → 탐색 → 실행 → 검토 → 진화
 - **네 가지 철칙**: Critical > 추측, Fetch > 가정, Thinking > 성급함, Review > 맹신
 - 규율: 한 부서 · 하나의 주요 산출물 · 닫힌 인수인계 체인
-- 장기 진실 공급원은 주로 `.claude/`와 `contracts/workflow-contract.json`
+- 장기 진실 공급원은 주로 `canonical/`와 `config/contracts/workflow-contract.json`
 
 ## 시간이 지날수록 가벼워지는 이유
 
@@ -51,8 +51,8 @@
 이 저장소는 “프롬프트 묶음”이 아니라 **층을 이룬 거버넌스 시스템**으로 읽는 것이 안전합니다.
 
 - **이론 정본**: `.claude/skills/meta-theory/` 및 `references/`
-- **조직 정본**: `.claude/agents/*.md` (8역할·경계)
-- **계약 정본**: `contracts/workflow-contract.json`
+- **조직 정본**: `canonical/agents/*.md` (8역할·경계)
+- **계약 정본**: `config/contracts/workflow-contract.json`
 - **런타임 투영**: `.codex/`, `.agents/`, `openclaw/`, `shared-skills/`
 - **도구·검증**: `scripts/`, `validate`, `eval:agents`, `tests/meta-theory/`
 
@@ -62,7 +62,7 @@
 
 `사용자 의도 → meta-warden → Critical → Fetch → Thinking → 전문 실행 → Review → Verification → Evolution`
 
-**유지보수 원칙**: 먼저 `.claude/`와 `contracts/`를 고치고, 그다음 런타임 거울을 동기화·검증합니다.
+**유지보수 원칙**: 먼저 `canonical/`와 `config/contracts/`를 고치고, 그다음 런타임 거울을 동기화·검증합니다.
 
 그림은**개념 옆**에 둡니다(그림만 있는 장이 아님). 단계 상세·이중 어휘·분기 지도는 영어 정본 [README.md](README.md)의 [Development Governance Spine](README.md#complex-spine-en)·[The 8-Stage Spine And The Business Workflow](README.md#meta-kim-diagram-two-layers-en)·[Workflow Relation Map](README.md#task-routing-en)을 참고하세요. 노드 표기는 Mermaid 호환을 위해 영어로 둡니다.
 
@@ -153,10 +153,10 @@ flowchart LR
   SRC -->|workspace| OW["OpenClaw"]
 ```
 
-- 유지보수는 **`.claude/`와 `contracts/workflow-contract.json`에서 시작**
+- 유지보수는 **`canonical/`와 `config/contracts/workflow-contract.json`에서 시작**
 - `.codex/`, `openclaw/` 대부분은 생성물 또는 런타임 전용
 - 편집 후 `npm run sync:runtimes` 등으로 재동기화
-- **Claude Code**: 거버넌스 플레이북은 **`/meta-theory`**로 `meta-theory` 스킬을 불러 옵니다(정본 [`.claude/skills/meta-theory/SKILL.md`](.claude/skills/meta-theory/SKILL.md)). 기본 에이전트 정문은 `meta-warden`, 스킬은 디스패처 역할입니다. 자세한 내용은 영문 [README.md · In Claude Code](README.md#meta-theory-skill-en).
+- **Claude Code**: 거버넌스 플레이북은 **`/meta-theory`**로 `meta-theory` 스킬을 불러 옵니다(정본 [`canonical/skills/meta-theory/SKILL.md`](canonical/skills/meta-theory/SKILL.md)). 기본 에이전트 정문은 `meta-warden`, 스킬은 디스패처 역할입니다. 자세한 내용은 영문 [README.md · In Claude Code](README.md#meta-theory-skill-en).
 
 ### OpenClaw 예시
 
@@ -244,7 +244,7 @@ flowchart LR
 | 층 | 정의 위치 | 역할 |
 | --- | --- | --- |
 | **8단계 척추** | `meta-theory` / `dev-governance.md` | 복잡 개발 작업의 정본 실행 사슬 |
-| **비즈니스 10 페이즈** | `contracts/workflow-contract.json` | 부서 run 계약·표시·산출물 규율 |
+| **비즈니스 10 페이즈** | `config/contracts/workflow-contract.json` | 부서 run 계약·표시·산출물 규율 |
 
 </div>
 
@@ -456,7 +456,7 @@ npm run validate
 npm run migrate:meta-kim -- ../old-agent-repo --apply
 ```
 
-이 명령은 persona / skill / contract 인접 자산만 `.meta-kim/state/{profile}/migrations/...`에 staging하고, 검증되지 않은 run state·SQLite 캐시·로그·artifact는 막습니다. 정본 `.claude/`나 `contracts/`로 옮기기 전에 생성된 `manifest.json`을 먼저 검토하세요.
+이 명령은 persona / skill / contract 인접 자산만 `.meta-kim/state/{profile}/migrations/...`에 staging하고, 검증되지 않은 run state·SQLite 캐시·로그·artifact는 막습니다. 정본 `canonical/`나 `config/contracts/`로 옮기기 전에 생성된 `manifest.json`을 먼저 검토하세요.
 
 [graphify](https://github.com/safishamsi/graphify) (`pip install graphifyy`)를 사용하여 **대상 프로젝트**(Meta_Kim 자체가 아님)의 코드 지식 그래프를 생성합니다. 서브그래프 추출로 최대 **71배 토큰 압축**을 실현합니다.
 
@@ -491,7 +491,7 @@ npm run graphify:update
 | `.agents/` | Codex 프로젝트 skill 미러 |
 | `codex/` | Codex 글로벌 설정 예시 |
 | `openclaw/` | OpenClaw workspaces, skills, 템플릿 |
-| `contracts/` | 런타임 거버넌스 계약 |
+| `config/contracts/` | 런타임 거버넌스 계약 |
 | `docs/` | 내부 메모 등, 추적 runtime 문서 소량 |
 | `scripts/` | 동기화·검증·MCP·헬스 |
 | `shared-skills/` | 런타임 간 공유 skill 미러 |
@@ -505,7 +505,7 @@ npm run graphify:update
 
 </div>
 
-직접 편집은 주로 `.claude/`와 `contracts/`. `.codex/`, `openclaw/workspaces/*`는 보통 `sync:runtimes`로 생성됩니다.
+직접 편집은 주로 `canonical/`와 `config/contracts/`. `.codex/`, `openclaw/workspaces/*`는 보통 `sync:runtimes`로 생성됩니다.
 
 ## 라이선스
 
@@ -513,4 +513,4 @@ npm run graphify:update
 
 ---
 
-*이 문서는 커뮤니티용 한국어 안내입니다. 규율의 최종 해석은 영어 정본 및 `contracts/workflow-contract.json`을 따릅니다.*
+*이 문서는 커뮤니티용 한국어 안내입니다. 규율의 최종 해석은 영어 정본 및 `config/contracts/workflow-contract.json`을 따릅니다.*

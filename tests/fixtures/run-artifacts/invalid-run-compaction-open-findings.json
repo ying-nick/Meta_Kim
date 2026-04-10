@@ -103,7 +103,7 @@
     ],
     "memoryMode": "inherit_summary_only",
     "workspaceHint": "auth-refresh-hardening",
-    "resultSchemaRef": "contracts/workflow-contract.json#/protocols/workerResultPacket",
+    "resultSchemaRef": "config/contracts/workflow-contract.json#/protocols/workerResultPacket",
     "reviewOwner": "meta-prism",
     "verificationOwner": "meta-warden"
   },

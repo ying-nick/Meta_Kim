@@ -48,7 +48,10 @@ describe("SKILL.md structural integrity", async () => {
   describe("Frontmatter validity", () => {
     test("has valid YAML frontmatter with --- delimiters", () => {
       const hasDelimiters = /^---\r?\n[\s\S]*?\r?\n---/.test(raw);
-      assert.ok(hasDelimiters, "SKILL.md must start with --- delimited YAML frontmatter");
+      assert.ok(
+        hasDelimiters,
+        "SKILL.md must start with --- delimited YAML frontmatter",
+      );
     });
 
     test("frontmatter.name === 'meta-theory'", () => {
@@ -59,14 +62,14 @@ describe("SKILL.md structural integrity", async () => {
       assert.match(
         frontmatter.version,
         /^\d+\.\d+\.\d+$/,
-        `version "${frontmatter.version}" does not match semver X.Y.Z`
+        `version "${frontmatter.version}" does not match semver X.Y.Z`,
       );
     });
 
     test("author is non-empty", () => {
       assert.ok(
         frontmatter.author && frontmatter.author.length > 0,
-        "author field must be a non-empty string"
+        "author field must be a non-empty string",
       );
     });
 
@@ -74,21 +77,27 @@ describe("SKILL.md structural integrity", async () => {
       const trigger = frontmatter.trigger || "";
       const hasChinese = /[\u4e00-\u9fff]/.test(trigger);
       const hasEnglish = /[a-zA-Z]/.test(trigger);
-      assert.ok(hasChinese, "trigger must contain at least one Chinese trigger");
-      assert.ok(hasEnglish, "trigger must contain at least one English trigger");
+      assert.ok(
+        hasChinese,
+        "trigger must contain at least one Chinese trigger",
+      );
+      assert.ok(
+        hasEnglish,
+        "trigger must contain at least one English trigger",
+      );
     });
 
     test("tools list exists", () => {
       assert.ok(
         raw.match(/^tools:\s*\r?\n(\s+-\s+\w+\r?\n?)+/m),
-        "frontmatter must contain a tools list"
+        "frontmatter must contain a tools list",
       );
     });
 
     test("description field exists", () => {
       assert.ok(
         raw.match(/^description:\s*\|?\s*\r?\n/m),
-        "frontmatter must contain a description field"
+        "frontmatter must contain a description field",
       );
     });
   });
@@ -101,7 +110,7 @@ describe("SKILL.md structural integrity", async () => {
         const pattern = new RegExp(`^##\\s+Type\\s+${type}:`, "m");
         assert.ok(
           pattern.test(raw),
-          `SKILL.md must contain a '## Type ${type}:' heading`
+          `SKILL.md must contain a '## Type ${type}:' heading`,
         );
       });
     }
@@ -113,14 +122,14 @@ describe("SKILL.md structural integrity", async () => {
     test("Gate 1: Clarity Check is documented", () => {
       assert.ok(
         raw.includes("Gate 1") && raw.includes("Clarity Check"),
-        "SKILL.md must document Gate 1: Clarity Check"
+        "SKILL.md must document Gate 1: Clarity Check",
       );
     });
 
     test("Gate 2: Dispatch-Not-Execute is documented", () => {
       assert.ok(
         raw.includes("Gate 2") && raw.includes("Dispatch-Not-Execute"),
-        "SKILL.md must document Gate 2: Dispatch-Not-Execute"
+        "SKILL.md must document Gate 2: Dispatch-Not-Execute",
       );
     });
   });
@@ -133,7 +142,7 @@ describe("SKILL.md structural integrity", async () => {
       assert.deepEqual(
         missing,
         [],
-        `SKILL.md is missing references to: ${missing.join(", ")}`
+        `SKILL.md is missing references to: ${missing.join(", ")}`,
       );
     });
   });
@@ -144,7 +153,7 @@ describe("SKILL.md structural integrity", async () => {
     for (const file of REFERENCE_FILES) {
       test(`references/${file} exists`, async () => {
         const exists = await fileExists(
-          `.claude/skills/meta-theory/references/${file}`
+          `canonical/skills/meta-theory/references/${file}`,
         );
         assert.ok(exists, `Reference file references/${file} must exist`);
       });
@@ -155,24 +164,36 @@ describe("SKILL.md structural integrity", async () => {
 
   describe("Contract files", () => {
     test("workflow-contract.json exists and is valid JSON", async () => {
-      const exists = await fileExists("contracts/workflow-contract.json");
-      assert.ok(exists, "contracts/workflow-contract.json must exist");
-      const data = await readJson("contracts/workflow-contract.json");
-      assert.equal(typeof data, "object", "workflow-contract.json must parse to an object");
+      const exists = await fileExists(
+        "config/contracts/workflow-contract.json",
+      );
+      assert.ok(exists, "config/contracts/workflow-contract.json must exist");
+      const data = await readJson("config/contracts/workflow-contract.json");
+      assert.equal(
+        typeof data,
+        "object",
+        "workflow-contract.json must parse to an object",
+      );
       assert.ok(data !== null, "workflow-contract.json must not be null");
     });
 
     test("evolution-contract.json exists and is valid JSON", async () => {
-      const exists = await fileExists("contracts/evolution-contract.json");
-      assert.ok(exists, "contracts/evolution-contract.json must exist");
-      const data = await readJson("contracts/evolution-contract.json");
-      assert.equal(typeof data, "object", "evolution-contract.json must parse to an object");
+      const exists = await fileExists(
+        "config/contracts/evolution-contract.json",
+      );
+      assert.ok(exists, "config/contracts/evolution-contract.json must exist");
+      const data = await readJson("config/contracts/evolution-contract.json");
+      assert.equal(
+        typeof data,
+        "object",
+        "evolution-contract.json must parse to an object",
+      );
       assert.ok(data !== null, "evolution-contract.json must not be null");
     });
 
     test("scar-protocol.md exists", async () => {
-      const exists = await fileExists("contracts/scar-protocol.md");
-      assert.ok(exists, "contracts/scar-protocol.md must exist");
+      const exists = await fileExists("config/contracts/scar-protocol.md");
+      assert.ok(exists, "config/contracts/scar-protocol.md must exist");
     });
   });
 });

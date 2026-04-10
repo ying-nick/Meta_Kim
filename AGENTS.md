@@ -8,7 +8,7 @@ If you only remember three things:
 
 - Meta_Kim is one cross-runtime governance system, not three separate projects.
 - `meta-warden` is the default public front door.
-- Long-term edits belong in `.claude/` and `contracts/workflow-contract.json`; Codex-facing files are mostly mirrors or runtime adapters.
+- Long-term edits belong in `canonical/` and `config/contracts/workflow-contract.json`; Codex-facing files are mostly projections or runtime adapters.
 
 ## Read This Repository Correctly
 
@@ -43,8 +43,8 @@ When this repository is opened in Codex:
 
 Important maintenance rule:
 
-- `.claude/agents/*.md` and `.claude/skills/meta-theory/SKILL.md` are the canonical sources
-- `contracts/workflow-contract.json` is the canonical run-discipline and gate contract
+- `canonical/agents/*.md` and `canonical/skills/meta-theory/SKILL.md` are the canonical sources
+- `config/contracts/workflow-contract.json` is the canonical run-discipline and gate contract
 - `.codex/agents/*` and `.agents/skills/*` are derived runtime assets unless explicitly stated otherwise
 
 ## Capability-First Rule
@@ -126,7 +126,7 @@ The execution backbone is the 8-stage spine:
 Critical -> Fetch -> Thinking -> Execution -> Review -> Meta-Review -> Verification -> Evolution
 ```
 
-The department-run contract is defined separately in `contracts/workflow-contract.json`:
+The department-run contract is defined separately in `config/contracts/workflow-contract.json`:
 
 ```text
 direction -> planning -> execution -> review -> meta_review -> revision -> verify -> summary -> feedback -> evolve
@@ -215,13 +215,19 @@ You:
 
 Preferred long-term edit targets:
 
-- `.claude/agents/*.md`
-- `.claude/skills/meta-theory/SKILL.md`
-- `.claude/skills/meta-theory/references/*.md`
-- `contracts/workflow-contract.json`
+- `canonical/agents/*.md`
+- `canonical/skills/meta-theory/SKILL.md`
+- `canonical/skills/meta-theory/references/*.md`
+- `canonical/runtime-assets/*`
+- `config/contracts/workflow-contract.json`
 
 Files that should usually be treated as mirrors or adapters:
 
+- `.claude/agents/*.md`
+- `.claude/skills/meta-theory/`
+- `.claude/hooks/`
+- `.claude/settings.json`
+- `.mcp.json`
 - `.codex/agents/*.toml`
 - `.agents/skills/meta-theory/`
 - `.claude/capability-index/meta-kim-capabilities.json`
@@ -247,6 +253,13 @@ After changing canonical files:
 11. run `npm run verify:all` before release or after larger changes
 12. run `npm run verify:all:live` only before runtime-sensitive releases that need the live acceptance layer
 13. read `docs/runtime-capability-matrix.md` whenever you touch trigger, card, silence, shell, review, verification, stop, or writeback behavior across runtimes
+
+Runtime target selection now has two layers:
+
+- `config/sync.json` declares repo-level `supportedTargets` and `defaultTargets`
+- `.meta-kim/local.overrides.json` stores machine-level `activeTargets`
+- `setup.mjs`, `sync:global:meta-theory`, and `deps:install:all-runtimes` act on `activeTargets`
+- `sync:runtimes` acts on repo `supportedTargets` unless `--targets` overrides it
 
 Useful supporting commands:
 

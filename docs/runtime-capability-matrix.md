@@ -121,7 +121,7 @@ npm run discover:global -- --json
 
 README 只能解释口径，不能承担一致性本身。真正防漂移要靠：
 
-- canonical source 固定为 `.claude/agents/*.md`、`.claude/skills/meta-theory/SKILL.md`、`contracts/workflow-contract.json`
+- canonical source 固定为 `canonical/agents/*.md`、`canonical/skills/meta-theory/SKILL.md`、`config/contracts/workflow-contract.json`
 - `npm run sync:runtimes` 生成 Codex / OpenClaw mirrors
 - `npm run validate` 检查 mirror 是否与 canonical 一致
 - `npm run eval:agents` 做轻量 runtime smoke

@@ -1,13 +1,13 @@
 # Meta_Kim for Claude Code
 
-Claude Code is the canonical editing runtime for Meta_Kim.
+Claude Code is one runtime projection of Meta_Kim, not the canonical source layer.
 
 ## Human Summary
 
 If you only remember three things:
 
 - `meta-warden` is the default public front door.
-- `.claude/agents/*.md`, `.claude/skills/meta-theory/SKILL.md`, and `contracts/workflow-contract.json` are the long-term source of truth.
+- `canonical/agents/*.md`, `canonical/skills/meta-theory/SKILL.md`, and `config/contracts/workflow-contract.json` are the long-term source of truth.
 - After editing canonical files, resync and validate before trusting the result.
 
 ## Third-party meta-skills (canonical install)
@@ -22,7 +22,7 @@ Meta_Kim is not Claude-only logic.
 
 It is:
 
-**one intent-amplification system projected into Claude Code, Codex, and OpenClaw, with Claude Code as the canonical editing home.**
+**one intent-amplification system projected into Claude Code, Codex, and OpenClaw, with `canonical/` as the neutral source layer.**
 
 ## What “Meta” Means
 
@@ -40,15 +40,22 @@ A valid meta unit must:
 
 ## Claude Code’s Role In The Project
 
-Claude Code is where the main editable sources live:
+Claude Code is a first-class projection with repo-local runtime assets:
 
 - `.claude/agents/*.md`
 - `.claude/skills/meta-theory/SKILL.md`
-- `contracts/workflow-contract.json`
+- `config/contracts/workflow-contract.json`
 - `.claude/settings.json`
 - `.mcp.json`
 
-Those files define the canonical agent prompts, skill behavior, project hooks, permissions, and MCP entry. Other runtime assets are derived from them.
+The neutral canonical sources live in:
+
+- `canonical/agents/*.md`
+- `canonical/skills/meta-theory/SKILL.md`
+- `canonical/skills/meta-theory/references/*.md`
+- `canonical/runtime-assets/claude/*`
+
+The Claude files above are generated runtime assets. Other runtime assets are derived alongside them.
 
 ## Capability-First Rule
 
@@ -120,7 +127,7 @@ The execution backbone is the 8-stage spine:
 Critical -> Fetch -> Thinking -> Execution -> Review -> Meta-Review -> Verification -> Evolution
 ```
 
-The department-run contract is defined separately in `contracts/workflow-contract.json`:
+The department-run contract is defined separately in `config/contracts/workflow-contract.json`:
 
 ```text
 direction -> planning -> execution -> review -> meta_review -> revision -> verify -> summary -> feedback -> evolve
@@ -218,13 +225,19 @@ These cover:
 
 Preferred long-term edit targets:
 
-- `.claude/agents/*.md`
-- `.claude/skills/meta-theory/SKILL.md`
-- `.claude/skills/meta-theory/references/*.md`
-- `contracts/workflow-contract.json`
+- `canonical/agents/*.md`
+- `canonical/skills/meta-theory/SKILL.md`
+- `canonical/skills/meta-theory/references/*.md`
+- `canonical/runtime-assets/*`
+- `config/contracts/workflow-contract.json`
 
 Files that should usually remain derived or runtime-specific:
 
+- `.claude/agents/*.md`
+- `.claude/skills/meta-theory/`
+- `.claude/hooks/`
+- `.claude/settings.json`
+- `.mcp.json`
 - `.codex/agents/*.toml`
 - `.agents/skills/meta-theory/`
 - `.codex/skills/meta-theory.md` and `.codex/skills/references/*`
@@ -232,7 +245,7 @@ Files that should usually remain derived or runtime-specific:
 - `openclaw/skills/meta-theory.md` and `openclaw/skills/references/*`
 - `openclaw/workspaces/*`
 
-`npm run sync:runtimes` writes the **same** portable `meta-theory` skill (main file + `references/`) into `shared-skills/`, `openclaw/skills/`, `.codex/skills/`, and `.agents/skills/meta-theory/`. If those trees disagree, re-run sync from `.claude/skills/meta-theory/` — do not hand-edit mirrors as a second source of truth.
+`npm run sync:runtimes` writes the **same** portable `meta-theory` skill (main file + `references/`) into `.claude/`, `shared-skills/`, `openclaw/skills/`, `.codex/skills/`, and `.agents/skills/meta-theory/`. If those trees disagree, re-run sync from `canonical/skills/meta-theory/` — do not hand-edit projections as a second source of truth.
 
 ### meta-theory reference language
 
@@ -327,7 +340,7 @@ For human readers:
 
 ## One-Line Summary
 
-Claude Code is not a separate product logic here. It is the canonical authoring runtime for the Meta_Kim governance system.
+Claude Code is not a separate product logic here. It is one runtime projection of the Meta_Kim governance system.
 
 ## graphify
 

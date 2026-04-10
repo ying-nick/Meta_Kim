@@ -32,7 +32,7 @@
 - 複雑タスクの流れ: 明確化 → 探索 → 実行 → レビュー → 進化
 - **四つの鉄則**: Critical > 推測、Fetch > 思い込み、Thinking > 突っ走り、Review > 盲信
 - 規律: 一部署・一主たる成果物・閉じた引き渡しチェーン
-- 長期のソース・オブ・トゥルースは主に `.claude/` と `contracts/workflow-contract.json`
+- 長期のソース・オブ・トゥルースは主に `canonical/` と `config/contracts/workflow-contract.json`
 
 ## 時間が経つほど軽くなる理由
 
@@ -51,8 +51,8 @@
 このリポジトリは「プロンプトの束」ではなく、層になった統治システムとして読むのが安全です。
 
 - **理論主源**: `.claude/skills/meta-theory/` と `references/`
-- **組織主源**: `.claude/agents/*.md`（8 役割と境界）
-- **契約主源**: `contracts/workflow-contract.json`（ゲートと成果物の閉じ方）
+- **組織主源**: `canonical/agents/*.md`（8 役割と境界）
+- **契約主源**: `config/contracts/workflow-contract.json`（ゲートと成果物の閉じ方）
 - **ランタイム投影**: `.codex/`、`.agents/`、`openclaw/`、`shared-skills/`
 - **ツールと検証**: `scripts/`、`validate`、`eval:agents`、`tests/meta-theory/`
 
@@ -62,7 +62,7 @@
 
 `ユーザー意図 → meta-warden → Critical → Fetch → Thinking → 専門実行 → Review → Verification → Evolution`
 
-**メンテの原則**: まず `.claude/` と `contracts/` を編集し、その後ランタイム鏡像を同期・検証する。
+**メンテの原則**: まず `canonical/` と `config/contracts/` を編集し、その後ランタイム鏡像を同期・検証する。
 
 図は**概念の横**に置きます（独立した「図だけの章」ではありません）。段階の詳細・二層の語彙・分岐の地図は英語正典 [README.md](README.md) の [Development Governance Spine](README.md#complex-spine-en)・[The 8-Stage Spine And The Business Workflow](README.md#meta-kim-diagram-two-layers-en)・[Workflow Relation Map](README.md#task-routing-en) を参照。ノード表記は Mermaid 互換のため英語のままです。
 
@@ -153,10 +153,10 @@ flowchart LR
   SRC -->|workspace| OW["OpenClaw"]
 ```
 
-- メンテは **`.claude/` と `contracts/workflow-contract.json` から**
+- メンテは **`canonical/` と `config/contracts/workflow-contract.json` から**
 - `.codex/`、`openclaw/` の多くは生成物またはランタイム用
 - 編集後は `npm run sync:runtimes` 等で再同期
-- **Claude Code**: ガバナンスの手引きは **`/meta-theory`** で `meta-theory` スキルを読み込む（正典 [`.claude/skills/meta-theory/SKILL.md`](.claude/skills/meta-theory/SKILL.md)）。エージェントのデフォルト前门は `meta-warden`、スキルはディスパッチャ。詳細は英語 [README.md § In Claude Code](README.md#meta-theory-skill-en)。
+- **Claude Code**: ガバナンスの手引きは **`/meta-theory`** で `meta-theory` スキルを読み込む（正典 [`canonical/skills/meta-theory/SKILL.md`](canonical/skills/meta-theory/SKILL.md)）。エージェントのデフォルト前门は `meta-warden`、スキルはディスパッチャ。詳細は英語 [README.md § In Claude Code](README.md#meta-theory-skill-en)。
 
 ### OpenClaw の例
 
@@ -244,7 +244,7 @@ flowchart LR
 | 層 | 定義の所在 | 役割 |
 | --- | --- | --- |
 | **八段階スパイン** | `meta-theory` / `dev-governance.md` | 複雑開発タスクの正典実行鎖 |
-| **業務 10 フェーズ** | `contracts/workflow-contract.json` | 部門 run の契約語彙・表示・成果物規律 |
+| **業務 10 フェーズ** | `config/contracts/workflow-contract.json` | 部門 run の契約語彙・表示・成果物規律 |
 
 </div>
 
@@ -454,7 +454,7 @@ npm run validate
 npm run migrate:meta-kim -- ../old-agent-repo --apply
 ```
 
-このコマンドは persona / skill / contract 周辺資産だけを `.meta-kim/state/{profile}/migrations/...` に staging し、未検証 run state・SQLite キャッシュ・ログ・artifact は拒否します。正典 `.claude/` や `contracts/` に移す前に、生成された `manifest.json` を確認してください。
+このコマンドは persona / skill / contract 周辺資産だけを `.meta-kim/state/{profile}/migrations/...` に staging し、未検証 run state・SQLite キャッシュ・ログ・artifact は拒否します。正典 `canonical/` や `config/contracts/` に移す前に、生成された `manifest.json` を確認してください。
 
 ## コードナレッジグラフ（graphify）
 
@@ -491,7 +491,7 @@ npm run graphify:update
 | `.agents/` | Codex プロジェクト skill ミラー |
 | `codex/` | Codex グローバル設定の例 |
 | `openclaw/` | OpenClaw workspaces、skills、テンプレート |
-| `contracts/` | ランタイム治理契約 |
+| `config/contracts/` | ランタイム治理契約 |
 | `docs/` | 内部メモ等、追跡済み runtime ドキュメント少量 |
 | `scripts/` | 同期・検証・MCP・ヘルス |
 | `shared-skills/` | ランタイム横断の skill ミラー |
@@ -505,7 +505,7 @@ npm run graphify:update
 
 </div>
 
-手で編集するのは主に `.claude/` と `contracts/`。`.codex/` や `openclaw/workspaces/*` は通常 `sync:runtimes` で生成。
+手で編集するのは主に `canonical/` と `config/contracts/`。`.codex/` や `openclaw/workspaces/*` は通常 `sync:runtimes` で生成。
 
 ## ライセンス
 
@@ -513,4 +513,4 @@ npm run graphify:update
 
 ---
 
-*本ドキュメントはコミュニティ向けの日本語ガイドです。規律の最終解釈は英語正典および `contracts/workflow-contract.json` に従います。*
+*本ドキュメントはコミュニティ向けの日本語ガイドです。規律の最終解釈は英語正典および `config/contracts/workflow-contract.json` に従います。*

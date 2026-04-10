@@ -4,6 +4,22 @@ All notable changes to Meta_Kim are documented here.
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 When you tag a release, add a new **`## [version] - YYYY-MM-DD`** section at the top (above older entries) and list changes there.
 
+## [1.4.0] - 2026-04-10
+
+### Added
+
+- Runtime-neutral canonical source layer under `canonical/`, plus repo-tracked sync manifest (`config/sync.json`) and three runtime profiles for Claude, Codex, and OpenClaw.
+- Local activation configuration via `.meta-kim/local.overrides.json`, with explicit separation between repo `supportedTargets` / `defaultTargets` and machine-level `activeTargets`.
+- `--targets` support across `setup.mjs`, `sync:runtimes`, `sync:global:meta-theory`, and `deps:install:all-runtimes`, so local activation can be multi-selected without shrinking the repo support surface.
+
+### Changed
+
+- `.claude/` is no longer treated as the canonical source layer; Claude, Codex, and OpenClaw are now peer runtime projections generated from `canonical/`.
+- `setup.mjs` now saves machine-local active runtime selection and uses it for local activation, while repo projection sync still follows repo-supported targets.
+- Validation, MCP runtime loading, migration staging, and meta-theory tests now read canonical agents / skill sources from `canonical/` instead of assuming `.claude/` is the source of truth.
+- `validate` now guards the canonical kernel and runtime-asset templates only; projection freshness stays in `check:runtimes`, so repo correctness no longer depends on generated mirrors or repo-local OpenClaw config.
+- OpenClaw evaluation now uses an ephemeral config outside the tracked repo surface, and the legacy `openclaw/openclaw.local.json` plus `sync:global:meta-theory:codex-active` path have been removed from the public project model.
+
 ## [1.3.0] - 2026-04-10
 
 ### Added
@@ -52,12 +68,12 @@ When you tag a release, add a new **`## [version] - YYYY-MM-DD`** section at the
 
 ### Changed
 
-- Extend `contracts/workflow-contract.json` again to formalize card governance: `cardPlanPacket`, `cardDecision`, `deliveryShell`, `silenceDecision`, `controlDecision`, `summaryPacket`, explicit dealer ownership, and run-artifact validation policy.
+- Extend `config/contracts/workflow-contract.json` again to formalize card governance: `cardPlanPacket`, `cardDecision`, `deliveryShell`, `silenceDecision`, `controlDecision`, `summaryPacket`, explicit dealer ownership, and run-artifact validation policy.
 - Add `scripts/validate-run-artifact.mjs` plus run-artifact fixtures/tests so Meta_Kim now validates real packet chains instead of only schema presence.
 - Sync `README.md`, `README.zh-CN.md`, `CLAUDE.md`, and `AGENTS.md` to the new card/dealer/silence/summary/run-validator model; these doc changes now map to concrete contract and script additions instead of standalone wording.
 - Align `package.json` with the latest released changelog version and stop public-facing docs from treating private/untracked `docs/meta.md` and `docs/repo-map.md` as required public entry points.
 - Clarify in both README files that `docs/` is internal-only and remove any public requirement to read `docs/runtime-capability-matrix.md`.
-- Harden `contracts/workflow-contract.json` from documentation-only governance toward runtime-checkable governance: add `taskClassification`, finding-level closure rules, explicit `writebackDecision`, and hard public-display gate semantics.
+- Harden `config/contracts/workflow-contract.json` from documentation-only governance toward runtime-checkable governance: add `taskClassification`, finding-level closure rules, explicit `writebackDecision`, and hard public-display gate semantics.
 - Extend `scripts/validate-project.mjs` and `tests/meta-theory/07-contract-compliance.test.mjs` to enforce the new task-classification, finding-closure, evolution-decision, and runtime-parity requirements.
 - Expand `docs/runtime-capability-matrix.md` with a behavior parity matrix covering trigger parity, hook parity, review parity, verification parity, stop condition parity, and writeback parity.
 - Sync `README.md`, `README.zh-CN.md`, `CLAUDE.md`, and `AGENTS.md` to the hardened governance model so the public docs match the canonical runtime contract.
@@ -90,7 +106,7 @@ When you tag a release, add a new **`## [version] - YYYY-MM-DD`** section at the
 - Restore the two root README files to a more complete project-facing shape instead of the earlier over-compressed onboarding rewrite.
 - Re-center the Chinese README on the `元` concept, preserving the original branding, concept explanation, contact block, support links, payment QR codes, and Mermaid diagrams.
 - Bring `README.md`, `README.zh-CN.md`, `AGENTS.md`, and `CLAUDE.md` back into alignment with the current project design rather than leaving them as lighter onboarding-only summaries.
-- Make the canonical governance sources explicit in documentation: `.claude/` plus `contracts/workflow-contract.json`.
+- Make the canonical governance sources explicit in documentation: `canonical/` plus `config/contracts/workflow-contract.json`.
 
 ### Added
 
@@ -112,7 +128,7 @@ When you tag a release, add a new **`## [version] - YYYY-MM-DD`** section at the
 - Rename private `meta/` directory to `docs/` and update all path references across 15+ files.
 - Sync `README.md`, `README.zh-CN.md`, `CLAUDE.md`, and `AGENTS.md` to the current project state.
 - Remove stale `factory/` references from public documentation.
-- Add `contracts/` to the repository trees documented in the README files.
+- Add `config/contracts/` to the repository trees documented in the README files.
 - Fix duplicate step numbering in `README.zh-CN.md`.
 - Remove hardcoded global capability counts from `CLAUDE.md`.
 - Add `.claude/capability-index/` to `.gitignore`.

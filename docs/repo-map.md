@@ -76,12 +76,12 @@
 | 路径 | 作用 |
 | --- | --- |
 | `.claude/skills/meta-theory/SKILL.md` | Meta_Kim 的可移植 skill 主源 |
-| `contracts/governance/create-agent.md` | 创建 agent 的方法参考 |
-| `contracts/governance/dev-governance.md` | 开发治理参考 |
-| `contracts/governance/intent-amplification.md` | 意图放大理论参考 |
-| `contracts/governance/meta-theory.md` | 元理论参考摘录 |
-| `contracts/governance/rhythm-orchestration.md` | 节奏编排参考 |
-| `contracts/governance/ten-step-governance.md` | 十步治理参考 |
+| `canonical/skills/meta-theory/references/create-agent.md` | 创建 agent 的方法参考 |
+| `canonical/skills/meta-theory/references/dev-governance.md` | 开发治理参考 |
+| `canonical/skills/meta-theory/references/intent-amplification.md` | 意图放大理论参考 |
+| `canonical/skills/meta-theory/references/meta-theory.md` | 元理论参考摘录 |
+| `canonical/skills/meta-theory/references/rhythm-orchestration.md` | 节奏编排参考 |
+| `canonical/skills/meta-theory/references/ten-step-governance.md` | 十步治理参考 |
 
 ## 三、`.codex/` 与 `codex/`
 

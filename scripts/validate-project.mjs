@@ -37,7 +37,7 @@ const canonicalOpenClawTemplatePath = path.join(
   "openclaw.template.json",
 );
 
-/** Must match contracts/workflow-contract.json runDiscipline.publicDisplayRequires (set equality). */
+/** Must match config/contracts/workflow-contract.json runDiscipline.publicDisplayRequires (set equality). */
 const EXPECTED_PUBLIC_DISPLAY_REQUIRES = [
   "verifyPassed",
   "summaryClosed",
