@@ -1183,16 +1183,12 @@ ${C.dim}${t.installOverviewEstimated}${C.reset}${t.installOverviewTime}
 
 /** Execute with progress indicator */
 async function withProgress(label, fn) {
+  console.log("");
   process.stdout.write(`${C.dim}→${C.reset} ${label}...`);
-  const startTime = Date.now();
 
   try {
-    const result = await fn();
-    const elapsed = Date.now() - startTime;
-    const timeStr =
-      elapsed > 1000 ? `${(elapsed / 1000).toFixed(1)}s` : `${elapsed}ms`;
-    console.log(` ${C.green}✓${C.reset} ${C.dim}(${timeStr})${C.reset}`);
-    return result;
+    await fn();
+    return true;
   } catch (err) {
     console.log(` ${C.red}✗${C.reset}`);
     throw err;
@@ -1900,16 +1896,14 @@ function showNextSteps(runtimes) {
 
   if (runtimes.claude) {
     console.log(`${C.dim}1.${C.reset} ${t.step1Open}`);
-    console.log(`   ${C.dim}cd "${PROJECT_DIR}" && claude${C.reset}`);
+    console.log(`${C.dim}cd "${PROJECT_DIR}" && claude${C.reset}`);
     console.log("");
     console.log(`${C.dim}2.${C.reset} ${t.step2Try}`);
-    console.log(
-      `   ${C.dim}/meta-theory review my agent definitions${C.reset}`,
-    );
+    console.log(`${C.dim}/meta-theory review my agent definitions${C.reset}`);
     console.log("");
     console.log(`${C.dim}3.${C.reset} ${t.step3Or}`);
-    console.log(`   ${C.dim}Build a user authentication system${C.reset}`);
-    console.log(`   ${C.dim}${t.step3Hint}${C.reset}`);
+    console.log(`${C.dim}Build a user authentication system${C.reset}`);
+    console.log(`${C.dim}${t.step3Hint}${C.reset}`);
     console.log("");
   }
 
@@ -1941,16 +1935,16 @@ function showNextSteps(runtimes) {
   console.log(`${C.bold}${t.usefulCommands}${C.reset}
 `);
   console.log(
-    `  ${C.dim}node setup.mjs --update          # ${t.cmdUpdate}${C.reset}`,
+    `${C.dim}node setup.mjs --update          # ${t.cmdUpdate}${C.reset}`,
   );
   console.log(
-    `  ${C.dim}node setup.mjs --check           # ${t.cmdCheck}${C.reset}`,
+    `${C.dim}node setup.mjs --check           # ${t.cmdCheck}${C.reset}`,
   );
   console.log(
-    `  ${C.dim}npm run doctor:governance         # ${t.cmdDoctor}${C.reset}`,
+    `${C.dim}npm run doctor:governance         # ${t.cmdDoctor}${C.reset}`,
   );
   console.log(
-    `  ${C.dim}npm run verify:all                # ${t.cmdVerify}${C.reset}`,
+    `${C.dim}npm run verify:all                # ${t.cmdVerify}${C.reset}`,
   );
   console.log("");
 }
@@ -2204,7 +2198,6 @@ async function main() {
 // ── Action runners ──────────────────────────────────────
 
 async function runInstall() {
-  const installStartTime = Date.now();
   const runtimes = await detectRuntimes();
   const activeTargets = await selectActiveTargets(runtimes);
 
@@ -2287,20 +2280,18 @@ async function runInstall() {
   }
 
   // [Optional] Python tools (graphify)
-  console.log("");
   stepNum++;
-  const wantPython = await askYesNo(t.askPythonToolsUpdate, true);
-  if (wantPython) {
-    await withProgress(
-      `Step ${stepNum}: Install Python graphify tool`,
-      async () => {
+  await withProgress(
+    `Step ${stepNum}: Install Python graphify tool`,
+    async () => {
+      const wantPython = await askYesNo(t.askPythonToolsUpdate, true);
+      if (wantPython) {
         await installPythonTools();
-      },
-    );
-  } else {
-    skip(`${C.dim}${t.pythonToolsSkipped}${C.reset}`);
-    stepNum--; // don't count skipped steps
-  }
+      } else {
+        skip(`${C.dim}${t.pythonToolsSkipped}${C.reset}`);
+      }
+    },
+  );
 
   // 验证：project-only 和 both 检查 repo-local；global-only 跳过 repo-local 检查
   stepNum++;
@@ -2312,16 +2303,7 @@ async function runInstall() {
     await validate();
   });
 
-  const totalMs = Date.now() - installStartTime;
-  const timeStr =
-    totalMs > 60000
-      ? `${(totalMs / 60000).toFixed(1)}min`
-      : totalMs > 1000
-        ? `${(totalMs / 1000).toFixed(1)}s`
-        : `${totalMs}ms`;
-  console.log(
-    `\n${C.bold}${C.green}✓ ${t.installComplete}（${timeStr}）${C.reset}\n`,
-  );
+  console.log(`\n${C.bold}${C.green}✓ ${t.installComplete}${C.reset}\n`);
   showNextSteps(runtimes);
 }
 
