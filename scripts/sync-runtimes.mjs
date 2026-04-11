@@ -659,9 +659,44 @@ async function syncClaudeProjection(
     fs.readFile(canonicalClaudeMcpPath, "utf8"),
   ]);
 
+  // For repo-local settings: convert relative hook commands to absolute paths so they
+  // work regardless of the current working directory (e.g. when Claude Code is
+  // invoked from a subdirectory like docs/).
+  let finalSettingsContent = settingsContent;
+  // Detect repo-local settings: path contains repoRoot (project dir) but not ~/.claude/hooks
+  const inRepoRoot = claudeSettingsProjectionPath.includes(repoRoot);
+  if (inRepoRoot) {
+    const settings = JSON.parse(settingsContent);
+    const relHookRe = /^node \.claude\/hooks\/(.+)\.mjs$/;
+    for (const hookType of Object.keys(settings.hooks ?? {})) {
+      for (const block of settings.hooks[hookType] ?? []) {
+        for (const h of block.hooks ?? []) {
+          if (h.type === "command" && relHookRe.test(h.command)) {
+            const hookName = h.command.match(relHookRe)[1];
+            const absPath =
+              repoRoot.replace(/\//g, path.sep) +
+              path.sep +
+              ".claude" +
+              path.sep +
+              "hooks" +
+              path.sep +
+              hookName +
+              ".mjs";
+            h.command = `node "${absPath}"`;
+          }
+        }
+      }
+    }
+    finalSettingsContent = `${JSON.stringify(settings, null, 2)}\n`;
+  }
+
   if (
-    (await writeGeneratedFile(claudeSettingsProjectionPath, settingsContent))
-      .changed
+    (
+      await writeGeneratedFile(
+        claudeSettingsProjectionPath,
+        finalSettingsContent,
+      )
+    ).changed
   ) {
     changedFiles.push(displayPaths.claudeSettings);
   }
