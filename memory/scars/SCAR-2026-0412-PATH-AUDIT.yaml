@@ -1,0 +1,32 @@
+scar:
+  id: SCAR-2026-0412-PATH-AUDIT
+  type: governance-audit
+  triggered_by: "Meta_Kim path audit 2026-04-12 — 8-stage spine governance"
+  what_happened: >
+    All Meta_Kim core paths audited end-to-end.
+    All scripts and npm commands validated.
+  root_cause: >
+    Systematic path verification confirmed all critical paths operational.
+  impact: none
+  prevention_rule: >
+    All npm commands and scripts must remain green.
+    Run verify:all before any push.
+  detected_by: automated path audit
+  severity: info
+  status: closed
+  test_results:
+    validate: PASS
+    doctor:governance: PASS
+    eval:agents: PASS
+    test:meta-theory: "362/362"
+    check: PASS
+    discover:global: PASS
+    verify:all: "362/362"
+    test:mcp: "8 agents, 3 tools"
+    check:global:meta-theory: "5 targets"
+    probe:clis: PASS
+    sync:runtimes: "up to date"
+    run-index: "rebuild OK"
+    setup:mjs: "4 runtimes"
+    validate:run-artifact: "valid=pass, invalid=reject"
+    doctor:governance: "all checks pass"
