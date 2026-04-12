@@ -6,43 +6,13 @@
 import { test, describe } from "node:test";
 import assert from "node:assert";
 import * as path from "node:path";
-
-// Canonical hook list (must match canonical/runtime-assets/claude/hooks/)
-const CANONICAL_HOOKS = [
-  "block-dangerous-bash.mjs",
-  "pre-git-push-confirm.mjs",
-  "post-format.mjs",
-  "post-typecheck.mjs",
-  "post-console-log-warn.mjs",
-  "subagent-context.mjs",
-  "stop-console-log-audit.mjs",
-  "stop-completion-guard.mjs",
-];
-
-// OpenClaw workspace required .md files
-const OPENCLAW_WORKSPACE_MD = [
-  "BOOT.md",
-  "BOOTSTRAP.md",
-  "IDENTITY.md",
-  "SOUL.md",
-  "TOOLS.md",
-  "AGENTS.md",
-  "MEMORY.md",
-  "HEARTBEAT.md",
-  "USER.md",
-];
-
-// Meta agents list
-const META_AGENTS = [
-  "meta-warden",
-  "meta-conductor",
-  "meta-genesis",
-  "meta-artisan",
-  "meta-sentinel",
-  "meta-librarian",
-  "meta-prism",
-  "meta-scout",
-];
+import {
+  CLAUDE_HOOK_FILES as CANONICAL_HOOKS,
+  META_AGENTS,
+  OPENCLAW_WORKSPACE_MD,
+  expectedAgentProjectionFiles,
+  summarizeExpectedFiles,
+} from "../../scripts/runtime-sync-check.mjs";
 
 // ── Hook validation ───────────────────────────────────────────
 
@@ -110,6 +80,41 @@ describe("validateHooks()", () => {
     const result = validateHooks("/home/user/.claude/hooks/meta-kim", allFiles);
     assert.strictEqual(result.allPresent, false);
     assert.strictEqual(result.present.length, 0);
+  });
+});
+
+describe("summarizeExpectedFiles()", () => {
+  test("counts exact Meta_Kim agents even when extra files exist", () => {
+    const summary = summarizeExpectedFiles(
+      [
+        ...expectedAgentProjectionFiles(".md"),
+        "frontend.md",
+        "backend.md",
+        "debugger.md",
+      ],
+      expectedAgentProjectionFiles(".md"),
+    );
+
+    assert.strictEqual(summary.presentCount, META_AGENTS.length);
+    assert.deepStrictEqual(summary.missing, []);
+    assert.ok(summary.extra.includes("frontend.md"));
+  });
+
+  test("reports missing expected Meta_Kim agents instead of raw directory size", () => {
+    const summary = summarizeExpectedFiles(
+      [
+        ...expectedAgentProjectionFiles(".md").filter(
+          (name) => name !== "meta-warden.md",
+        ),
+        "frontend.md",
+        "backend.md",
+        "debugger.md",
+      ],
+      expectedAgentProjectionFiles(".md"),
+    );
+
+    assert.strictEqual(summary.presentCount, META_AGENTS.length - 1);
+    assert.deepStrictEqual(summary.missing, ["meta-warden.md"]);
   });
 });
 

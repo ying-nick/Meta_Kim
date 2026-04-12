@@ -29,9 +29,9 @@
     "prompt:next-iteration": "node scripts/prompt-next-iteration.mjs",
     "probe:clis": "node scripts/eval-meta-agents.mjs --probe-clis-only",
     "test:meta-theory": "node --test tests/meta-theory/*.test.mjs",
-    "graphify:check": "node -e \"const{execSync}=require('child_process');try{const v=execSync('python --version',{encoding:'utf8',shell:true});console.log(v.trim())}catch{try{const v=execSync('python3 --version',{encoding:'utf8',shell:true});console.log(v.trim())}catch{console.log('Python not found')}}try{const g=execSync('graphify --version',{encoding:'utf8',shell:true});console.log('graphify',g.trim())}catch{console.log('graphify not installed')}\"",
-    "graphify:install": "node -e \"const{execSync}=require('child_process');const pip=process.platform==='win32'?'pip':'pip3';execSync(pip+' install graphifyy',{stdio:'inherit',shell:true});execSync('graphify claude install',{stdio:'inherit',shell:true})\"",
-    "graphify:update": "graphify --update",
+    "graphify:check": "node scripts/graphify-cli.mjs check",
+    "graphify:install": "node scripts/graphify-cli.mjs install",
+    "graphify:update": "node scripts/graphify-cli.mjs update",
     "validate": "node scripts/validate-project.mjs",
     "check": "npm run check:runtimes && npm run validate",
     "verify:all": "npm run check && npm run check:global:meta-theory && node scripts/eval-meta-agents.mjs --require-all-runtimes && npm run test:meta-theory",
@@ -50,7 +50,7 @@
     "meta-kim": "./bin/meta-kim.mjs"
   },
   "engines": {
-    "node": ">=18"
+    "node": ">=22.13.0"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.27.1",

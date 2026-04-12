@@ -28,11 +28,30 @@ import {
   toRepoRelative,
 } from "./scripts/meta-kim-local-state.mjs";
 import {
+  detectPython310,
+  extractPipShowVersion,
+  readProcessText,
+  runPythonModule,
+} from "./scripts/graphify-runtime.mjs";
+import { resolveManifestSkillSubdir } from "./scripts/install-platform-config.mjs";
+import { buildNodeScriptSpawn } from "./scripts/node-spawn-config.mjs";
+import {
+  CLAUDE_HOOK_FILES,
+  META_AGENTS,
+  OPENCLAW_WORKSPACE_MD,
+  expectedAgentProjectionFiles,
+  summarizeExpectedFiles,
+} from "./scripts/runtime-sync-check.mjs";
+import {
   loadLocalOverrides,
   normalizeTargets,
   resolveTargetContext,
   writeLocalOverrides,
 } from "./scripts/meta-kim-sync-config.mjs";
+import {
+  MIN_NODE_VERSION,
+  isSupportedNodeVersion,
+} from "./scripts/node-runtime-requirements.mjs";
 
 // ── Config ──────────────────────────────────────────────
 
@@ -67,26 +86,20 @@ function loadSkillsManifest() {
     const skillOwner =
       process.env.META_KIM_SKILL_OWNER || manifest.skillOwner || "KimYx0207";
 
-    const findskillPackSubdir = platform() === "win32" ? "windows" : "original";
-
     // Transform manifest to legacy format for compatibility
     return {
       skillOwner,
       externalUrls: manifest.externalUrls || {},
       skills: manifest.skills.map((skill) => {
         const repo = skill.repo.replace("${skillOwner}", skillOwner);
-
-        // Handle subdir with platform mapping
-        let subdir = skill.subdir;
-        if (skill.subdirTemplate === "{platform}" && skill.subdirMapping) {
-          subdir =
-            skill.subdirMapping[platform()] || skill.subdirMapping.default;
-        }
+        const subdir = resolveManifestSkillSubdir(skill, platform(), {
+          fallbackToFindskillPack: true,
+        });
 
         return {
           name: skill.id,
           repo,
-          subdir: subdir || findskillPackSubdir,
+          subdir,
           claudePlugin: skill.claudePlugin,
           targets: skill.targets || ["claude", "codex", "openclaw"],
         };
@@ -125,7 +138,7 @@ const I18N = {
     modeInteractive: "interactive",
     /** Shared gate before menu / CLI modes — headings below are titles only, no "step 1/N" */
     preflightHeading: "Environment check",
-    nodeOld: (v) => `Node.js v${v} too old, need >=18`,
+    nodeOld: (v) => `Node.js v${v} too old, need >=${MIN_NODE_VERSION}`,
     nodeOk: (v) => `Node.js v${v}`,
     npmNotFound: "npm not found",
     gitNotFound: "git not found — skills install requires git",
@@ -337,7 +350,7 @@ const I18N = {
     modeSilent: "静默",
     modeInteractive: "交互式",
     preflightHeading: "环境检查",
-    nodeOld: (v) => `Node.js v${v} 版本过低，需要 >=18`,
+    nodeOld: (v) => `Node.js v${v} 版本过低，需要 >=${MIN_NODE_VERSION}`,
     nodeOk: (v) => `Node.js v${v}`,
     npmNotFound: "npm 未找到",
     gitNotFound: "git 未找到 — 安装技能需要 git",
@@ -539,7 +552,7 @@ const I18N = {
     modeSilent: "サイレント",
     modeInteractive: "インタラクティブ",
     preflightHeading: "環境チェック",
-    nodeOld: (v) => `Node.js v${v} は古すぎます。>=18 が必要です`,
+    nodeOld: (v) => `Node.js v${v} は古すぎます。>=${MIN_NODE_VERSION} が必要です`,
     nodeOk: (v) => `Node.js v${v}`,
     npmNotFound: "npm が見つかりません",
     gitNotFound: "git が見つかりません — スキルのインストールに必要です",
@@ -763,7 +776,7 @@ const I18N = {
     modeSilent: "자동",
     modeInteractive: "대화형",
     preflightHeading: "환경 확인",
-    nodeOld: (v) => `Node.js v${v} 버전이 너무 낮습니다. >=18 필요`,
+    nodeOld: (v) => `Node.js v${v} 버전이 너무 낮습니다. >=${MIN_NODE_VERSION} 필요`,
     nodeOk: (v) => `Node.js v${v}`,
     npmNotFound: "npm을 찾을 수 없습니다",
     gitNotFound: "git을 찾을 수 없습니다 — 스킬 설치에 필요합니다",
@@ -1336,53 +1349,8 @@ function checkDependencies() {
 
 // ── Cross-runtime sync verification ─────────────────────
 
-const META_AGENTS = [
-  "meta-artisan",
-  "meta-conductor",
-  "meta-genesis",
-  "meta-librarian",
-  "meta-prism",
-  "meta-scout",
-  "meta-sentinel",
-  "meta-warden",
-];
-/** Same nine as scripts/validate-project.mjs (not "everything in readdir") */
-const OPENCLAW_WORKSPACE_MD = [
-  "BOOT.md",
-  "BOOTSTRAP.md",
-  "IDENTITY.md",
-  "MEMORY.md",
-  "USER.md",
-  "SOUL.md",
-  "AGENTS.md",
-  "HEARTBEAT.md",
-  "TOOLS.md",
-];
-
 function openclawWorkspaceMdComplete(wsPath) {
   return OPENCLAW_WORKSPACE_MD.every((name) => existsSync(join(wsPath, name)));
-}
-
-function resolveRuntimeHome(runtimeId) {
-  const envKeys = {
-    claude: ["META_KIM_CLAUDE_HOME", "CLAUDE_HOME"],
-    codex: ["META_KIM_CODEX_HOME", "CODEX_HOME"],
-    openclaw: ["META_KIM_OPENCLAW_HOME", "OPENCLAW_HOME"],
-    cursor: ["META_KIM_CURSOR_HOME", "CURSOR_HOME"],
-  };
-  const keys = envKeys[runtimeId] || [runtimeId.toUpperCase() + "_HOME"];
-  for (const key of keys) {
-    const v = process.env[key];
-    if (v) return resolve(v);
-  }
-  return join(
-    homedir(),
-    runtimeId === "codex"
-      ? ".codex"
-      : runtimeId === "openclaw"
-        ? ".openclaw"
-        : "." + runtimeId,
-  );
 }
 
 function checkSync(
@@ -1392,23 +1360,23 @@ function checkSync(
   heading(t.syncHeading);
   let allOk = true;
 
-  // Use global runtime home dirs for path resolution (same as sync-runtimes.mjs)
-  const claudeHome = resolveRuntimeHome("claude");
-  const codexHome = resolveRuntimeHome("codex");
-  const openclawHome = resolveRuntimeHome("openclaw");
-  const cursorHome = resolveRuntimeHome("cursor");
-
   // --- Claude Code ---
   if (repoTargets.includes("claude")) {
-    const claudeAgentsDir = join(claudeHome, "agents");
+    const claudeAgentsDir = join(PROJECT_DIR, ".claude", "agents");
     if (existsSync(claudeAgentsDir)) {
-      const agents = readdirSync(claudeAgentsDir).filter((f) =>
-        f.endsWith(".md"),
+      const summary = summarizeExpectedFiles(
+        readdirSync(claudeAgentsDir).filter((f) => f.endsWith(".md")),
+        expectedAgentProjectionFiles(".md"),
       );
-      if (agents.length === META_AGENTS.length)
-        ok(t.syncClaudeAgents(agents.length));
+      if (summary.missing.length === 0) ok(t.syncClaudeAgents(summary.presentCount));
       else {
-        warn(t.syncPartial("Claude agents", agents.length, META_AGENTS.length));
+        warn(
+          t.syncPartial(
+            "Claude agents",
+            `${summary.presentCount}/${META_AGENTS.length}`,
+            `missing: ${summary.missing.join(", ")}`,
+          ),
+        );
         allOk = false;
       }
     } else {
@@ -1417,7 +1385,8 @@ function checkSync(
     }
 
     const claudeSkillPath = join(
-      claudeHome,
+      PROJECT_DIR,
+      ".claude",
       "skills",
       "meta-theory",
       "SKILL.md",
@@ -1429,38 +1398,29 @@ function checkSync(
     }
 
     // Canonical hooks: exact 8 files synced by sync-global-meta-theory.mjs
-    const canonicalHooks = [
-      "block-dangerous-bash.mjs",
-      "pre-git-push-confirm.mjs",
-      "post-format.mjs",
-      "post-typecheck.mjs",
-      "post-console-log-warn.mjs",
-      "subagent-context.mjs",
-      "stop-console-log-audit.mjs",
-      "stop-completion-guard.mjs",
-    ];
-    const hooksDir = join(claudeHome, "hooks", "meta-kim");
-    const missingHooks = canonicalHooks.filter(
+    const hooksDir = join(PROJECT_DIR, ".claude", "hooks");
+    const missingHooks = CLAUDE_HOOK_FILES.filter(
       (h) => !existsSync(join(hooksDir, h)),
     );
     if (missingHooks.length === 0) {
-      ok(t.syncClaudeHooks(canonicalHooks.length));
+      ok(t.syncClaudeHooks(CLAUDE_HOOK_FILES.length));
     } else {
       warn(
         t.syncMissing(
-          `.claude/hooks/meta-kim/ — missing: ${missingHooks.join(", ")}`,
+          `.claude/hooks/ — missing: ${missingHooks.join(", ")}`,
         ),
       );
       allOk = false;
     }
 
-    if (existsSync(join(claudeHome, "settings.json"))) ok(t.syncClaudeSettings);
+    if (existsSync(join(PROJECT_DIR, ".claude", "settings.json")))
+      ok(t.syncClaudeSettings);
     else {
       warn(t.syncMissing(".claude/settings.json"));
       allOk = false;
     }
 
-    if (existsSync(join(claudeHome, ".mcp.json"))) ok(t.syncClaudeMcp);
+    if (existsSync(join(PROJECT_DIR, ".mcp.json"))) ok(t.syncClaudeMcp);
     else {
       warn(t.syncMissing(".mcp.json"));
       allOk = false;
@@ -1470,15 +1430,21 @@ function checkSync(
   // --- Codex ---
   if (repoTargets.includes("codex")) {
     console.log("");
-    const codexAgentsDir = join(codexHome, "agents");
+    const codexAgentsDir = join(PROJECT_DIR, ".codex", "agents");
     if (existsSync(codexAgentsDir)) {
-      const agents = readdirSync(codexAgentsDir).filter((f) =>
-        f.endsWith(".toml"),
+      const summary = summarizeExpectedFiles(
+        readdirSync(codexAgentsDir).filter((f) => f.endsWith(".toml")),
+        expectedAgentProjectionFiles(".toml"),
       );
-      if (agents.length === META_AGENTS.length)
-        ok(t.syncCodexAgents(agents.length));
+      if (summary.missing.length === 0) ok(t.syncCodexAgents(summary.presentCount));
       else {
-        warn(t.syncPartial("Codex agents", agents.length, META_AGENTS.length));
+        warn(
+          t.syncPartial(
+            "Codex agents",
+            `${summary.presentCount}/${META_AGENTS.length}`,
+            `missing: ${summary.missing.join(", ")}`,
+          ),
+        );
         allOk = false;
       }
     } else {
@@ -1486,7 +1452,13 @@ function checkSync(
       allOk = false;
     }
 
-    const codexSkillPath = join(codexHome, "skills", "meta-theory", "SKILL.md");
+    const codexSkillPath = join(
+      PROJECT_DIR,
+      ".agents",
+      "skills",
+      "meta-theory",
+      "SKILL.md",
+    );
     if (existsSync(codexSkillPath)) ok(t.syncCodexSkills);
     else {
       fail(t.syncMissing(".codex/skills/meta-theory/SKILL.md"));
@@ -1497,14 +1469,16 @@ function checkSync(
   // --- OpenClaw ---
   if (repoTargets.includes("openclaw")) {
     console.log("");
-    // OpenClaw workspaces: scan openclawHome for workspace-* directories
-    // (not a "workspaces/" subdirectory — actual layout is ~/.openclaw/workspace-{id}/)
-    const wsDirs = readdirSync(openclawHome, { withFileTypes: true })
-      .filter((d) => d.isDirectory() && d.name.startsWith("workspace-"))
-      .map((d) => d.name.replace(/^workspace-/, ""));
-    const wsCount = wsDirs.filter((n) => META_AGENTS.includes(n)).length;
+    const workspacesRoot = join(PROJECT_DIR, "openclaw", "workspaces");
+    const wsDirs = existsSync(workspacesRoot)
+      ? readdirSync(workspacesRoot, { withFileTypes: true })
+          .filter((d) => d.isDirectory())
+          .map((d) => d.name)
+      : [];
+    const wsSummary = summarizeExpectedFiles(wsDirs, META_AGENTS);
+    const wsCount = wsSummary.presentCount;
     const completeAgents = META_AGENTS.filter((id) =>
-      openclawWorkspaceMdComplete(join(openclawHome, `workspace-${id}`)),
+      openclawWorkspaceMdComplete(join(workspacesRoot, id)),
     ).length;
     if (
       wsCount === META_AGENTS.length &&
@@ -1516,7 +1490,9 @@ function checkSync(
         t.syncPartial(
           "OpenClaw workspaces",
           `${completeAgents}/${META_AGENTS.length} agents with 9 core .md`,
-          `${META_AGENTS.length} agents, 9 .md each (BOOT … TOOLS)`,
+          wsSummary.missing.length > 0
+            ? `missing: ${wsSummary.missing.join(", ")}`
+            : `${META_AGENTS.length} agents, 9 .md each (BOOT … TOOLS)`,
         ),
       );
       allOk = false;
@@ -1525,7 +1501,7 @@ function checkSync(
 
   // --- Shared ---
   if (repoTargets.includes("openclaw")) {
-    const sharedSkill = join(openclawHome, "shared-skills", "meta-theory.md");
+    const sharedSkill = join(PROJECT_DIR, "shared-skills", "meta-theory.md");
     if (existsSync(sharedSkill)) ok(t.syncSharedSkills);
     else {
       warn(t.syncMissing("shared-skills/meta-theory.md"));
@@ -1536,24 +1512,31 @@ function checkSync(
   // --- Cursor ---
   if (repoTargets.includes("cursor")) {
     console.log("");
-    const cursorAgentsDir = join(cursorHome, "agents");
+    const cursorAgentsDir = join(PROJECT_DIR, ".cursor", "agents");
     if (existsSync(cursorAgentsDir)) {
-      const agents = readdirSync(cursorAgentsDir).filter((f) =>
-        f.endsWith(".md"),
+      const summary = summarizeExpectedFiles(
+        readdirSync(cursorAgentsDir).filter((f) => f.endsWith(".md")),
+        expectedAgentProjectionFiles(".md"),
       );
-      if (agents.length === META_AGENTS.length)
-        ok(t.syncCursorAgents(agents.length));
+      if (summary.missing.length === 0) ok(t.syncCursorAgents(summary.presentCount));
       else {
-        warn(t.syncPartial("Cursor agents", agents.length, META_AGENTS.length));
+        warn(
+          t.syncPartial(
+            "Cursor agents",
+            `${summary.presentCount}/${META_AGENTS.length}`,
+            `missing: ${summary.missing.join(", ")}`,
+          ),
+        );
         allOk = false;
       }
     } else {
-      // Cursor may not support global agents directory
-      warn(t.syncMissing(".cursor/agents/ (may not be supported globally)"));
+      fail(t.syncMissing(".cursor/agents/"));
+      allOk = false;
     }
 
     const cursorSkillPath = join(
-      cursorHome,
+      PROJECT_DIR,
+      ".cursor",
       "skills",
       "meta-theory",
       "SKILL.md",
@@ -1564,7 +1547,7 @@ function checkSync(
       allOk = false;
     }
 
-    const cursorMcp = join(cursorHome, "mcp.json");
+    const cursorMcp = join(PROJECT_DIR, ".cursor", "mcp.json");
     if (existsSync(cursorMcp)) ok(t.syncCursorMcp);
     else {
       warn(t.syncMissing(".cursor/mcp.json"));
@@ -1584,8 +1567,7 @@ function preflight() {
   let passed = true;
 
   const nodeVer = process.versions.node;
-  const major = parseInt(nodeVer.split(".")[0], 10);
-  if (major >= 18) ok(t.nodeOk(nodeVer));
+  if (isSupportedNodeVersion(nodeVer)) ok(t.nodeOk(nodeVer));
   else {
     fail(t.nodeOld(nodeVer));
     passed = false;
@@ -1716,14 +1698,17 @@ async function selectActiveTargets(runtimes) {
 function runNodeScript(scriptRelative, extraArgs = []) {
   // Automatically pass --lang to child scripts
   const langArgs = currentLangCode ? ["--lang", currentLangCode] : [];
-  return spawnSync(
+  const spawnConfig = buildNodeScriptSpawn(
     process.execPath,
-    [join(PROJECT_DIR, scriptRelative), ...langArgs, ...extraArgs],
-    {
-      cwd: PROJECT_DIR,
-      stdio: "inherit",
-      shell: isWin,
-    },
+    PROJECT_DIR,
+    scriptRelative,
+    extraArgs,
+    langArgs,
+  );
+  return spawnSync(
+    spawnConfig.command,
+    spawnConfig.args,
+    spawnConfig.options,
   );
 }
 
@@ -1865,44 +1850,37 @@ async function installAllSkills() {
 // ── Step 4.5: Optional Python tools (graphify) ─────────
 
 function checkPython310() {
-  const cmds = ["python3", "python"];
-  for (const cmd of cmds) {
-    const r = run(`${cmd} --version`);
-    if (r) {
-      const m = r.match(/Python (\d+)\.(\d+)/);
-      if (m && (+m[1] > 3 || (+m[1] === 3 && +m[2] >= 10))) return cmd;
-    }
-  }
-  return null;
+  return detectPython310();
 }
 
 async function installPythonTools() {
   heading(t.stepPythonTools);
-  const pyCmd = checkPython310();
-  if (!pyCmd) {
+  const python = checkPython310();
+  if (!python) {
     warn(t.pythonNotFound);
     info(t.pythonHint);
     return;
   }
 
   // Check if graphify already installed via pip show (more reliable than --version)
-  const pipCmd = pyCmd === "python3" ? "pip3" : "pip";
-  const pipShow = run(`${pipCmd} show graphifyy`);
-  if (pipShow) {
-    const versionMatch = pipShow.match(/Version:\s*(.+)/);
-    const version = versionMatch ? versionMatch[1].trim() : "unknown";
+  const pipShow = runPythonModule(python, ["-m", "pip", "show", "graphifyy"]);
+  if (pipShow.status === 0) {
+    const version =
+      extractPipShowVersion(readProcessText(pipShow)) ?? "unknown";
     ok(t.graphifyAlreadyInstalled(version));
     return;
   }
 
   // Install graphify
   info(t.graphifyInstalling);
-  const installResult = spawnSync(pipCmd, ["install", "graphifyy"], {
-    stdio: "pipe",
-    shell: isWin,
-  });
+  const installResult = runPythonModule(
+    python,
+    ["-m", "pip", "install", "graphifyy"],
+    undefined,
+    { stdio: "pipe" },
+  );
   if (installResult.status !== 0) {
-    const stderr = installResult.stderr?.toString().trim();
+    const stderr = readProcessText(installResult);
     warn(t.graphifyInstallFailed);
     if (stderr) {
       console.log(`${C.dim}  pip error: ${stderr}${C.reset}`);
@@ -1914,13 +1892,11 @@ async function installPythonTools() {
   // Register Claude skill — use python -m graphify, not bare "graphify" command
   // graphifyy installs a module, not a system PATH command on Windows
   info(t.graphifySkillRegistering);
-  const skillResult = spawnSync(
-    pyCmd,
+  const skillResult = runPythonModule(
+    python,
     ["-m", "graphify", "claude", "install"],
-    {
-      stdio: "pipe",
-      shell: isWin,
-    },
+    undefined,
+    { stdio: "pipe" },
   );
   if (skillResult.status === 0) {
     ok(t.graphifySkillRegistered);
@@ -1935,14 +1911,22 @@ async function validate() {
   heading(t.stepValidate);
   const agentsDir = join(PROJECT_DIR, ".claude", "agents");
   if (existsSync(agentsDir)) {
-    const agents = readdirSync(agentsDir).filter((f) => f.endsWith(".md"));
-    ok(t.agentPrompts(agents.length));
+    const summary = summarizeExpectedFiles(
+      readdirSync(agentsDir).filter((f) => f.endsWith(".md")),
+      expectedAgentProjectionFiles(".md"),
+    );
+    ok(t.agentPrompts(summary.presentCount));
   }
-  const validateResult = spawnSync("node", ["scripts/validate-project.mjs"], {
-    cwd: PROJECT_DIR,
-    stdio: "inherit",
-    shell: isWin,
-  });
+  const validateSpawn = buildNodeScriptSpawn(
+    process.execPath,
+    PROJECT_DIR,
+    "scripts/validate-project.mjs",
+  );
+  const validateResult = spawnSync(
+    validateSpawn.command,
+    validateSpawn.args,
+    validateSpawn.options,
+  );
   if (validateResult.status === 0) ok(t.validationPassed);
   else warn(t.validationWarnings);
 }

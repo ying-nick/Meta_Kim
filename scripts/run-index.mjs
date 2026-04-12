@@ -3,12 +3,15 @@
 import { promises as fs } from "node:fs";
 import path from "node:path";
 import process from "node:process";
-import { DatabaseSync } from "node:sqlite";
 import {
   ensureProfileState,
   getProfilePaths,
   toRepoRelative,
 } from "./meta-kim-local-state.mjs";
+import {
+  MIN_NODE_VERSION,
+  isSupportedNodeVersion,
+} from "./node-runtime-requirements.mjs";
 import { validateArtifactFile } from "./validate-run-artifact.mjs";
 
 const DEFAULT_SOURCE = "tests/fixtures/run-artifacts";
@@ -80,7 +83,24 @@ async function resolveArtifactSources() {
   return [...new Set(files)];
 }
 
-function openDb(runIndexPath) {
+async function openDb(runIndexPath) {
+  if (!isSupportedNodeVersion(process.versions.node)) {
+    throw new Error(
+      `run-index requires Node.js >=${MIN_NODE_VERSION}. Current: ${process.versions.node}. ` +
+        `Reason: this command uses node:sqlite, which is only available without flags from Node ${MIN_NODE_VERSION}.`,
+    );
+  }
+
+  let DatabaseSync;
+  try {
+    ({ DatabaseSync } = await import("node:sqlite"));
+  } catch (error) {
+    throw new Error(
+      `Failed to load node:sqlite on Node ${process.versions.node}. ` +
+        `Use Node >=${MIN_NODE_VERSION}. Original error: ${error.message}`,
+    );
+  }
+
   const db = new DatabaseSync(runIndexPath);
   db.exec(`
     PRAGMA journal_mode = WAL;
@@ -243,7 +263,7 @@ async function indexArtifacts({ reset = false } = {}) {
     profile: takeFlag("profile"),
     runtimeFamily: takeFlag("runtime-family"),
   });
-  const db = openDb(runIndexPath);
+  const db = await openDb(runIndexPath);
   if (reset) {
     db.exec("DELETE FROM run_findings; DELETE FROM runs;");
   }
@@ -288,67 +308,70 @@ function queryRuns() {
     profile: paths.profile,
     runtimeFamily: paths.runtimeFamily,
   }).then((state) => {
-    const db = openDb(state.runIndexPath);
+    return openDb(state.runIndexPath).then((db) => {
 
-    const where = [];
-    const params = [];
+      const where = [];
+      const params = [];
 
-    const governanceFlow = takeFlag("governance-flow");
-    if (governanceFlow) {
-      where.push("governance_flow = ?");
-      params.push(governanceFlow);
-    }
+      const governanceFlow = takeFlag("governance-flow");
+      if (governanceFlow) {
+        where.push("governance_flow = ?");
+        params.push(governanceFlow);
+      }
 
-    const owner = takeFlag("owner");
-    if (owner) {
-      where.push("owner_agents_text LIKE ?");
-      params.push(`%|${owner}|%`);
-    }
+      const owner = takeFlag("owner");
+      if (owner) {
+        where.push("owner_agents_text LIKE ?");
+        params.push(`%|${owner}|%`);
+      }
 
-    const publicReady = takeBooleanFlag("public-ready");
-    if (publicReady !== undefined) {
-      where.push("public_ready = ?");
-      params.push(publicReady ? 1 : 0);
-    }
+      const publicReady = takeBooleanFlag("public-ready");
+      if (publicReady !== undefined) {
+        where.push("public_ready = ?");
+        params.push(publicReady ? 1 : 0);
+      }
 
-    const openFindings = takeBooleanFlag("open-findings");
-    if (openFindings !== undefined) {
-      where.push(openFindings ? "open_findings_count > 0" : "open_findings_count = 0");
-    }
+      const openFindings = takeBooleanFlag("open-findings");
+      if (openFindings !== undefined) {
+        where.push(
+          openFindings ? "open_findings_count > 0" : "open_findings_count = 0",
+        );
+      }
 
-    const limit = Number.parseInt(takeFlag("limit", "20"), 10);
-    const sql = `
-      SELECT artifact_path, governance_flow, primary_deliverable, owner_agents_json, public_ready,
-             verify_passed, open_findings_count, writeback_decision, payload_json
-      FROM runs
-      ${where.length > 0 ? `WHERE ${where.join(" AND ")}` : ""}
-      ORDER BY indexed_at DESC
-      LIMIT ${Number.isFinite(limit) ? Math.max(limit, 1) : 20}
-    `;
+      const limit = Number.parseInt(takeFlag("limit", "20"), 10);
+      const sql = `
+        SELECT artifact_path, governance_flow, primary_deliverable, owner_agents_json, public_ready,
+               verify_passed, open_findings_count, writeback_decision, payload_json
+        FROM runs
+        ${where.length > 0 ? `WHERE ${where.join(" AND ")}` : ""}
+        ORDER BY indexed_at DESC
+        LIMIT ${Number.isFinite(limit) ? Math.max(limit, 1) : 20}
+      `;
 
-    const rows = db.prepare(sql).all(...params).map((row) => ({
-      artifactPath: row.artifact_path,
-      governanceFlow: row.governance_flow,
-      primaryDeliverable: row.primary_deliverable,
-      ownerAgents: JSON.parse(row.owner_agents_json),
-      publicReady: Boolean(row.public_ready),
-      verifyPassed: Boolean(row.verify_passed),
-      openFindingsCount: row.open_findings_count,
-      writebackDecision: row.writeback_decision,
-      payload: JSON.parse(row.payload_json),
-    }));
-    db.close();
+      const rows = db.prepare(sql).all(...params).map((row) => ({
+        artifactPath: row.artifact_path,
+        governanceFlow: row.governance_flow,
+        primaryDeliverable: row.primary_deliverable,
+        ownerAgents: JSON.parse(row.owner_agents_json),
+        publicReady: Boolean(row.public_ready),
+        verifyPassed: Boolean(row.verify_passed),
+        openFindingsCount: row.open_findings_count,
+        writebackDecision: row.writeback_decision,
+        payload: JSON.parse(row.payload_json),
+      }));
+      db.close();
 
-    return {
-      ok: true,
-      command: "query",
-      profile: state.profile,
-      runtimeFamily: state.runtimeFamily,
-      profileKey: state.metadata.profileKey,
-      runIndexPath: toRepoRelative(state.runIndexPath),
-      count: rows.length,
-      rows,
-    };
+      return {
+        ok: true,
+        command: "query",
+        profile: state.profile,
+        runtimeFamily: state.runtimeFamily,
+        profileKey: state.metadata.profileKey,
+        runIndexPath: toRepoRelative(state.runIndexPath),
+        count: rows.length,
+        rows,
+      };
+    });
   });
 }
 

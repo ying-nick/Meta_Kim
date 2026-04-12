@@ -20,6 +20,16 @@ import { promises as fs } from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import process from "node:process";
+import {
+  detectPython310,
+  extractPipShowVersion,
+  readProcessText,
+  runPythonModule,
+} from "./graphify-runtime.mjs";
+import {
+  resolveManifestSkillSubdir,
+  shouldUseCliShell,
+} from "./install-platform-config.mjs";
 import { fileURLToPath } from "node:url";
 import { resolveTargetContext } from "./meta-kim-sync-config.mjs";
 import { t } from "./meta-kim-i18n.mjs";
@@ -65,9 +75,6 @@ function loadSkillsManifest() {
     const skillOwner =
       process.env.META_KIM_SKILL_OWNER || manifest.skillOwner || "KimYx0207";
 
-    // findskill platform-specific subdir
-    const findskillSubdir = os.platform() === "win32" ? "windows" : "original";
-
     // Transform manifest to script’s format
     const skillRepos = [];
     const claudePluginSpecs = [];
@@ -76,17 +83,12 @@ function loadSkillsManifest() {
       const repo = skill.repo.replace("${skillOwner}", skillOwner);
       const fullUrl = `https://github.com/${repo}.git`;
 
-      let subdir = skill.subdir;
-      // Handle subdir with platform mapping
-      if (skill.subdirTemplate === "{platform}" && skill.subdirMapping) {
-        subdir =
-          skill.subdirMapping[os.platform()] || skill.subdirMapping.default;
-      }
+      const subdir = resolveManifestSkillSubdir(skill, os.platform());
 
       skillRepos.push({
         id: skill.id,
         repo: fullUrl,
-        ...(subdir && { subdir }),
+        ...(subdir ? { subdir } : {}),
         targets: skill.targets || ["claude", "codex", "openclaw"],
       });
 
@@ -300,7 +302,12 @@ async function installAllSkillsForRuntime(label, skillsRoot, runtimeId) {
       await installGitSkill(targetDir, spec.repo);
     }
   }
-  await installSkillCreator(skillsRoot);
+  const hasManifestSkillCreator = SKILL_REPOS.some(
+    (spec) => spec.id === "skill-creator",
+  );
+  if (!hasManifestSkillCreator) {
+    await installSkillCreator(skillsRoot);
+  }
 }
 
 function installClaudePlugins() {
@@ -348,7 +355,7 @@ function installClaudePlugins() {
 
   const r = spawnSync("claude", ["--version"], {
     encoding: "utf8",
-    shell: os.platform() === "win32",
+    shell: shouldUseCliShell(os.platform()),
   });
   if (r.status !== 0) {
     console.warn(`${C.yellow}⚠${C.reset} ${t.warnClaNotFound}`);
@@ -360,7 +367,7 @@ function installClaudePlugins() {
   // so we must check the plugin list first.
   const listOut = spawnSync("claude", ["plugins", "list", "--json"], {
     encoding: "utf8",
-    shell: os.platform() === "win32",
+    shell: shouldUseCliShell(os.platform()),
   });
   let installedNames = new Set();
   if (listOut.status === 0 && listOut.stdout) {
@@ -394,7 +401,7 @@ function installClaudePlugins() {
     console.log(`${C.cyan}→${C.reset} ${t.installingPlugin(spec)}`);
     const p = spawnSync("claude", ["plugin", "install", spec], {
       stdio: "inherit",
-      shell: os.platform() === "win32",
+      shell: shouldUseCliShell(os.platform()),
     });
     if (p.status !== 0) {
       console.warn(
@@ -439,48 +446,37 @@ async function main() {
   // Optional: graphify (code knowledge graph)
   if (!pluginsOnly) {
     console.log(`\n${C.bold}${AMBER}--- Python Tools (optional) ---${C.reset}`);
-    const pyCmd = ["python3", "python"].find((cmd) => {
-      try {
-        const r = spawnSync(cmd, ["--version"], {
-          encoding: "utf8",
-          shell: os.platform() === "win32",
-        });
-        if (r.status === 0) {
-          const m = (r.stdout || "").match(/Python (\d+)\.(\d+)/);
-          return m && (+m[1] > 3 || (+m[1] === 3 && +m[2] >= 10));
-        }
-      } catch {
-        /* not found */
-      }
-      return false;
-    });
+    const python = detectPython310();
 
-    if (!pyCmd) {
+    if (!python) {
       console.log(t.pythonNotFoundGraphify);
       console.log(t.pythonInstallHintGraphify);
     } else {
       // Check if graphify already installed via pip show (more reliable than --version)
-      const pipCmd = pyCmd === "python3" ? "pip3" : "pip";
-      const pipShow = spawnSync(pipCmd, ["show", "graphifyy"], {
-        encoding: "utf8",
-        shell: os.platform() === "win32",
-      });
+      const pipShow = runPythonModule(
+        python,
+        ["-m", "pip", "show", "graphifyy"],
+      );
       if (pipShow.status === 0) {
-        const versionMatch = (pipShow.stdout || "").match(/Version:\s*(.+)/);
-        const version = versionMatch ? versionMatch[1].trim() : "unknown";
+        const version =
+          extractPipShowVersion(readProcessText(pipShow)) ?? "unknown";
         console.log(t.skipGraphifyInstalled(version));
       } else {
         console.log(t.installingGraphify);
-        const pipResult = spawnSync(pipCmd, ["install", "graphifyy"], {
-          stdio: "pipe",
-          shell: os.platform() === "win32",
-        });
+        const pipResult = runPythonModule(
+          python,
+          ["-m", "pip", "install", "graphifyy"],
+          undefined,
+          { stdio: "pipe" },
+        );
         if (pipResult.status === 0) {
           // Register Claude skill silently
-          spawnSync(pyCmd, ["-m", "graphify", "claude", "install"], {
-            stdio: "pipe",
-            shell: os.platform() === "win32",
-          });
+          runPythonModule(
+            python,
+            ["-m", "graphify", "claude", "install"],
+            undefined,
+            { stdio: "pipe" },
+          );
           console.log(t.okGraphifyInstalled);
         } else {
           console.warn(`${C.yellow}⚠${C.reset} ${t.warnGraphifyPipFailed}`);
