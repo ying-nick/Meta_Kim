@@ -10,6 +10,10 @@ import path from "node:path";
 import process from "node:process";
 import { fileURLToPath } from "node:url";
 import {
+  buildMetaKimHooksTemplate,
+  mergeGlobalMetaKimHooksIntoSettings,
+} from "./claude-settings-merge.mjs";
+import {
   canonicalRuntimeAssetsDir,
   canonicalSkillRoot,
   resolveTargetContext,
@@ -155,115 +159,6 @@ function globalMetaKimHooksDir() {
   return path.join(runtimeHomes.claude.dir, "hooks", "meta-kim");
 }
 
-function isMetaKimManagedHookCommand(command) {
-  if (typeof command !== "string") {
-    return false;
-  }
-  return (
-    command.includes("hooks/meta-kim/") || command.includes("hooks\\meta-kim\\")
-  );
-}
-
-function hookCommandNode(absScriptPath) {
-  return `node ${JSON.stringify(absScriptPath)}`;
-}
-
-/** Hook blocks matching Meta_Kim canonical runtime asset for Claude settings (absolute script paths). */
-function buildMetaKimHooksTemplate(absHooksDir) {
-  const cmd = (name) => ({
-    type: "command",
-    command: hookCommandNode(path.join(absHooksDir, name)),
-  });
-
-  return {
-    PreToolUse: [
-      {
-        matcher: "Bash",
-        hooks: [
-          cmd("block-dangerous-bash.mjs"),
-          cmd("pre-git-push-confirm.mjs"),
-        ],
-      },
-    ],
-    PostToolUse: [
-      {
-        matcher: "Edit|Write",
-        hooks: [
-          cmd("post-format.mjs"),
-          cmd("post-typecheck.mjs"),
-          cmd("post-console-log-warn.mjs"),
-        ],
-      },
-    ],
-    SubagentStart: [
-      {
-        matcher: "*",
-        hooks: [cmd("subagent-context.mjs")],
-      },
-    ],
-    Stop: [
-      {
-        matcher: "*",
-        hooks: [
-          cmd("stop-console-log-audit.mjs"),
-          cmd("stop-completion-guard.mjs"),
-        ],
-      },
-    ],
-  };
-}
-
-function stripMetaKimHookEntriesFromBlocks(blocks) {
-  return blocks
-    .map((block) => ({
-      ...block,
-      hooks: (block.hooks || []).filter(
-        (h) => !isMetaKimManagedHookCommand(h.command || ""),
-      ),
-    }))
-    .filter((block) => (block.hooks || []).length > 0);
-}
-
-function mergeHookMatcherBlocks(existing, additions) {
-  const result = structuredClone(existing);
-  for (const addBlock of additions) {
-    const idx = result.findIndex((b) => b.matcher === addBlock.matcher);
-    if (idx === -1) {
-      result.push(structuredClone(addBlock));
-      continue;
-    }
-    const cmds = new Set(
-      (result[idx].hooks || []).map((h) => h.command).filter(Boolean),
-    );
-    for (const h of addBlock.hooks || []) {
-      if (!cmds.has(h.command)) {
-        if (!result[idx].hooks) {
-          result[idx].hooks = [];
-        }
-        result[idx].hooks.push(h);
-        cmds.add(h.command);
-      }
-    }
-  }
-  return result;
-}
-
-function mergeMetaKimHooksIntoSettings(settings, template) {
-  const next = { ...settings };
-  if (!next.hooks) {
-    next.hooks = {};
-  }
-  const hooks = { ...next.hooks };
-
-  for (const [event, additionBlocks] of Object.entries(template)) {
-    const cleaned = stripMetaKimHookEntriesFromBlocks(hooks[event] || []);
-    hooks[event] = mergeHookMatcherBlocks(cleaned, additionBlocks);
-  }
-
-  next.hooks = hooks;
-  return next;
-}
-
 async function copyCanonicalHooksToGlobal() {
   const dest = globalMetaKimHooksDir();
   assertHomeBound(dest);
@@ -299,7 +194,7 @@ async function syncClaudeGlobalSettingsHooks() {
     );
   }
 
-  const merged = mergeMetaKimHooksIntoSettings(base, template);
+  const merged = mergeGlobalMetaKimHooksIntoSettings(base, template);
   const out = `${JSON.stringify(merged, null, 2)}\n`;
   const prev = (await pathExists(settingsPath))
     ? await fs.readFile(settingsPath, "utf8")

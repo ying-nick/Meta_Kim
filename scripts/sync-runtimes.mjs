@@ -2,6 +2,12 @@ import { promises as fs } from "node:fs";
 import path from "node:path";
 import process from "node:process";
 import {
+  buildMetaKimHooksTemplate,
+  mergeGlobalMetaKimHooksIntoSettings,
+  mergeRepoClaudeSettings,
+  rewriteRepoHookCommandsToAbsolute,
+} from "./claude-settings-merge.mjs";
+import {
   canonicalAgentsDir,
   canonicalRuntimeAssetsDir,
   canonicalSkillPath,
@@ -614,35 +620,38 @@ async function syncClaudeProjection(
     fs.readFile(canonicalClaudeMcpPath, "utf8"),
   ]);
 
-  // For repo-local settings: convert relative hook commands to absolute paths so they
-  // work regardless of the current working directory (e.g. when Claude Code is
-  // invoked from a subdirectory like docs/).
-  let finalSettingsContent = settingsContent;
-  // Detect repo-local settings: path contains repoRoot (project dir) but not ~/.claude/hooks
+  // Merge into existing settings.json — never blind overwrite (project + global).
   const inRepoRoot = claudeSettingsProjectionPath.includes(repoRoot);
+  let finalSettingsContent;
+  const canonicalParsed = JSON.parse(settingsContent);
+
   if (inRepoRoot) {
-    const settings = JSON.parse(settingsContent);
-    const relHookRe = /^node \.claude\/hooks\/(.+)\.mjs$/;
-    for (const hookType of Object.keys(settings.hooks ?? {})) {
-      for (const block of settings.hooks[hookType] ?? []) {
-        for (const h of block.hooks ?? []) {
-          if (h.type === "command" && relHookRe.test(h.command)) {
-            const hookName = h.command.match(relHookRe)[1];
-            const absPath =
-              repoRoot.replace(/\//g, path.sep) +
-              path.sep +
-              ".claude" +
-              path.sep +
-              "hooks" +
-              path.sep +
-              hookName +
-              ".mjs";
-            h.command = `node "${absPath}"`;
-          }
-        }
+    let base = {};
+    try {
+      const prev = await fs.readFile(claudeSettingsProjectionPath, "utf8");
+      base = JSON.parse(prev);
+    } catch (error) {
+      if (error.code !== "ENOENT") {
+        throw error;
       }
     }
-    finalSettingsContent = `${JSON.stringify(settings, null, 2)}\n`;
+    const canonCopy = structuredClone(canonicalParsed);
+    rewriteRepoHookCommandsToAbsolute(canonCopy, repoRoot);
+    const merged = mergeRepoClaudeSettings(base, canonCopy);
+    finalSettingsContent = `${JSON.stringify(merged, null, 2)}\n`;
+  } else {
+    let base = {};
+    try {
+      const prev = await fs.readFile(claudeSettingsProjectionPath, "utf8");
+      base = JSON.parse(prev);
+    } catch (error) {
+      if (error.code !== "ENOENT") {
+        throw error;
+      }
+    }
+    const template = buildMetaKimHooksTemplate(claudeHooksProjectionDir);
+    const merged = mergeGlobalMetaKimHooksIntoSettings(base, template);
+    finalSettingsContent = `${JSON.stringify(merged, null, 2)}\n`;
   }
 
   if (
