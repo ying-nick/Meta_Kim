@@ -1,0 +1,92 @@
+[
+  {
+    "id": "CR-01",
+    "input": "Fix a typo in README.md",
+    "scope": "1 file, pure style",
+    "expectedComplexity": "Simple",
+    "expectedGovernanceFlow": "simple_exec",
+    "expectedStages": 4,
+    "expectedStagesList": ["Execution", "Review", "Verification", "Evolution"],
+    "passFailCriteria": {
+      "PASS": "跳过了 Critical/Fetch/Thinking，直接进入 Execution",
+      "FAIL": "为单文件修改走了完整8阶段"
+    }
+  },
+  {
+    "id": "CR-02",
+    "input": "Refactor 3 files in the auth module",
+    "scope": "2-5 files, 1 module",
+    "expectedComplexity": "Medium",
+    "expectedGovernanceFlow": "complex_dev",
+    "expectedStages": 8,
+    "passFailCriteria": {
+      "PASS": "完整8阶段 spine，无10阶段 business phases",
+      "FAIL": "为3文件修改升级到10阶段"
+    }
+  },
+  {
+    "id": "CR-03",
+    "input": "Rewrite the payment gateway with multi-team coordination",
+    "scope": ">5 files, cross-system, multi-team",
+    "expectedComplexity": "Complex",
+    "expectedGovernanceFlow": "complex_dev",
+    "expectedUpgradeReasons": ["cross_system_scope", "business_workflow_upgrade"],
+    "expectedStages": 18,
+    "passFailCriteria": {
+      "PASS": "8阶段 spine + 10阶段 business phases 全部出现",
+      "FAIL": "只走了8阶段或只走了10阶段"
+    }
+  },
+  {
+    "id": "CR-04",
+    "input": "Add a security audit to the auth middleware",
+    "scope": "security-sensitive",
+    "expectedComplexity": "Complex",
+    "expectedGovernanceFlow": "complex_dev",
+    "expectedUpgradeReasons": ["security_gate_required"],
+    "expectedStages": 18,
+    "passFailCriteria": {
+      "PASS": "触发 security_gate_required，升级到10阶段",
+      "FAIL": "安全变更没有升级"
+    }
+  },
+  {
+    "id": "CR-05",
+    "input": "Read the current project structure",
+    "scope": "pure query, no file change",
+    "expectedComplexity": "Simple",
+    "expectedGovernanceFlow": "query",
+    "expectedBypass": true,
+    "expectedStages": 1,
+    "passFailCriteria": {
+      "PASS": "绕过 owner 要求，无 dispatchEnvelopePacket，直接回答",
+      "FAIL": "为纯查询创建了完整的 dispatchEnvelopePacket"
+    }
+  },
+  {
+    "id": "CR-06",
+    "input": "Create a new agent for blockchain smart contract auditing",
+    "scope": "owner creation required",
+    "expectedComplexity": "Complex",
+    "expectedGovernanceFlow": "complex_dev",
+    "expectedUpgradeReasons": ["owner_creation_required"],
+    "expectedStages": 18,
+    "passFailCriteria": {
+      "PASS": "触发 owner_creation_required，升级到10阶段，需要 capabilityGapPacket",
+      "FAIL": "没有创建 owner 就开始执行"
+    }
+  },
+  {
+    "id": "CR-07",
+    "input": "Refactor auth, logging, and caching — all independent",
+    "scope": "parallel merge required",
+    "expectedComplexity": "Complex",
+    "expectedGovernanceFlow": "complex_dev",
+    "expectedUpgradeReasons": ["parallel_merge_required"],
+    "expectedStages": 18,
+    "passFailCriteria": {
+      "PASS": "触发 parallel_merge_required，升级到10阶段，需要 parallelGroup 和 mergeOwner",
+      "FAIL": "独立任务按顺序执行"
+    }
+  }
+]

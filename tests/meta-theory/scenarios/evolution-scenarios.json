@@ -1,0 +1,120 @@
+[
+  {
+    "id": "EV-01",
+    "input": "Same pattern appeared in 3 different tasks today",
+    "detectedDimension": "patternReuse",
+    "evidence": "≥3 occurrences",
+    "expectedAmplification": "extract-as-skill",
+    "expectedStorage": "canonical/skills/{skill-name}/SKILL.md",
+    "passFailCriteria": {
+      "PASS": "触发 patternReuse，生成新 skill 文件",
+      "FAIL": "模式未被记录"
+    }
+  },
+  {
+    "id": "EV-02",
+    "input": "Execution revealed Stew-All death pattern — too many agents claiming ownership",
+    "detectedDimension": "boundaryDrift",
+    "evidence": "Stew-All",
+    "expectedAmplification": "trigger-type-b-split",
+    "expectedStorage": "canonical/agents/{agent}.md",
+    "passFailCriteria": {
+      "PASS": "触发 Type B pipeline，agent 边界重新设计",
+      "FAIL": "Stew-All 模式被忽略"
+    }
+  },
+  {
+    "id": "EV-03",
+    "input": "Review consistently fails at the verification stage",
+    "detectedDimension": "processBottleneck",
+    "evidence": "Review gate fails at same stage ≥2 times",
+    "expectedAmplification": "reorder-stages",
+    "expectedStorage": "contracts/workflow-contract.json",
+    "passFailCriteria": {
+      "PASS": "调整阶段优先级或顺序",
+      "FAIL": "重复失败的流程继续"
+    }
+  },
+  {
+    "id": "EV-04",
+    "input": "Evolution decision: none — this was a one-off debugging session",
+    "detectedDimension": "one-off",
+    "expectedWritebackDecision": "none",
+    "expectedReason": "one-off debugging session",
+    "passFailCriteria": {
+      "PASS": "writebackDecision=none，且提供了 decisionReason",
+      "FAIL": "one-off 也触发回写"
+    }
+  },
+  {
+    "id": "EV-05",
+    "input": "Full rollback: >3 files affected by cross-module contamination",
+    "rollbackLevel": "full",
+    "expectedAffectedFiles": ">3",
+    "expectedAction": "git stash, re-enter Stage 3 (Thinking)",
+    "expectedAftermath": "重新进入 Thinking 阶段，重新规划",
+    "passFailCriteria": {
+      "PASS": "git stash，重新进入 Stage 3 Thinking",
+      "FAIL": "继续执行，忽略跨模块污染"
+    }
+  },
+  {
+    "id": "EV-06",
+    "input": "File-level rollback: 1 file regressed",
+    "rollbackLevel": "file",
+    "expectedAffectedFiles": 1,
+    "expectedAction": "git checkout HEAD~1 -- <file>",
+    "expectedAftermath": "修复后重新进入 Stage 4 (Execution)",
+    "passFailCriteria": {
+      "PASS": "单文件 git checkout，不影响其他文件",
+      "FAIL": "回退了整个模块"
+    }
+  },
+  {
+    "id": "EV-07",
+    "input": "Partial rollback: some sub-tasks succeeded, others failed",
+    "rollbackLevel": "partial",
+    "expectedAction": "保留成功的 sub-tasks，回退失败的",
+    "expectedAftermath": "只重新执行失败的 sub-tasks",
+    "passFailCriteria": {
+      "PASS": "部分回退保留成功结果",
+      "FAIL": "回退所有内容，包括成功的"
+    }
+  },
+  {
+    "id": "EV-08",
+    "input": "Scar detected: critical overstep that required manual recovery",
+    "detectedDimension": "scarDetected",
+    "evidence": "impact: critical",
+    "expectedAmplification": "append-to-protocol",
+    "expectedStorage": "contracts/scar-protocol.md",
+    "passFailCriteria": {
+      "PASS": "生成 scar 记录，impact=critical，附防护规则",
+      "FAIL": "critical 事件没有留下 scar"
+    }
+  },
+  {
+    "id": "EV-09",
+    "input": "Capability gap detected: no agent owns blockchain auditing",
+    "detectedDimension": "capabilityGap",
+    "evidence": "Fetch returned 0 matches",
+    "expectedAmplification": "queue-for-scout",
+    "expectedStorage": "memory/capability-gaps.md",
+    "passFailCriteria": {
+      "PASS": "gap 记录到 memory/capability-gaps.md，队列给 Scout 后续处理",
+      "FAIL": "gap 没有记录，导致任务无人认领"
+    }
+  },
+  {
+    "id": "EV-10",
+    "input": "Rhythm bottleneck: ≥3 consecutive high-cost cards without pause",
+    "detectedDimension": "rhythmBottleneck",
+    "evidence": "≥3 consecutive high-cost card plays",
+    "expectedAmplification": "update-card-costs",
+    "expectedStorage": "contracts/workflow-contract.json",
+    "passFailCriteria": {
+      "PASS": "更新卡牌成本/优先级，防止再次出现连续高成本",
+      "FAIL": "节奏问题被忽视，继续低效发牌"
+    }
+  }
+]

@@ -1,0 +1,141 @@
+[
+  {
+    "id": "CD-01",
+    "input": "Simple question about agent responsibility",
+    "expectedCards": ["Clarify"],
+    "expectedDecision": "deal",
+    "expectedCost": "low",
+    "expectedPriority": 10,
+    "passFailCriteria": {
+      "PASS": "发出 Clarify 牌，优先级10，成本low",
+      "FAIL": "发出了高成本action牌"
+    }
+  },
+  {
+    "id": "CD-02",
+    "input": "Complex multi-agent task requiring rollback",
+    "expectedCards": ["Execute", "Verify", "Fix", "Rollback"],
+    "expectedHighCostSequence": 3,
+    "passFailCriteria": {
+      "PASS": "3张高成本牌后自动插入 Intentional Silence",
+      "FAIL": "连续发高成本牌直到用户抱怨"
+    }
+  },
+  {
+    "id": "CD-03",
+    "input": "URGENT: production is down",
+    "expectedCards": ["Risk", "Execute"],
+    "expectedControl": "interrupt",
+    "expectedInterruptTrigger": "user urgent",
+    "passFailCriteria": {
+      "PASS": "Risk 牌 interrupt_insert 到最前",
+      "FAIL": "按正常优先级顺序发牌"
+    }
+  },
+  {
+    "id": "CD-04",
+    "input": "Everything is clear, proceed with execution",
+    "expectedCards": ["Execute"],
+    "expectedSilenceDecision": "none",
+    "passFailCriteria": {
+      "PASS": "直接发 Execute 牌，无沉默",
+      "FAIL": "无原因地触发留白"
+    }
+  },
+  {
+    "id": "CD-05",
+    "input": "Context already provided by user",
+    "expectedCards": [],
+    "expectedSilenceDecision": "no_card",
+    "expectedReason": "already_in_context",
+    "passFailCriteria": {
+      "PASS": "不发任何牌，silenceDecision=no_card, suppressionReason=already_in_context",
+      "FAIL": "重复用户已经提供的信息"
+    }
+  },
+  {
+    "id": "CD-06",
+    "input": "Scope too large — needs shrinking",
+    "expectedCards": ["Shrink scope"],
+    "expectedCardType": "info",
+    "expectedCost": "low",
+    "expectedPriority": 9,
+    "passFailCriteria": {
+      "PASS": "发出 Shrink scope 牌，成本low，优先级9",
+      "FAIL": "直接执行过大范围的任务"
+    }
+  },
+  {
+    "id": "CD-07",
+    "input": "Multiple options available for approach",
+    "expectedCards": ["Options"],
+    "expectedCardType": "info",
+    "expectedCost": "mid",
+    "expectedPriority": 8,
+    "passFailCriteria": {
+      "PASS": "发出 Options 牌，展示多个方案",
+      "FAIL": "只选一个方案直接执行"
+    }
+  },
+  {
+    "id": "CD-08",
+    "input": "Quality review passed",
+    "expectedCards": ["Verify"],
+    "expectedCardType": "action",
+    "expectedCost": "mid",
+    "expectedPriority": 6,
+    "passFailCriteria": {
+      "PASS": "发出 Verify 牌，进行质量验证",
+      "FAIL": "跳过验证直接交付"
+    }
+  },
+  {
+    "id": "CD-09",
+    "input": "Minor issue found in review",
+    "expectedCards": ["Fix"],
+    "expectedCardType": "action",
+    "expectedCost": "mid",
+    "expectedPriority": 5,
+    "passFailCriteria": {
+      "PASS": "发出 Fix 牌，修复小问题",
+      "FAIL": "忽略小问题继续推进"
+    }
+  },
+  {
+    "id": "CD-10",
+    "input": "Attention budget exceeded — too many consecutive actions",
+    "expectedCards": ["Pause"],
+    "expectedCardType": "silence",
+    "expectedCost": "zero",
+    "expectedPriority": 1,
+    "passFailCriteria": {
+      "PASS": "发出 Pause 牌，暂停，等待用户确认",
+      "FAIL": "继续发牌直到用户抱怨"
+    }
+  },
+  {
+    "id": "CD-11",
+    "input": "Defer this decision until more data is available",
+    "expectedCards": [],
+    "expectedSilenceDecision": "defer",
+    "expectedDeferDeadline": true,
+    "passFailCriteria": {
+      "PASS": "silenceDecision=defer，且有 deferUntil 截止时间",
+      "FAIL": "defer 没有截止时间或没有记录"
+    }
+  },
+  {
+    "id": "CD-12",
+    "input": "Security risk detected during execution",
+    "expectedCards": ["Risk"],
+    "expectedCardType": "risk",
+    "expectedCost": "high",
+    "expectedPriority": 10,
+    "expectedControl": "interrupt",
+    "expectedInterruptReason": "security_risk",
+    "passFailCriteria": {
+      "PASS": "Risk 牌 interrupt_insert，优先级10，成本high，interruptReason=security_risk",
+      "FAIL": "安全风险没有中断执行"
+    }
+  }
+]
