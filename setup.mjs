@@ -202,7 +202,7 @@ const I18N = {
     setupCancelled: "Setup cancelled. Install an AI coding tool and re-run.",
     stepConfig: "Project configuration",
     mcpExists: ".mcp.json already configured",
-    mcpCreated: ".mcp.json created — MCP runtime server registered",
+    mcpCreated: ".mcp.json created — MCP service registered",
     settingsExists: ".claude/settings.json already configured",
     askCreateSettings: "Create .claude/settings.json with hooks?",
     settingsCreated:
@@ -279,6 +279,8 @@ const I18N = {
     postInstallNotesReminderText:
       "Run node setup.mjs --check to verify your installation at any time.",
     setupError: "Setup error:",
+    setupInterrupted:
+      "Interrupted (Ctrl+C) — setup did not finish. Run node setup.mjs again when ready.",
     selectLang: "Select language / 选择语言 / 言語を選択 / 언어 선택",
     choose: (n) => `Choose (1-${n})`,
     /** Shown under @inquirer select (replaces default English key hints). */
@@ -299,21 +301,19 @@ const I18N = {
     globalSkipped: "Global install skipped — using project-local only",
     // Install scope selection
     installScopeHeading: "Installation Scope",
-    installScopePrompt: "Where would you like to install Meta_Kim?",
-    installScopeProject:
-      "Project only — Files in .claude/.codex/openclaw/.cursor/ (current project only)",
+    installScopePrompt: "This repo only, home skills only, or both?",
+    installScopeProject: "This clone — .claude / .codex / openclaw / .cursor",
     installScopeGlobal:
-      "Global only — ~/.claude/skills/ (shared across all projects)",
-    installScopeBoth: "Both (recommended) — Project files + global skills",
-    installScopeProjectLabel: "Project only",
-    installScopeGlobalLabel: "Global only",
+      "Home — skills per selected tool (~/.*/skills), not Claude-only",
+    installScopeBoth: "Both (recommended) — repo, then home",
+    installScopeProjectLabel: "This repo only",
+    installScopeGlobalLabel: "Home skills only",
     installScopeBothLabel: "Both (recommended)",
     installScopeProjectDesc:
-      "Install to project directory only (.claude/, .codex/, openclaw/, .cursor/)",
+      "Update tool configs in this repo only; skips home-directory skills.",
     installScopeGlobalDesc:
-      "Install to global directory only (~/.claude/skills/)",
-    installScopeBothDesc:
-      "Install both project and global (recommended for full experience)",
+      "Install skills + meta-theory for tools you pick next; does not update this repo.",
+    installScopeBothDesc: "Repo step, then home step.",
     depCheckHeading: "Dependency Check",
     depOk: (n) => `${n} — OK`,
     depMissing: (n) => `${n} — MISSING`,
@@ -390,7 +390,7 @@ const I18N = {
     updateHeading: "Update Mode",
     updateNpm: "Reinstalling npm dependencies...",
     updateSkills: "Updating all skills...",
-    updateSyncProjectFiles: "Syncing project runtime files from canonical/...",
+    updateSyncProjectFiles: "Syncing tool configs in this repo from canonical/...",
     updateSyncDone: "Sync complete",
     updateSyncProjectSkipped: "Project sync skipped (global update mode)",
     updateSyncSkip: "Sync skipped or failed",
@@ -444,11 +444,11 @@ const I18N = {
     selectedScope: (name) => `Selected: ${name}`,
     npmVerOk: (v) => `npm v${v}`,
     activeRuntimesSavedCli: (list) =>
-      `Active runtimes saved from --targets: ${list}`,
-    savedActiveTargets: (list) => `Saved active runtime targets: ${list}`,
+      `Target tools saved from --targets: ${list}`,
+    savedActiveTargets: (list) => `Saved target tools: ${list}`,
     okRepoSynced: "Repo projections synced from canonical/",
     failRepoSync:
-      "Repo projection sync failed — some runtime configs may be stale",
+      "Repo projection sync failed — some in-repo configs may be stale",
     pipErrorDetail: (err) => `  pip error: ${err}`,
     modeInfoLine: (mode, plat, ver) => `Mode: ${mode} | ${plat} | Node ${ver}`,
     stepLabel: (n, label) => `Step ${n}: ${label}`,
@@ -514,7 +514,7 @@ const I18N = {
     setupCancelled: "安装已取消。请先安装 AI 编程工具。",
     stepConfig: "项目配置",
     mcpExists: ".mcp.json 已配置",
-    mcpCreated: ".mcp.json 已创建 — MCP 运行时服务器已注册",
+    mcpCreated: ".mcp.json 已创建 — 已注册 MCP 服务",
     settingsExists: ".claude/settings.json 已配置",
     askCreateSettings: "创建 .claude/settings.json（含 hooks 配置）？",
     settingsCreated: ".claude/settings.json 已创建 — hooks 和权限已注册",
@@ -588,6 +588,8 @@ const I18N = {
     postInstallNotesReminderText:
       "随时可运行 node setup.mjs --check 验证安装状态。",
     setupError: "安装出错：",
+    setupInterrupted:
+      "已中断（Ctrl+C），安装未完成。需要时请重新运行：node setup.mjs",
     selectLang: "Select language / 选择语言 / 言語を選択 / 언어 선택",
     choose: (n) => `选择 (1-${n})`,
     inquirerSingleHotkeys: "↑↓ 移动选项 · ⏎ 确认",
@@ -605,18 +607,17 @@ const I18N = {
     globalSkipped: "全局安装已跳过 — 将仅在当前项目使用",
     // 安装范围选择
     installScopeHeading: "安装范围",
-    installScopePrompt: "Meta_Kim 安装到哪里？",
-    installScopeProject:
-      "仅项目 — 文件在 .claude/.codex/openclaw/.cursor/（仅当前项目）",
-    installScopeGlobal: "仅全局 — ~/.claude/skills/（所有项目共享）",
-    installScopeBoth: "全部（推荐）— 项目文件 + 全局技能",
-    installScopeProjectLabel: "仅项目",
-    installScopeGlobalLabel: "仅全局",
-    installScopeBothLabel: "全部（推荐）",
-    installScopeProjectDesc:
-      "仅安装到项目目录（.claude/, .codex/, openclaw/, .cursor/）",
-    installScopeGlobalDesc: "仅安装到全局目录（~/.claude/skills/）",
-    installScopeBothDesc: "同时安装项目和全局（推荐，完整体验）",
+    installScopePrompt: "本仓库、用户目录技能、还是两者都要？",
+    installScopeProject: "仅本仓库 — .claude / .codex / openclaw / .cursor",
+    installScopeGlobal: "仅用户目录 — 所选工具各自的 ~/.*/skills（非仅 Claude）",
+    installScopeBoth: "两者（推荐）— 先本仓库，再用户目录",
+    installScopeProjectLabel: "仅本仓库",
+    installScopeGlobalLabel: "仅用户目录",
+    installScopeBothLabel: "两者（推荐）",
+    installScopeProjectDesc: "只更新本仓库内各工具配置；不改用户目录 skills。",
+    installScopeGlobalDesc:
+      "按下一步所选工具写入各 skills + 全局 meta-theory；不改本仓库。",
+    installScopeBothDesc: "先本仓库，后用户目录。",
     depCheckHeading: "依赖检查",
     depOk: (n) => `${n} — 正常`,
     depMissing: (n) => `${n} — 缺失`,
@@ -685,7 +686,7 @@ const I18N = {
     updateHeading: "更新模式",
     updateNpm: "正在重新安装 npm 依赖...",
     updateSkills: "正在更新所有技能...",
-    updateSyncProjectFiles: "正在从 canonical/ 同步项目运行时文件...",
+    updateSyncProjectFiles: "正在从 canonical/ 同步本仓库内的工具配置...",
     updateSyncDone: "同步完成",
     updateSyncProjectSkipped: "跳过项目同步（全局更新模式）",
     updateSyncSkip: "未同步或同步失败",
@@ -736,10 +737,10 @@ const I18N = {
     labelOptional: "（可选）",
     selectedScope: (name) => `已选择：${name}`,
     npmVerOk: (v) => `npm v${v}`,
-    activeRuntimesSavedCli: (list) => `已从 --targets 保存活跃运行时：${list}`,
-    savedActiveTargets: (list) => `已保存活跃运行时目标：${list}`,
+    activeRuntimesSavedCli: (list) => `已从 --targets 保存目标工具：${list}`,
+    savedActiveTargets: (list) => `已保存目标工具：${list}`,
     okRepoSynced: "仓库投影已从 canonical/ 同步",
-    failRepoSync: "仓库投影同步失败 — 部分运行时配置可能过期",
+    failRepoSync: "仓库投影同步失败 — 本仓库内部分配置可能已过期",
     pipErrorDetail: (err) => `  pip 错误：${err}`,
     modeInfoLine: (mode, plat, ver) => `模式：${mode} | ${plat} | Node ${ver}`,
     stepLabel: (n, label) => `步骤 ${n}：${label}`,
@@ -809,7 +810,7 @@ const I18N = {
       "セットアップがキャンセルされました。AIコーディングツールをインストールして再実行してください。",
     stepConfig: "プロジェクト設定",
     mcpExists: ".mcp.json は既に設定されています",
-    mcpCreated: ".mcp.json 作成済み — MCP ランタイムサーバー登録完了",
+    mcpCreated: ".mcp.json 作成済み — MCP サービスを登録",
     settingsExists: ".claude/settings.json は既に設定されています",
     askCreateSettings: ".claude/settings.json（hooks付き）を作成しますか？",
     settingsCreated:
@@ -886,6 +887,8 @@ const I18N = {
     postInstallNotesReminderText:
       "node setup.mjs --check でいつでも導入状態を確認できます。",
     setupError: "セットアップエラー：",
+    setupInterrupted:
+      "中断しました（Ctrl+C）。未完了です。再開するときは node setup.mjs を実行してください。",
     selectLang: "Select language / 选择语言 / 言語を選択 / 언어 선택",
     choose: (n) => `選択 (1-${n})`,
     inquirerSingleHotkeys: "↑↓ 移動 · ⏎ 確定",
@@ -905,21 +908,18 @@ const I18N = {
       "グローバルインストールスキップ — プロジェクトローカルのみ使用",
     // インストール範囲選択
     installScopeHeading: "インストール範囲",
-    installScopePrompt: "Meta_Kim をどこにインストールしますか？",
-    installScopeProject:
-      "プロジェクトのみ — .claude/.codex/openclaw/.cursor/ のファイル（現在のプロジェクトのみ）",
+    installScopePrompt: "リポのみ／ホームの skills のみ／両方？",
+    installScopeProject: "リポのみ — .claude / .codex / openclaw / .cursor",
     installScopeGlobal:
-      "グローバルのみ — ~/.claude/skills/（すべてのプロジェクトで共有）",
-    installScopeBoth: "両方（推奨）— プロジェクトファイル + グローバルスキル",
-    installScopeProjectLabel: "プロジェクトのみ",
-    installScopeGlobalLabel: "グローバルのみ",
+      "ホームのみ — 選択ツール別 ~/.*/skills（Claude 専用ではない）",
+    installScopeBoth: "両方（推奨）— リポ→ホーム",
+    installScopeProjectLabel: "リポのみ",
+    installScopeGlobalLabel: "ホームのみ",
     installScopeBothLabel: "両方（推奨）",
-    installScopeProjectDesc:
-      "プロジェクトディレクトリのみにインストール（.claude/, .codex/, openclaw/, .cursor/）",
+    installScopeProjectDesc: "このリポのツール設定のみ同期。ホーム skills は触らない。",
     installScopeGlobalDesc:
-      "グローバルディレクトリのみにインストール（~/.claude/skills/）",
-    installScopeBothDesc:
-      "プロジェクトとグローバル両方にインストール（推奨、完全な体験）",
+      "次に選ぶツール向けに skills + meta-theory。リポは更新しない。",
+    installScopeBothDesc: "リポのあとホーム。",
     depCheckHeading: "依存関係チェック",
     depOk: (n) => `${n} — OK`,
     depMissing: (n) => `${n} — 見つかりません`,
@@ -997,7 +997,7 @@ const I18N = {
     updateNpm: "npm依存関係を再インストール中...",
     updateSkills: "すべてのスキルを更新中...",
     updateSyncProjectFiles:
-      "canonical/ からプロジェクトランタイムファイルを同期中...",
+      "canonical/ からリポ内のツール設定を同期中...",
     updateSyncDone: "同期が完了しました",
     updateSyncProjectSkipped:
       "プロジェクト同期をスキップ（グローバル更新モード）",
@@ -1058,12 +1058,11 @@ const I18N = {
     selectedScope: (name) => `選択済み：${name}`,
     npmVerOk: (v) => `npm v${v}`,
     activeRuntimesSavedCli: (list) =>
-      `--targets からアクティブランタイムを保存：${list}`,
-    savedActiveTargets: (list) =>
-      `アクティブランタイムターゲットを保存：${list}`,
+      `--targets から対象ツールを保存：${list}`,
+    savedActiveTargets: (list) => `対象ツールを保存：${list}`,
     okRepoSynced: "canonical/ からリポジトリプロジェクションを同期",
     failRepoSync:
-      "リポジトリプロジェクション同期失敗 — 一部ランタイム設定が古い可能性",
+      "リポジトリプロジェクション同期失敗 — リポ内の一部設定が古い可能性",
     pipErrorDetail: (err) => `  pip エラー：${err}`,
     modeInfoLine: (mode, plat, ver) =>
       `モード：${mode} | ${plat} | Node ${ver}`,
@@ -1134,7 +1133,7 @@ const I18N = {
       "설정이 취소되었습니다. AI 코딩 도구를 설치하고 다시 실행하세요.",
     stepConfig: "프로젝트 설정",
     mcpExists: ".mcp.json이 이미 구성되어 있습니다",
-    mcpCreated: ".mcp.json 생성됨 — MCP 런타임 서버 등록 완료",
+    mcpCreated: ".mcp.json 생성됨 — MCP 서비스 등록됨",
     settingsExists: ".claude/settings.json이 이미 구성되어 있습니다",
     askCreateSettings: "hooks가 포함된 .claude/settings.json을 생성할까요?",
     settingsCreated: ".claude/settings.json 생성됨 — hooks + 권한 등록 완료",
@@ -1209,6 +1208,8 @@ const I18N = {
     postInstallNotesReminderText:
       "node setup.mjs --check로 언제든지 설치 상태를 확인할 수 있습니다.",
     setupError: "설정 오류:",
+    setupInterrupted:
+      "중단됨(Ctrl+C). 설치가 끝나지 않았습니다. 다시 실행: node setup.mjs",
     selectLang: "Select language / 选择语言 / 言語を選択 / 언어 선택",
     choose: (n) => `선택 (1-${n})`,
     inquirerSingleHotkeys: "↑↓ 이동 · ⏎ 확인",
@@ -1227,18 +1228,17 @@ const I18N = {
     globalSkipped: "전역 설치 건너뜀 — 프로젝트 로컬만 사용",
     // 설치 범위 선택
     installScopeHeading: "설치 범위",
-    installScopePrompt: "Meta_Kim을 어디에 설치하시겠습니까?",
-    installScopeProject:
-      "프로젝트만 — .claude/.codex/openclaw/.cursor/ 파일 (현재 프로젝트만)",
-    installScopeGlobal: "전역만 — ~/.claude/skills/ (모든 프로젝트 공유)",
-    installScopeBoth: "둘 다 (권장) — 프로젝트 파일 + 전역 스킬",
-    installScopeProjectLabel: "프로젝트만",
-    installScopeGlobalLabel: "전역만",
+    installScopePrompt: "리포만 / 홈 skills만 / 둘 다?",
+    installScopeProject: "리포만 — .claude / .codex / openclaw / .cursor",
+    installScopeGlobal: "홈만 — 선택 도구별 ~/.*/skills (Claude 전용 아님)",
+    installScopeBoth: "둘 다 (권장) — 리포→홈",
+    installScopeProjectLabel: "리포만",
+    installScopeGlobalLabel: "홈만",
     installScopeBothLabel: "둘 다 (권장)",
-    installScopeProjectDesc:
-      "프로젝트 디렉토리에만 설치 (.claude/, .codex/, openclaw/, .cursor/)",
-    installScopeGlobalDesc: "전역 디렉토리에만 설치 (~/.claude/skills/)",
-    installScopeBothDesc: "프로젝트와 전역 모두 설치 (권장, 완전한 경험)",
+    installScopeProjectDesc: "이 리포 도구 설정만. 홈 skills는 안 함.",
+    installScopeGlobalDesc:
+      "다음에 고른 도구용 skills + meta-theory. 리포는 안 건드림.",
+    installScopeBothDesc: "리포 후 홈 순서.",
     depCheckHeading: "의존성 확인",
     depOk: (n) => `${n} — 정상`,
     depMissing: (n) => `${n} — 누락`,
@@ -1311,7 +1311,7 @@ const I18N = {
     updateHeading: "업데이트 모드",
     updateNpm: "npm 의존성 재설치 중...",
     updateSkills: "모든 스킬 업데이트 중...",
-    updateSyncProjectFiles: "canonical/에서 프로젝트 런타임 파일 동기화 중...",
+    updateSyncProjectFiles: "canonical/에서 리포 내 도구 설정 동기화 중...",
     updateSyncDone: "동기화 완료",
     updateSyncProjectSkipped: "프로젝트 동기화 건너뜀 (전역 업데이트 모드)",
     updateSyncSkip: "동기화를 건너뛰었거나 실패했습니다",
@@ -1365,11 +1365,11 @@ const I18N = {
     labelOptional: "(선택)",
     selectedScope: (name) => `선택됨：${name}`,
     npmVerOk: (v) => `npm v${v}`,
-    activeRuntimesSavedCli: (list) => `--targets에서 활성 런타임 저장：${list}`,
-    savedActiveTargets: (list) => `활성 런타임 대상 저장：${list}`,
+    activeRuntimesSavedCli: (list) => `--targets에서 대상 도구 저장：${list}`,
+    savedActiveTargets: (list) => `대상 도구 저장：${list}`,
     okRepoSynced: "canonical/에서 리포지토리 프로젝션 동기화됨",
     failRepoSync:
-      "리포지토리 프로젝션 동기화 실패 — 일부 런타임 설정이 오래되었을 수 있음",
+      "리포지토리 프로젝션 동기화 실패 — 리포 내 일부 설정이 오래되었을 수 있음",
     pipErrorDetail: (err) => `  pip 오류：${err}`,
     modeInfoLine: (mode, plat, ver) => `모드：${mode} | ${plat} | Node ${ver}`,
     stepLabel: (n, label) => `단계 ${n}：${label}`,
@@ -1407,6 +1407,13 @@ const I18N = {
 };
 
 let t = I18N.en; // default, overwritten by selectLanguage()
+if (langArg) {
+  const code = normalizeLangCliArg(langArg);
+  const langMatch = LANGUAGES.find((l) => l.code === code);
+  if (langMatch && I18N[langMatch.code]) {
+    t = I18N[langMatch.code];
+  }
+}
 
 /** Format i18n string with placeholder replacement */
 function fmt(template, values = {}) {
@@ -1832,16 +1839,13 @@ function isFirstRun() {
 /** Show installation overview before starting (scope-aware bullets) */
 function showInstallOverview(activeTargets, installScope, skillIds = []) {
   const bullets = [];
-  bullets.push(t.installOverviewSyncConfig);
-
   if (installScope === "project") {
-    // project-only: sync only
+    bullets.push(t.installOverviewSyncConfig);
   } else if (installScope === "global") {
-    // global-only: skills + meta-theory only
     bullets.push(t.installOverviewInstallSkills);
     bullets.push(t.installOverviewSyncMeta);
   } else {
-    // both: all steps
+    bullets.push(t.installOverviewSyncConfig);
     bullets.push(t.installOverviewInstallSkills);
     bullets.push(t.installOverviewSyncMeta);
   }
@@ -1921,12 +1925,18 @@ async function askInstallScope() {
     t.installScopePrompt,
     scopes.map((s) => ({
       ...s,
-      label: `${s.label}${s.id === "both" ? ` ${C.dim}(default)${C.reset}` : ""}  ${C.dim}${s.desc}${C.reset}`,
+      label: `${s.label}  ${C.dim}${s.desc}${C.reset}`,
     })),
   );
 
   const selected = scopes[idx]?.id || "both";
-  info(t.selectedScope(selected));
+  const pickedLabel =
+    {
+      project: t.installScopeProjectLabel,
+      global: t.installScopeGlobalLabel,
+      both: t.installScopeBothLabel,
+    }[selected] || selected;
+  info(t.selectedScope(pickedLabel));
   return selected;
 }
 
@@ -3318,6 +3328,15 @@ async function runCheck() {
 }
 
 main().catch((err) => {
-  console.error(`\n${C.red}  ${t.setupError} ${err.message}${C.reset}\n`);
+  const msg = err?.message || String(err);
+  const interrupted =
+    msg.includes("SIGINT") ||
+    msg.includes("force closed") ||
+    err?.name === "ExitPromptError";
+  if (interrupted) {
+    console.error(`\n${C.dim}  ${t.setupInterrupted}${C.reset}\n`);
+    process.exit(130);
+  }
+  console.error(`\n${C.red}  ${t.setupError} ${msg}${C.reset}\n`);
   process.exit(1);
 });

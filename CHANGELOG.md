@@ -11,6 +11,7 @@ When you tag a release, add a new **`## [version] - YYYY-MM-DD`** section at the
 - **Dual-end Warden architecture (Type A/B/C/D/E routing)**: meta-theory SKILL.md now explicitly models Warden as BOTH entry gate (clarification + solution enumeration via brainstorming) AND exit gate (quality gate + final synthesis) for ALL dispatch types. Conductor now orchestrates ALL types, not just Type C.
 - **findskill dependency for all 8 meta agents**: Added `findskill` discovery step to Dependency Skill Invocations of all 8 canonical agents (warden, conductor, genesis, artisan, scout, sentinel, librarian, prism). Artisan and Scout already had findskill; others are new.
 - **superpowers/brainstorming for Warden entry gate**: Warden now uses `superpowers/brainstorming` at the entry gate for solution enumeration (≥2 approaches before dispatch).
+- **Hook path auto-fix during install**: `install-skill-sanitizer.mjs` now scans installed skill SKILL.md files for known broken hook command paths and patches them in-place. Currently fixes `planning-with-files` Stop hook (incorrectly uses `plugins/` instead of `skills/`). Logs each fix with dry-run support.
 
 ### Changed
 
@@ -18,6 +19,7 @@ When you tag a release, add a new **`## [version] - YYYY-MM-DD`** section at the
 - **meta-theory SKILL.md Type A/B/C/D/E detail sections**: Added Entry Gate (Warden) / Orchestration (Conductor) / Execution / Exit Gate (Warden) structure to all five Type sections.
 - **sync-runtimes.mjs cross-runtime path substitution**: Added `applyRuntimePaths()` function that substitutes canonical/ paths to runtime-specific paths (`.claude/`, `.codex/`, `openclaw/`, `.cursor/`) during sync. OpenClaw agent references use workspace-per-agent format (`openclaw/workspaces/{workspace}/AGENTS.md#`).
 - **canonical/meta-theory/SKILL.md canonical paths**: All `.claude/` path references in the canonical SKILL.md replaced with `canonical/` format, enabling correct cross-runtime sync.
+- **discover-global-capabilities.mjs hook scanning scope**: Reverted Phase 2 hook extraction from third-party skill SKILL.md YAML frontmatter. Capability index now only records physical hook script files under the hooks directory. Third-party skill hook commands (including broken ones) are excluded from Meta_Kim's governance scope.
 
 ## [2.0.4] - 2026-04-15
 

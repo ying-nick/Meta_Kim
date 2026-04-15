@@ -153,6 +153,55 @@ export async function listSkillFiles(rootDir) {
   return results;
 }
 
+/**
+ * Known incorrect hook command paths in third-party skills, mapped to their correct paths.
+ * Key = exact string fragment to find; Value = replacement string.
+ *
+ * HOW THIS WORKS:
+ * When install-skill-sanitizer runs, it scans every installed skill's SKILL.md.
+ * For each skill, if the frontmatter is valid YAML, it then checks the content for
+ * known broken hook command strings. If found, the string is replaced in-place.
+ * The file is only modified if dryRun=false.
+ *
+ * This is a curated list of known issues in Meta_Kim's dependency skills.
+ * Add entries here when a dependency skill has a bug that would cause hook failures.
+ * The fix is applied locally during install — it does NOT patch the upstream repo.
+ */
+const KNOWN_BROKEN_HOOK_PATTERNS = [
+  {
+    /** planning-with-files Stop hook: uses plugins/ instead of skills/ */
+    find: "${CLAUDE_PLUGIN_ROOT:-$HOME/.claude/plugins/planning-with-files}/scripts",
+    replace:
+      "${CLAUDE_PLUGIN_ROOT:-$HOME/.claude/skills/planning-with-files}/scripts",
+    skill: "planning-with-files",
+    reason:
+      "Stop hook references non-existent plugins/ directory; correct path is skills/",
+  },
+];
+
+/**
+ * Returns a new string with all known broken hook patterns replaced,
+ * plus an array of what was replaced.
+ */
+function applyHookPathFixes(rawContent) {
+  let content = rawContent;
+  const fixes = [];
+
+  for (const pattern of KNOWN_BROKEN_HOOK_PATTERNS) {
+    if (content.includes(pattern.find)) {
+      content = content.replaceAll(pattern.find, pattern.replace);
+      fixes.push({
+        skill: pattern.skill,
+        reason: pattern.reason,
+        replaced: pattern.find,
+        with: pattern.replace,
+      });
+    }
+  }
+
+  return { content, fixes };
+}
+
 function buildDisabledSkillPath(filePath) {
   return path.join(path.dirname(filePath), "SKILL.invalid.md");
 }
@@ -163,11 +212,23 @@ export async function sanitizeInstalledSkillTree(
 ) {
   const files = await listSkillFiles(targetDir);
   const invalidFiles = [];
+  const hookPathFixes = [];
 
   for (const filePath of files) {
     const raw = await fs.readFile(filePath, "utf8");
     const validation = validateSkillFrontmatter(raw);
     if (validation.ok) {
+      // Valid YAML: check for known broken hook command paths and patch in-place.
+      const { content: patched, fixes } = applyHookPathFixes(raw);
+      if (fixes.length > 0) {
+        hookPathFixes.push({
+          filePath,
+          fixes,
+        });
+        if (!dryRun) {
+          await fs.writeFile(filePath, patched, "utf8");
+        }
+      }
       continue;
     }
 
@@ -191,5 +252,7 @@ export async function sanitizeInstalledSkillTree(
     scanned: files.length,
     quarantined: invalidFiles.length,
     invalidFiles,
+    hookPathFixes,
+    patchedFiles: hookPathFixes.length,
   };
 }

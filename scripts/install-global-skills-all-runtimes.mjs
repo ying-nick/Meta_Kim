@@ -547,6 +547,22 @@ async function sanitizeManagedSkillTarget(skillId, targetDir) {
   }
 
   const result = await sanitizeInstalledSkillTree(targetDir, { dryRun });
+
+  // Log hook path fixes (e.g. planning-with-files Stop hook plugins/ -> skills/)
+  if (result.hookPathFixes && result.hookPathFixes.length > 0) {
+    for (const patch of result.hookPathFixes) {
+      for (const fix of patch.fixes) {
+        console.warn(
+          `${C.yellow}⚠${C.reset} ${C.bold}${skillId}${C.reset}: hook path auto-patched — ${fix.reason}`,
+        );
+        if (dryRun) {
+          console.warn(`${C.dim}  would replace: ${fix.replaced}${C.reset}`);
+          console.warn(`${C.dim}  with:        ${fix.with}${C.reset}`);
+        }
+      }
+    }
+  }
+
   if (result.quarantined === 0) {
     return;
   }
@@ -746,8 +762,7 @@ function parseGitProgress(stderrText) {
 function formatCloneHudLine(skillId, bytes, est, recv) {
   const curStr = formatBytesBin(bytes);
   if (recv && recv.tot > 0) {
-    const totStr =
-      est != null && est > 0 ? formatBytesBin(est) : "…";
+    const totStr = est != null && est > 0 ? formatBytesBin(est) : "…";
     return t.cloneProgressLine(
       skillId,
       curStr,
@@ -1047,11 +1062,15 @@ async function installViaArchiveFallback({
  */
 function isGitWorkTreeReady(dir) {
   if (!dir || !existsSync(dir)) return false;
-  const r = spawnSync("git", ["-C", dir, "rev-parse", "-q", "--verify", "HEAD"], {
-    encoding: "utf8",
-    windowsHide: true,
-    timeout: 20_000,
-  });
+  const r = spawnSync(
+    "git",
+    ["-C", dir, "rev-parse", "-q", "--verify", "HEAD"],
+    {
+      encoding: "utf8",
+      windowsHide: true,
+      timeout: 20_000,
+    },
+  );
   return r.status === 0;
 }
 
@@ -1069,7 +1088,9 @@ function logGitFailureRawDetails(skillId, displayTargetDir, error) {
   const tail = lines.slice(-20);
   if (tail.length) {
     console.warn(`${C.dim}${tail.map((l) => `  ${l}`).join("\n")}${C.reset}`);
-    if (/(Receiving objects|接收对象|Resolving deltas|解析增量)/i.test(stderr)) {
+    if (
+      /(Receiving objects|接收对象|Resolving deltas|解析增量)/i.test(stderr)
+    ) {
       console.warn(`${C.dim}${t.gitFailureProgressNotFinalHint}${C.reset}`);
     }
   } else {
@@ -1992,6 +2013,21 @@ async function main() {
       console.log(
         `${C.yellow}⚠${C.reset} ${item.skillId} -> ${item.quarantined} file(s) in ${item.targetDir}`,
       );
+    }
+
+    // Report hook path auto-fixes (e.g. planning-with-files Stop hook)
+    const allHookFixes = sanitizedSkillIssues.flatMap(
+      (item) => item.hookPathFixes || [],
+    );
+    if (allHookFixes.length > 0) {
+      console.log(
+        `\n${C.yellow}⚠ Hook path auto-fixed during install:${C.reset}`,
+      );
+      for (const patch of allHookFixes) {
+        for (const fix of patch.fixes) {
+          console.log(`${C.yellow}  •${C.reset} ${fix.skill}: ${fix.reason}`);
+        }
+      }
     }
   }
 

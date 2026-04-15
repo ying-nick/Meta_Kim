@@ -24,11 +24,14 @@ const PLATFORMS = {
     baseDir: () => path.join(os.homedir(), ".claude"),
     // 每个类型的扫描函数
     scanners: {
-      agents: async (baseDir) => scanMarkdownFiles(path.join(baseDir, "agents")),
+      agents: async (baseDir) =>
+        scanMarkdownFiles(path.join(baseDir, "agents")),
       skills: async (baseDir) => scanSkillFiles(path.join(baseDir, "skills")),
       hooks: async (baseDir) => scanHookFiles(path.join(baseDir, "hooks")),
-      plugins: async (baseDir) => scanPluginFiles(path.join(baseDir, "plugins")),
-      commands: async (baseDir) => scanCommandFiles(path.join(baseDir, "commands")),
+      plugins: async (baseDir) =>
+        scanPluginFiles(path.join(baseDir, "plugins")),
+      commands: async (baseDir) =>
+        scanCommandFiles(path.join(baseDir, "commands")),
     },
   },
   openclaw: {
@@ -36,18 +39,23 @@ const PLATFORMS = {
     baseDir: () => path.join(os.homedir(), ".openclaw"),
     scanners: {
       agents: async (baseDir) => scanOpenClawAgents(baseDir),
-      skills: async (baseDir) => scanSkillFilesRecursive(path.join(baseDir, "skills")),
+      skills: async (baseDir) =>
+        scanSkillFilesRecursive(path.join(baseDir, "skills")),
       hooks: async (baseDir) => scanHookFiles(path.join(baseDir, "hooks")),
-      commands: async (baseDir) => scanCommandFiles(path.join(baseDir, "commands")),
+      commands: async (baseDir) =>
+        scanCommandFiles(path.join(baseDir, "commands")),
     },
   },
   codex: {
     name: "Codex",
     baseDir: () => path.join(os.homedir(), ".codex"),
     scanners: {
-      agents: async (baseDir) => scanTomlFilesRecursive(path.join(baseDir, "agents")),
-      skills: async (baseDir) => scanSkillFilesRecursive(path.join(baseDir, "skills")),
-      commands: async (baseDir) => scanCommandFiles(path.join(baseDir, "commands")),
+      agents: async (baseDir) =>
+        scanTomlFilesRecursive(path.join(baseDir, "agents")),
+      skills: async (baseDir) =>
+        scanSkillFilesRecursive(path.join(baseDir, "skills")),
+      commands: async (baseDir) =>
+        scanCommandFiles(path.join(baseDir, "commands")),
     },
   },
 };
@@ -69,7 +77,8 @@ async function* walkDir(dir, maxDepth = 10) {
         continue;
       }
       if (entry.isDirectory()) {
-        const depth = fullPath.split(path.sep).length - dir.split(path.sep).length;
+        const depth =
+          fullPath.split(path.sep).length - dir.split(path.sep).length;
         if (depth < maxDepth) {
           yield* walkDir(fullPath, maxDepth);
         }
@@ -285,7 +294,8 @@ async function scanSkillFilesRecursive(dir) {
     const stat = await fs.stat(filePath);
     const relPath = path.relative(dir, filePath);
     const skillRoot = path.dirname(relPath);
-    const normalizedRoot = skillRoot === "." ? "" : skillRoot.replace(/\\/g, "/");
+    const normalizedRoot =
+      skillRoot === "." ? "" : skillRoot.replace(/\\/g, "/");
     const id = normalizedRoot || "SKILL";
 
     results.push({
@@ -301,8 +311,18 @@ async function scanSkillFilesRecursive(dir) {
 
 async function scanHookFiles(dir) {
   const results = [];
+
+  // Only scan physical hook script files in the hooks directory.
+  // Meta_Kim's capability index records what hooks Meta_Kim manages
+  // (i.e., the physical .js/.py/.sh files under the hooks directory).
+  // Hook commands defined inside third-party skill SKILL.md files are
+  // governed by their respective skill repositories, not by Meta_Kim.
   for await (const filePath of walkDir(dir, 3)) {
-    if (filePath.endsWith(".js") || filePath.endsWith(".py") || filePath.endsWith(".sh")) {
+    if (
+      filePath.endsWith(".js") ||
+      filePath.endsWith(".py") ||
+      filePath.endsWith(".sh")
+    ) {
       const stat = await fs.stat(filePath);
       const relPath = path.relative(dir, filePath);
       const id = relPath.replace(/\\/g, "/");
@@ -315,6 +335,7 @@ async function scanHookFiles(dir) {
       });
     }
   }
+
   return results;
 }
 
@@ -424,8 +445,10 @@ async function extractAgentMetadata(filePath) {
         if (colonIndex > 0) {
           const key = trimmed.slice(0, colonIndex).trim();
           let value = trimmed.slice(colonIndex + 1).trim();
-          if ((value.startsWith('"') && value.endsWith('"')) ||
-              (value.startsWith("'") && value.endsWith("'"))) {
+          if (
+            (value.startsWith('"') && value.endsWith('"')) ||
+            (value.startsWith("'") && value.endsWith("'"))
+          ) {
             value = value.slice(1, -1);
           }
           metadata[key] = value;
@@ -477,8 +500,10 @@ async function extractSkillMetadata(filePath) {
         if (colonIndex > 0) {
           const key = trimmed.slice(0, colonIndex).trim();
           let value = trimmed.slice(colonIndex + 1).trim();
-          if ((value.startsWith('"') && value.endsWith('"')) ||
-              (value.startsWith("'") && value.endsWith("'"))) {
+          if (
+            (value.startsWith('"') && value.endsWith('"')) ||
+            (value.startsWith("'") && value.endsWith("'"))
+          ) {
             value = value.slice(1, -1);
           }
           metadata[key] = value;
@@ -540,15 +565,43 @@ async function scanPlatform(platformId, platform) {
             capability.metadata = item.metadata;
           }
 
-          // 提取特定类型的元数据
+          // Pass through hook fields from skill hook extraction
+          if (type === "hooks") {
+            if (item.command !== undefined) {
+              capability.command = item.command;
+            }
+            if (item.available !== undefined) {
+              capability.available = item.available;
+            }
+            if (item.unavailableReason) {
+              capability.unavailableReason = item.unavailableReason;
+            }
+            if (item.fromSkill) {
+              capability.fromSkill = item.fromSkill;
+            }
+            if (item.hookEvent) {
+              capability.hookEvent = item.hookEvent;
+            }
+          }
+
+          // Extract specific-type metadata
           if (type === "agents") {
             if (item.path.endsWith(".md")) {
-              capability.metadata = { ...capability.metadata, ...await extractAgentMetadata(item.path) };
+              capability.metadata = {
+                ...capability.metadata,
+                ...(await extractAgentMetadata(item.path)),
+              };
             } else if (item.path.endsWith(".toml")) {
-              capability.metadata = { ...capability.metadata, ...await extractCodexAgentMetadata(item.path) };
+              capability.metadata = {
+                ...capability.metadata,
+                ...(await extractCodexAgentMetadata(item.path)),
+              };
             }
           } else if (type === "skills" && item.path.endsWith("SKILL.md")) {
-            capability.metadata = { ...capability.metadata, ...await extractSkillMetadata(item.path) };
+            capability.metadata = {
+              ...capability.metadata,
+              ...(await extractSkillMetadata(item.path)),
+            };
           }
 
           result.capabilities[type].push(capability);
@@ -593,7 +646,8 @@ async function buildCapabilityIndex(scannedResults) {
     index.byPlatform[scan.platformId] = scan;
 
     for (const [type, capabilities] of Object.entries(scan.capabilities)) {
-      index.summary[`total${type.charAt(0).toUpperCase()}${type.slice(1)}`] += capabilities.length;
+      index.summary[`total${type.charAt(0).toUpperCase()}${type.slice(1)}`] +=
+        capabilities.length;
 
       for (const cap of capabilities) {
         const key = `${scan.platformId}:${cap.id}`;
@@ -657,7 +711,9 @@ function formatTableOutput(index) {
 async function main() {
   const args = process.argv.slice(2);
   const outputFormat = args.includes("--json") ? "json" : "table";
-  const filterPlatform = args.find((a) => a.startsWith("--platform="))?.split("=")[1];
+  const filterPlatform = args
+    .find((a) => a.startsWith("--platform="))
+    ?.split("=")[1];
   const filterType = args.find((a) => a.startsWith("--type="))?.split("=")[1];
 
   const platformsToScan = filterPlatform
