@@ -81,7 +81,7 @@ X <a href="https://x.com/KimYx0207">@KimYx0207</a> |
 
 | 微信支付 | 支付宝 |
 | --- | --- |
-| ![微信收款码](docs/images/wechat-pay.jpg) | ![支付宝收款码](docs/images/alipay.jpg) |
+| <img src="docs/images/wechat-pay.jpg" width="260" alt="微信收款码"> | <img src="docs/images/alipay.jpg" width="260" alt="支付宝收款码"> |
 
 ### 方法依据
 

@@ -81,7 +81,7 @@ Meta_Kim이 도움이 되었다면 후원으로 응원해 주세요.
 
 | 위챗 결제 | 알리페이 |
 | --- | --- |
-| ![위챗 수금 QR](docs/images/wechat-pay.jpg) | ![알리페이 QR](docs/images/alipay.jpg) |
+| <img src="docs/images/wechat-pay.jpg" width="260" alt="위챗 수금 QR"> | <img src="docs/images/alipay.jpg" width="260" alt="알리페이 QR"> |
 
 ### 방법론 근거
 

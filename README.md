@@ -81,7 +81,7 @@ If Meta_Kim has been useful, support the project with a coffee.
 
 | WeChat Pay | Alipay |
 | --- | --- |
-| ![WeChat Pay QR](docs/images/wechat-pay.jpg) | ![Alipay QR](docs/images/alipay.jpg) |
+| <img src="docs/images/wechat-pay.jpg" width="260" alt="WeChat Pay QR"> | <img src="docs/images/alipay.jpg" width="260" alt="Alipay QR"> |docs/images/wechat-pay.jpg) | ![Alipay QR](docs/images/alipay.jpg) |
 
 ### Method basis
 
