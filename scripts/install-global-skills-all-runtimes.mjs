@@ -2109,7 +2109,15 @@ async function installSkillsToMultipleRuntimes(
         const staged = stagedSkills.get(spec.id);
         const targetDir = resolveSkillTargetDir(runtimeHome, spec);
 
-        if (staged?.success) {
+        // staged?.success can be true even when stagedPath is empty (skip-clone
+        // when skill already exists at first runtime). In that case fall through
+        // to direct install so "already exists" output is printed.
+        const stagedPathExists =
+          staged?.success &&
+          (await pathExists(staged.stagedPath)) &&
+          !(await isEmptyDir(staged.stagedPath));
+
+        if (stagedPathExists) {
           emitHeader();
           await deployStagedSkill(
             staged.stagedPath,
@@ -2118,7 +2126,7 @@ async function installSkillsToMultipleRuntimes(
             spec.subdir,
           );
         } else {
-          // Staging failed: fall back to direct per-runtime install
+          // Staging skipped or failed: fall back to direct per-runtime install
           emitHeader();
           if (spec.subdir) {
             await installGitSkillFromSubdir(
