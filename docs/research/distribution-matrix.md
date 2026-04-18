@@ -55,7 +55,7 @@ Notes: Only claude-only dependency. Correctly isolated via `targets: ["claude"]`
 
 | Platform | Decision | Install Method | Rationale |
 |----------|----------|---------------|-----------|
-| Claude Code | DISTRIBUTE | Claude Plugin (`superpowers@claude-plugins-official`) + git clone | Dual-channel: marketplace plugin + skill dir |
+| Claude Code | DISTRIBUTE | Claude Plugin (`superpowers@superpowers-marketplace`) + git clone | Dual-channel: marketplace plugin + skill dir |
 | Codex | DISTRIBUTE | `git clone --depth 1` | SKILL.md format, explicitly supports Codex |
 | OpenClaw | DISTRIBUTE | `git clone --depth 1` | SKILL.md format, explicitly supports OpenClaw |
 | Cursor | DISTRIBUTE | `git clone --depth 1` | SKILL.md format, explicitly supports Cursor |

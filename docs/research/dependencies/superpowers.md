@@ -36,7 +36,7 @@ README explicitly lists: Claude Code, Cursor, Codex, OpenCode, Gemini, Copilot.
 {
   "id": "superpowers",
   "repo": "obra/superpowers",
-  "claudePlugin": "superpowers@claude-plugins-official",
+  "claudePlugin": "superpowers@superpowers-marketplace",
   "targets": ["claude", "codex", "openclaw", "cursor"]
 }
 ```
@@ -44,7 +44,7 @@ README explicitly lists: Claude Code, Cursor, Codex, OpenCode, Gemini, Copilot.
 ## Install Method
 
 - **Claude Code**: Dual-channel
-  1. `claude plugin install superpowers@claude-plugins-official` (marketplace plugin)
+  1. `claude plugin install superpowers@superpowers-marketplace` (marketplace plugin)
   2. `git clone --depth 1` to `~/.claude/skills/superpowers/` (skill dir)
 - **Other platforms**: `git clone --depth 1` only
 - Plugin install is detected and skipped if already installed (checks `claude plugins list --json`)

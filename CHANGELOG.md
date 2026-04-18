@@ -40,6 +40,14 @@ When you tag a release, add a new **`## [version] - YYYY-MM-DD`** section at the
 
 - **install-skills: `--skills ""` filtering all skills**: `parseSkillsArg` returned `[]` instead of `null` for `--skills ""` (empty string), causing `applySkillsIdFilter` to filter ALL skills out of `SKILL_REPOS`. Fixed by moving the length check to after `filter(Boolean)`. Also updated `install-global-skills-all-runtimes.mjs` to skip filtering when `skillsArg` is empty.
 
+- **doctor-interactive.mjs: non-interactive TTY crash**: `@inquirer/prompts` `select()` crashes with "User force closed the prompt" in non-TTY environments (Claude Code bash, CI). Fixed by detecting TTY before invoking the menu — non-interactive mode auto-runs `runFullDiagnostic()`.
+
+- **doctor-interactive.mjs: "npm run run" spurious prefix**: All npm script calls in switch cases had an extra `"run"` entry in the args array, generating `npm run run meta:doctor:governance`. Fixed by removing all spurious `"run"` prefixes.
+
+- **install-global-skills-all-runtimes.mjs: Mac plugin marketplace registration**: On Mac/Linux, `claude plugin install superpowers@superpowers-marketplace` and `everything-claude-code@everything-claude-code` failed with "Plugin not found in marketplace" because these marketplaces are not pre-registered on fresh installs (unlike Windows which has them by default). Fixed by adding auto-registration logic: before each plugin install, probes `claude plugin marketplace list --json` and calls `claude plugin marketplace add <GitHub-url>` for any missing marketplace. Registry map: `superpowers-marketplace` → `obra/superpowers-marketplace`, `everything-claude-code` → `affaan-m/everything-claude-code`.
+
+- **docs: corrected superpowers marketplace identifier**: Research docs listed `superpowers@claude-plugins-official` (wrong) instead of `superpowers@superpowers-marketplace` (correct). Fixed in `docs/research/dependencies/superpowers.md` and `docs/research/distribution-matrix.md`.
+
 ### Added
 
 - **setup.mjs: `--log-file` tee for debug capture**: Added optional `--log-file <path>` to `install-global-skills-all-runtimes.mjs` — replaces `process.stdout/stderr.write` with a tee that mirrors all output to both terminal and the specified log file. setup.mjs auto-generates `~/.cache/meta-kim-setup/install-YYYYMMDD-HHMMSS.log` (code commented out by default, ready for re-enable during future debug sessions).

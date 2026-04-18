@@ -1545,6 +1545,80 @@ async function installClaudePlugins() {
     return;
   }
 
+  // Auto-register plugin marketplaces if not already present.
+  // This is needed on fresh Mac/Linux installs where marketplaces are not
+  // pre-registered (unlike Windows which has them installed by default).
+  // Registry: marketplace-id -> GitHub repo URL (marketplace.json's "name" field
+  // becomes the marketplace-id used in "plugin@marketplace" spec).
+  const MARKETPLACE_URLS = {
+    "superpowers-marketplace":
+      "https://github.com/obra/superpowers-marketplace",
+    "everything-claude-code":
+      "https://github.com/affaan-m/everything-claude-code",
+  };
+
+  // Collect marketplace IDs needed by CLAUDE_PLUGIN_SPECS (spec format: "name@marketplace")
+  const neededMarketplaces = new Set(
+    CLAUDE_PLUGIN_SPECS.map((spec) => spec.split("@")[1]).filter(
+      (id) => id in MARKETPLACE_URLS,
+    ),
+  );
+
+  if (neededMarketplaces.size > 0) {
+    console.log(`\n${C.dim}  Checking plugin marketplaces...${C.reset}`);
+
+    // Probe currently-registered marketplaces
+    const mktListOut = spawnSync(
+      "claude",
+      ["plugin", "marketplace", "list", "--json"],
+      { encoding: "utf8", shell: claudeShellOpt },
+    );
+    let registeredMarketplaces = new Set();
+    if (mktListOut.status === 0 && mktListOut.stdout) {
+      try {
+        // Output is JSON array of { name, source, repo, ... }
+        const mktData = JSON.parse(mktListOut.stdout);
+        if (Array.isArray(mktData)) {
+          for (const m of mktData) {
+            if (m.name) registeredMarketplaces.add(m.name);
+          }
+        }
+      } catch {
+        // Fall through with empty set
+      }
+    }
+
+    for (const mktId of neededMarketplaces) {
+      if (registeredMarketplaces.has(mktId)) {
+        console.log(
+          `${C.green}✓${C.reset} ${C.dim}Marketplace "${mktId}" already registered${C.reset}`,
+        );
+        continue;
+      }
+      const url = MARKETPLACE_URLS[mktId];
+      console.log(
+        `${C.cyan}→${C.reset} ${C.dim}Registering marketplace "${mktId}" from ${url}${C.reset}`,
+      );
+      const addOut = spawnSync(
+        "claude",
+        ["plugin", "marketplace", "add", url],
+        { encoding: "utf8", shell: claudeShellOpt },
+      );
+      if (addOut.status === 0) {
+        console.log(
+          `${C.green}✓${C.reset} ${C.dim}Marketplace "${mktId}" registered${C.reset}`,
+        );
+      } else {
+        const err = (addOut.stderr || addOut.stdout || "")
+          .trim()
+          .split("\n")[0];
+        console.warn(
+          `${C.yellow}⚠${C.reset} ${C.dim}Failed to register marketplace "${mktId}": ${err}${C.reset}`,
+        );
+      }
+    }
+  }
+
   // Load installed plugin records from installed_plugins.json
   // Format: { version: 2, plugins: { "<fullKey>": [records] } }
   let installedPluginsFile = { version: 2, plugins: {} };
